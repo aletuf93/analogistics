@@ -4,4 +4,6 @@ This packages is developed for analysts and researchers in the field of Supply C
 * Distribution Network
 * Storage Systems (i.e. warehouses)
 * Production Systems
+
+
 The subfolder *examples* contains useful implementation of the methods using sample data.
