@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from matplotlib.colors import Normalize
 
-
 from statsmodels.tsa.arima_model import ARIMA
 from statsmodels.tsa.stattools import acf, pacf
 from statsmodels.tsa.stattools import adfuller
