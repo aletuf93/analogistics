@@ -47,10 +47,12 @@ from scipy.stats import boxcox
 def timeStampToDays(series: pd.Series) -&gt; pd.Series:
     &#34;&#34;&#34;
     Convert a datetime series into float series with the number of days
-    :param series: DESCRIPTION input pandas series
-    :type series: pd.Series
-    :return: DESCRIPTION pandas series with float of days
-    :rtype: TYPE pd.Series
+
+    Args:
+        series (pd.Series): input pandas series.
+
+    Returns:
+        result (pd.Series): pandas series with float of days.
 
     &#34;&#34;&#34;
 
@@ -65,13 +67,16 @@ def sampleTimeSeries(series: pd.Series,
                      sampleInterval: str) -&gt; pd.Series:
     &#34;&#34;&#34;
     Sample a pandas series using a sampling interval
-    :param series: DESCRIPTION input pandas datetime series
-    :type series: pd.Series
-    :param sampleInterval: DESCRIPTION type of sampling required
-    :type sampleInterval: str
-    :raises ValueError: DESCRIPTION error in case of invalid sampling parameter
-    :return: DESCRIPTION Output sampled seried
-    :rtype: TYPE pd.Series
+
+    Args:
+        series (pd.Series): input pandas datetime series.
+        sampleInterval (str): type of sampling required.
+
+    Raises:
+        ValueError: error in case of invalid sampling parameter.
+
+    Returns:
+        series (TYPE): Output sampled seried.
 
     &#34;&#34;&#34;
 
@@ -95,16 +100,18 @@ def groupPerWeek(df: pd.DataFrame,
                  groupType: str) -&gt; pd.DataFrame:
     &#34;&#34;&#34;
     Perform a weekly groupby based on a datetime variable, applying a specific type of grouping
-    :param df: DESCRIPTION input pandas dataframe
-    :type df: pd.DataFrame
-    :param timeVariable: DESCRIPTION column name corresponding to the time variable
-    :type timeVariable: str
-    :param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-    :type groupVariable: str
-    :param groupType: DESCRIPTION type of grouping function
-    :type groupType: str
-    :return: DESCRIPTION Output grouped DataFrame
-    :rtype: TYPE pd.DataFrame
+
+    Args:
+        df (pd.DataFrame): input pandas dataframe.
+        timeVariable (str): column name corresponding to the time variable.
+        groupVariable (str): column name corresponding to the grouping variable.
+        groupType (str): type of grouping function.
+
+    Raises:
+        ValueError: error in case of invalid sampling parameter.
+
+    Returns:
+        df (TYPE): Output grouped DataFrame.
 
     &#34;&#34;&#34;
 
@@ -135,16 +142,18 @@ def groupPerMonth(df: pd.DataFrame,
                   groupType: str) -&gt; pd.DataFrame:
     &#34;&#34;&#34;
     Perform a monthly groupby based on a datetime variable, applying a specific type of grouping
-    :param df: DESCRIPTION input pandas dataframe
-    :type df: pd.DataFrame
-    :param timeVariable: DESCRIPTION column name corresponding to the time variable
-    :type timeVariable: str
-    :param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-    :type groupVariable: str
-    :param groupType: DESCRIPTION type of grouping function
-    :type groupType: str
-    :return: DESCRIPTION Output grouped DataFrame
-    :rtype: TYPE pd.DataFrame
+
+    Args:
+        df (pd.DataFrame): input pandas dataframe.
+        timeVariable (str): column name corresponding to the time variable.
+        groupVariable (str): column name corresponding to the grouping variable.
+        groupType (str): type of grouping function.
+
+    Raises:
+        ValueError: error in case of invalid sampling parameter.
+
+    Returns:
+        df (pd.DataFrame): Output grouped DataFrame.
 
     &#34;&#34;&#34;
 
@@ -171,14 +180,14 @@ def groupPerWeekday(df: pd.DataFrame,
                     groupVariable: str) -&gt; pd.DataFrame:
     &#34;&#34;&#34;
     Perform a groupby per weekday based on a datetime variable, applying a specific type of grouping
-    :param df: DESCRIPTION input pandas dataframe
-    :type df: pd.DataFrame
-    :param timeVariable: DESCRIPTION column name corresponding to the time variable
-    :type timeVariable: str
-    :param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-    :type groupVariable: str
-    :return: DESCRIPTION Output grouped DataFrame
-    :rtype: TYPE pd.DataFrame
+
+    Args:
+        df (pd.DataFrame): input pandas dataframe.
+        timeVariable (str): column name corresponding to the time variable.
+        groupVariable (str): column name corresponding to the grouping variable.
+
+    Returns:
+        D_grouped (pd.DataFrame): Output grouped DataFrame.
 
     &#34;&#34;&#34;
 
@@ -198,14 +207,16 @@ def assignWeekDay(df: pd.DataFrame,
                   timeVariable: str) -&gt; tuple:
     &#34;&#34;&#34;
     Return the day of the week, and a boolean indicating whether the day is in the weekend
-    :param df: DESCRIPTION input pandas dataframe
-    :type df: pd.DataFrame
-    :param timeVariable: DESCRIPTION column name corresponding to the time variable
-    :type timeVariable: str
-    :return: DESCRIPTION tuple with the day of the week, and a boolean for weekend
-    :rtype: tuple
+
+    Args:
+        df (pd.DataFrame): input pandas dataframe.
+        timeVariable (str): column name corresponding to the time variable.
+
+    Returns:
+        tuple: tuple with the day of the week, and a boolean for weekend.
 
     &#34;&#34;&#34;
+
     dayOfTheWeek = df[timeVariable].dt.weekday_name
     weekend = (dayOfTheWeek == &#39;Sunday&#39;) | (dayOfTheWeek == &#39;Saturday&#39;)
     weekEnd = weekend.copy()
@@ -218,10 +229,12 @@ def ACF_PACF_plot(series: pd.Series) -&gt; tuple:
     &#34;&#34;&#34;
     Creates a graph with a time series, the ACF and the PACF. In addition, it returns
     two pandas Series with the significant lags in the ACF and PACF
-    :param series: DESCRIPTION input pandas series with the observations
-    :type series: pd.Series
-    :return: DESCRIPTION output tuple
-    :rtype: tuple
+
+    Args:
+        series (pd.Series): input pandas series with the observations.
+
+    Returns:
+        tuple: output tuple.
 
     &#34;&#34;&#34;
 
@@ -279,16 +292,17 @@ def returnSignificantLags(D_pacf_significant: pd.Series,
     &#34;&#34;&#34;
     This function returns tuples of significant order (p, d, q) based on the lags of the function ACF_PACF_plot
 
-    :param D_pacf_significant: DESCRIPTION significant lags of the PACF function, like in the output of ACF_PACF_plot function
-    :type D_pacf_significant: pd.Series
-    :param D_acf_significant: DESCRIPTION significant lags of the ACF function, like in the output of ACF_PACF_plot function
-    :type D_acf_significant: pd.Series
-    :param maxValuesSelected: DESCRIPTION, defaults to 2. Number of combinations of p, d, and q to produce
-    :type maxValuesSelected: int, optional
-    :return: DESCRIPTION multidimensional list with combinations of (p, d, q) for ARIMA fitting
-    :rtype: list
+
+    Args:
+        D_pacf_significant (pd.Series): significant lags of the PACF function, like in the output of ACF_PACF_plot function.
+        D_acf_significant (pd.Series): significant lags of the ACF function, like in the output of ACF_PACF_plot function.
+        maxValuesSelected (int, optional): Number of combinations of p, d, and q to produce. Defaults to 2.
+
+    Returns:
+        list: multidimensional list with combinations of (p, d, q) for ARIMA fitting.
 
     &#34;&#34;&#34;
+
     # Select values for parameter p
     if len(D_pacf_significant) &gt; 1:
         numSelected = min(maxValuesSelected, len(D_pacf_significant))
@@ -314,14 +328,16 @@ def detrendByRollingMean(series: pd.Series,
                          seasonalityPeriod: int) -&gt; pd.Series:
     &#34;&#34;&#34;
     Apply detrending by using a rolling mean
-    :param series: DESCRIPTION input pandas series
-    :type series: pd.Series
-    :param seasonalityPeriod: DESCRIPTION window of the rolling mean
-    :type seasonalityPeriod: int
-    :return: DESCRIPTION output detrended series
-    :rtype: TYPE
+
+    Args:
+        series (pd.Series): input pandas series.
+        seasonalityPeriod (int): window of the rolling mean.
+
+    Returns:
+        detrended (TYPE): output detrended series.
 
     &#34;&#34;&#34;
+
     rolling_mean = series.rolling(window=seasonalityPeriod).mean()
     detrended = series.Series - rolling_mean
     return detrended
@@ -340,12 +356,12 @@ def SARIMAXfit(stationary_series: pd.Series,
     ACF=&gt;MA
     ARIMA(P,D,Q) = ARIMA(AR, I, MA)
 
-    :param stationary_series: DESCRIPTION input pandas series to fit
-    :type stationary_series: pd.series
-    :param params: DESCRIPTION (p, d, q) parameters to fit the SARIMAX model, as output of returnSignificantLags function
-    :type params: list
-    :return: DESCRIPTION tuple with output
-    :rtype: tuple
+    Args:
+        stationary_series (pd.Series): input pandas series to fit.
+        params (list): (p, d, q) parameters to fit the SARIMAX model, as output of returnSignificantLags function.
+
+    Returns:
+        tuple: tuple with output.
 
     &#34;&#34;&#34;
 
@@ -390,16 +406,14 @@ def ARIMAfit(series: pd.Series,
              q: int) -&gt; bool:
     &#34;&#34;&#34;
 
-    :param series: DESCRIPTION input pandas series to fit
-    :type series: pd. series
-    :param p: DESCRIPTION ARIMA parameter P
-    :type p: int
-    :param d: DESCRIPTION ARIMA parameter D
-    :type d: int
-    :param q: DESCRIPTION ARIMA parameter Q
-    :type q: int
-    :return: DESCRIPTION
-    :rtype: bool
+    Args:
+        series (pd.Series): input pandas series to fit.
+        p (int): ARIMA parameter P.
+        d (int): ARIMA parameter D.
+        q (int): ARIMA parameter Q.
+
+    Returns:
+        bool: DESCRIPTION.
 
     &#34;&#34;&#34;
 
@@ -459,20 +473,17 @@ def forecastSARIMAX(series: pd.Series,
                     title: str) -&gt; tuple:
     &#34;&#34;&#34;
     the function test several consecutive values of (p, d, q) using SARIMAX model fitting.
-    :param series: DESCRIPTION input pandas series to fit
-    :type series: pd.series
-    :param minRangepdq: DESCRIPTION minimum value among  (p, d, q) to test
-    :type minRangepdq: int
-    :param maxRangepdqy: DESCRIPTION maximum value among  (p, d, q) to test
-    :type maxRangepdqy: int
-    :param seasonality: DESCRIPTION value of seasonality
-    :type seasonality: int
-    :param NofSteps: DESCRIPTION number of future time points to forecast
-    :type NofSteps: int
-    :param title: DESCRIPTION title of the output figure
-    :type title: str
-    :return: DESCRIPTION output tuple
-    :rtype: tuple
+
+    Args:
+        series (pd.Series): input pandas series to fit.
+        minRangepdq (int): minimum value among  (p, d, q) to test.
+        maxRangepdqy (int): maximum value among  (p, d, q) to test.
+        seasonality (int): value of seasonality.
+        NofSteps (int): number of future time points to forecast.
+        title (str): title of the output figure.
+
+    Returns:
+        tuple: DESCRIPTION.
 
     &#34;&#34;&#34;
 
@@ -506,10 +517,12 @@ def fourierAnalysis(y: np.array) -&gt; pd.DataFrame:
     &#34;&#34;&#34;
     The function applies the fast Fourier transform to a time series and returna a pandas DataFrame with the significant
     fourier Coefficients
-    :param y: DESCRIPTION input array of float
-    :type y: np.array
-    :return: DESCRIPTION
-    :rtype: TYPE pd.DataFrame
+
+    Args:
+        y (np.array): input array of float.
+
+    Returns:
+        D (TYPE): DESCRIPTION.
 
     &#34;&#34;&#34;
 
@@ -545,16 +558,16 @@ def fourierAnalysis(y: np.array) -&gt; pd.DataFrame:
 def transformSeriesToStationary(series: pd.Series,
                                 signifAlpha: float = 0.05) -&gt; tuple:
     &#34;&#34;&#34;
-    this function tries log, power and square root transformation to stationary series
+    This function tries log, power and square root transformation to stationary series
     it returns the series and a string with the model used to transform the series
     reference: http://www.insightsbot.com/blog/1MH61d/augmented-dickey-fuller-test-in-python
 
-    :param series: DESCRIPTION pandas series to transform stationary
-    :type series: pd.Series
-    :param signifAlpha: DESCRIPTION, defaults to 0.05. significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller
-    :type signifAlpha: float, optional
-    :return: DESCRIPTION
-    :rtype: tuple
+    Args:
+        series (pd.Series): pandas series to transform stationary.
+        signifAlpha (float, optional): defaults to 0.05. significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller. Defaults to 0.05.
+
+    Returns:
+        tuple: DESCRIPTION.
 
     &#34;&#34;&#34;
 
@@ -648,14 +661,19 @@ def transformSeriesToStationary(series: pd.Series,
 def attractor_estimate(y, dim=&#39;3d&#39;) -&gt; bool:
     &#34;&#34;&#34;
     Uses the Ruelle &amp; Packard method to estimate an attractor
-    :param y: DESCRIPTION time series to evaluate
-    :type y: TYPE
-    :param dim: DESCRIPTION, defaults to &#39;3d&#39;. &#39;3d&#39; or &#39;2d&#39; projection
-    :type dim: TYPE, optional
-    :return: DESCRIPTION
-    :rtype: TYPE
+
+    Args:
+        y (TYPE): time series to evaluate.
+        dim (TYPE, optional): &#39;3d&#39; or &#39;2d&#39; projection. Defaults to &#39;3d&#39;.
+
+    Raises:
+        ValueError: DESCRIPTION.
+
+    Returns:
+        bool: DESCRIPTION.
 
     &#34;&#34;&#34;
+
     if dim not in [&#39;2d&#39;, &#39;3d&#39;]:
         raise ValueError(f&#34;&#34;&#34;dim parameter: {dim} not a valid projection.
                           Choose between [&#39;2d&#39;, &#39;3d&#39;]&#34;&#34;&#34;)
@@ -692,18 +710,18 @@ def poincare_section(series: pd.Series,
     &#34;&#34;&#34;
     Define the poincare section of a time series at time lags T and output
     a figure for each time lag containing a given number of dots
-    :param series: DESCRIPTION time series to analyse
-    :type series: TYPE
-    :param T: DESCRIPTION, defaults to 2. time lag at which evaluate the time series
-    :type T: TYPE, optional
-    :param num_of_dots_on_picture: DESCRIPTION, defaults to 10. number of dots for each image of the poincare section
-    :type num_of_dots_on_picture: TYPE, optional
-    :return: DESCRIPTION pandas dataframe with poincare section coordinates for each time lag evaluated,
-                         corresponding predicted value (next time lag()) and an image (rgb array) with the
-                         num_of_dots_on_picture poincare section evaluated at that step
 
-                         dictionary containing the poincare section at the last time lag
-    :rtype: TYPE tuple
+    Args:
+        series (pd.Series): time series to analyse.
+        T (int, optional): time lag at which evaluate the time series. Defaults to 2.
+        num_of_dots_on_picture (int, optional): DESCRIPTION. Defaults to 10.
+
+    Returns:
+        tuple: pandas dataframe with poincare section coordinates for each time lag evaluated,
+                             corresponding predicted value (next time lag()) and an image (rgb array) with the
+                             num_of_dots_on_picture poincare section evaluated at that step
+
+                             dictionary containing the poincare section at the last time lag.
 
     &#34;&#34;&#34;
 
@@ -772,11 +790,17 @@ def poincare_section(series: pd.Series,
 </code></dt>
 <dd>
 <div class="desc"><p>Creates a graph with a time series, the ACF and the PACF. In addition, it returns
-two pandas Series with the significant lags in the ACF and PACF
-:param series: DESCRIPTION input pandas series with the observations
-:type series: pd.Series
-:return: DESCRIPTION output tuple
-:rtype: tuple</p></div>
+two pandas Series with the significant lags in the ACF and PACF</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>input pandas series with the observations.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>output tuple.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -785,10 +809,12 @@ two pandas Series with the significant lags in the ACF and PACF
     &#34;&#34;&#34;
     Creates a graph with a time series, the ACF and the PACF. In addition, it returns
     two pandas Series with the significant lags in the ACF and PACF
-    :param series: DESCRIPTION input pandas series with the observations
-    :type series: pd.Series
-    :return: DESCRIPTION output tuple
-    :rtype: tuple
+
+    Args:
+        series (pd.Series): input pandas series with the observations.
+
+    Returns:
+        tuple: output tuple.
 
     &#34;&#34;&#34;
 
@@ -844,16 +870,22 @@ two pandas Series with the significant lags in the ACF and PACF
 <span>def <span class="ident">ARIMAfit</span></span>(<span>series: pandas.core.series.Series, p: int, d: int, q: int) -> bool</span>
 </code></dt>
 <dd>
-<div class="desc"><p>:param series: DESCRIPTION input pandas series to fit
-:type series: pd. series
-:param p: DESCRIPTION ARIMA parameter P
-:type p: int
-:param d: DESCRIPTION ARIMA parameter D
-:type d: int
-:param q: DESCRIPTION ARIMA parameter Q
-:type q: int
-:return: DESCRIPTION
-:rtype: bool</p></div>
+<div class="desc"><h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>input pandas series to fit.</dd>
+<dt><strong><code>p</code></strong> :&ensp;<code>int</code></dt>
+<dd>ARIMA parameter P.</dd>
+<dt><strong><code>d</code></strong> :&ensp;<code>int</code></dt>
+<dd>ARIMA parameter D.</dd>
+<dt><strong><code>q</code></strong> :&ensp;<code>int</code></dt>
+<dd>ARIMA parameter Q.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -864,16 +896,14 @@ two pandas Series with the significant lags in the ACF and PACF
              q: int) -&gt; bool:
     &#34;&#34;&#34;
 
-    :param series: DESCRIPTION input pandas series to fit
-    :type series: pd. series
-    :param p: DESCRIPTION ARIMA parameter P
-    :type p: int
-    :param d: DESCRIPTION ARIMA parameter D
-    :type d: int
-    :param q: DESCRIPTION ARIMA parameter Q
-    :type q: int
-    :return: DESCRIPTION
-    :rtype: bool
+    Args:
+        series (pd.Series): input pandas series to fit.
+        p (int): ARIMA parameter P.
+        d (int): ARIMA parameter D.
+        q (int): ARIMA parameter Q.
+
+    Returns:
+        bool: DESCRIPTION.
 
     &#34;&#34;&#34;
 
@@ -901,12 +931,18 @@ a dict resultModel with the model, the error (AIC), the order p,d,q</p>
 <p>PACF=&gt;AR
 ACF=&gt;MA
 ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
-<p>:param stationary_series: DESCRIPTION input pandas series to fit
-:type stationary_series: pd.series
-:param params: DESCRIPTION (p, d, q) parameters to fit the SARIMAX model, as output of returnSignificantLags function
-:type params: list
-:return: DESCRIPTION tuple with output
-:rtype: tuple</p></div>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>stationary_series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>input pandas series to fit.</dd>
+<dt><strong><code>params</code></strong> :&ensp;<code>list</code></dt>
+<dd>(p, d, q) parameters to fit the SARIMAX model, as output of returnSignificantLags function.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>tuple with output.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -924,12 +960,12 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
     ACF=&gt;MA
     ARIMA(P,D,Q) = ARIMA(AR, I, MA)
 
-    :param stationary_series: DESCRIPTION input pandas series to fit
-    :type stationary_series: pd.series
-    :param params: DESCRIPTION (p, d, q) parameters to fit the SARIMAX model, as output of returnSignificantLags function
-    :type params: list
-    :return: DESCRIPTION tuple with output
-    :rtype: tuple
+    Args:
+        stationary_series (pd.Series): input pandas series to fit.
+        params (list): (p, d, q) parameters to fit the SARIMAX model, as output of returnSignificantLags function.
+
+    Returns:
+        tuple: tuple with output.
 
     &#34;&#34;&#34;
 
@@ -972,13 +1008,19 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
 <span>def <span class="ident">assignWeekDay</span></span>(<span>df: pandas.core.frame.DataFrame, timeVariable: str) -> tuple</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Return the day of the week, and a boolean indicating whether the day is in the weekend
-:param df: DESCRIPTION input pandas dataframe
-:type df: pd.DataFrame
-:param timeVariable: DESCRIPTION column name corresponding to the time variable
-:type timeVariable: str
-:return: DESCRIPTION tuple with the day of the week, and a boolean for weekend
-:rtype: tuple</p></div>
+<div class="desc"><p>Return the day of the week, and a boolean indicating whether the day is in the weekend</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input pandas dataframe.</dd>
+<dt><strong><code>timeVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name corresponding to the time variable.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>tuple with the day of the week, and a boolean for weekend.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -987,14 +1029,16 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
                   timeVariable: str) -&gt; tuple:
     &#34;&#34;&#34;
     Return the day of the week, and a boolean indicating whether the day is in the weekend
-    :param df: DESCRIPTION input pandas dataframe
-    :type df: pd.DataFrame
-    :param timeVariable: DESCRIPTION column name corresponding to the time variable
-    :type timeVariable: str
-    :return: DESCRIPTION tuple with the day of the week, and a boolean for weekend
-    :rtype: tuple
+
+    Args:
+        df (pd.DataFrame): input pandas dataframe.
+        timeVariable (str): column name corresponding to the time variable.
+
+    Returns:
+        tuple: tuple with the day of the week, and a boolean for weekend.
 
     &#34;&#34;&#34;
+
     dayOfTheWeek = df[timeVariable].dt.weekday_name
     weekend = (dayOfTheWeek == &#39;Sunday&#39;) | (dayOfTheWeek == &#39;Saturday&#39;)
     weekEnd = weekend.copy()
@@ -1007,13 +1051,24 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
 <span>def <span class="ident">attractor_estimate</span></span>(<span>y, dim='3d') -> bool</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Uses the Ruelle &amp; Packard method to estimate an attractor
-:param y: DESCRIPTION time series to evaluate
-:type y: TYPE
-:param dim: DESCRIPTION, defaults to '3d'. '3d' or '2d' projection
-:type dim: TYPE, optional
-:return: DESCRIPTION
-:rtype: TYPE</p></div>
+<div class="desc"><p>Uses the Ruelle &amp; Packard method to estimate an attractor</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>TYPE</code></dt>
+<dd>time series to evaluate.</dd>
+<dt><strong><code>dim</code></strong> :&ensp;<code>TYPE</code>, optional</dt>
+<dd>'3d' or '2d' projection. Defaults to '3d'.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1021,14 +1076,19 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
 <pre><code class="python">def attractor_estimate(y, dim=&#39;3d&#39;) -&gt; bool:
     &#34;&#34;&#34;
     Uses the Ruelle &amp; Packard method to estimate an attractor
-    :param y: DESCRIPTION time series to evaluate
-    :type y: TYPE
-    :param dim: DESCRIPTION, defaults to &#39;3d&#39;. &#39;3d&#39; or &#39;2d&#39; projection
-    :type dim: TYPE, optional
-    :return: DESCRIPTION
-    :rtype: TYPE
+
+    Args:
+        y (TYPE): time series to evaluate.
+        dim (TYPE, optional): &#39;3d&#39; or &#39;2d&#39; projection. Defaults to &#39;3d&#39;.
+
+    Raises:
+        ValueError: DESCRIPTION.
+
+    Returns:
+        bool: DESCRIPTION.
 
     &#34;&#34;&#34;
+
     if dim not in [&#39;2d&#39;, &#39;3d&#39;]:
         raise ValueError(f&#34;&#34;&#34;dim parameter: {dim} not a valid projection.
                           Choose between [&#39;2d&#39;, &#39;3d&#39;]&#34;&#34;&#34;)
@@ -1108,13 +1168,16 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
 <span>def <span class="ident">detrendByRollingMean</span></span>(<span>series: pandas.core.series.Series, seasonalityPeriod: int) -> pandas.core.series.Series</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Apply detrending by using a rolling mean
-:param series: DESCRIPTION input pandas series
-:type series: pd.Series
-:param seasonalityPeriod: DESCRIPTION window of the rolling mean
-:type seasonalityPeriod: int
-:return: DESCRIPTION output detrended series
-:rtype: TYPE</p></div>
+<div class="desc"><p>Apply detrending by using a rolling mean</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>input pandas series.</dd>
+<dt><strong><code>seasonalityPeriod</code></strong> :&ensp;<code>int</code></dt>
+<dd>window of the rolling mean.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>detrended (TYPE): output detrended series.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1123,14 +1186,16 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
                          seasonalityPeriod: int) -&gt; pd.Series:
     &#34;&#34;&#34;
     Apply detrending by using a rolling mean
-    :param series: DESCRIPTION input pandas series
-    :type series: pd.Series
-    :param seasonalityPeriod: DESCRIPTION window of the rolling mean
-    :type seasonalityPeriod: int
-    :return: DESCRIPTION output detrended series
-    :rtype: TYPE
+
+    Args:
+        series (pd.Series): input pandas series.
+        seasonalityPeriod (int): window of the rolling mean.
+
+    Returns:
+        detrended (TYPE): output detrended series.
 
     &#34;&#34;&#34;
+
     rolling_mean = series.rolling(window=seasonalityPeriod).mean()
     detrended = series.Series - rolling_mean
     return detrended</code></pre>
@@ -1140,23 +1205,29 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
 <span>def <span class="ident">forecastSARIMAX</span></span>(<span>series: pandas.core.series.Series, minRangepdq: int, maxRangepdqy: int, seasonality: int, NofSteps: int, title: str) -> tuple</span>
 </code></dt>
 <dd>
-<div class="desc"><p>the function test several consecutive values of (p, d, q) using SARIMAX model fitting.
-:param series: DESCRIPTION input pandas series to fit
-:type series: pd.series
-:param minRangepdq: DESCRIPTION minimum value among
-(p, d, q) to test
-:type minRangepdq: int
-:param maxRangepdqy: DESCRIPTION maximum value among
-(p, d, q) to test
-:type maxRangepdqy: int
-:param seasonality: DESCRIPTION value of seasonality
-:type seasonality: int
-:param NofSteps: DESCRIPTION number of future time points to forecast
-:type NofSteps: int
-:param title: DESCRIPTION title of the output figure
-:type title: str
-:return: DESCRIPTION output tuple
-:rtype: tuple</p></div>
+<div class="desc"><p>the function test several consecutive values of (p, d, q) using SARIMAX model fitting.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>input pandas series to fit.</dd>
+<dt><strong><code>minRangepdq</code></strong> :&ensp;<code>int</code></dt>
+<dd>minimum value among
+(p, d, q) to test.</dd>
+<dt><strong><code>maxRangepdqy</code></strong> :&ensp;<code>int</code></dt>
+<dd>maximum value among
+(p, d, q) to test.</dd>
+<dt><strong><code>seasonality</code></strong> :&ensp;<code>int</code></dt>
+<dd>value of seasonality.</dd>
+<dt><strong><code>NofSteps</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of future time points to forecast.</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>str</code></dt>
+<dd>title of the output figure.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1169,20 +1240,17 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
                     title: str) -&gt; tuple:
     &#34;&#34;&#34;
     the function test several consecutive values of (p, d, q) using SARIMAX model fitting.
-    :param series: DESCRIPTION input pandas series to fit
-    :type series: pd.series
-    :param minRangepdq: DESCRIPTION minimum value among  (p, d, q) to test
-    :type minRangepdq: int
-    :param maxRangepdqy: DESCRIPTION maximum value among  (p, d, q) to test
-    :type maxRangepdqy: int
-    :param seasonality: DESCRIPTION value of seasonality
-    :type seasonality: int
-    :param NofSteps: DESCRIPTION number of future time points to forecast
-    :type NofSteps: int
-    :param title: DESCRIPTION title of the output figure
-    :type title: str
-    :return: DESCRIPTION output tuple
-    :rtype: tuple
+
+    Args:
+        series (pd.Series): input pandas series to fit.
+        minRangepdq (int): minimum value among  (p, d, q) to test.
+        maxRangepdqy (int): maximum value among  (p, d, q) to test.
+        seasonality (int): value of seasonality.
+        NofSteps (int): number of future time points to forecast.
+        title (str): title of the output figure.
+
+    Returns:
+        tuple: DESCRIPTION.
 
     &#34;&#34;&#34;
 
@@ -1217,11 +1285,14 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
 </code></dt>
 <dd>
 <div class="desc"><p>The function applies the fast Fourier transform to a time series and returna a pandas DataFrame with the significant
-fourier Coefficients
-:param y: DESCRIPTION input array of float
-:type y: np.array
-:return: DESCRIPTION
-:rtype: TYPE pd.DataFrame</p></div>
+fourier Coefficients</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>np.array</code></dt>
+<dd>input array of float.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D (TYPE): DESCRIPTION.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1230,10 +1301,12 @@ fourier Coefficients
     &#34;&#34;&#34;
     The function applies the fast Fourier transform to a time series and returna a pandas DataFrame with the significant
     fourier Coefficients
-    :param y: DESCRIPTION input array of float
-    :type y: np.array
-    :return: DESCRIPTION
-    :rtype: TYPE pd.DataFrame
+
+    Args:
+        y (np.array): input array of float.
+
+    Returns:
+        D (TYPE): DESCRIPTION.
 
     &#34;&#34;&#34;
 
@@ -1270,17 +1343,25 @@ fourier Coefficients
 <span>def <span class="ident">groupPerMonth</span></span>(<span>df: pandas.core.frame.DataFrame, timeVariable: str, groupVariable: str, groupType: str) -> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Perform a monthly groupby based on a datetime variable, applying a specific type of grouping
-:param df: DESCRIPTION input pandas dataframe
-:type df: pd.DataFrame
-:param timeVariable: DESCRIPTION column name corresponding to the time variable
-:type timeVariable: str
-:param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-:type groupVariable: str
-:param groupType: DESCRIPTION type of grouping function
-:type groupType: str
-:return: DESCRIPTION Output grouped DataFrame
-:rtype: TYPE pd.DataFrame</p></div>
+<div class="desc"><p>Perform a monthly groupby based on a datetime variable, applying a specific type of grouping</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input pandas dataframe.</dd>
+<dt><strong><code>timeVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name corresponding to the time variable.</dd>
+<dt><strong><code>groupVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name corresponding to the grouping variable.</dd>
+<dt><strong><code>groupType</code></strong> :&ensp;<code>str</code></dt>
+<dd>type of grouping function.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>error in case of invalid sampling parameter.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>df (pd.DataFrame): Output grouped DataFrame.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1291,16 +1372,18 @@ fourier Coefficients
                   groupType: str) -&gt; pd.DataFrame:
     &#34;&#34;&#34;
     Perform a monthly groupby based on a datetime variable, applying a specific type of grouping
-    :param df: DESCRIPTION input pandas dataframe
-    :type df: pd.DataFrame
-    :param timeVariable: DESCRIPTION column name corresponding to the time variable
-    :type timeVariable: str
-    :param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-    :type groupVariable: str
-    :param groupType: DESCRIPTION type of grouping function
-    :type groupType: str
-    :return: DESCRIPTION Output grouped DataFrame
-    :rtype: TYPE pd.DataFrame
+
+    Args:
+        df (pd.DataFrame): input pandas dataframe.
+        timeVariable (str): column name corresponding to the time variable.
+        groupVariable (str): column name corresponding to the grouping variable.
+        groupType (str): type of grouping function.
+
+    Raises:
+        ValueError: error in case of invalid sampling parameter.
+
+    Returns:
+        df (pd.DataFrame): Output grouped DataFrame.
 
     &#34;&#34;&#34;
 
@@ -1326,17 +1409,25 @@ fourier Coefficients
 <span>def <span class="ident">groupPerWeek</span></span>(<span>df: pandas.core.frame.DataFrame, timeVariable: str, groupVariable: str, groupType: str) -> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Perform a weekly groupby based on a datetime variable, applying a specific type of grouping
-:param df: DESCRIPTION input pandas dataframe
-:type df: pd.DataFrame
-:param timeVariable: DESCRIPTION column name corresponding to the time variable
-:type timeVariable: str
-:param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-:type groupVariable: str
-:param groupType: DESCRIPTION type of grouping function
-:type groupType: str
-:return: DESCRIPTION Output grouped DataFrame
-:rtype: TYPE pd.DataFrame</p></div>
+<div class="desc"><p>Perform a weekly groupby based on a datetime variable, applying a specific type of grouping</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input pandas dataframe.</dd>
+<dt><strong><code>timeVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name corresponding to the time variable.</dd>
+<dt><strong><code>groupVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name corresponding to the grouping variable.</dd>
+<dt><strong><code>groupType</code></strong> :&ensp;<code>str</code></dt>
+<dd>type of grouping function.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>error in case of invalid sampling parameter.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>df (TYPE): Output grouped DataFrame.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1347,16 +1438,18 @@ fourier Coefficients
                  groupType: str) -&gt; pd.DataFrame:
     &#34;&#34;&#34;
     Perform a weekly groupby based on a datetime variable, applying a specific type of grouping
-    :param df: DESCRIPTION input pandas dataframe
-    :type df: pd.DataFrame
-    :param timeVariable: DESCRIPTION column name corresponding to the time variable
-    :type timeVariable: str
-    :param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-    :type groupVariable: str
-    :param groupType: DESCRIPTION type of grouping function
-    :type groupType: str
-    :return: DESCRIPTION Output grouped DataFrame
-    :rtype: TYPE pd.DataFrame
+
+    Args:
+        df (pd.DataFrame): input pandas dataframe.
+        timeVariable (str): column name corresponding to the time variable.
+        groupVariable (str): column name corresponding to the grouping variable.
+        groupType (str): type of grouping function.
+
+    Raises:
+        ValueError: error in case of invalid sampling parameter.
+
+    Returns:
+        df (TYPE): Output grouped DataFrame.
 
     &#34;&#34;&#34;
 
@@ -1385,15 +1478,18 @@ fourier Coefficients
 <span>def <span class="ident">groupPerWeekday</span></span>(<span>df: pandas.core.frame.DataFrame, timeVariable: str, groupVariable: str) -> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Perform a groupby per weekday based on a datetime variable, applying a specific type of grouping
-:param df: DESCRIPTION input pandas dataframe
-:type df: pd.DataFrame
-:param timeVariable: DESCRIPTION column name corresponding to the time variable
-:type timeVariable: str
-:param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-:type groupVariable: str
-:return: DESCRIPTION Output grouped DataFrame
-:rtype: TYPE pd.DataFrame</p></div>
+<div class="desc"><p>Perform a groupby per weekday based on a datetime variable, applying a specific type of grouping</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input pandas dataframe.</dd>
+<dt><strong><code>timeVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name corresponding to the time variable.</dd>
+<dt><strong><code>groupVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name corresponding to the grouping variable.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_grouped (pd.DataFrame): Output grouped DataFrame.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1403,14 +1499,14 @@ fourier Coefficients
                     groupVariable: str) -&gt; pd.DataFrame:
     &#34;&#34;&#34;
     Perform a groupby per weekday based on a datetime variable, applying a specific type of grouping
-    :param df: DESCRIPTION input pandas dataframe
-    :type df: pd.DataFrame
-    :param timeVariable: DESCRIPTION column name corresponding to the time variable
-    :type timeVariable: str
-    :param groupVariable: DESCRIPTION column name corresponding to the grouping variable
-    :type groupVariable: str
-    :return: DESCRIPTION Output grouped DataFrame
-    :rtype: TYPE pd.DataFrame
+
+    Args:
+        df (pd.DataFrame): input pandas dataframe.
+        timeVariable (str): column name corresponding to the time variable.
+        groupVariable (str): column name corresponding to the grouping variable.
+
+    Returns:
+        D_grouped (pd.DataFrame): Output grouped DataFrame.
 
     &#34;&#34;&#34;
 
@@ -1431,19 +1527,25 @@ fourier Coefficients
 </code></dt>
 <dd>
 <div class="desc"><p>Define the poincare section of a time series at time lags T and output
-a figure for each time lag containing a given number of dots
-:param series: DESCRIPTION time series to analyse
-:type series: TYPE
-:param T: DESCRIPTION, defaults to 2. time lag at which evaluate the time series
-:type T: TYPE, optional
-:param num_of_dots_on_picture: DESCRIPTION, defaults to 10. number of dots for each image of the poincare section
-:type num_of_dots_on_picture: TYPE, optional
-:return: DESCRIPTION pandas dataframe with poincare section coordinates for each time lag evaluated,
+a figure for each time lag containing a given number of dots</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>time series to analyse.</dd>
+<dt><strong><code>T</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>time lag at which evaluate the time series. Defaults to 2.</dd>
+<dt><strong><code>num_of_dots_on_picture</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>DESCRIPTION. Defaults to 10.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>pandas dataframe with poincare section coordinates for each time lag evaluated,
 corresponding predicted value (next time lag()) and an image (rgb array) with the
-num_of_dots_on_picture poincare section evaluated at that step</p>
-<pre><code>                 dictionary containing the poincare section at the last time lag
+num_of_dots_on_picture poincare section evaluated at that step<pre><code>             dictionary containing the poincare section at the last time lag.
 </code></pre>
-<p>:rtype: TYPE tuple</p></div>
+</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1454,18 +1556,18 @@ num_of_dots_on_picture poincare section evaluated at that step</p>
     &#34;&#34;&#34;
     Define the poincare section of a time series at time lags T and output
     a figure for each time lag containing a given number of dots
-    :param series: DESCRIPTION time series to analyse
-    :type series: TYPE
-    :param T: DESCRIPTION, defaults to 2. time lag at which evaluate the time series
-    :type T: TYPE, optional
-    :param num_of_dots_on_picture: DESCRIPTION, defaults to 10. number of dots for each image of the poincare section
-    :type num_of_dots_on_picture: TYPE, optional
-    :return: DESCRIPTION pandas dataframe with poincare section coordinates for each time lag evaluated,
-                         corresponding predicted value (next time lag()) and an image (rgb array) with the
-                         num_of_dots_on_picture poincare section evaluated at that step
 
-                         dictionary containing the poincare section at the last time lag
-    :rtype: TYPE tuple
+    Args:
+        series (pd.Series): time series to analyse.
+        T (int, optional): time lag at which evaluate the time series. Defaults to 2.
+        num_of_dots_on_picture (int, optional): DESCRIPTION. Defaults to 10.
+
+    Returns:
+        tuple: pandas dataframe with poincare section coordinates for each time lag evaluated,
+                             corresponding predicted value (next time lag()) and an image (rgb array) with the
+                             num_of_dots_on_picture poincare section evaluated at that step
+
+                             dictionary containing the poincare section at the last time lag.
 
     &#34;&#34;&#34;
 
@@ -1527,14 +1629,20 @@ num_of_dots_on_picture poincare section evaluated at that step</p>
 </code></dt>
 <dd>
 <div class="desc"><p>This function returns tuples of significant order (p, d, q) based on the lags of the function ACF_PACF_plot</p>
-<p>:param D_pacf_significant: DESCRIPTION significant lags of the PACF function, like in the output of ACF_PACF_plot function
-:type D_pacf_significant: pd.Series
-:param D_acf_significant: DESCRIPTION significant lags of the ACF function, like in the output of ACF_PACF_plot function
-:type D_acf_significant: pd.Series
-:param maxValuesSelected: DESCRIPTION, defaults to 2. Number of combinations of p, d, and q to produce
-:type maxValuesSelected: int, optional
-:return: DESCRIPTION multidimensional list with combinations of (p, d, q) for ARIMA fitting
-:rtype: list</p></div>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_pacf_significant</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>significant lags of the PACF function, like in the output of ACF_PACF_plot function.</dd>
+<dt><strong><code>D_acf_significant</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>significant lags of the ACF function, like in the output of ACF_PACF_plot function.</dd>
+<dt><strong><code>maxValuesSelected</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of combinations of p, d, and q to produce. Defaults to 2.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>multidimensional list with combinations of (p, d, q) for ARIMA fitting.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1545,16 +1653,17 @@ num_of_dots_on_picture poincare section evaluated at that step</p>
     &#34;&#34;&#34;
     This function returns tuples of significant order (p, d, q) based on the lags of the function ACF_PACF_plot
 
-    :param D_pacf_significant: DESCRIPTION significant lags of the PACF function, like in the output of ACF_PACF_plot function
-    :type D_pacf_significant: pd.Series
-    :param D_acf_significant: DESCRIPTION significant lags of the ACF function, like in the output of ACF_PACF_plot function
-    :type D_acf_significant: pd.Series
-    :param maxValuesSelected: DESCRIPTION, defaults to 2. Number of combinations of p, d, and q to produce
-    :type maxValuesSelected: int, optional
-    :return: DESCRIPTION multidimensional list with combinations of (p, d, q) for ARIMA fitting
-    :rtype: list
+
+    Args:
+        D_pacf_significant (pd.Series): significant lags of the PACF function, like in the output of ACF_PACF_plot function.
+        D_acf_significant (pd.Series): significant lags of the ACF function, like in the output of ACF_PACF_plot function.
+        maxValuesSelected (int, optional): Number of combinations of p, d, and q to produce. Defaults to 2.
+
+    Returns:
+        list: multidimensional list with combinations of (p, d, q) for ARIMA fitting.
 
     &#34;&#34;&#34;
+
     # Select values for parameter p
     if len(D_pacf_significant) &gt; 1:
         numSelected = min(maxValuesSelected, len(D_pacf_significant))
@@ -1580,14 +1689,21 @@ num_of_dots_on_picture poincare section evaluated at that step</p>
 <span>def <span class="ident">sampleTimeSeries</span></span>(<span>series: pandas.core.series.Series, sampleInterval: str) -> pandas.core.series.Series</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Sample a pandas series using a sampling interval
-:param series: DESCRIPTION input pandas datetime series
-:type series: pd.Series
-:param sampleInterval: DESCRIPTION type of sampling required
-:type sampleInterval: str
-:raises ValueError: DESCRIPTION error in case of invalid sampling parameter
-:return: DESCRIPTION Output sampled seried
-:rtype: TYPE pd.Series</p></div>
+<div class="desc"><p>Sample a pandas series using a sampling interval</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>input pandas datetime series.</dd>
+<dt><strong><code>sampleInterval</code></strong> :&ensp;<code>str</code></dt>
+<dd>type of sampling required.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ValueError</code></dt>
+<dd>error in case of invalid sampling parameter.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>series (TYPE): Output sampled seried.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1596,13 +1712,16 @@ num_of_dots_on_picture poincare section evaluated at that step</p>
                      sampleInterval: str) -&gt; pd.Series:
     &#34;&#34;&#34;
     Sample a pandas series using a sampling interval
-    :param series: DESCRIPTION input pandas datetime series
-    :type series: pd.Series
-    :param sampleInterval: DESCRIPTION type of sampling required
-    :type sampleInterval: str
-    :raises ValueError: DESCRIPTION error in case of invalid sampling parameter
-    :return: DESCRIPTION Output sampled seried
-    :rtype: TYPE pd.Series
+
+    Args:
+        series (pd.Series): input pandas datetime series.
+        sampleInterval (str): type of sampling required.
+
+    Raises:
+        ValueError: error in case of invalid sampling parameter.
+
+    Returns:
+        series (TYPE): Output sampled seried.
 
     &#34;&#34;&#34;
 
@@ -1624,11 +1743,14 @@ num_of_dots_on_picture poincare section evaluated at that step</p>
 <span>def <span class="ident">timeStampToDays</span></span>(<span>series: pandas.core.series.Series) -> pandas.core.series.Series</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Convert a datetime series into float series with the number of days
-:param series: DESCRIPTION input pandas series
-:type series: pd.Series
-:return: DESCRIPTION pandas series with float of days
-:rtype: TYPE pd.Series</p></div>
+<div class="desc"><p>Convert a datetime series into float series with the number of days</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>input pandas series.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>result (pd.Series): pandas series with float of days.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1636,10 +1758,12 @@ num_of_dots_on_picture poincare section evaluated at that step</p>
 <pre><code class="python">def timeStampToDays(series: pd.Series) -&gt; pd.Series:
     &#34;&#34;&#34;
     Convert a datetime series into float series with the number of days
-    :param series: DESCRIPTION input pandas series
-    :type series: pd.Series
-    :return: DESCRIPTION pandas series with float of days
-    :rtype: TYPE pd.Series
+
+    Args:
+        series (pd.Series): input pandas series.
+
+    Returns:
+        result (pd.Series): pandas series with float of days.
 
     &#34;&#34;&#34;
 
@@ -1654,15 +1778,21 @@ num_of_dots_on_picture poincare section evaluated at that step</p>
 <span>def <span class="ident">transformSeriesToStationary</span></span>(<span>series: pandas.core.series.Series, signifAlpha: float = 0.05) -> tuple</span>
 </code></dt>
 <dd>
-<div class="desc"><p>this function tries log, power and square root transformation to stationary series
+<div class="desc"><p>This function tries log, power and square root transformation to stationary series
 it returns the series and a string with the model used to transform the series
 reference: <a href="http://www.insightsbot.com/blog/1MH61d/augmented-dickey-fuller-test-in-python">http://www.insightsbot.com/blog/1MH61d/augmented-dickey-fuller-test-in-python</a></p>
-<p>:param series: DESCRIPTION pandas series to transform stationary
-:type series: pd.Series
-:param signifAlpha: DESCRIPTION, defaults to 0.05. significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller
-:type signifAlpha: float, optional
-:return: DESCRIPTION
-:rtype: tuple</p></div>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>pandas series to transform stationary.</dd>
+<dt><strong><code>signifAlpha</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>defaults to 0.05. significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller. Defaults to 0.05.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1670,16 +1800,16 @@ reference: <a href="http://www.insightsbot.com/blog/1MH61d/augmented-dickey-full
 <pre><code class="python">def transformSeriesToStationary(series: pd.Series,
                                 signifAlpha: float = 0.05) -&gt; tuple:
     &#34;&#34;&#34;
-    this function tries log, power and square root transformation to stationary series
+    This function tries log, power and square root transformation to stationary series
     it returns the series and a string with the model used to transform the series
     reference: http://www.insightsbot.com/blog/1MH61d/augmented-dickey-fuller-test-in-python
 
-    :param series: DESCRIPTION pandas series to transform stationary
-    :type series: pd.Series
-    :param signifAlpha: DESCRIPTION, defaults to 0.05. significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller
-    :type signifAlpha: float, optional
-    :return: DESCRIPTION
-    :rtype: tuple
+    Args:
+        series (pd.Series): pandas series to transform stationary.
+        signifAlpha (float, optional): defaults to 0.05. significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller. Defaults to 0.05.
+
+    Returns:
+        tuple: DESCRIPTION.
 
     &#34;&#34;&#34;
 
