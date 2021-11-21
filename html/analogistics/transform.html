@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>analogistics API documentation</title>
-<meta name="description" content="Analogistics …" />
+<title>analogistics.transform API documentation</title>
+<meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,57 +17,151 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Package <code>analogistics</code></h1>
+<h1 class="title">Module <code>analogistics.transform</code></h1>
 </header>
 <section id="section-intro">
-<p>Analogistics.</p>
-<p>Analytical Tools for Logistics System Design and Operations Management.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;
-Analogistics.
+<pre><code class="python">import numpy as np
+import pandas as pd
 
-Analytical Tools for Logistics System Design and Operations Management.
-&#34;&#34;&#34;
 
-__version__ = &#34;0.1.0&#34;
-__author__ = &#39;Alessandro Tufano&#39;</code></pre>
+def dummyColumns(X: pd.DataFrame) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Transform categorical columns adding dummy columns with 0, 1 values
+
+    Args:
+        X (pd.DataFrame): input pandas dataframe.
+
+    Returns:
+        X (TYPE): output dataframe with dummy variables.
+
+    &#34;&#34;&#34;
+
+    # The index of the dataframe is not modified
+    try:
+        for column in X.columns:
+            try:
+                if X[column].dtype == object:
+                    dummyCols = pd.get_dummies(X[column])
+                    X = pd.concat([X, dummyCols], axis=1)
+                    del X[column]
+            except Exception as e:
+                print(e)
+    except Exception as e:
+        print(e)
+    return X
+
+
+def transformClockData(series: pd.Series):
+    &#34;&#34;&#34;
+    use cosine and sine transformation to a series
+    (e.g. indicating the hour of the days, or the minutes)
+
+    Args:
+        series (pd.Series): input datetime series.
+
+    Returns:
+        transformedDataCos (pd.Series): output series.
+        transformedDataSin (pd.Series): output series.
+
+    &#34;&#34;&#34;
+
+    transformedDataCos = np.cos(2 * np.pi * series / max(series))
+    transformedDataSin = np.sin(2 * np.pi * series / max(series))
+    return transformedDataCos, transformedDataSin</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="analogistics.clean" href="clean.html">analogistics.clean</a></code></dt>
+<dt id="analogistics.transform.dummyColumns"><code class="name flex">
+<span>def <span class="ident">dummyColumns</span></span>(<span>X: pandas.core.frame.DataFrame) -> pandas.core.frame.DataFrame</span>
+</code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Transform categorical columns adding dummy columns with 0, 1 values</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input pandas dataframe.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>X (TYPE): output dataframe with dummy variables.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dummyColumns(X: pd.DataFrame) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Transform categorical columns adding dummy columns with 0, 1 values
+
+    Args:
+        X (pd.DataFrame): input pandas dataframe.
+
+    Returns:
+        X (TYPE): output dataframe with dummy variables.
+
+    &#34;&#34;&#34;
+
+    # The index of the dataframe is not modified
+    try:
+        for column in X.columns:
+            try:
+                if X[column].dtype == object:
+                    dummyCols = pd.get_dummies(X[column])
+                    X = pd.concat([X, dummyCols], axis=1)
+                    del X[column]
+            except Exception as e:
+                print(e)
+    except Exception as e:
+        print(e)
+    return X</code></pre>
+</details>
 </dd>
-<dt><code class="name"><a title="analogistics.explore" href="explore.html">analogistics.explore</a></code></dt>
+<dt id="analogistics.transform.transformClockData"><code class="name flex">
+<span>def <span class="ident">transformClockData</span></span>(<span>series: pandas.core.series.Series)</span>
+</code></dt>
 <dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.learning" href="learning/index.html">analogistics.learning</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.reduce" href="reduce.html">analogistics.reduce</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.statistics" href="statistics/index.html">analogistics.statistics</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.transform" href="transform.html">analogistics.transform</a></code></dt>
-<dd>
-<div class="desc"></div>
+<div class="desc"><p>use cosine and sine transformation to a series
+(e.g. indicating the hour of the days, or the minutes)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>series</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>input datetime series.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>transformedDataCos (pd.Series): output series.
+transformedDataSin (pd.Series): output series.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def transformClockData(series: pd.Series):
+    &#34;&#34;&#34;
+    use cosine and sine transformation to a series
+    (e.g. indicating the hour of the days, or the minutes)
+
+    Args:
+        series (pd.Series): input datetime series.
+
+    Returns:
+        transformedDataCos (pd.Series): output series.
+        transformedDataSin (pd.Series): output series.
+
+    &#34;&#34;&#34;
+
+    transformedDataCos = np.cos(2 * np.pi * series / max(series))
+    transformedDataSin = np.sin(2 * np.pi * series / max(series))
+    return transformedDataCos, transformedDataSin</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -78,14 +172,15 @@ __author__ = &#39;Alessandro Tufano&#39;</code></pre>
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="analogistics.clean" href="clean.html">analogistics.clean</a></code></li>
-<li><code><a title="analogistics.explore" href="explore.html">analogistics.explore</a></code></li>
-<li><code><a title="analogistics.learning" href="learning/index.html">analogistics.learning</a></code></li>
-<li><code><a title="analogistics.reduce" href="reduce.html">analogistics.reduce</a></code></li>
-<li><code><a title="analogistics.statistics" href="statistics/index.html">analogistics.statistics</a></code></li>
-<li><code><a title="analogistics.transform" href="transform.html">analogistics.transform</a></code></li>
+<li><code><a title="analogistics" href="index.html">analogistics</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.transform.dummyColumns" href="#analogistics.transform.dummyColumns">dummyColumns</a></code></li>
+<li><code><a title="analogistics.transform.transformClockData" href="#analogistics.transform.transformClockData">transformClockData</a></code></li>
 </ul>
 </li>
 </ul>

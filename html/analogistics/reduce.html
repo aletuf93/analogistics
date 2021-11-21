@@ -1,0 +1,1345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.reduce API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.reduce</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import itertools
+
+from sklearn import preprocessing
+from sklearn.decomposition import PCA
+from sklearn import linear_model
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.feature_selection import VarianceThreshold, SelectFromModel
+
+from analogistics.transform import dummyColumns
+from analogistics.explore import correlationMatrix
+from analogistics.learning.linear_models import fit_linear_reg
+
+
+def diagnoseForFeatureSelection(X: pd.DataFrame,
+                                y: pd.Series,
+                                dirResultsMachineLearning: str,
+                                diagnoseModels: list) -&gt; bool:
+    &#34;&#34;&#34;
+    The function uses several strategies for feature selection
+
+    Args:
+        X (pd.DataFrame): Input pandas dataframe with the observation.
+        y (pd.Series): Input series containing the target variable.
+        dirResultsMachineLearning (str): output directory to save reports and figures.
+        diagnoseModels (list): list of the models to test.
+
+    Returns:
+        bool: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    Q = dummyColumns(X)
+    Y = pd.concat([Q, y], axis=1)
+    plt.close(&#39;all&#39;)
+
+    # Analyse correlation between variables
+    correlationMatrix(Y, dirResultsMachineLearning, annotationCell=False)
+
+    # Analysis of correlation with the target variable
+    if diagnoseModels.count(&#39;correlation&#39;) &gt; 0:
+        selectByCorrelation(X, y, 1, dirResultsMachineLearning, True)
+
+    # Study of the variance of the variables
+    if diagnoseModels.count(&#39;variance&#39;) &gt; 0:
+        selectByVariance(X, 1, dirResultsMachineLearning, True)
+
+    # Analysis of the selection of the variables by lasso
+    if diagnoseModels.count(&#39;lasso&#39;) &gt; 0:
+        selectByLassoL1(X, y, 1, dirResultsMachineLearning, True)
+
+    # Check if a PCA can express the variance of the dataset
+    if diagnoseModels.count(&#39;PCA&#39;) &gt; 0:
+        PCAplot(len(Q.columns), Q, dirResultsMachineLearning, diagnose=True)
+
+    # Plot the curve of the forward stepwise
+    if diagnoseModels.count(&#39;forward stepwise&#39;) &gt; 0:
+        selectByForwardStepwiseSelection(X, y, dirResultsMachineLearning, len(X.columns), saveFig=True)
+
+    return True
+
+
+def selectPreprocessFeature(X: pd.DataFrame,
+                            y: pd.Series,
+                            value: float,
+                            model: str) -&gt; tuple:
+    &#34;&#34;&#34;
+    Args:
+        X (pd.DataFrame): feature dataframe.
+        y (pd.Series): target variable.
+        value (float): indicates the parameter of the model (if any). For correlation it is the minimum treshold.
+         For forward stepwise it is the number of features to select.For PCA it is the number of principal component.
+        model (str): type of the model chosen for feature selection.
+
+    Returns:
+        tuple: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    if model == &#39;correlation&#39;:
+        return selectByCorrelation(X, y, value, False)
+    elif model == &#39;variance&#39;:
+        return selectByVariance(X, value, False)
+    elif model == &#39;lasso&#39;:
+        return selectByLassoL1(X, y, value, False)
+    elif model == &#39;tree&#39;:
+        return selectByTree(X, y)
+    elif model == &#39;forward stepwise&#39;:
+        return selectByForwardStepwiseSelection(X, y, value, False)
+    elif model == &#39;PCA&#39;:
+        return PCAplot(value, X, False)
+    else:  # if no feature selection, the dataset is only returned as numerical (dummy) to code strings
+        return dummyColumns(X)
+
+
+def selectByCorrelation(X: pd.DataFrame,
+                        y: pd.DataFrame,
+                        corrThreshold: float,
+                        diagnose: bool = False) -&gt; tuple:
+    &#34;&#34;&#34;
+    Select the features of the input dataframe X
+    based on the correlation with y
+
+    Args:
+        X (pd.DataFrame): dataframe of the attributes.
+        y (pd.DataFrame): dataframe with the target variable.
+        corrThreshold (float): correlation treshold 0-&gt;1.
+        diagnose (bool, optional): defaults to False. if true generates the correlation of each variable to the target var. Defaults to False.
+
+    Returns:
+        tuple: tuple composed of: dataframe with only the features above the correlation threshold; dictionary containing the figure of the correlation for each variable (if diagnose is true).
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    targetVariable = y.columns[0]
+    Q = dummyColumns(X)
+    Q = pd.concat([Q, y], axis=1)
+    cor = Q.corr()
+    cor_target = abs(cor[targetVariable])
+
+    if diagnose:
+        numFeatSelected = []
+        # count the number of selected features for each value of correlation
+        for i in range(1, 101):
+            val = i / 100
+            nn = len(cor_target[cor_target &gt; val])
+            # print(nn)
+            numFeatSelected.append(nn)
+        fig1 = plt.figure()
+        plt.plot(range(1, 101), numFeatSelected)
+        plt.title(&#39;Correlation graph&#39;)
+        plt.xlabel(&#39;Corr threshold %&#39;)
+        plt.ylabel(&#39;Num. selected features&#39;)
+        output_figure[&#39;CorrelationChart&#39;] = fig1
+        plt.close(&#39;all&#39;)
+
+    # Selecting highly correlated features
+    relevant_features = cor_target[cor_target &gt; corrThreshold]
+    relevant_features = list(relevant_features.index.values)
+    try:  # check if the target feature is contained within the relevant features and remove
+        relevant_features.remove(targetVariable)
+    except Exception as e:
+        print(e)
+    Z = Q.loc[:, relevant_features]
+    return Z, output_figure
+
+
+def selectByVariance(X: pd.DataFrame,
+                     perc: float,
+                     diagnose: bool = False):
+    &#34;&#34;&#34;
+    Select the features of the input dataframe X
+    based on their variance
+
+    Args:
+        X (pd.DataFrame): dataframe of the attributes.
+        perc (float): variance treshold.
+        diagnose (bool, optional): defaults to False if true render the plot of the selected features depending o the variance. Defaults to False.
+
+    Returns:
+        res (TYPE): dataframe output dataframe with selected variables.
+        output_figure (TYPE): dictionary containing the figures with the plot of the selected features depending o the variance.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    # It select the features having the same value in more than perc of the samples
+    Q = dummyColumns(X)
+    if diagnose:
+        numFeatSelected = []
+        for i in range(1, 101):
+            val = i / 100
+            sel = VarianceThreshold(threshold=(val))
+            sel.fit_transform(Q)
+            nn = len(Q.columns[sel.get_support()])
+            # print(nn)
+            numFeatSelected.append(nn)
+        fig1 = plt.figure()
+        plt.plot(range(1, 101), numFeatSelected)
+        plt.title(&#39;Variance graph&#39;)
+        plt.xlabel(&#39;Variance threshold %&#39;)
+        plt.ylabel(&#39;Num. selected features&#39;)
+        output_figure[&#39;VarianceChart&#39;] = fig1
+        plt.close(&#39;all&#39;)
+
+    sel = VarianceThreshold(threshold=(perc))
+    Z = sel.fit_transform(Q)
+    feature_idx = sel.get_support()
+    feature_name = Q.columns[feature_idx]
+    res = pd.DataFrame(Z, columns=feature_name)
+    return res, output_figure
+
+
+def selectByLassoL1(X: pd.DataFrame,
+                    y: pd.DataFrame,
+                    value: float,
+                    diagnose: bool = False):
+    &#34;&#34;&#34;
+    Select the features of the input dataframe X
+    based on the coefficients of a Lasso regression
+
+    Args:
+        X (pd.DataFrame): dataframe of the attributes.
+        y (pd.DataFrame): series of the target variable.
+        value (float): threshold.
+        diagnose (bool, optional): DESCRIPTION. Defaults to False.
+
+    Returns:
+        res (TYPE): DESCRIPTION.
+        output_figure (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    # lasso feature selection works for regression models
+    Q = dummyColumns(X)
+    clf = linear_model.LassoCV(cv=5)
+
+    if diagnose:
+        numFeatSelected = []
+        for i in range(1, 101):
+            val = i / 100
+            sfm = SelectFromModel(clf, threshold=val)
+            sfm.fit(Q, y)
+            nn = len(Q.columns[sfm.get_support()])
+            # print(nn)
+            numFeatSelected.append(nn)
+        fig1 = plt.figure()
+        plt.plot(range(1, 101), numFeatSelected)
+        plt.title(&#39;Lasso graph&#39;)
+        plt.xlabel(&#39;Coeff threshold %&#39;)
+        plt.ylabel(&#39;Num. selected features&#39;)
+        output_figure[&#39;LassoChart&#39;] = fig1
+        plt.close(&#39;all&#39;)
+
+    # _, _, _, alphaValue, _= LassoRegressionCV(Q,y,&#39;&#39;,nFolds=5, saveFig=False) #previous version with lasso from ZO_RegressionLinearModel
+    # las=LassoRegressionComplete(Q,y,alphaValue)
+
+    sfm = SelectFromModel(clf, threshold=value)
+    sfm.fit(Q, y)
+    # n_features = sfm.transform(X).shape[1]
+    # model = SelectFromModel(las, prefit=True,threshold=0.25)
+
+    Z = sfm.transform(Q)
+    feature_idx = sfm.get_support()
+    feature_name = Q.columns[feature_idx]
+    res = pd.DataFrame(Z, columns=feature_name)
+    return res, output_figure
+
+
+def selectByTree(X: pd.DataFrame, y: pd.Series):
+    &#34;&#34;&#34;
+    select feature using a minimum threshold on the number of times a feature is chosen as
+    a decision variables for a decision tree
+
+    Args:
+        X (TYPE): dataframe of the attributes .
+        y (TYPE): dataframe with the target variable.
+
+    Returns:
+        res (TYPE): output dataframe with selected variables.
+
+    &#34;&#34;&#34;
+
+    # lasso feature selection works for regression models
+    Q = dummyColumns(X)
+    tree = ExtraTreesClassifier(n_estimators=50).fit(Q, y)
+    model = SelectFromModel(tree, prefit=True)
+    Z = model.transform(Q)
+    feature_idx = model.get_support()
+    feature_name = Q.columns[feature_idx]
+    res = pd.DataFrame(Z, columns=feature_name)
+    return res
+
+
+def ridgePath(df: pd.DataFrame, y: pd.Series) -&gt; dict:
+    &#34;&#34;&#34;
+    Generate the path of the ridge regression using different alphas
+
+    Args:
+        df (pd.DataFrame): dataframe of the attributes.
+        y (pd.Series): dataframe with the target variable.
+
+    Returns:
+        output_figure (dict): dictionary with the figure.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+
+    X = dummyColumns(df)
+    columnNames = list(pd.concat([X, y], axis=1))
+    columnNames[-1] = []
+    alphas = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6]
+
+    coefs = []
+    for a in alphas:
+        ridge = linear_model.Ridge(alpha=a, fit_intercept=False)
+        ridge.fit(X, y)
+        coefs.append(ridge.coef_[0])
+
+    # Display results
+    fig1 = plt.figure(figsize=(25, 10))
+    ax = plt.gca()
+
+    ax.plot(alphas, coefs)
+    ax.set_xscale(&#39;log&#39;)
+    ax.set_xlim(ax.get_xlim()[::-1])  # reverse axis
+    plt.xlabel(&#39;alpha&#39;)
+    plt.ylabel(&#39;weights&#39;)
+    plt.title(&#39;Ridge coefficients as a function of the regularization&#39;)
+    plt.axis(&#39;tight&#39;)
+    plt.show()
+    plt.legend(columnNames)
+    output_figure[&#39;RidgePath&#39;] = fig1
+    plt.close(&#39;all&#39;)
+    return output_figure
+
+
+def lassoPath(df: pd.DataFrame, y: pd.Series) -&gt; dict:
+    &#34;&#34;&#34;
+    Generate the path of the lasso regression using different alphas
+
+    Args:
+        df (pd.DataFrame): dataframe of the attributes .
+        y (pd.Series): dataframe with the target variable.
+
+    Returns:
+        dict: dictionary with the figure.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    X = dummyColumns(df)
+
+    columnNames = list(pd.concat([X, y], axis=1))
+    columnNames[-1] = []
+
+    alphas = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1, 1e1, 1e2, 1e3]
+
+    coefs = []
+    for a in alphas:
+        lasso = linear_model.Lasso(alpha=a, fit_intercept=False)
+        lasso.fit(X, y)
+        coefs.append(lasso.coef_)
+
+    # Display results
+    fig1 = plt.figure(figsize=(25, 10))
+    ax = plt.gca()
+
+    ax.plot(alphas, coefs)
+    ax.set_xscale(&#39;log&#39;)
+    ax.set_xlim(ax.get_xlim()[::-1])  # reverse axis
+    plt.xlabel(&#39;alpha&#39;)
+    plt.ylabel(&#39;weights&#39;)
+    plt.title(&#39;Lasso coefficients as a function of the regularization&#39;)
+    plt.axis(&#39;tight&#39;)
+    plt.show()
+    plt.legend(columnNames)
+    output_figure[&#39;LassoPath&#39;] = fig1
+    plt.close(&#39;all&#39;)
+    return output_figure
+
+
+def selectByForwardStepwiseSelection(df: pd.DataFrame, y: pd.Series, n_feat: int):
+    &#34;&#34;&#34;
+    Select features using forward stepwise selection
+
+    Args:
+        df (pd.DataFrame): dataframe of the attributes .
+        y (pd.Series): series with the target variable.
+        n_feat (int): number of features to consider.
+
+    Returns:
+        X_res (TYPE): dataframe with selected features.
+        output_figure (TYPE): dictionary of figures.
+        output_df (TYPE): dictionary of dataframes.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_df = {}
+
+    # Converto eventuali variabili categoriche
+    X = dummyColumns(df)
+    k = len(X.columns)
+
+    columnNames = [&#39;Features&#39;, &#39;RSS&#39;, &#39;R_squared&#39;]
+    resultFSs = pd.DataFrame(columns=columnNames)
+
+    remaining_features = list(X.columns.values)
+    features = []
+    numb_features = [np.inf]
+    RSS_list, R_squared_list = [np.inf], [np.inf]  # Due to 1 indexing of the loop...
+    features_list = dict()
+
+    for i in range(1, k + 1):
+        best_RSS = np.inf
+
+        for combo in itertools.combinations(remaining_features, 1):
+            RSS = fit_linear_reg(X[list(combo) + features], y)  # Store temp result
+
+            if RSS[0] &lt; best_RSS:
+                best_RSS = RSS[0]
+                best_R_squared = RSS[1]
+                best_feature = combo[0]
+
+        # Updating variables for next loop
+        features.append(best_feature)
+        if len(remaining_features) &gt; 0:
+            remaining_features.remove(best_feature)
+
+        # Saving values for plotting
+        RSS_list.append(best_RSS)
+        R_squared_list.append(best_R_squared)
+        features_list[i] = features.copy()
+
+        listResult = []
+        listResult.append(features_list[i])
+        listResult.append([round(best_RSS, 3)])
+        listResult.append([round(best_R_squared, 3)])
+        listResult = [listResult]
+        row = pd.DataFrame(listResult, columns=columnNames)
+        resultFSs = resultFSs.append(row)
+
+        numb_features.append(len(features))
+    # resultFSs.to_excel(dirResults+&#39;\\00-ForwardStepwiseSelection.xlsx&#39;)
+
+    # Salvo le variabili
+    s = resultFSs[&#39;Features&#39;]
+    mlb = preprocessing.MultiLabelBinarizer()
+    aaa = pd.DataFrame(mlb.fit_transform(s), columns=mlb.classes_, index=resultFSs.index)
+    bbb = pd.concat([resultFSs, aaa], axis=1)
+
+    output_df[&#39;ForwardStepwiseSelection&#39;] = bbb
+
+    # Store in DataFrame
+    df = pd.DataFrame({&#39;numb_features&#39;: numb_features, &#39;RSS&#39;: RSS_list, &#39;R_squared&#39;: R_squared_list})
+    df_min = df[df.groupby(&#39;numb_features&#39;)[&#39;RSS&#39;].transform(min) == df[&#39;RSS&#39;]]
+    # df_max = df[df.groupby(&#39;numb_features&#39;)[&#39;R_squared&#39;].transform(max) == df[&#39;R_squared&#39;]]
+
+    output_df[&#39;ForwardStepwiseSelection_min&#39;] = df_min
+
+    df[&#39;min_RSS&#39;] = df.groupby(&#39;numb_features&#39;)[&#39;RSS&#39;].transform(min)
+    df[&#39;max_R_squared&#39;] = df.groupby(&#39;numb_features&#39;)[&#39;R_squared&#39;].transform(max)
+
+    fig = plt.figure(figsize=(16, 6))
+    ax = fig.add_subplot(1, 2, 1)
+
+    ax.scatter(df.numb_features, df.RSS, alpha=.2, color=&#39;darkblue&#39;)
+    ax.set_xlabel(&#39;# Features&#39;)
+    ax.set_ylabel(&#39;RSS&#39;)
+    ax.set_title(&#39;RSS - Forward Stepwise selection&#39;)
+    ax.plot(df.numb_features, df.min_RSS, color=&#39;r&#39;, label=&#39;Best subset&#39;)
+    ax.legend()
+
+    ax = fig.add_subplot(1, 2, 2)
+    ax.scatter(df.numb_features, df.R_squared, alpha=.2, color=&#39;darkblue&#39;)
+    ax.plot(df.numb_features, df.max_R_squared, color=&#39;r&#39;, label=&#39;Best subset&#39;)
+    ax.set_xlabel(&#39;# Features&#39;)
+    ax.set_ylabel(&#39;R squared&#39;)
+    ax.set_title(&#39;R_squared - Forward Stepwise selection&#39;)
+    ax.legend()
+    plt.show()
+    output_figure[&#39;ForwardStepwiseSelection&#39;] = fig
+    plt.close(&#39;all&#39;)
+
+    result = resultFSs.reset_index()
+    selected_features = result.Features[n_feat - 1]
+
+    X_res = X.loc[:, selected_features]
+    return X_res, output_figure, output_df
+
+
+def PCAplot(n_comp: int, df: pd.DataFrame, diagnose=False):
+    &#34;&#34;&#34;
+
+    Args:
+        n_comp (int): number of components of the PCA.
+        df (pd.DataFrame): dataframe of the attributes .
+        diagnose (TYPE, optional): if True produces the Pareto curve of the number of components. Defaults to False.
+
+    Returns:
+        pd.DataFrame: output compressed DataFrame.
+        output_figure (TYPE): dictionary of figures.
+        output_df (TYPE): dictionary of dataframes.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_df = {}
+
+    D_Table = dummyColumns(df)
+    # apply PCA
+    data_scaled = pd.DataFrame(preprocessing.scale(D_Table), columns=D_Table.columns)
+    pca = PCA(n_components=n_comp)
+    PC = pca.fit_transform(data_scaled)
+
+    if diagnose:
+        components = pd.DataFrame(pca.components_, columns=data_scaled.columns)
+        output_df[&#39;PCA&#39;] = components
+
+        var = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=3) * 100)
+
+        # Plot variance explaination
+        fig = plt.figure(num=None, figsize=(10, 8), dpi=80, facecolor=&#39;w&#39;, edgecolor=&#39;k&#39;)
+        plt.ylabel(&#39;% Variance Explained&#39;)
+        plt.xlabel(&#39;# of Features&#39;)
+        plt.title(&#39;PCA Analysis&#39;)
+        plt.ylim(30, 100.5)
+        plt.style.context(&#39;seaborn-whitegrid&#39;)
+        plt.plot(np.arange(1, len(var) + 1), var)
+        output_figure[&#39;PCA_varianceExplanation&#39;] = fig
+
+        # Plot graph PCA
+        if n_comp == 2:  # if only two components, they can be plotted
+            fig1 = plt.figure(num=None, figsize=(10, 8), dpi=80, facecolor=&#39;w&#39;, edgecolor=&#39;k&#39;)
+            plt.scatter(PC[:, 0], PC[:, 1], color=&#39;orange&#39;)
+            plt.xlabel(&#34;PC1 (var=%.2f)&#34; % pca.explained_variance_ratio_[0])
+            plt.ylabel(&#34;PC2 (var=%.2f)&#34; % pca.explained_variance_ratio_[1])
+            plt.axis(&#39;equal&#39;)
+            plt.tight_layout()
+            plt.title(&#39;Principal Component plot&#39;)
+            output_figure[&#39;PCA_plot&#39;] = fig1
+            plt.close(&#39;all&#39;)
+    return pd.DataFrame(PC), output_figure, output_df</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.reduce.PCAplot"><code class="name flex">
+<span>def <span class="ident">PCAplot</span></span>(<span>n_comp: int, df: pandas.core.frame.DataFrame, diagnose=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>n_comp</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of components of the PCA.</dd>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe of the attributes .</dd>
+<dt><strong><code>diagnose</code></strong> :&ensp;<code>TYPE</code>, optional</dt>
+<dd>if True produces the Pareto curve of the number of components. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>output compressed DataFrame.</dd>
+</dl>
+<p>output_figure (TYPE): dictionary of figures.
+output_df (TYPE): dictionary of dataframes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def PCAplot(n_comp: int, df: pd.DataFrame, diagnose=False):
+    &#34;&#34;&#34;
+
+    Args:
+        n_comp (int): number of components of the PCA.
+        df (pd.DataFrame): dataframe of the attributes .
+        diagnose (TYPE, optional): if True produces the Pareto curve of the number of components. Defaults to False.
+
+    Returns:
+        pd.DataFrame: output compressed DataFrame.
+        output_figure (TYPE): dictionary of figures.
+        output_df (TYPE): dictionary of dataframes.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_df = {}
+
+    D_Table = dummyColumns(df)
+    # apply PCA
+    data_scaled = pd.DataFrame(preprocessing.scale(D_Table), columns=D_Table.columns)
+    pca = PCA(n_components=n_comp)
+    PC = pca.fit_transform(data_scaled)
+
+    if diagnose:
+        components = pd.DataFrame(pca.components_, columns=data_scaled.columns)
+        output_df[&#39;PCA&#39;] = components
+
+        var = np.cumsum(np.round(pca.explained_variance_ratio_, decimals=3) * 100)
+
+        # Plot variance explaination
+        fig = plt.figure(num=None, figsize=(10, 8), dpi=80, facecolor=&#39;w&#39;, edgecolor=&#39;k&#39;)
+        plt.ylabel(&#39;% Variance Explained&#39;)
+        plt.xlabel(&#39;# of Features&#39;)
+        plt.title(&#39;PCA Analysis&#39;)
+        plt.ylim(30, 100.5)
+        plt.style.context(&#39;seaborn-whitegrid&#39;)
+        plt.plot(np.arange(1, len(var) + 1), var)
+        output_figure[&#39;PCA_varianceExplanation&#39;] = fig
+
+        # Plot graph PCA
+        if n_comp == 2:  # if only two components, they can be plotted
+            fig1 = plt.figure(num=None, figsize=(10, 8), dpi=80, facecolor=&#39;w&#39;, edgecolor=&#39;k&#39;)
+            plt.scatter(PC[:, 0], PC[:, 1], color=&#39;orange&#39;)
+            plt.xlabel(&#34;PC1 (var=%.2f)&#34; % pca.explained_variance_ratio_[0])
+            plt.ylabel(&#34;PC2 (var=%.2f)&#34; % pca.explained_variance_ratio_[1])
+            plt.axis(&#39;equal&#39;)
+            plt.tight_layout()
+            plt.title(&#39;Principal Component plot&#39;)
+            output_figure[&#39;PCA_plot&#39;] = fig1
+            plt.close(&#39;all&#39;)
+    return pd.DataFrame(PC), output_figure, output_df</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.diagnoseForFeatureSelection"><code class="name flex">
+<span>def <span class="ident">diagnoseForFeatureSelection</span></span>(<span>X: pandas.core.frame.DataFrame, y: pandas.core.series.Series, dirResultsMachineLearning: str, diagnoseModels: list) -> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function uses several strategies for feature selection</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas dataframe with the observation.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>Input series containing the target variable.</dd>
+<dt><strong><code>dirResultsMachineLearning</code></strong> :&ensp;<code>str</code></dt>
+<dd>output directory to save reports and figures.</dd>
+<dt><strong><code>diagnoseModels</code></strong> :&ensp;<code>list</code></dt>
+<dd>list of the models to test.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def diagnoseForFeatureSelection(X: pd.DataFrame,
+                                y: pd.Series,
+                                dirResultsMachineLearning: str,
+                                diagnoseModels: list) -&gt; bool:
+    &#34;&#34;&#34;
+    The function uses several strategies for feature selection
+
+    Args:
+        X (pd.DataFrame): Input pandas dataframe with the observation.
+        y (pd.Series): Input series containing the target variable.
+        dirResultsMachineLearning (str): output directory to save reports and figures.
+        diagnoseModels (list): list of the models to test.
+
+    Returns:
+        bool: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    Q = dummyColumns(X)
+    Y = pd.concat([Q, y], axis=1)
+    plt.close(&#39;all&#39;)
+
+    # Analyse correlation between variables
+    correlationMatrix(Y, dirResultsMachineLearning, annotationCell=False)
+
+    # Analysis of correlation with the target variable
+    if diagnoseModels.count(&#39;correlation&#39;) &gt; 0:
+        selectByCorrelation(X, y, 1, dirResultsMachineLearning, True)
+
+    # Study of the variance of the variables
+    if diagnoseModels.count(&#39;variance&#39;) &gt; 0:
+        selectByVariance(X, 1, dirResultsMachineLearning, True)
+
+    # Analysis of the selection of the variables by lasso
+    if diagnoseModels.count(&#39;lasso&#39;) &gt; 0:
+        selectByLassoL1(X, y, 1, dirResultsMachineLearning, True)
+
+    # Check if a PCA can express the variance of the dataset
+    if diagnoseModels.count(&#39;PCA&#39;) &gt; 0:
+        PCAplot(len(Q.columns), Q, dirResultsMachineLearning, diagnose=True)
+
+    # Plot the curve of the forward stepwise
+    if diagnoseModels.count(&#39;forward stepwise&#39;) &gt; 0:
+        selectByForwardStepwiseSelection(X, y, dirResultsMachineLearning, len(X.columns), saveFig=True)
+
+    return True</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.lassoPath"><code class="name flex">
+<span>def <span class="ident">lassoPath</span></span>(<span>df: pandas.core.frame.DataFrame, y: pandas.core.series.Series) -> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate the path of the lasso regression using different alphas</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe of the attributes .</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>dataframe with the target variable.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>dictionary with the figure.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def lassoPath(df: pd.DataFrame, y: pd.Series) -&gt; dict:
+    &#34;&#34;&#34;
+    Generate the path of the lasso regression using different alphas
+
+    Args:
+        df (pd.DataFrame): dataframe of the attributes .
+        y (pd.Series): dataframe with the target variable.
+
+    Returns:
+        dict: dictionary with the figure.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    X = dummyColumns(df)
+
+    columnNames = list(pd.concat([X, y], axis=1))
+    columnNames[-1] = []
+
+    alphas = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1, 1e1, 1e2, 1e3]
+
+    coefs = []
+    for a in alphas:
+        lasso = linear_model.Lasso(alpha=a, fit_intercept=False)
+        lasso.fit(X, y)
+        coefs.append(lasso.coef_)
+
+    # Display results
+    fig1 = plt.figure(figsize=(25, 10))
+    ax = plt.gca()
+
+    ax.plot(alphas, coefs)
+    ax.set_xscale(&#39;log&#39;)
+    ax.set_xlim(ax.get_xlim()[::-1])  # reverse axis
+    plt.xlabel(&#39;alpha&#39;)
+    plt.ylabel(&#39;weights&#39;)
+    plt.title(&#39;Lasso coefficients as a function of the regularization&#39;)
+    plt.axis(&#39;tight&#39;)
+    plt.show()
+    plt.legend(columnNames)
+    output_figure[&#39;LassoPath&#39;] = fig1
+    plt.close(&#39;all&#39;)
+    return output_figure</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.ridgePath"><code class="name flex">
+<span>def <span class="ident">ridgePath</span></span>(<span>df: pandas.core.frame.DataFrame, y: pandas.core.series.Series) -> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate the path of the ridge regression using different alphas</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe of the attributes.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>dataframe with the target variable.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>output_figure (dict): dictionary with the figure.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ridgePath(df: pd.DataFrame, y: pd.Series) -&gt; dict:
+    &#34;&#34;&#34;
+    Generate the path of the ridge regression using different alphas
+
+    Args:
+        df (pd.DataFrame): dataframe of the attributes.
+        y (pd.Series): dataframe with the target variable.
+
+    Returns:
+        output_figure (dict): dictionary with the figure.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+
+    X = dummyColumns(df)
+    columnNames = list(pd.concat([X, y], axis=1))
+    columnNames[-1] = []
+    alphas = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1, 1e1, 1e2, 1e3, 1e4, 1e5, 1e6]
+
+    coefs = []
+    for a in alphas:
+        ridge = linear_model.Ridge(alpha=a, fit_intercept=False)
+        ridge.fit(X, y)
+        coefs.append(ridge.coef_[0])
+
+    # Display results
+    fig1 = plt.figure(figsize=(25, 10))
+    ax = plt.gca()
+
+    ax.plot(alphas, coefs)
+    ax.set_xscale(&#39;log&#39;)
+    ax.set_xlim(ax.get_xlim()[::-1])  # reverse axis
+    plt.xlabel(&#39;alpha&#39;)
+    plt.ylabel(&#39;weights&#39;)
+    plt.title(&#39;Ridge coefficients as a function of the regularization&#39;)
+    plt.axis(&#39;tight&#39;)
+    plt.show()
+    plt.legend(columnNames)
+    output_figure[&#39;RidgePath&#39;] = fig1
+    plt.close(&#39;all&#39;)
+    return output_figure</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.selectByCorrelation"><code class="name flex">
+<span>def <span class="ident">selectByCorrelation</span></span>(<span>X: pandas.core.frame.DataFrame, y: pandas.core.frame.DataFrame, corrThreshold: float, diagnose: bool = False) -> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Select the features of the input dataframe X
+based on the correlation with y</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe of the attributes.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe with the target variable.</dd>
+<dt><strong><code>corrThreshold</code></strong> :&ensp;<code>float</code></dt>
+<dd>correlation treshold 0-&gt;1.</dd>
+<dt><strong><code>diagnose</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>defaults to False. if true generates the correlation of each variable to the target var. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>tuple composed of: dataframe with only the features above the correlation threshold; dictionary containing the figure of the correlation for each variable (if diagnose is true).</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def selectByCorrelation(X: pd.DataFrame,
+                        y: pd.DataFrame,
+                        corrThreshold: float,
+                        diagnose: bool = False) -&gt; tuple:
+    &#34;&#34;&#34;
+    Select the features of the input dataframe X
+    based on the correlation with y
+
+    Args:
+        X (pd.DataFrame): dataframe of the attributes.
+        y (pd.DataFrame): dataframe with the target variable.
+        corrThreshold (float): correlation treshold 0-&gt;1.
+        diagnose (bool, optional): defaults to False. if true generates the correlation of each variable to the target var. Defaults to False.
+
+    Returns:
+        tuple: tuple composed of: dataframe with only the features above the correlation threshold; dictionary containing the figure of the correlation for each variable (if diagnose is true).
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    targetVariable = y.columns[0]
+    Q = dummyColumns(X)
+    Q = pd.concat([Q, y], axis=1)
+    cor = Q.corr()
+    cor_target = abs(cor[targetVariable])
+
+    if diagnose:
+        numFeatSelected = []
+        # count the number of selected features for each value of correlation
+        for i in range(1, 101):
+            val = i / 100
+            nn = len(cor_target[cor_target &gt; val])
+            # print(nn)
+            numFeatSelected.append(nn)
+        fig1 = plt.figure()
+        plt.plot(range(1, 101), numFeatSelected)
+        plt.title(&#39;Correlation graph&#39;)
+        plt.xlabel(&#39;Corr threshold %&#39;)
+        plt.ylabel(&#39;Num. selected features&#39;)
+        output_figure[&#39;CorrelationChart&#39;] = fig1
+        plt.close(&#39;all&#39;)
+
+    # Selecting highly correlated features
+    relevant_features = cor_target[cor_target &gt; corrThreshold]
+    relevant_features = list(relevant_features.index.values)
+    try:  # check if the target feature is contained within the relevant features and remove
+        relevant_features.remove(targetVariable)
+    except Exception as e:
+        print(e)
+    Z = Q.loc[:, relevant_features]
+    return Z, output_figure</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.selectByForwardStepwiseSelection"><code class="name flex">
+<span>def <span class="ident">selectByForwardStepwiseSelection</span></span>(<span>df: pandas.core.frame.DataFrame, y: pandas.core.series.Series, n_feat: int)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Select features using forward stepwise selection</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe of the attributes .</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>series with the target variable.</dd>
+<dt><strong><code>n_feat</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of features to consider.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>X_res (TYPE): dataframe with selected features.
+output_figure (TYPE): dictionary of figures.
+output_df (TYPE): dictionary of dataframes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def selectByForwardStepwiseSelection(df: pd.DataFrame, y: pd.Series, n_feat: int):
+    &#34;&#34;&#34;
+    Select features using forward stepwise selection
+
+    Args:
+        df (pd.DataFrame): dataframe of the attributes .
+        y (pd.Series): series with the target variable.
+        n_feat (int): number of features to consider.
+
+    Returns:
+        X_res (TYPE): dataframe with selected features.
+        output_figure (TYPE): dictionary of figures.
+        output_df (TYPE): dictionary of dataframes.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_df = {}
+
+    # Converto eventuali variabili categoriche
+    X = dummyColumns(df)
+    k = len(X.columns)
+
+    columnNames = [&#39;Features&#39;, &#39;RSS&#39;, &#39;R_squared&#39;]
+    resultFSs = pd.DataFrame(columns=columnNames)
+
+    remaining_features = list(X.columns.values)
+    features = []
+    numb_features = [np.inf]
+    RSS_list, R_squared_list = [np.inf], [np.inf]  # Due to 1 indexing of the loop...
+    features_list = dict()
+
+    for i in range(1, k + 1):
+        best_RSS = np.inf
+
+        for combo in itertools.combinations(remaining_features, 1):
+            RSS = fit_linear_reg(X[list(combo) + features], y)  # Store temp result
+
+            if RSS[0] &lt; best_RSS:
+                best_RSS = RSS[0]
+                best_R_squared = RSS[1]
+                best_feature = combo[0]
+
+        # Updating variables for next loop
+        features.append(best_feature)
+        if len(remaining_features) &gt; 0:
+            remaining_features.remove(best_feature)
+
+        # Saving values for plotting
+        RSS_list.append(best_RSS)
+        R_squared_list.append(best_R_squared)
+        features_list[i] = features.copy()
+
+        listResult = []
+        listResult.append(features_list[i])
+        listResult.append([round(best_RSS, 3)])
+        listResult.append([round(best_R_squared, 3)])
+        listResult = [listResult]
+        row = pd.DataFrame(listResult, columns=columnNames)
+        resultFSs = resultFSs.append(row)
+
+        numb_features.append(len(features))
+    # resultFSs.to_excel(dirResults+&#39;\\00-ForwardStepwiseSelection.xlsx&#39;)
+
+    # Salvo le variabili
+    s = resultFSs[&#39;Features&#39;]
+    mlb = preprocessing.MultiLabelBinarizer()
+    aaa = pd.DataFrame(mlb.fit_transform(s), columns=mlb.classes_, index=resultFSs.index)
+    bbb = pd.concat([resultFSs, aaa], axis=1)
+
+    output_df[&#39;ForwardStepwiseSelection&#39;] = bbb
+
+    # Store in DataFrame
+    df = pd.DataFrame({&#39;numb_features&#39;: numb_features, &#39;RSS&#39;: RSS_list, &#39;R_squared&#39;: R_squared_list})
+    df_min = df[df.groupby(&#39;numb_features&#39;)[&#39;RSS&#39;].transform(min) == df[&#39;RSS&#39;]]
+    # df_max = df[df.groupby(&#39;numb_features&#39;)[&#39;R_squared&#39;].transform(max) == df[&#39;R_squared&#39;]]
+
+    output_df[&#39;ForwardStepwiseSelection_min&#39;] = df_min
+
+    df[&#39;min_RSS&#39;] = df.groupby(&#39;numb_features&#39;)[&#39;RSS&#39;].transform(min)
+    df[&#39;max_R_squared&#39;] = df.groupby(&#39;numb_features&#39;)[&#39;R_squared&#39;].transform(max)
+
+    fig = plt.figure(figsize=(16, 6))
+    ax = fig.add_subplot(1, 2, 1)
+
+    ax.scatter(df.numb_features, df.RSS, alpha=.2, color=&#39;darkblue&#39;)
+    ax.set_xlabel(&#39;# Features&#39;)
+    ax.set_ylabel(&#39;RSS&#39;)
+    ax.set_title(&#39;RSS - Forward Stepwise selection&#39;)
+    ax.plot(df.numb_features, df.min_RSS, color=&#39;r&#39;, label=&#39;Best subset&#39;)
+    ax.legend()
+
+    ax = fig.add_subplot(1, 2, 2)
+    ax.scatter(df.numb_features, df.R_squared, alpha=.2, color=&#39;darkblue&#39;)
+    ax.plot(df.numb_features, df.max_R_squared, color=&#39;r&#39;, label=&#39;Best subset&#39;)
+    ax.set_xlabel(&#39;# Features&#39;)
+    ax.set_ylabel(&#39;R squared&#39;)
+    ax.set_title(&#39;R_squared - Forward Stepwise selection&#39;)
+    ax.legend()
+    plt.show()
+    output_figure[&#39;ForwardStepwiseSelection&#39;] = fig
+    plt.close(&#39;all&#39;)
+
+    result = resultFSs.reset_index()
+    selected_features = result.Features[n_feat - 1]
+
+    X_res = X.loc[:, selected_features]
+    return X_res, output_figure, output_df</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.selectByLassoL1"><code class="name flex">
+<span>def <span class="ident">selectByLassoL1</span></span>(<span>X: pandas.core.frame.DataFrame, y: pandas.core.frame.DataFrame, value: float, diagnose: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Select the features of the input dataframe X
+based on the coefficients of a Lasso regression</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe of the attributes.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>series of the target variable.</dd>
+<dt><strong><code>value</code></strong> :&ensp;<code>float</code></dt>
+<dd>threshold.</dd>
+<dt><strong><code>diagnose</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>DESCRIPTION. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>res (TYPE): DESCRIPTION.
+output_figure (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def selectByLassoL1(X: pd.DataFrame,
+                    y: pd.DataFrame,
+                    value: float,
+                    diagnose: bool = False):
+    &#34;&#34;&#34;
+    Select the features of the input dataframe X
+    based on the coefficients of a Lasso regression
+
+    Args:
+        X (pd.DataFrame): dataframe of the attributes.
+        y (pd.DataFrame): series of the target variable.
+        value (float): threshold.
+        diagnose (bool, optional): DESCRIPTION. Defaults to False.
+
+    Returns:
+        res (TYPE): DESCRIPTION.
+        output_figure (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    # lasso feature selection works for regression models
+    Q = dummyColumns(X)
+    clf = linear_model.LassoCV(cv=5)
+
+    if diagnose:
+        numFeatSelected = []
+        for i in range(1, 101):
+            val = i / 100
+            sfm = SelectFromModel(clf, threshold=val)
+            sfm.fit(Q, y)
+            nn = len(Q.columns[sfm.get_support()])
+            # print(nn)
+            numFeatSelected.append(nn)
+        fig1 = plt.figure()
+        plt.plot(range(1, 101), numFeatSelected)
+        plt.title(&#39;Lasso graph&#39;)
+        plt.xlabel(&#39;Coeff threshold %&#39;)
+        plt.ylabel(&#39;Num. selected features&#39;)
+        output_figure[&#39;LassoChart&#39;] = fig1
+        plt.close(&#39;all&#39;)
+
+    # _, _, _, alphaValue, _= LassoRegressionCV(Q,y,&#39;&#39;,nFolds=5, saveFig=False) #previous version with lasso from ZO_RegressionLinearModel
+    # las=LassoRegressionComplete(Q,y,alphaValue)
+
+    sfm = SelectFromModel(clf, threshold=value)
+    sfm.fit(Q, y)
+    # n_features = sfm.transform(X).shape[1]
+    # model = SelectFromModel(las, prefit=True,threshold=0.25)
+
+    Z = sfm.transform(Q)
+    feature_idx = sfm.get_support()
+    feature_name = Q.columns[feature_idx]
+    res = pd.DataFrame(Z, columns=feature_name)
+    return res, output_figure</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.selectByTree"><code class="name flex">
+<span>def <span class="ident">selectByTree</span></span>(<span>X: pandas.core.frame.DataFrame, y: pandas.core.series.Series)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>select feature using a minimum threshold on the number of times a feature is chosen as
+a decision variables for a decision tree</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>TYPE</code></dt>
+<dd>dataframe of the attributes .</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>TYPE</code></dt>
+<dd>dataframe with the target variable.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>res (TYPE): output dataframe with selected variables.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def selectByTree(X: pd.DataFrame, y: pd.Series):
+    &#34;&#34;&#34;
+    select feature using a minimum threshold on the number of times a feature is chosen as
+    a decision variables for a decision tree
+
+    Args:
+        X (TYPE): dataframe of the attributes .
+        y (TYPE): dataframe with the target variable.
+
+    Returns:
+        res (TYPE): output dataframe with selected variables.
+
+    &#34;&#34;&#34;
+
+    # lasso feature selection works for regression models
+    Q = dummyColumns(X)
+    tree = ExtraTreesClassifier(n_estimators=50).fit(Q, y)
+    model = SelectFromModel(tree, prefit=True)
+    Z = model.transform(Q)
+    feature_idx = model.get_support()
+    feature_name = Q.columns[feature_idx]
+    res = pd.DataFrame(Z, columns=feature_name)
+    return res</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.selectByVariance"><code class="name flex">
+<span>def <span class="ident">selectByVariance</span></span>(<span>X: pandas.core.frame.DataFrame, perc: float, diagnose: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Select the features of the input dataframe X
+based on their variance</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe of the attributes.</dd>
+<dt><strong><code>perc</code></strong> :&ensp;<code>float</code></dt>
+<dd>variance treshold.</dd>
+<dt><strong><code>diagnose</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>defaults to False if true render the plot of the selected features depending o the variance. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>res (TYPE): dataframe output dataframe with selected variables.
+output_figure (TYPE): dictionary containing the figures with the plot of the selected features depending o the variance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def selectByVariance(X: pd.DataFrame,
+                     perc: float,
+                     diagnose: bool = False):
+    &#34;&#34;&#34;
+    Select the features of the input dataframe X
+    based on their variance
+
+    Args:
+        X (pd.DataFrame): dataframe of the attributes.
+        perc (float): variance treshold.
+        diagnose (bool, optional): defaults to False if true render the plot of the selected features depending o the variance. Defaults to False.
+
+    Returns:
+        res (TYPE): dataframe output dataframe with selected variables.
+        output_figure (TYPE): dictionary containing the figures with the plot of the selected features depending o the variance.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    # It select the features having the same value in more than perc of the samples
+    Q = dummyColumns(X)
+    if diagnose:
+        numFeatSelected = []
+        for i in range(1, 101):
+            val = i / 100
+            sel = VarianceThreshold(threshold=(val))
+            sel.fit_transform(Q)
+            nn = len(Q.columns[sel.get_support()])
+            # print(nn)
+            numFeatSelected.append(nn)
+        fig1 = plt.figure()
+        plt.plot(range(1, 101), numFeatSelected)
+        plt.title(&#39;Variance graph&#39;)
+        plt.xlabel(&#39;Variance threshold %&#39;)
+        plt.ylabel(&#39;Num. selected features&#39;)
+        output_figure[&#39;VarianceChart&#39;] = fig1
+        plt.close(&#39;all&#39;)
+
+    sel = VarianceThreshold(threshold=(perc))
+    Z = sel.fit_transform(Q)
+    feature_idx = sel.get_support()
+    feature_name = Q.columns[feature_idx]
+    res = pd.DataFrame(Z, columns=feature_name)
+    return res, output_figure</code></pre>
+</details>
+</dd>
+<dt id="analogistics.reduce.selectPreprocessFeature"><code class="name flex">
+<span>def <span class="ident">selectPreprocessFeature</span></span>(<span>X: pandas.core.frame.DataFrame, y: pandas.core.series.Series, value: float, model: str) -> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>feature dataframe.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>target variable.</dd>
+<dt><strong><code>value</code></strong> :&ensp;<code>float</code></dt>
+<dd>indicates the parameter of the model (if any). For correlation it is the minimum treshold.</dd>
+<dt>For forward stepwise it is the number of features to select.For PCA it is the number of principal component.</dt>
+<dt><strong><code>model</code></strong> :&ensp;<code>str</code></dt>
+<dd>type of the model chosen for feature selection.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def selectPreprocessFeature(X: pd.DataFrame,
+                            y: pd.Series,
+                            value: float,
+                            model: str) -&gt; tuple:
+    &#34;&#34;&#34;
+    Args:
+        X (pd.DataFrame): feature dataframe.
+        y (pd.Series): target variable.
+        value (float): indicates the parameter of the model (if any). For correlation it is the minimum treshold.
+         For forward stepwise it is the number of features to select.For PCA it is the number of principal component.
+        model (str): type of the model chosen for feature selection.
+
+    Returns:
+        tuple: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    if model == &#39;correlation&#39;:
+        return selectByCorrelation(X, y, value, False)
+    elif model == &#39;variance&#39;:
+        return selectByVariance(X, value, False)
+    elif model == &#39;lasso&#39;:
+        return selectByLassoL1(X, y, value, False)
+    elif model == &#39;tree&#39;:
+        return selectByTree(X, y)
+    elif model == &#39;forward stepwise&#39;:
+        return selectByForwardStepwiseSelection(X, y, value, False)
+    elif model == &#39;PCA&#39;:
+        return PCAplot(value, X, False)
+    else:  # if no feature selection, the dataset is only returned as numerical (dummy) to code strings
+        return dummyColumns(X)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics" href="index.html">analogistics</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.reduce.PCAplot" href="#analogistics.reduce.PCAplot">PCAplot</a></code></li>
+<li><code><a title="analogistics.reduce.diagnoseForFeatureSelection" href="#analogistics.reduce.diagnoseForFeatureSelection">diagnoseForFeatureSelection</a></code></li>
+<li><code><a title="analogistics.reduce.lassoPath" href="#analogistics.reduce.lassoPath">lassoPath</a></code></li>
+<li><code><a title="analogistics.reduce.ridgePath" href="#analogistics.reduce.ridgePath">ridgePath</a></code></li>
+<li><code><a title="analogistics.reduce.selectByCorrelation" href="#analogistics.reduce.selectByCorrelation">selectByCorrelation</a></code></li>
+<li><code><a title="analogistics.reduce.selectByForwardStepwiseSelection" href="#analogistics.reduce.selectByForwardStepwiseSelection">selectByForwardStepwiseSelection</a></code></li>
+<li><code><a title="analogistics.reduce.selectByLassoL1" href="#analogistics.reduce.selectByLassoL1">selectByLassoL1</a></code></li>
+<li><code><a title="analogistics.reduce.selectByTree" href="#analogistics.reduce.selectByTree">selectByTree</a></code></li>
+<li><code><a title="analogistics.reduce.selectByVariance" href="#analogistics.reduce.selectByVariance">selectByVariance</a></code></li>
+<li><code><a title="analogistics.reduce.selectPreprocessFeature" href="#analogistics.reduce.selectPreprocessFeature">selectPreprocessFeature</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

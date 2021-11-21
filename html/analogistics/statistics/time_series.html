@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>analogistics.stat_time_series API documentation</title>
+<title>analogistics.statistics.time_series API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,7 +17,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>analogistics.stat_time_series</code></h1>
+<h1 class="title">Module <code>analogistics.statistics.time_series</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
@@ -785,7 +785,7 @@ def poincare_section(series: pd.Series,
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="analogistics.stat_time_series.ACF_PACF_plot"><code class="name flex">
+<dt id="analogistics.statistics.time_series.ACF_PACF_plot"><code class="name flex">
 <span>def <span class="ident">ACF_PACF_plot</span></span>(<span>series: pandas.core.series.Series) -> tuple</span>
 </code></dt>
 <dd>
@@ -866,7 +866,7 @@ two pandas Series with the significant lags in the ACF and PACF</p>
     return fig, D_acf_significant, D_pacf_significant</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.ARIMAfit"><code class="name flex">
+<dt id="analogistics.statistics.time_series.ARIMAfit"><code class="name flex">
 <span>def <span class="ident">ARIMAfit</span></span>(<span>series: pandas.core.series.Series, p: int, d: int, q: int) -> bool</span>
 </code></dt>
 <dd>
@@ -919,7 +919,7 @@ two pandas Series with the significant lags in the ACF and PACF</p>
     return True</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.SARIMAXfit"><code class="name flex">
+<dt id="analogistics.statistics.time_series.SARIMAXfit"><code class="name flex">
 <span>def <span class="ident">SARIMAXfit</span></span>(<span>stationary_series: pandas.core.series.Series, params: list) -> tuple</span>
 </code></dt>
 <dd>
@@ -1004,7 +1004,7 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
     return figure_forecast, figure_residuals, resultModel</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.assignWeekDay"><code class="name flex">
+<dt id="analogistics.statistics.time_series.assignWeekDay"><code class="name flex">
 <span>def <span class="ident">assignWeekDay</span></span>(<span>df: pandas.core.frame.DataFrame, timeVariable: str) -> tuple</span>
 </code></dt>
 <dd>
@@ -1047,7 +1047,7 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
     return dayOfTheWeek, weekEnd</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.attractor_estimate"><code class="name flex">
+<dt id="analogistics.statistics.time_series.attractor_estimate"><code class="name flex">
 <span>def <span class="ident">attractor_estimate</span></span>(<span>y, dim='3d') -> bool</span>
 </code></dt>
 <dd>
@@ -1119,7 +1119,7 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
     return True</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.autoSARIMAXfit"><code class="name flex">
+<dt id="analogistics.statistics.time_series.autoSARIMAXfit"><code class="name flex">
 <span>def <span class="ident">autoSARIMAXfit</span></span>(<span>y, minRangepdq, maxRangepdqy, seasonality)</span>
 </code></dt>
 <dd>
@@ -1164,7 +1164,7 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
     return bestModel</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.detrendByRollingMean"><code class="name flex">
+<dt id="analogistics.statistics.time_series.detrendByRollingMean"><code class="name flex">
 <span>def <span class="ident">detrendByRollingMean</span></span>(<span>series: pandas.core.series.Series, seasonalityPeriod: int) -> pandas.core.series.Series</span>
 </code></dt>
 <dd>
@@ -1201,7 +1201,7 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
     return detrended</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.forecastSARIMAX"><code class="name flex">
+<dt id="analogistics.statistics.time_series.forecastSARIMAX"><code class="name flex">
 <span>def <span class="ident">forecastSARIMAX</span></span>(<span>series: pandas.core.series.Series, minRangepdq: int, maxRangepdqy: int, seasonality: int, NofSteps: int, title: str) -> tuple</span>
 </code></dt>
 <dd>
@@ -1280,7 +1280,7 @@ ARIMA(P,D,Q) = ARIMA(AR, I, MA)</p>
     return residui, forecast</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.fourierAnalysis"><code class="name flex">
+<dt id="analogistics.statistics.time_series.fourierAnalysis"><code class="name flex">
 <span>def <span class="ident">fourierAnalysis</span></span>(<span>y: <built-in function array>) -> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
@@ -1339,7 +1339,7 @@ fourier Coefficients</p>
     return D</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.groupPerMonth"><code class="name flex">
+<dt id="analogistics.statistics.time_series.groupPerMonth"><code class="name flex">
 <span>def <span class="ident">groupPerMonth</span></span>(<span>df: pandas.core.frame.DataFrame, timeVariable: str, groupVariable: str, groupType: str) -> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
@@ -1405,7 +1405,7 @@ fourier Coefficients</p>
     return df</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.groupPerWeek"><code class="name flex">
+<dt id="analogistics.statistics.time_series.groupPerWeek"><code class="name flex">
 <span>def <span class="ident">groupPerWeek</span></span>(<span>df: pandas.core.frame.DataFrame, timeVariable: str, groupVariable: str, groupType: str) -> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
@@ -1474,7 +1474,7 @@ fourier Coefficients</p>
     return df</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.groupPerWeekday"><code class="name flex">
+<dt id="analogistics.statistics.time_series.groupPerWeekday"><code class="name flex">
 <span>def <span class="ident">groupPerWeekday</span></span>(<span>df: pandas.core.frame.DataFrame, timeVariable: str, groupVariable: str) -> pandas.core.frame.DataFrame</span>
 </code></dt>
 <dd>
@@ -1522,7 +1522,7 @@ fourier Coefficients</p>
     return D_grouped</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.poincare_section"><code class="name flex">
+<dt id="analogistics.statistics.time_series.poincare_section"><code class="name flex">
 <span>def <span class="ident">poincare_section</span></span>(<span>series: pandas.core.series.Series, T: int = 2, num_of_dots_on_picture: int = 10) -> tuple</span>
 </code></dt>
 <dd>
@@ -1624,7 +1624,7 @@ num_of_dots_on_picture poincare section evaluated at that step<pre><code>       
     return D_all_coords, out_fig</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.returnSignificantLags"><code class="name flex">
+<dt id="analogistics.statistics.time_series.returnSignificantLags"><code class="name flex">
 <span>def <span class="ident">returnSignificantLags</span></span>(<span>D_pacf_significant: pandas.core.series.Series, D_acf_significant: pandas.core.series.Series, maxValuesSelected: int = 2) -> list</span>
 </code></dt>
 <dd>
@@ -1685,7 +1685,7 @@ num_of_dots_on_picture poincare section evaluated at that step<pre><code>       
     return params</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.sampleTimeSeries"><code class="name flex">
+<dt id="analogistics.statistics.time_series.sampleTimeSeries"><code class="name flex">
 <span>def <span class="ident">sampleTimeSeries</span></span>(<span>series: pandas.core.series.Series, sampleInterval: str) -> pandas.core.series.Series</span>
 </code></dt>
 <dd>
@@ -1739,7 +1739,7 @@ num_of_dots_on_picture poincare section evaluated at that step<pre><code>       
     return series</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.timeStampToDays"><code class="name flex">
+<dt id="analogistics.statistics.time_series.timeStampToDays"><code class="name flex">
 <span>def <span class="ident">timeStampToDays</span></span>(<span>series: pandas.core.series.Series) -> pandas.core.series.Series</span>
 </code></dt>
 <dd>
@@ -1774,7 +1774,7 @@ num_of_dots_on_picture poincare section evaluated at that step<pre><code>       
     return result</code></pre>
 </details>
 </dd>
-<dt id="analogistics.stat_time_series.transformSeriesToStationary"><code class="name flex">
+<dt id="analogistics.statistics.time_series.transformSeriesToStationary"><code class="name flex">
 <span>def <span class="ident">transformSeriesToStationary</span></span>(<span>series: pandas.core.series.Series, signifAlpha: float = 0.05) -> tuple</span>
 </code></dt>
 <dd>
@@ -1913,28 +1913,28 @@ reference: <a href="http://www.insightsbot.com/blog/1MH61d/augmented-dickey-full
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="analogistics" href="index.html">analogistics</a></code></li>
+<li><code><a title="analogistics.statistics" href="index.html">analogistics.statistics</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="analogistics.stat_time_series.ACF_PACF_plot" href="#analogistics.stat_time_series.ACF_PACF_plot">ACF_PACF_plot</a></code></li>
-<li><code><a title="analogistics.stat_time_series.ARIMAfit" href="#analogistics.stat_time_series.ARIMAfit">ARIMAfit</a></code></li>
-<li><code><a title="analogistics.stat_time_series.SARIMAXfit" href="#analogistics.stat_time_series.SARIMAXfit">SARIMAXfit</a></code></li>
-<li><code><a title="analogistics.stat_time_series.assignWeekDay" href="#analogistics.stat_time_series.assignWeekDay">assignWeekDay</a></code></li>
-<li><code><a title="analogistics.stat_time_series.attractor_estimate" href="#analogistics.stat_time_series.attractor_estimate">attractor_estimate</a></code></li>
-<li><code><a title="analogistics.stat_time_series.autoSARIMAXfit" href="#analogistics.stat_time_series.autoSARIMAXfit">autoSARIMAXfit</a></code></li>
-<li><code><a title="analogistics.stat_time_series.detrendByRollingMean" href="#analogistics.stat_time_series.detrendByRollingMean">detrendByRollingMean</a></code></li>
-<li><code><a title="analogistics.stat_time_series.forecastSARIMAX" href="#analogistics.stat_time_series.forecastSARIMAX">forecastSARIMAX</a></code></li>
-<li><code><a title="analogistics.stat_time_series.fourierAnalysis" href="#analogistics.stat_time_series.fourierAnalysis">fourierAnalysis</a></code></li>
-<li><code><a title="analogistics.stat_time_series.groupPerMonth" href="#analogistics.stat_time_series.groupPerMonth">groupPerMonth</a></code></li>
-<li><code><a title="analogistics.stat_time_series.groupPerWeek" href="#analogistics.stat_time_series.groupPerWeek">groupPerWeek</a></code></li>
-<li><code><a title="analogistics.stat_time_series.groupPerWeekday" href="#analogistics.stat_time_series.groupPerWeekday">groupPerWeekday</a></code></li>
-<li><code><a title="analogistics.stat_time_series.poincare_section" href="#analogistics.stat_time_series.poincare_section">poincare_section</a></code></li>
-<li><code><a title="analogistics.stat_time_series.returnSignificantLags" href="#analogistics.stat_time_series.returnSignificantLags">returnSignificantLags</a></code></li>
-<li><code><a title="analogistics.stat_time_series.sampleTimeSeries" href="#analogistics.stat_time_series.sampleTimeSeries">sampleTimeSeries</a></code></li>
-<li><code><a title="analogistics.stat_time_series.timeStampToDays" href="#analogistics.stat_time_series.timeStampToDays">timeStampToDays</a></code></li>
-<li><code><a title="analogistics.stat_time_series.transformSeriesToStationary" href="#analogistics.stat_time_series.transformSeriesToStationary">transformSeriesToStationary</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.ACF_PACF_plot" href="#analogistics.statistics.time_series.ACF_PACF_plot">ACF_PACF_plot</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.ARIMAfit" href="#analogistics.statistics.time_series.ARIMAfit">ARIMAfit</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.SARIMAXfit" href="#analogistics.statistics.time_series.SARIMAXfit">SARIMAXfit</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.assignWeekDay" href="#analogistics.statistics.time_series.assignWeekDay">assignWeekDay</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.attractor_estimate" href="#analogistics.statistics.time_series.attractor_estimate">attractor_estimate</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.autoSARIMAXfit" href="#analogistics.statistics.time_series.autoSARIMAXfit">autoSARIMAXfit</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.detrendByRollingMean" href="#analogistics.statistics.time_series.detrendByRollingMean">detrendByRollingMean</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.forecastSARIMAX" href="#analogistics.statistics.time_series.forecastSARIMAX">forecastSARIMAX</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.fourierAnalysis" href="#analogistics.statistics.time_series.fourierAnalysis">fourierAnalysis</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.groupPerMonth" href="#analogistics.statistics.time_series.groupPerMonth">groupPerMonth</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.groupPerWeek" href="#analogistics.statistics.time_series.groupPerWeek">groupPerWeek</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.groupPerWeekday" href="#analogistics.statistics.time_series.groupPerWeekday">groupPerWeekday</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.poincare_section" href="#analogistics.statistics.time_series.poincare_section">poincare_section</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.returnSignificantLags" href="#analogistics.statistics.time_series.returnSignificantLags">returnSignificantLags</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.sampleTimeSeries" href="#analogistics.statistics.time_series.sampleTimeSeries">sampleTimeSeries</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.timeStampToDays" href="#analogistics.statistics.time_series.timeStampToDays">timeStampToDays</a></code></li>
+<li><code><a title="analogistics.statistics.time_series.transformSeriesToStationary" href="#analogistics.statistics.time_series.transformSeriesToStationary">transformSeriesToStationary</a></code></li>
 </ul>
 </li>
 </ul>

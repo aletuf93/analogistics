@@ -10,9 +10,9 @@ from sklearn import linear_model
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import VarianceThreshold, SelectFromModel
 
-from logproj.ml_dataCleaning import dummyColumns
-from logproj.ml_explore import correlationMatrix
-from logproj.M_learningMethod.linear_models import fit_linear_reg
+from analogistics.transform import dummyColumns
+from analogistics.explore import correlationMatrix
+from analogistics.learning.linear_models import fit_linear_reg
 
 
 def diagnoseForFeatureSelection(X: pd.DataFrame,
@@ -476,12 +476,12 @@ def selectByForwardStepwiseSelection(df: pd.DataFrame, y: pd.Series, n_feat: int
     return X_res, output_figure, output_df
 
 
-def PCAplot(n_comp: int, df: pd.dataFrame, diagnose=False):
+def PCAplot(n_comp: int, df: pd.DataFrame, diagnose=False):
     """
 
     Args:
         n_comp (int): number of components of the PCA.
-        df (pd.dataFrame): dataframe of the attributes .
+        df (pd.DataFrame): dataframe of the attributes .
         diagnose (TYPE, optional): if True produces the Pareto curve of the number of components. Defaults to False.
 
     Returns:
