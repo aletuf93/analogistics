@@ -109,8 +109,11 @@ class GridSearch(ABC):
             F1 = f1_score(y_test, y_pred, average='weighted')
 
             # get classification report
-            D_rep = classification_report(y_test, y_pred, target_names=MODEL.classes_)
-
+            # print(y_test)
+            # print(y_pred)
+            # print(MODEL.classes_)
+            # D_rep = classification_report(y_test, y_pred, target_names=MODEL.classes_)
+            D_rep = pd.DataFrame()
             D_trainingResults = D_trainingResults.append(pd.DataFrame([[model, MODEL, PARAMS, SCORE_TEST, ACCURACY, PRECISION, RECALL, F1, D_rep]],
                                                                       columns=D_trainingResults.columns))
         return D_trainingResults
