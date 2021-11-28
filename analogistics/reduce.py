@@ -12,7 +12,7 @@ from sklearn.feature_selection import VarianceThreshold, SelectFromModel
 
 from analogistics.transform import dummyColumns
 from analogistics.explore import correlationMatrix
-from analogistics.learning.linear_models import fit_linear_reg
+from analogistics.learning.linear_grids import fit_linear_reg
 
 
 def diagnoseForFeatureSelection(X: pd.DataFrame,
