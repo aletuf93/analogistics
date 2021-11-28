@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from analogistics.statistics import time_series as ts
-from analogistics.supplsupply_chain.information_framework import movementfunctionfromInventory
+from analogistics.supply_chain.information_framework import movementfunctionfromInventory
 from analogistics.explore import paretoDataframe
 
 
