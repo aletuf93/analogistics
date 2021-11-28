@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P9_workload_prediction.demand_assessment API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P9_workload_prediction.demand_assessment</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from analogistics.statistics import time_series as ts
+from statsmodels.tsa.seasonal import seasonal_decompose
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+
+
+def getAdvanceInPlanning(D_mov: pd.DataFrame, loadingptafield: str = &#39;LOADING_TIME_WINDOWS_PROVISIONAL_START&#39;):
+    &#34;&#34;&#34;
+    calculate the distribution of the advance in planning
+
+    Args:
+        D_mov (pd.DataFrame): Input movements dataFrame.
+        loadingptafield (str, optional): column name with planning timestamp. Defaults to &#39;LOADING_TIME_WINDOWS_PROVISIONAL_START&#39;.
+
+    Returns:
+        plt.Figure: output figure.
+        pd.DataFrame: output dataframe.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_data = {}
+    output_coverage = {}
+
+    # filterNan
+    D_mov_filtered = D_mov[[&#39;TIMESTAMP_IN&#39;, loadingptafield]].dropna()
+
+    if len(D_mov_filtered) == 0:
+        return output_figure, pd.DataFrame([&#39;No PTA fields to perform this analysis&#39;])
+    if loadingptafield == &#39;TIMESTAMP_IN&#39;:  # when using the same column, get zero
+        mean_advanceInPlanning = std_advanceInPlanning = 0
+        advanceInPlanningDistribution = []
+    else:
+        advanceInPlanning = D_mov_filtered[loadingptafield] - D_mov_filtered[&#39;TIMESTAMP_IN&#39;]
+        advanceInPlanningD = advanceInPlanning.dt.components[&#39;days&#39;]
+        advanceInPlanningH = advanceInPlanning.dt.components[&#39;hours&#39;]
+        advanceInPlanningM = advanceInPlanning.dt.components[&#39;minutes&#39;]
+        advanceInPlanning = advanceInPlanningD + advanceInPlanningH / 24 + advanceInPlanningM / (60 * 24)
+        advanceInPlanning = advanceInPlanning[advanceInPlanning &gt; 0]
+        mean_advanceInPlanning = np.mean(advanceInPlanning)
+        std_advanceInPlanning = np.std(advanceInPlanning)
+        advanceInPlanningDistribution = advanceInPlanning
+
+    if len(advanceInPlanningDistribution) &gt; 0:
+        # Advance in planning
+        fig_planningAdvance = plt.figure()
+        plt.title(&#39;Days of advance in booking&#39;)
+        plt.hist(advanceInPlanning, color=&#39;orange&#39;, bins=np.arange(0, max(advanceInPlanningDistribution), 1))
+        plt.xlabel(&#39;days&#39;)
+        plt.ylabel(&#39;N.ofBooks&#39;)
+
+        # output_figure
+        output_figure[&#39;ADVANCE_IN_PLANNING&#39;] = fig_planningAdvance
+
+    # output_data
+    output_data[&#39;ADVANCE_PLANNING_MEAN&#39;] = mean_advanceInPlanning
+    output_data[&#39;ADVANCE_PLANNING_STD&#39;] = std_advanceInPlanning
+    output_data[&#39;SERIES&#39;] = advanceInPlanningDistribution
+
+    # get coverage
+    output_coverage[&#39;ADVANCE_PLANNING_MEAN&#39;] = getCoverageStats(D_mov, loadingptafield, capacityField=&#39;QUANTITY&#39;)
+    output_coverage[&#39;ADVANCE_PLANNING_STD&#39;] = output_coverage[&#39;ADVANCE_PLANNING_MEAN&#39;]
+    output_coverage[&#39;SERIES&#39;] = output_coverage[&#39;ADVANCE_PLANNING_MEAN&#39;]
+
+    D_global = pd.DataFrame([output_data, output_coverage]).transpose()
+    D_global.columns = [&#39;VALUE&#39;, &#39;ACCURACY&#39;]
+
+    return output_figure, D_global
+
+
+def bookingStatistics(D_mov: pd.DataFrame, capacityField: str = &#39;QUANTITY&#39;,
+                      timeVariable: str = &#39;TIMESTAMP_IN&#39;,
+                      samplingInterval: list = [&#39;day&#39;, &#39;week&#39;, &#39;month&#39;]):
+    &#34;&#34;&#34;
+    trend analysis by month, wek and day
+
+    Args:
+        D_mov (pd.DataFrame): Inpur movements DataFrame.
+        capacityField (str, optional): Column name with quantity. Defaults to &#39;QUANTITY&#39;.
+        timeVariable (str, optional): Column name with timestamp. Defaults to &#39;TIMESTAMP_IN&#39;.
+        samplingInterval (list, optional): List of sampling intervals to consider. Defaults to [&#39;day&#39;, &#39;week&#39;, &#39;month&#39;].
+
+    Returns:
+        imageResults (dict): Dictionary with output figures.
+        dataframeResults (dict): Dictionary with output dataFrames.
+
+    &#34;&#34;&#34;
+
+    # create dictionary results
+    imageResults = {}
+    dataframeResults = {}
+    dataResults_trend = {}
+    coverage_stats = {}
+
+    # calculate coverages
+    accuracy, _ = getCoverageStats(D_mov, analysisFieldList=timeVariable, capacityField=capacityField)
+
+    D_OrderTrend = D_mov.groupby([timeVariable]).size().reset_index()
+    D_OrderTrend.columns = [&#39;DatePeriod&#39;, &#39;Orders&#39;]
+    D_OrderTrend = D_OrderTrend.sort_values([&#39;DatePeriod&#39;])
+
+    for spInterval in samplingInterval:
+        if spInterval == &#39;month&#39;:
+            timeSeries_analysis = ts.raggruppaPerMese(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
+
+        elif spInterval == &#39;week&#39;:
+            timeSeries_analysis = ts.raggruppaPerSettimana(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
+
+        elif spInterval == &#39;day&#39;:
+            timeSeries_analysis = D_OrderTrend.set_index(&#39;DatePeriod&#39;)
+            timeSeries_analysis = timeSeries_analysis[&#39;Orders&#39;]
+
+        # daily trend
+        fig1 = plt.figure()
+        plt.plot(timeSeries_analysis.index.values, timeSeries_analysis, color=&#39;orange&#39;)
+        plt.title(f&#34;TREND: {timeVariable} per {spInterval}&#34;)
+        plt.xticks(rotation=30)
+        imageResults[f&#34;trend_{spInterval}&#34;] = fig1
+
+        # distribution
+        fig2 = plt.figure()
+        plt.hist(timeSeries_analysis, color=&#39;orange&#39;)
+        plt.title(f&#34;Frequency analysis of {timeVariable} per {spInterval}&#34;)
+        plt.xlabel(f&#34;{timeVariable}&#34;)
+        plt.ylabel(f&#34;{spInterval}&#34;)
+        imageResults[f&#34;pdf_{spInterval}&#34;] = fig2
+        # fig1.savefig(dirResults+&#39;\\02-ContainerPDFDaily.png&#39;)
+
+        daily_mean = np.mean(timeSeries_analysis)
+        daily_std = np.std(timeSeries_analysis)
+
+        # calculate the values
+        dataResults_trend[f&#34;{timeVariable}_{spInterval}_MEAN&#34;] = daily_mean
+        dataResults_trend[f&#34;{timeVariable}_{spInterval}_STD&#34;] = daily_std
+
+        # assign coverages
+        coverage_stats[f&#34;{timeVariable}_{spInterval}_MEAN&#34;] = accuracy
+        coverage_stats[f&#34;{timeVariable}_{spInterval}_STD&#34;] = accuracy
+
+    # save dataframe with results
+    D_trend_stat = pd.DataFrame([dataResults_trend, coverage_stats]).transpose()
+    D_trend_stat.columns = [&#39;VALUE&#39;, &#39;ACCURACY&#39;]
+    dataframeResults[&#39;trend_df&#39;] = D_trend_stat
+
+    # distribution per weekday
+    D_grouped = ts.raggruppaPerGiornoDellaSettimana(D_OrderTrend, timeVariable=&#39;DatePeriod&#39;, seriesVariable=&#39;Orders&#39;)
+    D_grouped[&#39;accuracy&#39;] = [accuracy for i in range(0, len(D_grouped))]
+    dataframeResults[&#39;weekday_df&#39;] = D_grouped
+
+    fig3 = plt.figure()
+    plt.bar(D_grouped.index.values, D_grouped[&#39;mean&#39;], color=&#39;orange&#39;)
+    plt.title(f&#34;N.of {timeVariable} per day of the week&#34;)
+    plt.xlabel(&#39;day of the week&#39;)
+    plt.ylabel(&#39;Frequency&#39;)
+    imageResults[&#34;pdf_dayOfTheWeek&#34;] = fig3
+
+    return imageResults, dataframeResults
+
+
+def plotquantitytrend(D_temp: pd.DataFrame, date_field: str = &#39;TIMESTAMP_IN&#39;,
+                      filterVariable: list = [], filterValue: list = [],
+                      quantityVariable: str = &#39;sum_QUANTITY&#39;,
+                      countVariable: str = &#39;count_TIMESTAMP_IN&#39;, titolo: str = &#39;&#39;):
+    &#34;&#34;&#34;
+    the function return a figure with two subplots on for quantities the other for lines
+
+    Args:
+        D_temp (pd.DataFrame): input dataframe.
+        date_field (str, optional): string with the column name for the date field. Defaults to &#39;TIMESTAMP_IN&#39;.
+        filterVariable (list, optional): string with the column name for filtering the dataframe. Defaults to [].
+        filterValue (list, optional): value to filter the dataframe. Defaults to [].
+        quantityVariable (str, optional): string with the column name for the sum of the quantities. Defaults to &#39;sum_QUANTITY&#39;.
+        countVariable (str, optional): string with the column name for the count. Defaults to &#39;count_TIMESTAMP_IN&#39;.
+        titolo (str, optional): title of the figure. Defaults to &#39;&#39;.
+
+    Returns:
+        fig (plt.figure): Output figure.
+
+    &#34;&#34;&#34;
+
+    if len(filterVariable) &gt; 0:
+        D_temp = D_temp[D_temp[filterVariable] == filterValue]
+    D_temp = D_temp.sort_values(date_field)
+    D_temp = D_temp.reset_index(drop=True)
+    D_temp = D_temp.dropna(subset=[date_field, quantityVariable])
+
+    fig, axs = plt.subplots(1, 2, figsize=(10, 8))
+    fig.suptitle(titolo)
+
+    # plot quantity
+    axs[0].plot(D_temp[date_field], D_temp[quantityVariable])
+    axs[0].set_title(&#39;Quantity trend&#39;)
+    for tick in axs[0].get_xticklabels():
+        tick.set_rotation(45)
+
+    # plot lines
+    axs[1].plot(D_temp[date_field], D_temp[countVariable])
+    axs[1].set_title(&#39;Lines trend&#39;)
+    for tick in axs[1].get_xticklabels():
+        tick.set_rotation(45)
+
+    return fig
+
+
+def plotQuantityTrendWeeklyDaily(D_temp: pd.DataFrame, date_field: str = &#39;TIMESTAMP_IN&#39;,
+                                 filterVariable: str = [], filterValue: str = [],
+                                 quantityVariable: str = &#39;sum_QUANTITY&#39;,
+                                 countVariable: str = &#39;count_TIMESTAMP_IN&#39;,
+                                 titolo: str = &#39;&#39;):
+    &#34;&#34;&#34;
+    the function return a figure with two subplots on for quantities the other for lines
+
+    Args:
+        D_temp (pd.dataFrame): input dataframe.
+        date_field (str, optional): string with the column name for the date field. Defaults to &#39;TIMESTAMP_IN&#39;.
+        filterVariable (str, optional): string with the column name for filtering the dataframe. Defaults to [].
+        filterValue (list, optional): value to filter the dataframe. Defaults to [].
+        quantityVariable (str, optional): string with the column name for the sum of the quantities. Defaults to &#39;sum_QUANTITY&#39;.
+        countVariable (str, optional): string with the column name for the count. Defaults to &#39;count_TIMESTAMP_IN&#39;.
+        titolo (str, optional): title of the figure. Defaults to &#39;&#39;.
+
+    Returns:
+        fig (plt.figure): Output figure.
+
+    &#34;&#34;&#34;
+
+    if len(filterVariable) &gt; 0:
+        D_temp = D_temp[D_temp[filterVariable] == filterValue]
+    D_temp = D_temp.sort_values(date_field)
+    D_temp = D_temp.reset_index(drop=True)
+    D_temp = D_temp.dropna(subset=[date_field, quantityVariable])
+
+    fig, axs = plt.subplots(1, 2, figsize=(10, 8))
+    fig.suptitle(titolo)
+
+    # QUANTITIES
+    # extract daily time series
+    timeSeries = pd.DataFrame(D_temp[[date_field, quantityVariable]])
+    timeSeries_day = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+
+    # extract weekly time series
+    timeSeries_week = ts.raggruppaPerSettimana(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
+
+    # extract monthly time series
+    timeSeries_month = ts.raggruppaPerMese(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
+
+    # plot weekly-daily
+    axs[0].plot(timeSeries_day)
+    axs[0].plot(timeSeries_week)
+    axs[0].plot(timeSeries_month)
+    axs[0].set_title(&#39;Quantity trend&#39;)
+    axs[0].legend([&#39;daily time series&#39;, &#39;weekly time series&#39;, &#39;monthly time series&#39;])
+    for tick in axs[0].get_xticklabels():
+        tick.set_rotation(45)
+
+    # LINES
+
+    # extract daily time series
+    timeSeries = pd.DataFrame(D_temp[[date_field, countVariable]])
+    timeSeries_day = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+
+    # extract weekly time series
+    timeSeries_week = ts.raggruppaPerSettimana(timeSeries, date_field, countVariable, &#39;sum&#39;)
+
+    # extract monthly time series
+    timeSeries_month = ts.raggruppaPerMese(timeSeries, date_field, countVariable, &#39;sum&#39;)
+
+    # plot weekly-daily
+    axs[1].plot(timeSeries_day)
+    axs[1].plot(timeSeries_week)
+    axs[1].plot(timeSeries_month)
+    axs[1].set_title(&#39;Lines trend&#39;)
+    axs[1].legend([&#39;daily time series&#39;, &#39;weekly time series&#39;, &#39;monthly time series&#39;])
+    for tick in axs[1].get_xticklabels():
+        tick.set_rotation(45)
+
+    return fig
+
+
+def decomposeTimeSeries(D_time: pd.DataFrame, seriesVariable: str,
+                        samplingInterval: str = &#39;week&#39;, date_field: str = &#39;TIMESTAMP_IN&#39;,
+                        decompositionModel: str = &#39;additive&#39;):
+    &#34;&#34;&#34;
+    defines a graph decomposing a time series
+
+    Args:
+        D_time (pd.DataFrame): input dataframe.
+        seriesVariable (str): string with the name of the column containing the datetime series.
+        samplingInterval (str, optional): if week it groups the series for week. Defaults to &#39;week&#39;.
+        date_field (str, optional): string with the name of the column containing the series. Defaults to &#39;TIMESTAMP_IN&#39;.
+        decompositionModel (str, optional): argument of seasonal_decompose (additive or multiplicative). Defaults to &#39;additive&#39;.
+
+    Returns:
+        TYPE: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # estract daily time series
+    timeSeries = pd.DataFrame(D_time[[date_field, seriesVariable]])
+    timeSeries_analysis = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+    timeSeries_analysis[date_field] = timeSeries_analysis.index.values
+
+    if samplingInterval == &#39;month&#39;:
+        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        frequency = min(12, len(timeSeries_analysis) - 1)  # search yearly frequency
+    elif samplingInterval == &#39;week&#39;:
+        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        frequency = min(4, len(timeSeries_analysis) - 1)  # search monthly frequency
+    elif samplingInterval == &#39;day&#39;:
+        timeSeries_analysis = timeSeries_analysis[seriesVariable]
+        frequency = min(7, len(timeSeries_analysis) - 1)  # search weekly frequency
+
+    if len(timeSeries_analysis) &lt; 2 * frequency:
+        print(f&#34;Not enough values to decompose series with sampling interval {samplingInterval}&#34;)
+        return plt.figure()
+    result = seasonal_decompose(timeSeries_analysis, model=decompositionModel, freq=frequency)
+    fig = result.plot()
+    return fig
+
+
+def seasonalityWithfourier(D_time: pd.DataFrame, seriesVariable: str,
+                           samplingInterval: str = &#39;week&#39;,
+                           date_field: str = &#39;TIMESTAMP_IN&#39;, titolo: str = &#39;&#39;):
+    &#34;&#34;&#34;
+    decompose the seasonal part of a time series using Fourier transform
+
+    Args:
+        D_time (pd.dataFrame): Input dataFrame.
+        seriesVariable (str): string with the name of the column containing the series.
+        samplingInterval (str, optional): if week it groups the series for week or day. Defaults to &#39;week&#39;.
+        date_field (str, optional): string with the name of the column containing the datetime series. Defaults to &#39;TIMESTAMP_IN&#39;.
+        titolo (str, optional): title of the figure. Defaults to &#39;&#39;.
+
+    Returns:
+        fig (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # extract time series
+    timeSeries = pd.DataFrame(D_time[[date_field, seriesVariable]])
+    timeSeries_analysis = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+    timeSeries_analysis[date_field] = timeSeries_analysis.index.values
+
+    if samplingInterval == &#39;month&#39;:
+        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;week&#39;:
+        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;day&#39;:
+        timeSeries_analysis = timeSeries_analysis[seriesVariable]
+
+    y = np.array(timeSeries_analysis)
+    D = ts.fourierAnalysis(y)
+
+    fig = plt.figure()
+    plt.stem(1 / D[&#39;Frequency_domain_value&#39;], D[&#39;Amplitude&#39;])
+    plt.title(f&#34;Amplitude spectrum {titolo}&#34;)
+    plt.xlabel(f&#34;Time domain: {samplingInterval}&#34;)
+    plt.ylabel(&#39;Amplitude&#39;)
+    return fig</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P9_workload_prediction.demand_assessment.bookingStatistics"><code class="name flex">
+<span>def <span class="ident">bookingStatistics</span></span>(<span>D_mov: pandas.core.frame.DataFrame, capacityField: str = 'QUANTITY', timeVariable: str = 'TIMESTAMP_IN', samplingInterval: list = ['day', 'week', 'month'])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>trend analysis by month, wek and day</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Inpur movements DataFrame.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with quantity. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>timeVariable</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with timestamp. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>samplingInterval</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>List of sampling intervals to consider. Defaults to ['day', 'week', 'month'].</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>imageResults (dict): Dictionary with output figures.
+dataframeResults (dict): Dictionary with output dataFrames.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bookingStatistics(D_mov: pd.DataFrame, capacityField: str = &#39;QUANTITY&#39;,
+                      timeVariable: str = &#39;TIMESTAMP_IN&#39;,
+                      samplingInterval: list = [&#39;day&#39;, &#39;week&#39;, &#39;month&#39;]):
+    &#34;&#34;&#34;
+    trend analysis by month, wek and day
+
+    Args:
+        D_mov (pd.DataFrame): Inpur movements DataFrame.
+        capacityField (str, optional): Column name with quantity. Defaults to &#39;QUANTITY&#39;.
+        timeVariable (str, optional): Column name with timestamp. Defaults to &#39;TIMESTAMP_IN&#39;.
+        samplingInterval (list, optional): List of sampling intervals to consider. Defaults to [&#39;day&#39;, &#39;week&#39;, &#39;month&#39;].
+
+    Returns:
+        imageResults (dict): Dictionary with output figures.
+        dataframeResults (dict): Dictionary with output dataFrames.
+
+    &#34;&#34;&#34;
+
+    # create dictionary results
+    imageResults = {}
+    dataframeResults = {}
+    dataResults_trend = {}
+    coverage_stats = {}
+
+    # calculate coverages
+    accuracy, _ = getCoverageStats(D_mov, analysisFieldList=timeVariable, capacityField=capacityField)
+
+    D_OrderTrend = D_mov.groupby([timeVariable]).size().reset_index()
+    D_OrderTrend.columns = [&#39;DatePeriod&#39;, &#39;Orders&#39;]
+    D_OrderTrend = D_OrderTrend.sort_values([&#39;DatePeriod&#39;])
+
+    for spInterval in samplingInterval:
+        if spInterval == &#39;month&#39;:
+            timeSeries_analysis = ts.raggruppaPerMese(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
+
+        elif spInterval == &#39;week&#39;:
+            timeSeries_analysis = ts.raggruppaPerSettimana(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
+
+        elif spInterval == &#39;day&#39;:
+            timeSeries_analysis = D_OrderTrend.set_index(&#39;DatePeriod&#39;)
+            timeSeries_analysis = timeSeries_analysis[&#39;Orders&#39;]
+
+        # daily trend
+        fig1 = plt.figure()
+        plt.plot(timeSeries_analysis.index.values, timeSeries_analysis, color=&#39;orange&#39;)
+        plt.title(f&#34;TREND: {timeVariable} per {spInterval}&#34;)
+        plt.xticks(rotation=30)
+        imageResults[f&#34;trend_{spInterval}&#34;] = fig1
+
+        # distribution
+        fig2 = plt.figure()
+        plt.hist(timeSeries_analysis, color=&#39;orange&#39;)
+        plt.title(f&#34;Frequency analysis of {timeVariable} per {spInterval}&#34;)
+        plt.xlabel(f&#34;{timeVariable}&#34;)
+        plt.ylabel(f&#34;{spInterval}&#34;)
+        imageResults[f&#34;pdf_{spInterval}&#34;] = fig2
+        # fig1.savefig(dirResults+&#39;\\02-ContainerPDFDaily.png&#39;)
+
+        daily_mean = np.mean(timeSeries_analysis)
+        daily_std = np.std(timeSeries_analysis)
+
+        # calculate the values
+        dataResults_trend[f&#34;{timeVariable}_{spInterval}_MEAN&#34;] = daily_mean
+        dataResults_trend[f&#34;{timeVariable}_{spInterval}_STD&#34;] = daily_std
+
+        # assign coverages
+        coverage_stats[f&#34;{timeVariable}_{spInterval}_MEAN&#34;] = accuracy
+        coverage_stats[f&#34;{timeVariable}_{spInterval}_STD&#34;] = accuracy
+
+    # save dataframe with results
+    D_trend_stat = pd.DataFrame([dataResults_trend, coverage_stats]).transpose()
+    D_trend_stat.columns = [&#39;VALUE&#39;, &#39;ACCURACY&#39;]
+    dataframeResults[&#39;trend_df&#39;] = D_trend_stat
+
+    # distribution per weekday
+    D_grouped = ts.raggruppaPerGiornoDellaSettimana(D_OrderTrend, timeVariable=&#39;DatePeriod&#39;, seriesVariable=&#39;Orders&#39;)
+    D_grouped[&#39;accuracy&#39;] = [accuracy for i in range(0, len(D_grouped))]
+    dataframeResults[&#39;weekday_df&#39;] = D_grouped
+
+    fig3 = plt.figure()
+    plt.bar(D_grouped.index.values, D_grouped[&#39;mean&#39;], color=&#39;orange&#39;)
+    plt.title(f&#34;N.of {timeVariable} per day of the week&#34;)
+    plt.xlabel(&#39;day of the week&#39;)
+    plt.ylabel(&#39;Frequency&#39;)
+    imageResults[&#34;pdf_dayOfTheWeek&#34;] = fig3
+
+    return imageResults, dataframeResults</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P9_workload_prediction.demand_assessment.decomposeTimeSeries"><code class="name flex">
+<span>def <span class="ident">decomposeTimeSeries</span></span>(<span>D_time: pandas.core.frame.DataFrame, seriesVariable: str, samplingInterval: str = 'week', date_field: str = 'TIMESTAMP_IN', decompositionModel: str = 'additive')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>defines a graph decomposing a time series</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_time</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input dataframe.</dd>
+<dt><strong><code>seriesVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the name of the column containing the datetime series.</dd>
+<dt><strong><code>samplingInterval</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>if week it groups the series for week. Defaults to 'week'.</dd>
+<dt><strong><code>date_field</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the name of the column containing the series. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>decompositionModel</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>argument of seasonal_decompose (additive or multiplicative). Defaults to 'additive'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>TYPE</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def decomposeTimeSeries(D_time: pd.DataFrame, seriesVariable: str,
+                        samplingInterval: str = &#39;week&#39;, date_field: str = &#39;TIMESTAMP_IN&#39;,
+                        decompositionModel: str = &#39;additive&#39;):
+    &#34;&#34;&#34;
+    defines a graph decomposing a time series
+
+    Args:
+        D_time (pd.DataFrame): input dataframe.
+        seriesVariable (str): string with the name of the column containing the datetime series.
+        samplingInterval (str, optional): if week it groups the series for week. Defaults to &#39;week&#39;.
+        date_field (str, optional): string with the name of the column containing the series. Defaults to &#39;TIMESTAMP_IN&#39;.
+        decompositionModel (str, optional): argument of seasonal_decompose (additive or multiplicative). Defaults to &#39;additive&#39;.
+
+    Returns:
+        TYPE: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # estract daily time series
+    timeSeries = pd.DataFrame(D_time[[date_field, seriesVariable]])
+    timeSeries_analysis = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+    timeSeries_analysis[date_field] = timeSeries_analysis.index.values
+
+    if samplingInterval == &#39;month&#39;:
+        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        frequency = min(12, len(timeSeries_analysis) - 1)  # search yearly frequency
+    elif samplingInterval == &#39;week&#39;:
+        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        frequency = min(4, len(timeSeries_analysis) - 1)  # search monthly frequency
+    elif samplingInterval == &#39;day&#39;:
+        timeSeries_analysis = timeSeries_analysis[seriesVariable]
+        frequency = min(7, len(timeSeries_analysis) - 1)  # search weekly frequency
+
+    if len(timeSeries_analysis) &lt; 2 * frequency:
+        print(f&#34;Not enough values to decompose series with sampling interval {samplingInterval}&#34;)
+        return plt.figure()
+    result = seasonal_decompose(timeSeries_analysis, model=decompositionModel, freq=frequency)
+    fig = result.plot()
+    return fig</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P9_workload_prediction.demand_assessment.getAdvanceInPlanning"><code class="name flex">
+<span>def <span class="ident">getAdvanceInPlanning</span></span>(<span>D_mov: pandas.core.frame.DataFrame, loadingptafield: str = 'LOADING_TIME_WINDOWS_PROVISIONAL_START')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculate the distribution of the advance in planning</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input movements dataFrame.</dd>
+<dt><strong><code>loadingptafield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with planning timestamp. Defaults to 'LOADING_TIME_WINDOWS_PROVISIONAL_START'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>plt.Figure</code></dt>
+<dd>output figure.</dd>
+<dt><code>pd.DataFrame</code></dt>
+<dd>output dataframe.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getAdvanceInPlanning(D_mov: pd.DataFrame, loadingptafield: str = &#39;LOADING_TIME_WINDOWS_PROVISIONAL_START&#39;):
+    &#34;&#34;&#34;
+    calculate the distribution of the advance in planning
+
+    Args:
+        D_mov (pd.DataFrame): Input movements dataFrame.
+        loadingptafield (str, optional): column name with planning timestamp. Defaults to &#39;LOADING_TIME_WINDOWS_PROVISIONAL_START&#39;.
+
+    Returns:
+        plt.Figure: output figure.
+        pd.DataFrame: output dataframe.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_data = {}
+    output_coverage = {}
+
+    # filterNan
+    D_mov_filtered = D_mov[[&#39;TIMESTAMP_IN&#39;, loadingptafield]].dropna()
+
+    if len(D_mov_filtered) == 0:
+        return output_figure, pd.DataFrame([&#39;No PTA fields to perform this analysis&#39;])
+    if loadingptafield == &#39;TIMESTAMP_IN&#39;:  # when using the same column, get zero
+        mean_advanceInPlanning = std_advanceInPlanning = 0
+        advanceInPlanningDistribution = []
+    else:
+        advanceInPlanning = D_mov_filtered[loadingptafield] - D_mov_filtered[&#39;TIMESTAMP_IN&#39;]
+        advanceInPlanningD = advanceInPlanning.dt.components[&#39;days&#39;]
+        advanceInPlanningH = advanceInPlanning.dt.components[&#39;hours&#39;]
+        advanceInPlanningM = advanceInPlanning.dt.components[&#39;minutes&#39;]
+        advanceInPlanning = advanceInPlanningD + advanceInPlanningH / 24 + advanceInPlanningM / (60 * 24)
+        advanceInPlanning = advanceInPlanning[advanceInPlanning &gt; 0]
+        mean_advanceInPlanning = np.mean(advanceInPlanning)
+        std_advanceInPlanning = np.std(advanceInPlanning)
+        advanceInPlanningDistribution = advanceInPlanning
+
+    if len(advanceInPlanningDistribution) &gt; 0:
+        # Advance in planning
+        fig_planningAdvance = plt.figure()
+        plt.title(&#39;Days of advance in booking&#39;)
+        plt.hist(advanceInPlanning, color=&#39;orange&#39;, bins=np.arange(0, max(advanceInPlanningDistribution), 1))
+        plt.xlabel(&#39;days&#39;)
+        plt.ylabel(&#39;N.ofBooks&#39;)
+
+        # output_figure
+        output_figure[&#39;ADVANCE_IN_PLANNING&#39;] = fig_planningAdvance
+
+    # output_data
+    output_data[&#39;ADVANCE_PLANNING_MEAN&#39;] = mean_advanceInPlanning
+    output_data[&#39;ADVANCE_PLANNING_STD&#39;] = std_advanceInPlanning
+    output_data[&#39;SERIES&#39;] = advanceInPlanningDistribution
+
+    # get coverage
+    output_coverage[&#39;ADVANCE_PLANNING_MEAN&#39;] = getCoverageStats(D_mov, loadingptafield, capacityField=&#39;QUANTITY&#39;)
+    output_coverage[&#39;ADVANCE_PLANNING_STD&#39;] = output_coverage[&#39;ADVANCE_PLANNING_MEAN&#39;]
+    output_coverage[&#39;SERIES&#39;] = output_coverage[&#39;ADVANCE_PLANNING_MEAN&#39;]
+
+    D_global = pd.DataFrame([output_data, output_coverage]).transpose()
+    D_global.columns = [&#39;VALUE&#39;, &#39;ACCURACY&#39;]
+
+    return output_figure, D_global</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P9_workload_prediction.demand_assessment.plotQuantityTrendWeeklyDaily"><code class="name flex">
+<span>def <span class="ident">plotQuantityTrendWeeklyDaily</span></span>(<span>D_temp: pandas.core.frame.DataFrame, date_field: str = 'TIMESTAMP_IN', filterVariable: str = [], filterValue: str = [], quantityVariable: str = 'sum_QUANTITY', countVariable: str = 'count_TIMESTAMP_IN', titolo: str = '')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>the function return a figure with two subplots on for quantities the other for lines</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_temp</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>input dataframe.</dd>
+<dt><strong><code>date_field</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the column name for the date field. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>filterVariable</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the column name for filtering the dataframe. Defaults to [].</dd>
+<dt><strong><code>filterValue</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>value to filter the dataframe. Defaults to [].</dd>
+<dt><strong><code>quantityVariable</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the column name for the sum of the quantities. Defaults to 'sum_QUANTITY'.</dd>
+<dt><strong><code>countVariable</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the column name for the count. Defaults to 'count_TIMESTAMP_IN'.</dd>
+<dt><strong><code>titolo</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>title of the figure. Defaults to ''.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig (plt.figure): Output figure.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plotQuantityTrendWeeklyDaily(D_temp: pd.DataFrame, date_field: str = &#39;TIMESTAMP_IN&#39;,
+                                 filterVariable: str = [], filterValue: str = [],
+                                 quantityVariable: str = &#39;sum_QUANTITY&#39;,
+                                 countVariable: str = &#39;count_TIMESTAMP_IN&#39;,
+                                 titolo: str = &#39;&#39;):
+    &#34;&#34;&#34;
+    the function return a figure with two subplots on for quantities the other for lines
+
+    Args:
+        D_temp (pd.dataFrame): input dataframe.
+        date_field (str, optional): string with the column name for the date field. Defaults to &#39;TIMESTAMP_IN&#39;.
+        filterVariable (str, optional): string with the column name for filtering the dataframe. Defaults to [].
+        filterValue (list, optional): value to filter the dataframe. Defaults to [].
+        quantityVariable (str, optional): string with the column name for the sum of the quantities. Defaults to &#39;sum_QUANTITY&#39;.
+        countVariable (str, optional): string with the column name for the count. Defaults to &#39;count_TIMESTAMP_IN&#39;.
+        titolo (str, optional): title of the figure. Defaults to &#39;&#39;.
+
+    Returns:
+        fig (plt.figure): Output figure.
+
+    &#34;&#34;&#34;
+
+    if len(filterVariable) &gt; 0:
+        D_temp = D_temp[D_temp[filterVariable] == filterValue]
+    D_temp = D_temp.sort_values(date_field)
+    D_temp = D_temp.reset_index(drop=True)
+    D_temp = D_temp.dropna(subset=[date_field, quantityVariable])
+
+    fig, axs = plt.subplots(1, 2, figsize=(10, 8))
+    fig.suptitle(titolo)
+
+    # QUANTITIES
+    # extract daily time series
+    timeSeries = pd.DataFrame(D_temp[[date_field, quantityVariable]])
+    timeSeries_day = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+
+    # extract weekly time series
+    timeSeries_week = ts.raggruppaPerSettimana(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
+
+    # extract monthly time series
+    timeSeries_month = ts.raggruppaPerMese(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
+
+    # plot weekly-daily
+    axs[0].plot(timeSeries_day)
+    axs[0].plot(timeSeries_week)
+    axs[0].plot(timeSeries_month)
+    axs[0].set_title(&#39;Quantity trend&#39;)
+    axs[0].legend([&#39;daily time series&#39;, &#39;weekly time series&#39;, &#39;monthly time series&#39;])
+    for tick in axs[0].get_xticklabels():
+        tick.set_rotation(45)
+
+    # LINES
+
+    # extract daily time series
+    timeSeries = pd.DataFrame(D_temp[[date_field, countVariable]])
+    timeSeries_day = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+
+    # extract weekly time series
+    timeSeries_week = ts.raggruppaPerSettimana(timeSeries, date_field, countVariable, &#39;sum&#39;)
+
+    # extract monthly time series
+    timeSeries_month = ts.raggruppaPerMese(timeSeries, date_field, countVariable, &#39;sum&#39;)
+
+    # plot weekly-daily
+    axs[1].plot(timeSeries_day)
+    axs[1].plot(timeSeries_week)
+    axs[1].plot(timeSeries_month)
+    axs[1].set_title(&#39;Lines trend&#39;)
+    axs[1].legend([&#39;daily time series&#39;, &#39;weekly time series&#39;, &#39;monthly time series&#39;])
+    for tick in axs[1].get_xticklabels():
+        tick.set_rotation(45)
+
+    return fig</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P9_workload_prediction.demand_assessment.plotquantitytrend"><code class="name flex">
+<span>def <span class="ident">plotquantitytrend</span></span>(<span>D_temp: pandas.core.frame.DataFrame, date_field: str = 'TIMESTAMP_IN', filterVariable: list = [], filterValue: list = [], quantityVariable: str = 'sum_QUANTITY', countVariable: str = 'count_TIMESTAMP_IN', titolo: str = '')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>the function return a figure with two subplots on for quantities the other for lines</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_temp</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input dataframe.</dd>
+<dt><strong><code>date_field</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the column name for the date field. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>filterVariable</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>string with the column name for filtering the dataframe. Defaults to [].</dd>
+<dt><strong><code>filterValue</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>value to filter the dataframe. Defaults to [].</dd>
+<dt><strong><code>quantityVariable</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the column name for the sum of the quantities. Defaults to 'sum_QUANTITY'.</dd>
+<dt><strong><code>countVariable</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the column name for the count. Defaults to 'count_TIMESTAMP_IN'.</dd>
+<dt><strong><code>titolo</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>title of the figure. Defaults to ''.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig (plt.figure): Output figure.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plotquantitytrend(D_temp: pd.DataFrame, date_field: str = &#39;TIMESTAMP_IN&#39;,
+                      filterVariable: list = [], filterValue: list = [],
+                      quantityVariable: str = &#39;sum_QUANTITY&#39;,
+                      countVariable: str = &#39;count_TIMESTAMP_IN&#39;, titolo: str = &#39;&#39;):
+    &#34;&#34;&#34;
+    the function return a figure with two subplots on for quantities the other for lines
+
+    Args:
+        D_temp (pd.DataFrame): input dataframe.
+        date_field (str, optional): string with the column name for the date field. Defaults to &#39;TIMESTAMP_IN&#39;.
+        filterVariable (list, optional): string with the column name for filtering the dataframe. Defaults to [].
+        filterValue (list, optional): value to filter the dataframe. Defaults to [].
+        quantityVariable (str, optional): string with the column name for the sum of the quantities. Defaults to &#39;sum_QUANTITY&#39;.
+        countVariable (str, optional): string with the column name for the count. Defaults to &#39;count_TIMESTAMP_IN&#39;.
+        titolo (str, optional): title of the figure. Defaults to &#39;&#39;.
+
+    Returns:
+        fig (plt.figure): Output figure.
+
+    &#34;&#34;&#34;
+
+    if len(filterVariable) &gt; 0:
+        D_temp = D_temp[D_temp[filterVariable] == filterValue]
+    D_temp = D_temp.sort_values(date_field)
+    D_temp = D_temp.reset_index(drop=True)
+    D_temp = D_temp.dropna(subset=[date_field, quantityVariable])
+
+    fig, axs = plt.subplots(1, 2, figsize=(10, 8))
+    fig.suptitle(titolo)
+
+    # plot quantity
+    axs[0].plot(D_temp[date_field], D_temp[quantityVariable])
+    axs[0].set_title(&#39;Quantity trend&#39;)
+    for tick in axs[0].get_xticklabels():
+        tick.set_rotation(45)
+
+    # plot lines
+    axs[1].plot(D_temp[date_field], D_temp[countVariable])
+    axs[1].set_title(&#39;Lines trend&#39;)
+    for tick in axs[1].get_xticklabels():
+        tick.set_rotation(45)
+
+    return fig</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P9_workload_prediction.demand_assessment.seasonalityWithfourier"><code class="name flex">
+<span>def <span class="ident">seasonalityWithfourier</span></span>(<span>D_time: pandas.core.frame.DataFrame, seriesVariable: str, samplingInterval: str = 'week', date_field: str = 'TIMESTAMP_IN', titolo: str = '')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>decompose the seasonal part of a time series using Fourier transform</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_time</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>Input dataFrame.</dd>
+<dt><strong><code>seriesVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the name of the column containing the series.</dd>
+<dt><strong><code>samplingInterval</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>if week it groups the series for week or day. Defaults to 'week'.</dd>
+<dt><strong><code>date_field</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the name of the column containing the datetime series. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>titolo</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>title of the figure. Defaults to ''.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def seasonalityWithfourier(D_time: pd.DataFrame, seriesVariable: str,
+                           samplingInterval: str = &#39;week&#39;,
+                           date_field: str = &#39;TIMESTAMP_IN&#39;, titolo: str = &#39;&#39;):
+    &#34;&#34;&#34;
+    decompose the seasonal part of a time series using Fourier transform
+
+    Args:
+        D_time (pd.dataFrame): Input dataFrame.
+        seriesVariable (str): string with the name of the column containing the series.
+        samplingInterval (str, optional): if week it groups the series for week or day. Defaults to &#39;week&#39;.
+        date_field (str, optional): string with the name of the column containing the datetime series. Defaults to &#39;TIMESTAMP_IN&#39;.
+        titolo (str, optional): title of the figure. Defaults to &#39;&#39;.
+
+    Returns:
+        fig (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # extract time series
+    timeSeries = pd.DataFrame(D_time[[date_field, seriesVariable]])
+    timeSeries_analysis = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+    timeSeries_analysis[date_field] = timeSeries_analysis.index.values
+
+    if samplingInterval == &#39;month&#39;:
+        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;week&#39;:
+        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;day&#39;:
+        timeSeries_analysis = timeSeries_analysis[seriesVariable]
+
+    y = np.array(timeSeries_analysis)
+    D = ts.fourierAnalysis(y)
+
+    fig = plt.figure()
+    plt.stem(1 / D[&#39;Frequency_domain_value&#39;], D[&#39;Amplitude&#39;])
+    plt.title(f&#34;Amplitude spectrum {titolo}&#34;)
+    plt.xlabel(f&#34;Time domain: {samplingInterval}&#34;)
+    plt.ylabel(&#39;Amplitude&#39;)
+    return fig</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction" href="index.html">analogistics.supply_chain.P9_workload_prediction</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.demand_assessment.bookingStatistics" href="#analogistics.supply_chain.P9_workload_prediction.demand_assessment.bookingStatistics">bookingStatistics</a></code></li>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.demand_assessment.decomposeTimeSeries" href="#analogistics.supply_chain.P9_workload_prediction.demand_assessment.decomposeTimeSeries">decomposeTimeSeries</a></code></li>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.demand_assessment.getAdvanceInPlanning" href="#analogistics.supply_chain.P9_workload_prediction.demand_assessment.getAdvanceInPlanning">getAdvanceInPlanning</a></code></li>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.demand_assessment.plotQuantityTrendWeeklyDaily" href="#analogistics.supply_chain.P9_workload_prediction.demand_assessment.plotQuantityTrendWeeklyDaily">plotQuantityTrendWeeklyDaily</a></code></li>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.demand_assessment.plotquantitytrend" href="#analogistics.supply_chain.P9_workload_prediction.demand_assessment.plotquantitytrend">plotquantitytrend</a></code></li>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.demand_assessment.seasonalityWithfourier" href="#analogistics.supply_chain.P9_workload_prediction.demand_assessment.seasonalityWithfourier">seasonalityWithfourier</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

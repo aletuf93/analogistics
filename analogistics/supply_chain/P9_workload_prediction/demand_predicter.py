@@ -6,16 +6,16 @@ import datetime as date
 import numpy as np
 
 # import stat packages
-from fbprophet import Prophet
-from fbprophet.plot import plot_plotly
-from sklearn.metrics import mean_squared_error
+# from fbprophet import Prophet
+# from fbprophet.plot import plot_plotly
+# from sklearn.metrics import mean_squared_error
 
-import plotly.offline as py
+# import plotly.offline as py
 
 from analogistics.statistics import time_series as ts
 # from logproj.utilities import creaCartella
 
-
+'''
 def predictWithFBPROPHET(D_series: pd.DataFrame, timeVariable: str, seriesVariable: str, prediction_results: str,
                          titolo: str, samplingInterval: str = 'week', predictionsLength: int = 52):
     """
@@ -75,6 +75,8 @@ def predictWithFBPROPHET(D_series: pd.DataFrame, timeVariable: str, seriesVariab
     py.iplot(fig)
     py.plot(fig, filename=f"{prediction_results}\\prophet_{titolo}.html", auto_open=False)
     return m, forecast_fig, components_fig, MSE
+
+'''
 
 
 def predictWithARIMA(D_series: pd.DataFrame, seriesVariable: str, samplingInterval: str = 'week',
@@ -283,6 +285,7 @@ def LOOP_PREDICT_SARIMA(D_time: pd.DataFrame, date_field: str, qtyVariable: str,
     return True
 
 
+'''
 def LOOP_PREDICT_FBPROPHET(D_time: pd.DataFrame, timeVariable: str, qtyVariable: str,
                            countVariable: str, prediction_results_path: str, filterVariable: str = [],
                            samplingInterval: str = 'week'):
@@ -402,3 +405,4 @@ def LOOP_PREDICT_FBPROPHET(D_time: pd.DataFrame, timeVariable: str, qtyVariable:
     # SAVE dataframe results
     D_results.to_excel(f"{prediction_results_path}\\pred_results_FBPROPHET.xlsx")
     return True
+'''

@@ -1,0 +1,1133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P8_performance_assessment.vehicle_assessment API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P8_performance_assessment.vehicle_assessment</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+import numpy as np
+import pandas as pd
+import datetime
+import matplotlib.pyplot as plt
+
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P9_workload_prediction.demand_assessment import getAdvanceInPlanning
+from analogistics.graph.graph import plotGraph
+
+
+def createTabellaMovimenti(D_mov: pd.DataFrame,
+                           locfrom: str = &#39;LOADING_NODE&#39;,
+                           locto: str = &#39;DISCHARGING_NODE&#39;,
+                           capacityField: str = &#39;QUANTITY&#39;,
+                           timeColumns: dict = {}
+                           ):
+    &#34;&#34;&#34;
+    Create a table with the movements (one line for each movement)
+
+    Args:
+        D_mov (pd.dataFrame): Input pandas DataFrame.
+        locfrom (str, optional): Column name containing origin nodes. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): Column name containing destination nodes. Defaults to &#39;DISCHARGING_NODE&#39;.
+        capacityField (str, optional): Column name containing transported quantities. Defaults to &#39;QUANTITY&#39;.
+        timeColumns (dict, optional): Dict containing time windows column names. Defaults to {}.
+
+    Returns:
+        D (pd.DataFrame): Output movements DataFrame.
+
+    &#34;&#34;&#34;
+    # Split movements into two rows (IN and OUT)
+
+    print(&#34;**** DEFINE D MOV IN/OUT ****&#34;)
+    # check which felds are available, and define grouping keys
+    columnsCompleteFrom = [&#39;loadingpta&#39;, &#39;loadingptd&#39;, &#39;loadingata&#39;, &#39;loadingatd&#39;]
+    columnsCompleteTo = [&#39;dischargingpta&#39;, &#39;dischargingptd&#39;, &#39;dischargingata&#39;, &#39;dischargingatd&#39;]
+
+    columnsPresentFrom = [timeColumns[col] for col in list(timeColumns) if col in columnsCompleteFrom]
+    columnsPresentTo = [timeColumns[col] for col in list(timeColumns) if col in columnsCompleteTo]
+
+    selectColumnFrom = list(D_mov.columns)
+    for col in [locto, *columnsPresentTo]:
+        if col in selectColumnFrom:
+            selectColumnFrom.remove(col)
+
+    selectColumnTo = list(D_mov.columns)
+    for col in [locfrom, *columnsPresentFrom]:
+        if col in selectColumnTo:
+            selectColumnTo.remove(col)
+
+    # identify which coluns are present, and how to rename them
+    allcolumnstorename = {&#39;loadingpta&#39;: &#39;PTA&#39;,
+                          &#39;loadingptd&#39;: &#39;PTD&#39;,
+                          &#39;loadingata&#39;: &#39;ATA&#39;,
+                          &#39;loadingatd&#39;: &#39;ATD&#39;,
+                          &#39;dischargingpta&#39;: &#39;PTA&#39;,
+                          &#39;dischargingptd&#39;: &#39;PTD&#39;,
+                          &#39;dischargingata&#39;: &#39;ATA&#39;,
+                          &#39;dischargingatd&#39;: &#39;ATD&#39;}
+
+    renameDictionarycomplete = {locto: &#39;Location&#39;,
+                                locfrom: &#39;Location&#39;
+                                }
+    for col in allcolumnstorename.keys():
+        if col in timeColumns.keys():
+            renameDictionarycomplete[timeColumns[col]] = allcolumnstorename[col]
+
+    # split and rename movements
+    D1 = D_mov[selectColumnFrom]
+    D1 = D1.rename(columns=renameDictionarycomplete)
+    D1[&#39;InOut&#39;] = &#39;IN&#39;
+
+    D2 = D_mov[selectColumnTo]
+    D2 = D2.rename(columns=renameDictionarycomplete)
+    D2[&#39;InOut&#39;] = &#39;OUT&#39;
+
+    # Create movements table
+    D = pd.concat([D1, D2])
+
+    # Assign quantities and sign to the movements
+    MovimentiIN = (D.InOut == &#39;IN&#39;) * 1
+    MovimentiOUT = (D.InOut == &#39;OUT&#39;) * (-1)
+    D[&#39;Movementquantity&#39;] = MovimentiIN + MovimentiOUT
+    D[&#39;Movementquantity&#39;] = D.Movementquantity * D[capacityField]
+
+    return D
+
+
+def defineRouteTable(D: pd.DataFrame, agregationVariables: list = [&#39;VEHICLE_CODE&#39;, &#39;VOYAGE_CODE&#39;],
+                     actual: str = &#39;PROVISIONAL&#39;):
+    &#34;&#34;&#34;
+    Define the route of a vessel, given its movements
+
+    Args:
+        D (pd.DataFrame): Input pandas dataFrame.
+        agregationVariables (list, optional): Key of the route. Defaults to [&#39;VEHICLE_CODE&#39;, &#39;VOYAGE_CODE&#39;].
+        actual (str, optional): If &#34;ACTUAL&#34; use the actual timestamp to define the route. Defaults to &#39;PROVISIONAL&#39;.
+
+    Returns:
+        D_route (pd.DataFRame): Output dataframe with the route.
+        timestartfield (str): Column name containing start time.
+        timeendfield (str): Column name containing end time.
+
+    &#34;&#34;&#34;
+    # import a dataframe D containing movements and defines a route dataframe
+    print(&#34;**** DEFINE ROUTES  ****&#34;)
+    aggregation_dictionary = {&#39;Movementquantity&#39;: np.sum}
+    if actual == &#39;PROVISIONAL&#39;:
+        listCol = [*agregationVariables, &#39;Location&#39;, &#39;PTA&#39;, &#39;PTD&#39;, &#39;Movementquantity&#39;, &#39;_id&#39;]
+    elif actual == &#39;ACTUAL&#39;:
+        listCol = [*agregationVariables, &#39;Location&#39;, &#39;ATA&#39;, &#39;ATD&#39;, &#39;Movementquantity&#39;, &#39;_id&#39;]
+    aggregation_columns = [col for col in D.columns if col not in listCol]
+    for col in aggregation_columns:
+        aggregation_dictionary[col] = lambda group_series: list(set(group_series.tolist()))
+
+    # remove columns eventually containing dict
+    # listKeys = aggregation_dictionary.keys()
+    for col in list(aggregation_dictionary):
+        if any([isinstance(i, dict) for i in D[col]]):
+            print(col)
+            aggregation_dictionary.pop(col)
+
+    # Infer the actual route
+    if actual == &#39;PROVISIONAL&#39;:
+        D_route = D.groupby([*agregationVariables, &#39;Location&#39;, &#39;PTA&#39;, &#39;PTD&#39;]).agg(aggregation_dictionary).reset_index()
+        timestartfield = &#39;PTA&#39;
+        timeendfield = &#39;PTD&#39;
+
+    elif actual == &#39;ACTUAL&#39;:
+        D_route = D.groupby([*agregationVariables, &#39;Location&#39;, &#39;ATA&#39;, &#39;ATD&#39;]).agg(aggregation_dictionary).reset_index()
+        timestartfield = &#39;ATA&#39;
+        timeendfield = &#39;ATD&#39;
+    return D_route, timestartfield, timeendfield
+
+
+def voyageStatistics(D_mov: pd.DataFrame,
+                     timefield: str = &#39;TIMESTAMP_IN&#39;,
+                     locfrom: str = &#39;LOADING_NODE&#39;,
+                     locto: str = &#39;DISCHARGING_NODE&#39;,
+                     timeColumns: dict = {},
+                     capacityField: str = &#39;QUANTITY&#39;,
+                     censoredData: bool = False,
+                     voyagefield: str = &#39;VOYAGE_CODE&#39;,
+                     actual: str = &#39;PROVISIONAL&#39;):
+    &#34;&#34;&#34;
+    Estimate inventory values of the vessels on a route
+
+    Args:
+        D_mov (pd.DataFrame): Input dataframe.
+        timefield (str, optional): column name with time. Defaults to &#39;TIMESTAMP_IN&#39;.
+        locfrom (str, optional): Column name with origin node. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): column name with destination node. Defaults to &#39;DISCHARGING_NODE&#39;.
+        timeColumns (dict, optional): Dict with time windows columns names. Defaults to {}.
+        capacityField (str, optional): Column name with transported quantities. Defaults to &#39;QUANTITY&#39;.
+        censoredData (bool, optional): If ture, considers censored data. Defaults to False.
+        voyagefield (str, optional): Column name containing voyage code. Defaults to &#39;VOYAGE_CODE&#39;.
+        actual (str, optional): If &#34;ACTUAL&#34; consider actual timestamps. Otherwise, provisional. Defaults to &#39;PROVISIONAL&#39;.
+
+    Returns:
+        D_route (pd.DataFrame): Output dataFrame with route.
+        D_arcs_route (pd.DataFrame): Output dataFrame with route arcs.
+        D_coverages (pd.DataFrame): Output dataFrame with statistical coverages.
+
+    &#34;&#34;&#34;
+
+    # Initialise empty dataframes
+    D_route = D_arcs_route = D_coverages = pd.DataFrame()
+
+    # Calculate coverages and availability of data
+    if actual == &#39;PROVISIONAL&#39;:
+        colonneNecessarie = [&#39;loadingpta&#39;, &#39;loadingptd&#39;, &#39;dischargingpta&#39;, &#39;dischargingptd&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [locfrom, locto, timeColumns[&#39;loadingpta&#39;], timeColumns[&#39;loadingptd&#39;], timeColumns[&#39;dischargingpta&#39;], timeColumns[&#39;dischargingptd&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            D_coverages = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+    elif actual == &#39;ACTUAL&#39;:
+        colonneNecessarie = [&#39;loadingata&#39;, &#39;loadingatd&#39;, &#39;dischargingata&#39;, &#39;dischargingatd&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [locfrom, locto, timeColumns[&#39;loadingata&#39;], timeColumns[&#39;loadingatd&#39;], timeColumns[&#39;dischargingata&#39;], timeColumns[&#39;dischargingatd&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            D_coverages = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+    # Assign accuracy
+    D_coverages = pd.DataFrame(accuracy)
+
+    D_arcs_route = pd.DataFrame()
+
+    D = createTabellaMovimenti(D_mov=D_mov,
+                               locfrom=locfrom,
+                               locto=locto,
+                               capacityField=capacityField,
+                               timeColumns=timeColumns)
+
+    # define routes
+    D_route, timestartfield, timeendfield = defineRouteTable(D, agregationVariables=[voyagefield],
+                                                             actual=actual)
+
+    # identify voyages
+    Voyages = np.unique(D_route[voyagefield])
+
+    # identify first planning day
+    firstPlanningDay = min(D_mov[timefield].dt.date)
+
+    # Identify advance in planning
+    _, df_advance = getAdvanceInPlanning(D_mov, loadingptafield=timeColumns[&#39;loadingpta&#39;])
+    mean_advanceInPlanning = df_advance.loc[&#39;ADVANCE_PLANNING_MEAN&#39;][&#39;VALUE&#39;]
+    std_advanceInPlanning = df_advance.loc[&#39;ADVANCE_PLANNING_STD&#39;][&#39;VALUE&#39;]
+    lowerBoundDataCensored = firstPlanningDay + pd.Timedelta(days=(mean_advanceInPlanning + std_advanceInPlanning))
+
+    # Identify last planning day
+    lastPlanningDay = max(D_mov[timefield].dt.date)
+
+    # remove movements outside the reference time horizon
+    if(not(censoredData)):  # if avoiding censored data
+        D_route = D_route[(D_route[timestartfield] &gt; pd.to_datetime(lowerBoundDataCensored)) &amp; (D_route[timeendfield] &lt; pd.to_datetime(lastPlanningDay))]
+        D_route = D_route.reset_index(drop=True)
+
+    # go on only if there are not censored data
+    if len(D_route) == 0:
+        D_route = pd.DataFrame([&#34;No uncensored data&#34;])
+        return D_route, D_arcs_route, D_coverages
+    D_route[&#39;inventory&#39;] = np.nan
+
+    print(&#34;**** INVENTORY ESTIMATE  ****&#34;)
+    # scan each single voyage identifying the residual capacity
+    for i in range(0, len(Voyages)):
+        # i=0
+        voyage = Voyages[i]
+        route = D_route[D_route[voyagefield] == voyage]
+
+        print(f&#34;==estimate inventory voyage {voyage}, with {len(route)} movements&#34;)
+        # if a route is given
+        if len(route) &gt; 0:
+
+            # sort by time
+            route = route.sort_values([timeendfield])
+
+            # define planned movements
+            counter = 0
+            allIndex = []  # define a list of indexes
+            for index, row in route.iterrows():  # same indexes of D_route
+                if counter == 0:
+                    D_route[&#39;inventory&#39;].loc[index] = row[&#39;Movementquantity&#39;]
+                    allIndex.append(index)
+
+                else:
+                    D_route[&#39;inventory&#39;].loc[index] = row[&#39;Movementquantity&#39;] + D_route[&#39;inventory&#39;].loc[allIndex[counter - 1]]
+                    allIndex.append(index)
+                counter = counter + 1
+
+            # calculate the estimate of the capacity and move on positive values (above zero)
+            allCapacities = D_route[D_route[voyagefield] == voyage][&#39;inventory&#39;]
+            slack = np.double(- min(allCapacities))
+            D_route[&#39;inventory&#39;].loc[allIndex] = D_route[D_route[voyagefield] == voyage][&#39;inventory&#39;] + slack
+            capMax = max(D_route[&#39;inventory&#39;].loc[allIndex])
+
+            # assign route value on the dataframe
+            route = D_route[D_route[voyagefield] == voyage]
+            route = route.sort_values([timeendfield])
+
+            # scan the route to define from-to movement dataframe
+            for k in range(0, len(route) - 1):
+                # k=0
+
+                # identify current and following movement
+                currentMovement = route.iloc[k]
+                nextMovement = route.iloc[k + 1]
+
+                rowDictionary = {&#39;arcFrom&#39;: currentMovement.Location,
+                                 &#39;arcTo&#39;: nextMovement.Location,
+                                 &#39;departureFromALAP&#39;: currentMovement[timeendfield],
+                                 &#39;arrivalToASAP&#39;: nextMovement[timestartfield],
+                                 &#39;inventory&#39;: currentMovement.inventory,
+                                 &#39;capacity&#39;: capMax - currentMovement.inventory}
+                # append all the other FROM
+                add_columns_from = [col for col in currentMovement.index if col not in [&#39;Location&#39;, &#39;timeendfield&#39;, &#39;inventory&#39;]]
+                for col in add_columns_from:
+                    rowDictionary[f&#34;{col}_from&#34;] = currentMovement[col]
+
+                # append all the other TO
+                add_columns_to = [col for col in nextMovement.index if col not in [&#39;Location&#39;, &#39;timestartfield&#39;, &#39;inventory&#39;]]
+                for col in add_columns_to:
+                    rowDictionary[f&#34;{col}_to&#34;] = nextMovement[col]
+
+                # add restults to the final dataframe
+                D_arcs_route = D_arcs_route.append(pd.DataFrame([rowDictionary]))
+
+    return D_route, D_arcs_route, D_coverages
+
+
+def returnFigureVoyage(D_route: pd.DataFrame, D_arcs_route: pd.DataFrame, lastPlanningDay: list = [],
+                       lowerBoundDataCensored: list = [], filteringfield: str = &#39;VOYAGE_CODE&#39;, sortTimefield: str = &#39;PTD&#39;):
+    &#34;&#34;&#34;
+    Create a dictionary of figures with  a chart plot of the routes
+
+    Args:
+        D_route (pd.dataFrame): Input route dataframe.
+        D_arcs_route (pd.DataFrame): Input route dataframe with arcs.
+        lastPlanningDay (list, optional): DESCRIPTION. Defaults to [].
+        lowerBoundDataCensored (list, optional): DESCRIPTION. Defaults to [].
+        filteringfield (str, optional): DESCRIPTION. Defaults to &#39;VOYAGE_CODE&#39;.
+        sortTimefield (str, optional): column name to sort values by. Defaults to &#39;PTD&#39;.
+
+    Returns:
+        figure_results (dict): Output dictionary containing figures.
+
+    &#34;&#34;&#34;
+
+    figure_results = {}
+    for voyage in set(D_route[filteringfield]):
+        # voyage=&#39;Vessel 10&#39;
+        # generate inventory dataframe
+        D_plannedRouteVessel = D_route[D_route[filteringfield] == voyage]
+
+        if len(D_plannedRouteVessel) &gt; 0:
+            D_plannedRouteVessel = D_plannedRouteVessel.sort_values(by=sortTimefield)
+
+            # Create capacity charts
+            figure = plt.figure(figsize=(20, 10))
+            plt.step(D_plannedRouteVessel[sortTimefield], D_plannedRouteVessel[&#39;inventory&#39;], color=&#39;orange&#39;)
+            plt.title(str(voyage) + &#39; inventory&#39;)
+            plt.xticks(rotation=30)
+
+            # track the capacity
+            capMax = max(D_plannedRouteVessel[&#39;inventory&#39;])
+            plt.plot(D_plannedRouteVessel[sortTimefield], [capMax] * len(D_plannedRouteVessel), &#39;r--&#39;)
+            plt.axvline(x=lastPlanningDay, color=&#39;red&#39;, linestyle=&#39;--&#39;)
+            plt.axvline(x=lowerBoundDataCensored, color=&#39;red&#39;, linestyle=&#39;--&#39;)
+            figure_results[f&#34;{filteringfield}_{voyage}_inventory&#34;] = figure
+
+        # generate graph chart
+        D_plannedRouteVessel_fromTo = D_arcs_route[D_arcs_route[f&#34;{filteringfield}_from&#34;] == voyage]
+
+        if len(D_plannedRouteVessel_fromTo) &gt; 0:
+            # plot routes on a graph
+            FlowAnalysis = D_plannedRouteVessel_fromTo.groupby([&#39;arcFrom&#39;, &#39;arcTo&#39;]).size().reset_index()
+            FlowAnalysis = FlowAnalysis.rename(columns={0: &#39;Trips&#39;})
+
+            fig1 = plotGraph(df=FlowAnalysis,
+                             edgeFrom=&#39;arcFrom&#39;,
+                             edgeTo=&#39;arcTo&#39;,
+                             distance=&#39;Trips&#39;,
+                             weight=&#39;Trips&#39;,
+                             title=str(voyage),
+                             arcLabel=True)
+            figure_results[f&#34;{filteringfield}_{voyage}_graph&#34;] = fig1
+
+    return figure_results
+
+
+def graphClock(D_mov: pd.DataFrame,
+               loadingNode: str = &#39;LOADING_NODE&#39;,
+               dischargingNode: str = &#39;DISCHARGING_NODE&#39;,
+               sortingField: str = &#39;PTA_FROM&#39;,
+               vehicle: str = &#39;VEHICLE_CODE&#39;,
+               capacityField: str = &#39;QUANTITY&#39;,
+               timeColumns: str = {},
+               actual: str = &#39;PROVISIONAL&#39;):
+    &#34;&#34;&#34;
+    Train style chart with time and space
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas DataFrame.
+        loadingNode (str, optional): Column name containing origin node. Defaults to &#39;LOADING_NODE&#39;.
+        dischargingNode (str, optional): Column name containing destination node. Defaults to &#39;DISCHARGING_NODE&#39;.
+        sortingField (str, optional): Column name containing attribute to sort by. Defaults to &#39;PTA_FROM&#39;.
+        vehicle (str, optional): Column name containing vehicle code. Defaults to &#39;VEHICLE_CODE&#39;.
+        capacityField (str, optional): Column name containing transported quantity. Defaults to &#39;QUANTITY&#39;.
+        timeColumns (str, optional): dict of column names containing time windows. Defaults to {}.
+        actual (str, optional): If &#34;ACTUAL&#34; use actual timestamps, otherwise, &#34;PROVISIONAL&#34;. Defaults to &#39;PROVISIONAL&#39;.
+
+    Returns:
+        output_figure (TYPE): DESCRIPTION.
+        output_df (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_df = {}
+
+    # identify necessary columns and calculate coverages
+    if actual == &#39;PROVISIONAL&#39;:
+        colonneNecessarie = [&#39;loadingptd&#39;, &#39;dischargingpta&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [loadingNode, dischargingNode, vehicle, timeColumns[&#39;loadingptd&#39;], timeColumns[&#39;dischargingpta&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            output_df[&#39;coverages&#39;] = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+            return output_figure, output_df
+    elif actual == &#39;ACTUAL&#39;:
+        colonneNecessarie = [&#39;loadingatd&#39;, &#39;dischargingata&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [loadingNode, dischargingNode, vehicle, timeColumns[&#39;loadingatd&#39;], timeColumns[&#39;dischargingata&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+    output_df[f&#34;coverages_{actual}&#34;] = pd.DataFrame(accuracy)
+
+    # identify all terminals
+    terminal_dict = {}
+    D_mov = D_mov.sort_values(by=[sortingField])
+    terminals = list(set([*D_mov[loadingNode], *D_mov[dischargingNode]]))
+    for i in range(0, len(terminals)):
+        terminal_dict[terminals[i]] = i
+
+    # identify movements
+    D = createTabellaMovimenti(D_mov,
+                               locfrom=loadingNode,
+                               locto=dischargingNode,
+                               capacityField=capacityField,
+                               timeColumns=timeColumns
+                               )
+    D_route, timestartfield, timeendfield = defineRouteTable(D,
+                                                             agregationVariables=[vehicle],
+                                                             actual=actual)
+
+    for vessel in set(D_route[vehicle]):
+        D_mov_filtered = D_route[D_mov[vehicle] == vessel]
+        D_mov_filtered = D_route.sort_values(by=timestartfield)
+        D_mov_filtered = D_mov_filtered.dropna(subset=[timestartfield, &#39;Location&#39;])
+
+        # create graph on a temporal axis
+        fig1 = plt.figure()
+        for i in range(1, len(D_mov_filtered)):
+
+            # plot voyage
+            x_array = [D_mov_filtered[timeendfield].iloc[i - 1], D_mov_filtered[timestartfield].iloc[i]]
+            y_array = [terminal_dict[D_mov_filtered[&#39;Location&#39;].iloc[i - 1]], terminal_dict[D_mov_filtered[&#39;Location&#39;].iloc[i]]]
+            plt.plot(x_array, y_array, color=&#39;orange&#39;, marker=&#39;o&#39;)
+
+            # plot waiting time
+            x_array = [D_mov_filtered[timestartfield].iloc[i], D_mov_filtered[timeendfield].iloc[i]]
+            y_array = [terminal_dict[D_mov_filtered[&#39;Location&#39;].iloc[i]], terminal_dict[D_mov_filtered[&#39;Location&#39;].iloc[i]]]
+            plt.plot(x_array, y_array, color=&#39;orange&#39;, marker=&#39;o&#39;)
+        plt.ylabel(&#39;Terminal&#39;)
+        plt.xlabel(&#39;Time&#39;)
+        output_figure[f&#34;Train_chart_{vessel}_{actual}&#34;] = fig1
+
+        if actual == &#39;PROVISIONAL&#39;:
+            time_from = timeColumns[&#39;loadingptd&#39;]
+            time_to = timeColumns[&#39;dischargingpta&#39;]
+        elif actual == &#39;ACTUAL&#39;:
+            time_from = timeColumns[&#39;loadingatd&#39;]
+            time_to = timeColumns[&#39;dischargingata&#39;]
+
+        # plot graph grouping on a day
+        D_train = D_mov[D_mov[vehicle] == vessel]
+        D_train[&#39;hour_from&#39;] = D_train[time_from].dt.time
+        D_train[&#39;hour_to&#39;] = D_train[time_to].dt.time
+        D_graph = D_train.groupby([loadingNode, dischargingNode, &#39;hour_from&#39;, &#39;hour_to&#39;]).sum()[capacityField].reset_index()
+        D_graph = D_graph.sort_values(by=capacityField, ascending=False)
+        fig1 = plt.figure()
+        for i in range(0, len(D_graph)):
+            x_array = [D_graph[&#39;hour_from&#39;].iloc[i], D_graph[&#39;hour_to&#39;].iloc[i]]
+            y_array = [terminal_dict[D_graph[loadingNode].iloc[i]], terminal_dict[D_graph[dischargingNode].iloc[i]]]
+
+            my_day = datetime.date(1990, 1, 1)
+            x_array = [datetime.datetime.combine(my_day, t) for t in x_array]
+
+            plt.title(f&#34;Train schedule chart VEHICLE: {vessel}&#34;)
+            plt.plot(x_array, y_array, color=&#39;orange&#39;, marker=&#39;o&#39;, linewidth=np.log(D_graph[capacityField].iloc[i]))
+        output_figure[f&#34;Train_chart_daily_{vessel}_{actual}&#34;] = fig1
+        plt.close(&#39;all&#39;)
+    return output_figure, output_df</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.createTabellaMovimenti"><code class="name flex">
+<span>def <span class="ident">createTabellaMovimenti</span></span>(<span>D_mov: pandas.core.frame.DataFrame, locfrom: str = 'LOADING_NODE', locto: str = 'DISCHARGING_NODE', capacityField: str = 'QUANTITY', timeColumns: dict = {})</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a table with the movements (one line for each movement)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>Input pandas DataFrame.</dd>
+<dt><strong><code>locfrom</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing origin nodes. Defaults to 'LOADING_NODE'.</dd>
+<dt><strong><code>locto</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing destination nodes. Defaults to 'DISCHARGING_NODE'.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing transported quantities. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>dict</code>, optional</dt>
+<dd>Dict containing time windows column names. Defaults to {}.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D (pd.DataFrame): Output movements DataFrame.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createTabellaMovimenti(D_mov: pd.DataFrame,
+                           locfrom: str = &#39;LOADING_NODE&#39;,
+                           locto: str = &#39;DISCHARGING_NODE&#39;,
+                           capacityField: str = &#39;QUANTITY&#39;,
+                           timeColumns: dict = {}
+                           ):
+    &#34;&#34;&#34;
+    Create a table with the movements (one line for each movement)
+
+    Args:
+        D_mov (pd.dataFrame): Input pandas DataFrame.
+        locfrom (str, optional): Column name containing origin nodes. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): Column name containing destination nodes. Defaults to &#39;DISCHARGING_NODE&#39;.
+        capacityField (str, optional): Column name containing transported quantities. Defaults to &#39;QUANTITY&#39;.
+        timeColumns (dict, optional): Dict containing time windows column names. Defaults to {}.
+
+    Returns:
+        D (pd.DataFrame): Output movements DataFrame.
+
+    &#34;&#34;&#34;
+    # Split movements into two rows (IN and OUT)
+
+    print(&#34;**** DEFINE D MOV IN/OUT ****&#34;)
+    # check which felds are available, and define grouping keys
+    columnsCompleteFrom = [&#39;loadingpta&#39;, &#39;loadingptd&#39;, &#39;loadingata&#39;, &#39;loadingatd&#39;]
+    columnsCompleteTo = [&#39;dischargingpta&#39;, &#39;dischargingptd&#39;, &#39;dischargingata&#39;, &#39;dischargingatd&#39;]
+
+    columnsPresentFrom = [timeColumns[col] for col in list(timeColumns) if col in columnsCompleteFrom]
+    columnsPresentTo = [timeColumns[col] for col in list(timeColumns) if col in columnsCompleteTo]
+
+    selectColumnFrom = list(D_mov.columns)
+    for col in [locto, *columnsPresentTo]:
+        if col in selectColumnFrom:
+            selectColumnFrom.remove(col)
+
+    selectColumnTo = list(D_mov.columns)
+    for col in [locfrom, *columnsPresentFrom]:
+        if col in selectColumnTo:
+            selectColumnTo.remove(col)
+
+    # identify which coluns are present, and how to rename them
+    allcolumnstorename = {&#39;loadingpta&#39;: &#39;PTA&#39;,
+                          &#39;loadingptd&#39;: &#39;PTD&#39;,
+                          &#39;loadingata&#39;: &#39;ATA&#39;,
+                          &#39;loadingatd&#39;: &#39;ATD&#39;,
+                          &#39;dischargingpta&#39;: &#39;PTA&#39;,
+                          &#39;dischargingptd&#39;: &#39;PTD&#39;,
+                          &#39;dischargingata&#39;: &#39;ATA&#39;,
+                          &#39;dischargingatd&#39;: &#39;ATD&#39;}
+
+    renameDictionarycomplete = {locto: &#39;Location&#39;,
+                                locfrom: &#39;Location&#39;
+                                }
+    for col in allcolumnstorename.keys():
+        if col in timeColumns.keys():
+            renameDictionarycomplete[timeColumns[col]] = allcolumnstorename[col]
+
+    # split and rename movements
+    D1 = D_mov[selectColumnFrom]
+    D1 = D1.rename(columns=renameDictionarycomplete)
+    D1[&#39;InOut&#39;] = &#39;IN&#39;
+
+    D2 = D_mov[selectColumnTo]
+    D2 = D2.rename(columns=renameDictionarycomplete)
+    D2[&#39;InOut&#39;] = &#39;OUT&#39;
+
+    # Create movements table
+    D = pd.concat([D1, D2])
+
+    # Assign quantities and sign to the movements
+    MovimentiIN = (D.InOut == &#39;IN&#39;) * 1
+    MovimentiOUT = (D.InOut == &#39;OUT&#39;) * (-1)
+    D[&#39;Movementquantity&#39;] = MovimentiIN + MovimentiOUT
+    D[&#39;Movementquantity&#39;] = D.Movementquantity * D[capacityField]
+
+    return D</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.defineRouteTable"><code class="name flex">
+<span>def <span class="ident">defineRouteTable</span></span>(<span>D: pandas.core.frame.DataFrame, agregationVariables: list = ['VEHICLE_CODE', 'VOYAGE_CODE'], actual: str = 'PROVISIONAL')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define the route of a vessel, given its movements</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas dataFrame.</dd>
+<dt><strong><code>agregationVariables</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>Key of the route. Defaults to ['VEHICLE_CODE', 'VOYAGE_CODE'].</dd>
+<dt><strong><code>actual</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>If "ACTUAL" use the actual timestamp to define the route. Defaults to 'PROVISIONAL'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_route (pd.DataFRame): Output dataframe with the route.
+timestartfield (str): Column name containing start time.
+timeendfield (str): Column name containing end time.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def defineRouteTable(D: pd.DataFrame, agregationVariables: list = [&#39;VEHICLE_CODE&#39;, &#39;VOYAGE_CODE&#39;],
+                     actual: str = &#39;PROVISIONAL&#39;):
+    &#34;&#34;&#34;
+    Define the route of a vessel, given its movements
+
+    Args:
+        D (pd.DataFrame): Input pandas dataFrame.
+        agregationVariables (list, optional): Key of the route. Defaults to [&#39;VEHICLE_CODE&#39;, &#39;VOYAGE_CODE&#39;].
+        actual (str, optional): If &#34;ACTUAL&#34; use the actual timestamp to define the route. Defaults to &#39;PROVISIONAL&#39;.
+
+    Returns:
+        D_route (pd.DataFRame): Output dataframe with the route.
+        timestartfield (str): Column name containing start time.
+        timeendfield (str): Column name containing end time.
+
+    &#34;&#34;&#34;
+    # import a dataframe D containing movements and defines a route dataframe
+    print(&#34;**** DEFINE ROUTES  ****&#34;)
+    aggregation_dictionary = {&#39;Movementquantity&#39;: np.sum}
+    if actual == &#39;PROVISIONAL&#39;:
+        listCol = [*agregationVariables, &#39;Location&#39;, &#39;PTA&#39;, &#39;PTD&#39;, &#39;Movementquantity&#39;, &#39;_id&#39;]
+    elif actual == &#39;ACTUAL&#39;:
+        listCol = [*agregationVariables, &#39;Location&#39;, &#39;ATA&#39;, &#39;ATD&#39;, &#39;Movementquantity&#39;, &#39;_id&#39;]
+    aggregation_columns = [col for col in D.columns if col not in listCol]
+    for col in aggregation_columns:
+        aggregation_dictionary[col] = lambda group_series: list(set(group_series.tolist()))
+
+    # remove columns eventually containing dict
+    # listKeys = aggregation_dictionary.keys()
+    for col in list(aggregation_dictionary):
+        if any([isinstance(i, dict) for i in D[col]]):
+            print(col)
+            aggregation_dictionary.pop(col)
+
+    # Infer the actual route
+    if actual == &#39;PROVISIONAL&#39;:
+        D_route = D.groupby([*agregationVariables, &#39;Location&#39;, &#39;PTA&#39;, &#39;PTD&#39;]).agg(aggregation_dictionary).reset_index()
+        timestartfield = &#39;PTA&#39;
+        timeendfield = &#39;PTD&#39;
+
+    elif actual == &#39;ACTUAL&#39;:
+        D_route = D.groupby([*agregationVariables, &#39;Location&#39;, &#39;ATA&#39;, &#39;ATD&#39;]).agg(aggregation_dictionary).reset_index()
+        timestartfield = &#39;ATA&#39;
+        timeendfield = &#39;ATD&#39;
+    return D_route, timestartfield, timeendfield</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.graphClock"><code class="name flex">
+<span>def <span class="ident">graphClock</span></span>(<span>D_mov: pandas.core.frame.DataFrame, loadingNode: str = 'LOADING_NODE', dischargingNode: str = 'DISCHARGING_NODE', sortingField: str = 'PTA_FROM', vehicle: str = 'VEHICLE_CODE', capacityField: str = 'QUANTITY', timeColumns: str = {}, actual: str = 'PROVISIONAL')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Train style chart with time and space</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas DataFrame.</dd>
+<dt><strong><code>loadingNode</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing origin node. Defaults to 'LOADING_NODE'.</dd>
+<dt><strong><code>dischargingNode</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing destination node. Defaults to 'DISCHARGING_NODE'.</dd>
+<dt><strong><code>sortingField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing attribute to sort by. Defaults to 'PTA_FROM'.</dd>
+<dt><strong><code>vehicle</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing vehicle code. Defaults to 'VEHICLE_CODE'.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing transported quantity. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>dict of column names containing time windows. Defaults to {}.</dd>
+<dt><strong><code>actual</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>If "ACTUAL" use actual timestamps, otherwise, "PROVISIONAL". Defaults to 'PROVISIONAL'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>output_figure (TYPE): DESCRIPTION.
+output_df (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def graphClock(D_mov: pd.DataFrame,
+               loadingNode: str = &#39;LOADING_NODE&#39;,
+               dischargingNode: str = &#39;DISCHARGING_NODE&#39;,
+               sortingField: str = &#39;PTA_FROM&#39;,
+               vehicle: str = &#39;VEHICLE_CODE&#39;,
+               capacityField: str = &#39;QUANTITY&#39;,
+               timeColumns: str = {},
+               actual: str = &#39;PROVISIONAL&#39;):
+    &#34;&#34;&#34;
+    Train style chart with time and space
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas DataFrame.
+        loadingNode (str, optional): Column name containing origin node. Defaults to &#39;LOADING_NODE&#39;.
+        dischargingNode (str, optional): Column name containing destination node. Defaults to &#39;DISCHARGING_NODE&#39;.
+        sortingField (str, optional): Column name containing attribute to sort by. Defaults to &#39;PTA_FROM&#39;.
+        vehicle (str, optional): Column name containing vehicle code. Defaults to &#39;VEHICLE_CODE&#39;.
+        capacityField (str, optional): Column name containing transported quantity. Defaults to &#39;QUANTITY&#39;.
+        timeColumns (str, optional): dict of column names containing time windows. Defaults to {}.
+        actual (str, optional): If &#34;ACTUAL&#34; use actual timestamps, otherwise, &#34;PROVISIONAL&#34;. Defaults to &#39;PROVISIONAL&#39;.
+
+    Returns:
+        output_figure (TYPE): DESCRIPTION.
+        output_df (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_df = {}
+
+    # identify necessary columns and calculate coverages
+    if actual == &#39;PROVISIONAL&#39;:
+        colonneNecessarie = [&#39;loadingptd&#39;, &#39;dischargingpta&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [loadingNode, dischargingNode, vehicle, timeColumns[&#39;loadingptd&#39;], timeColumns[&#39;dischargingpta&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            output_df[&#39;coverages&#39;] = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+            return output_figure, output_df
+    elif actual == &#39;ACTUAL&#39;:
+        colonneNecessarie = [&#39;loadingatd&#39;, &#39;dischargingata&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [loadingNode, dischargingNode, vehicle, timeColumns[&#39;loadingatd&#39;], timeColumns[&#39;dischargingata&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+    output_df[f&#34;coverages_{actual}&#34;] = pd.DataFrame(accuracy)
+
+    # identify all terminals
+    terminal_dict = {}
+    D_mov = D_mov.sort_values(by=[sortingField])
+    terminals = list(set([*D_mov[loadingNode], *D_mov[dischargingNode]]))
+    for i in range(0, len(terminals)):
+        terminal_dict[terminals[i]] = i
+
+    # identify movements
+    D = createTabellaMovimenti(D_mov,
+                               locfrom=loadingNode,
+                               locto=dischargingNode,
+                               capacityField=capacityField,
+                               timeColumns=timeColumns
+                               )
+    D_route, timestartfield, timeendfield = defineRouteTable(D,
+                                                             agregationVariables=[vehicle],
+                                                             actual=actual)
+
+    for vessel in set(D_route[vehicle]):
+        D_mov_filtered = D_route[D_mov[vehicle] == vessel]
+        D_mov_filtered = D_route.sort_values(by=timestartfield)
+        D_mov_filtered = D_mov_filtered.dropna(subset=[timestartfield, &#39;Location&#39;])
+
+        # create graph on a temporal axis
+        fig1 = plt.figure()
+        for i in range(1, len(D_mov_filtered)):
+
+            # plot voyage
+            x_array = [D_mov_filtered[timeendfield].iloc[i - 1], D_mov_filtered[timestartfield].iloc[i]]
+            y_array = [terminal_dict[D_mov_filtered[&#39;Location&#39;].iloc[i - 1]], terminal_dict[D_mov_filtered[&#39;Location&#39;].iloc[i]]]
+            plt.plot(x_array, y_array, color=&#39;orange&#39;, marker=&#39;o&#39;)
+
+            # plot waiting time
+            x_array = [D_mov_filtered[timestartfield].iloc[i], D_mov_filtered[timeendfield].iloc[i]]
+            y_array = [terminal_dict[D_mov_filtered[&#39;Location&#39;].iloc[i]], terminal_dict[D_mov_filtered[&#39;Location&#39;].iloc[i]]]
+            plt.plot(x_array, y_array, color=&#39;orange&#39;, marker=&#39;o&#39;)
+        plt.ylabel(&#39;Terminal&#39;)
+        plt.xlabel(&#39;Time&#39;)
+        output_figure[f&#34;Train_chart_{vessel}_{actual}&#34;] = fig1
+
+        if actual == &#39;PROVISIONAL&#39;:
+            time_from = timeColumns[&#39;loadingptd&#39;]
+            time_to = timeColumns[&#39;dischargingpta&#39;]
+        elif actual == &#39;ACTUAL&#39;:
+            time_from = timeColumns[&#39;loadingatd&#39;]
+            time_to = timeColumns[&#39;dischargingata&#39;]
+
+        # plot graph grouping on a day
+        D_train = D_mov[D_mov[vehicle] == vessel]
+        D_train[&#39;hour_from&#39;] = D_train[time_from].dt.time
+        D_train[&#39;hour_to&#39;] = D_train[time_to].dt.time
+        D_graph = D_train.groupby([loadingNode, dischargingNode, &#39;hour_from&#39;, &#39;hour_to&#39;]).sum()[capacityField].reset_index()
+        D_graph = D_graph.sort_values(by=capacityField, ascending=False)
+        fig1 = plt.figure()
+        for i in range(0, len(D_graph)):
+            x_array = [D_graph[&#39;hour_from&#39;].iloc[i], D_graph[&#39;hour_to&#39;].iloc[i]]
+            y_array = [terminal_dict[D_graph[loadingNode].iloc[i]], terminal_dict[D_graph[dischargingNode].iloc[i]]]
+
+            my_day = datetime.date(1990, 1, 1)
+            x_array = [datetime.datetime.combine(my_day, t) for t in x_array]
+
+            plt.title(f&#34;Train schedule chart VEHICLE: {vessel}&#34;)
+            plt.plot(x_array, y_array, color=&#39;orange&#39;, marker=&#39;o&#39;, linewidth=np.log(D_graph[capacityField].iloc[i]))
+        output_figure[f&#34;Train_chart_daily_{vessel}_{actual}&#34;] = fig1
+        plt.close(&#39;all&#39;)
+    return output_figure, output_df</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.returnFigureVoyage"><code class="name flex">
+<span>def <span class="ident">returnFigureVoyage</span></span>(<span>D_route: pandas.core.frame.DataFrame, D_arcs_route: pandas.core.frame.DataFrame, lastPlanningDay: list = [], lowerBoundDataCensored: list = [], filteringfield: str = 'VOYAGE_CODE', sortTimefield: str = 'PTD')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a dictionary of figures with
+a chart plot of the routes</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_route</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>Input route dataframe.</dd>
+<dt><strong><code>D_arcs_route</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input route dataframe with arcs.</dd>
+<dt><strong><code>lastPlanningDay</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>DESCRIPTION. Defaults to [].</dd>
+<dt><strong><code>lowerBoundDataCensored</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>DESCRIPTION. Defaults to [].</dd>
+<dt><strong><code>filteringfield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>DESCRIPTION. Defaults to 'VOYAGE_CODE'.</dd>
+<dt><strong><code>sortTimefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name to sort values by. Defaults to 'PTD'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>figure_results (dict): Output dictionary containing figures.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def returnFigureVoyage(D_route: pd.DataFrame, D_arcs_route: pd.DataFrame, lastPlanningDay: list = [],
+                       lowerBoundDataCensored: list = [], filteringfield: str = &#39;VOYAGE_CODE&#39;, sortTimefield: str = &#39;PTD&#39;):
+    &#34;&#34;&#34;
+    Create a dictionary of figures with  a chart plot of the routes
+
+    Args:
+        D_route (pd.dataFrame): Input route dataframe.
+        D_arcs_route (pd.DataFrame): Input route dataframe with arcs.
+        lastPlanningDay (list, optional): DESCRIPTION. Defaults to [].
+        lowerBoundDataCensored (list, optional): DESCRIPTION. Defaults to [].
+        filteringfield (str, optional): DESCRIPTION. Defaults to &#39;VOYAGE_CODE&#39;.
+        sortTimefield (str, optional): column name to sort values by. Defaults to &#39;PTD&#39;.
+
+    Returns:
+        figure_results (dict): Output dictionary containing figures.
+
+    &#34;&#34;&#34;
+
+    figure_results = {}
+    for voyage in set(D_route[filteringfield]):
+        # voyage=&#39;Vessel 10&#39;
+        # generate inventory dataframe
+        D_plannedRouteVessel = D_route[D_route[filteringfield] == voyage]
+
+        if len(D_plannedRouteVessel) &gt; 0:
+            D_plannedRouteVessel = D_plannedRouteVessel.sort_values(by=sortTimefield)
+
+            # Create capacity charts
+            figure = plt.figure(figsize=(20, 10))
+            plt.step(D_plannedRouteVessel[sortTimefield], D_plannedRouteVessel[&#39;inventory&#39;], color=&#39;orange&#39;)
+            plt.title(str(voyage) + &#39; inventory&#39;)
+            plt.xticks(rotation=30)
+
+            # track the capacity
+            capMax = max(D_plannedRouteVessel[&#39;inventory&#39;])
+            plt.plot(D_plannedRouteVessel[sortTimefield], [capMax] * len(D_plannedRouteVessel), &#39;r--&#39;)
+            plt.axvline(x=lastPlanningDay, color=&#39;red&#39;, linestyle=&#39;--&#39;)
+            plt.axvline(x=lowerBoundDataCensored, color=&#39;red&#39;, linestyle=&#39;--&#39;)
+            figure_results[f&#34;{filteringfield}_{voyage}_inventory&#34;] = figure
+
+        # generate graph chart
+        D_plannedRouteVessel_fromTo = D_arcs_route[D_arcs_route[f&#34;{filteringfield}_from&#34;] == voyage]
+
+        if len(D_plannedRouteVessel_fromTo) &gt; 0:
+            # plot routes on a graph
+            FlowAnalysis = D_plannedRouteVessel_fromTo.groupby([&#39;arcFrom&#39;, &#39;arcTo&#39;]).size().reset_index()
+            FlowAnalysis = FlowAnalysis.rename(columns={0: &#39;Trips&#39;})
+
+            fig1 = plotGraph(df=FlowAnalysis,
+                             edgeFrom=&#39;arcFrom&#39;,
+                             edgeTo=&#39;arcTo&#39;,
+                             distance=&#39;Trips&#39;,
+                             weight=&#39;Trips&#39;,
+                             title=str(voyage),
+                             arcLabel=True)
+            figure_results[f&#34;{filteringfield}_{voyage}_graph&#34;] = fig1
+
+    return figure_results</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.voyageStatistics"><code class="name flex">
+<span>def <span class="ident">voyageStatistics</span></span>(<span>D_mov: pandas.core.frame.DataFrame, timefield: str = 'TIMESTAMP_IN', locfrom: str = 'LOADING_NODE', locto: str = 'DISCHARGING_NODE', timeColumns: dict = {}, capacityField: str = 'QUANTITY', censoredData: bool = False, voyagefield: str = 'VOYAGE_CODE', actual: str = 'PROVISIONAL')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Estimate inventory values of the vessels on a route</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>timefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with time. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>locfrom</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with origin node. Defaults to 'LOADING_NODE'.</dd>
+<dt><strong><code>locto</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with destination node. Defaults to 'DISCHARGING_NODE'.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>dict</code>, optional</dt>
+<dd>Dict with time windows columns names. Defaults to {}.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with transported quantities. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>censoredData</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If ture, considers censored data. Defaults to False.</dd>
+<dt><strong><code>voyagefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing voyage code. Defaults to 'VOYAGE_CODE'.</dd>
+<dt><strong><code>actual</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>If "ACTUAL" consider actual timestamps. Otherwise, provisional. Defaults to 'PROVISIONAL'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_route (pd.DataFrame): Output dataFrame with route.
+D_arcs_route (pd.DataFrame): Output dataFrame with route arcs.
+D_coverages (pd.DataFrame): Output dataFrame with statistical coverages.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def voyageStatistics(D_mov: pd.DataFrame,
+                     timefield: str = &#39;TIMESTAMP_IN&#39;,
+                     locfrom: str = &#39;LOADING_NODE&#39;,
+                     locto: str = &#39;DISCHARGING_NODE&#39;,
+                     timeColumns: dict = {},
+                     capacityField: str = &#39;QUANTITY&#39;,
+                     censoredData: bool = False,
+                     voyagefield: str = &#39;VOYAGE_CODE&#39;,
+                     actual: str = &#39;PROVISIONAL&#39;):
+    &#34;&#34;&#34;
+    Estimate inventory values of the vessels on a route
+
+    Args:
+        D_mov (pd.DataFrame): Input dataframe.
+        timefield (str, optional): column name with time. Defaults to &#39;TIMESTAMP_IN&#39;.
+        locfrom (str, optional): Column name with origin node. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): column name with destination node. Defaults to &#39;DISCHARGING_NODE&#39;.
+        timeColumns (dict, optional): Dict with time windows columns names. Defaults to {}.
+        capacityField (str, optional): Column name with transported quantities. Defaults to &#39;QUANTITY&#39;.
+        censoredData (bool, optional): If ture, considers censored data. Defaults to False.
+        voyagefield (str, optional): Column name containing voyage code. Defaults to &#39;VOYAGE_CODE&#39;.
+        actual (str, optional): If &#34;ACTUAL&#34; consider actual timestamps. Otherwise, provisional. Defaults to &#39;PROVISIONAL&#39;.
+
+    Returns:
+        D_route (pd.DataFrame): Output dataFrame with route.
+        D_arcs_route (pd.DataFrame): Output dataFrame with route arcs.
+        D_coverages (pd.DataFrame): Output dataFrame with statistical coverages.
+
+    &#34;&#34;&#34;
+
+    # Initialise empty dataframes
+    D_route = D_arcs_route = D_coverages = pd.DataFrame()
+
+    # Calculate coverages and availability of data
+    if actual == &#39;PROVISIONAL&#39;:
+        colonneNecessarie = [&#39;loadingpta&#39;, &#39;loadingptd&#39;, &#39;dischargingpta&#39;, &#39;dischargingptd&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [locfrom, locto, timeColumns[&#39;loadingpta&#39;], timeColumns[&#39;loadingptd&#39;], timeColumns[&#39;dischargingpta&#39;], timeColumns[&#39;dischargingptd&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            D_coverages = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+    elif actual == &#39;ACTUAL&#39;:
+        colonneNecessarie = [&#39;loadingata&#39;, &#39;loadingatd&#39;, &#39;dischargingata&#39;, &#39;dischargingatd&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [locfrom, locto, timeColumns[&#39;loadingata&#39;], timeColumns[&#39;loadingatd&#39;], timeColumns[&#39;dischargingata&#39;], timeColumns[&#39;dischargingatd&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            D_coverages = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+    # Assign accuracy
+    D_coverages = pd.DataFrame(accuracy)
+
+    D_arcs_route = pd.DataFrame()
+
+    D = createTabellaMovimenti(D_mov=D_mov,
+                               locfrom=locfrom,
+                               locto=locto,
+                               capacityField=capacityField,
+                               timeColumns=timeColumns)
+
+    # define routes
+    D_route, timestartfield, timeendfield = defineRouteTable(D, agregationVariables=[voyagefield],
+                                                             actual=actual)
+
+    # identify voyages
+    Voyages = np.unique(D_route[voyagefield])
+
+    # identify first planning day
+    firstPlanningDay = min(D_mov[timefield].dt.date)
+
+    # Identify advance in planning
+    _, df_advance = getAdvanceInPlanning(D_mov, loadingptafield=timeColumns[&#39;loadingpta&#39;])
+    mean_advanceInPlanning = df_advance.loc[&#39;ADVANCE_PLANNING_MEAN&#39;][&#39;VALUE&#39;]
+    std_advanceInPlanning = df_advance.loc[&#39;ADVANCE_PLANNING_STD&#39;][&#39;VALUE&#39;]
+    lowerBoundDataCensored = firstPlanningDay + pd.Timedelta(days=(mean_advanceInPlanning + std_advanceInPlanning))
+
+    # Identify last planning day
+    lastPlanningDay = max(D_mov[timefield].dt.date)
+
+    # remove movements outside the reference time horizon
+    if(not(censoredData)):  # if avoiding censored data
+        D_route = D_route[(D_route[timestartfield] &gt; pd.to_datetime(lowerBoundDataCensored)) &amp; (D_route[timeendfield] &lt; pd.to_datetime(lastPlanningDay))]
+        D_route = D_route.reset_index(drop=True)
+
+    # go on only if there are not censored data
+    if len(D_route) == 0:
+        D_route = pd.DataFrame([&#34;No uncensored data&#34;])
+        return D_route, D_arcs_route, D_coverages
+    D_route[&#39;inventory&#39;] = np.nan
+
+    print(&#34;**** INVENTORY ESTIMATE  ****&#34;)
+    # scan each single voyage identifying the residual capacity
+    for i in range(0, len(Voyages)):
+        # i=0
+        voyage = Voyages[i]
+        route = D_route[D_route[voyagefield] == voyage]
+
+        print(f&#34;==estimate inventory voyage {voyage}, with {len(route)} movements&#34;)
+        # if a route is given
+        if len(route) &gt; 0:
+
+            # sort by time
+            route = route.sort_values([timeendfield])
+
+            # define planned movements
+            counter = 0
+            allIndex = []  # define a list of indexes
+            for index, row in route.iterrows():  # same indexes of D_route
+                if counter == 0:
+                    D_route[&#39;inventory&#39;].loc[index] = row[&#39;Movementquantity&#39;]
+                    allIndex.append(index)
+
+                else:
+                    D_route[&#39;inventory&#39;].loc[index] = row[&#39;Movementquantity&#39;] + D_route[&#39;inventory&#39;].loc[allIndex[counter - 1]]
+                    allIndex.append(index)
+                counter = counter + 1
+
+            # calculate the estimate of the capacity and move on positive values (above zero)
+            allCapacities = D_route[D_route[voyagefield] == voyage][&#39;inventory&#39;]
+            slack = np.double(- min(allCapacities))
+            D_route[&#39;inventory&#39;].loc[allIndex] = D_route[D_route[voyagefield] == voyage][&#39;inventory&#39;] + slack
+            capMax = max(D_route[&#39;inventory&#39;].loc[allIndex])
+
+            # assign route value on the dataframe
+            route = D_route[D_route[voyagefield] == voyage]
+            route = route.sort_values([timeendfield])
+
+            # scan the route to define from-to movement dataframe
+            for k in range(0, len(route) - 1):
+                # k=0
+
+                # identify current and following movement
+                currentMovement = route.iloc[k]
+                nextMovement = route.iloc[k + 1]
+
+                rowDictionary = {&#39;arcFrom&#39;: currentMovement.Location,
+                                 &#39;arcTo&#39;: nextMovement.Location,
+                                 &#39;departureFromALAP&#39;: currentMovement[timeendfield],
+                                 &#39;arrivalToASAP&#39;: nextMovement[timestartfield],
+                                 &#39;inventory&#39;: currentMovement.inventory,
+                                 &#39;capacity&#39;: capMax - currentMovement.inventory}
+                # append all the other FROM
+                add_columns_from = [col for col in currentMovement.index if col not in [&#39;Location&#39;, &#39;timeendfield&#39;, &#39;inventory&#39;]]
+                for col in add_columns_from:
+                    rowDictionary[f&#34;{col}_from&#34;] = currentMovement[col]
+
+                # append all the other TO
+                add_columns_to = [col for col in nextMovement.index if col not in [&#39;Location&#39;, &#39;timestartfield&#39;, &#39;inventory&#39;]]
+                for col in add_columns_to:
+                    rowDictionary[f&#34;{col}_to&#34;] = nextMovement[col]
+
+                # add restults to the final dataframe
+                D_arcs_route = D_arcs_route.append(pd.DataFrame([rowDictionary]))
+
+    return D_route, D_arcs_route, D_coverages</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.createTabellaMovimenti" href="#analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.createTabellaMovimenti">createTabellaMovimenti</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.defineRouteTable" href="#analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.defineRouteTable">defineRouteTable</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.graphClock" href="#analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.graphClock">graphClock</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.returnFigureVoyage" href="#analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.returnFigureVoyage">returnFigureVoyage</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.voyageStatistics" href="#analogistics.supply_chain.P8_performance_assessment.vehicle_assessment.voyageStatistics">voyageStatistics</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

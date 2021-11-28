@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.learning.grids API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.learning.grids</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+from abc import ABC
+import pandas as pd
+
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import mean_squared_error, accuracy_score, precision_score, f1_score, recall_score, classification_report
+
+
+class GridSearch(ABC):
+    def __init__(self):
+        self.models_regression = None
+        self.models_classification = None
+
+    def train_models_regression(self,
+                                X: pd.DataFrame, y: pd.Series,
+                                test_size: float = 0.33,
+                                cv: int = 5) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Train all the models of a regression grid using grid search with cross validation
+
+        Args:
+            X (pd.DataFrame): Input dataframe.
+            y (pd.Series): Input target label series.
+            test_size (float, optional): Percentage size of the test set. Defaults to 0.33.
+            cv (int, optional): Number of folds of the cross-validation. Defaults to 5.
+
+        Returns:
+            D_trainingResults (pd.DataFrame): Output DataFrame with the results of the models.
+
+        &#34;&#34;&#34;
+        # get regression grid
+        models_regression_grid = self.models_regression
+
+        # split into train and validation set
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+
+        # define evaluation dataframe
+        D_trainingResults = pd.DataFrame(columns=[&#39;MODEL_NAME&#39;, &#39;MODEL&#39;,
+                                                  &#39;PARAMS&#39;, &#39;SCORE_TEST&#39;,
+                                                  &#39;SCORE_VALIDATION&#39;])
+
+        scores = &#39;neg_mean_squared_error&#39;
+        for model in models_regression_grid.keys():
+            estimator = models_regression_grid[model][&#39;estimator&#39;]
+            param_grid = models_regression_grid[model][&#39;param&#39;]
+
+            clf = GridSearchCV(estimator, param_grid, cv=cv, scoring=scores, verbose=10)
+            clf.fit(X_train, y_train)
+            # clf.cv_results_
+            MODEL = clf.best_estimator_
+            SCORE_TEST = clf.best_score_
+            PARAMS = clf.best_params_
+
+            # validation_set
+            y_pred = MODEL.predict(X_test)
+            # scorer=get_scorer(scores)
+            SCORE_VALIDATION = - mean_squared_error(y_test, y_pred)
+            D_trainingResults = D_trainingResults.append(pd.DataFrame([[model, MODEL, PARAMS, SCORE_TEST, SCORE_VALIDATION]],
+                                                                      columns=D_trainingResults.columns))
+        return D_trainingResults
+
+    def train_models_classification(self, X: pd.DataFrame, y: pd.Series,
+                                    test_size: float = 0.33, cv: int = 3,
+                                    scores: str = &#39;accuracy&#39;) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Train all the models of a classification grid using grid search with cross validation
+
+        Args:
+            X (pd.DataFrame): Input dataframe.
+            y (pd.Series): Input target label series.
+            test_size (float, optional): Percentage size of the test set. Defaults to 0.33.
+            cv (int, optional): Number of folds of the cross-validation. Defaults to 3.
+            scores (str, optional): Metric to minimise in the training procedure. Defaults to &#39;accuracy&#39;.
+
+        Returns:
+            D_trainingResults (pd.DataFrame): Output DataFrame with the results of the models.
+
+        &#34;&#34;&#34;
+        # get classification grid
+        models_classification = self.models_classification
+        # split into train and validation set
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+
+        # define evaluation dataframe
+        D_trainingResults = pd.DataFrame(columns=[&#39;MODEL_NAME&#39;, &#39;MODEL&#39;, &#39;PARAMS&#39;, &#39;SCORE_TEST&#39;,
+                                                  &#39;ACCURACY&#39;,
+                                                  &#39;PRECISION&#39;,
+                                                  &#39;RECALL&#39;,
+                                                  &#39;F1&#39;,
+                                                  &#39;REPORT&#39;])
+
+        for model in models_classification.keys():
+            estimator = models_classification[model][&#39;estimator&#39;]
+            param_grid = models_classification[model][&#39;param&#39;]
+
+            clf = GridSearchCV(estimator, param_grid, cv=cv, scoring=scores, verbose=7, n_jobs=-1)
+            clf.fit(X_train, y_train)
+            # clf.cv_results_
+            MODEL = clf.best_estimator_
+            SCORE_TEST = clf.best_score_
+            PARAMS = clf.best_params_
+
+            # validation_set
+            y_pred = MODEL.predict(X_test)
+            # scorer=get_scorer(scores)
+            ACCURACY = accuracy_score(y_test, y_pred)
+            PRECISION = precision_score(y_test, y_pred, average=&#39;weighted&#39;)
+            RECALL = recall_score(y_test, y_pred, average=&#39;weighted&#39;)
+            F1 = f1_score(y_test, y_pred, average=&#39;weighted&#39;)
+
+            # get classification report
+            # print(y_test)
+            # print(y_pred)
+            # print(MODEL.classes_)
+            # D_rep = classification_report(y_test, y_pred, target_names=MODEL.classes_)
+            D_rep = pd.DataFrame()
+            D_trainingResults = D_trainingResults.append(pd.DataFrame([[model, MODEL, PARAMS, SCORE_TEST, ACCURACY, PRECISION, RECALL, F1, D_rep]],
+                                                                      columns=D_trainingResults.columns))
+        return D_trainingResults</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="analogistics.learning.grids.GridSearch"><code class="flex name class">
+<span>class <span class="ident">GridSearch</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GridSearch(ABC):
+    def __init__(self):
+        self.models_regression = None
+        self.models_classification = None
+
+    def train_models_regression(self,
+                                X: pd.DataFrame, y: pd.Series,
+                                test_size: float = 0.33,
+                                cv: int = 5) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Train all the models of a regression grid using grid search with cross validation
+
+        Args:
+            X (pd.DataFrame): Input dataframe.
+            y (pd.Series): Input target label series.
+            test_size (float, optional): Percentage size of the test set. Defaults to 0.33.
+            cv (int, optional): Number of folds of the cross-validation. Defaults to 5.
+
+        Returns:
+            D_trainingResults (pd.DataFrame): Output DataFrame with the results of the models.
+
+        &#34;&#34;&#34;
+        # get regression grid
+        models_regression_grid = self.models_regression
+
+        # split into train and validation set
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+
+        # define evaluation dataframe
+        D_trainingResults = pd.DataFrame(columns=[&#39;MODEL_NAME&#39;, &#39;MODEL&#39;,
+                                                  &#39;PARAMS&#39;, &#39;SCORE_TEST&#39;,
+                                                  &#39;SCORE_VALIDATION&#39;])
+
+        scores = &#39;neg_mean_squared_error&#39;
+        for model in models_regression_grid.keys():
+            estimator = models_regression_grid[model][&#39;estimator&#39;]
+            param_grid = models_regression_grid[model][&#39;param&#39;]
+
+            clf = GridSearchCV(estimator, param_grid, cv=cv, scoring=scores, verbose=10)
+            clf.fit(X_train, y_train)
+            # clf.cv_results_
+            MODEL = clf.best_estimator_
+            SCORE_TEST = clf.best_score_
+            PARAMS = clf.best_params_
+
+            # validation_set
+            y_pred = MODEL.predict(X_test)
+            # scorer=get_scorer(scores)
+            SCORE_VALIDATION = - mean_squared_error(y_test, y_pred)
+            D_trainingResults = D_trainingResults.append(pd.DataFrame([[model, MODEL, PARAMS, SCORE_TEST, SCORE_VALIDATION]],
+                                                                      columns=D_trainingResults.columns))
+        return D_trainingResults
+
+    def train_models_classification(self, X: pd.DataFrame, y: pd.Series,
+                                    test_size: float = 0.33, cv: int = 3,
+                                    scores: str = &#39;accuracy&#39;) -&gt; pd.DataFrame:
+        &#34;&#34;&#34;
+        Train all the models of a classification grid using grid search with cross validation
+
+        Args:
+            X (pd.DataFrame): Input dataframe.
+            y (pd.Series): Input target label series.
+            test_size (float, optional): Percentage size of the test set. Defaults to 0.33.
+            cv (int, optional): Number of folds of the cross-validation. Defaults to 3.
+            scores (str, optional): Metric to minimise in the training procedure. Defaults to &#39;accuracy&#39;.
+
+        Returns:
+            D_trainingResults (pd.DataFrame): Output DataFrame with the results of the models.
+
+        &#34;&#34;&#34;
+        # get classification grid
+        models_classification = self.models_classification
+        # split into train and validation set
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+
+        # define evaluation dataframe
+        D_trainingResults = pd.DataFrame(columns=[&#39;MODEL_NAME&#39;, &#39;MODEL&#39;, &#39;PARAMS&#39;, &#39;SCORE_TEST&#39;,
+                                                  &#39;ACCURACY&#39;,
+                                                  &#39;PRECISION&#39;,
+                                                  &#39;RECALL&#39;,
+                                                  &#39;F1&#39;,
+                                                  &#39;REPORT&#39;])
+
+        for model in models_classification.keys():
+            estimator = models_classification[model][&#39;estimator&#39;]
+            param_grid = models_classification[model][&#39;param&#39;]
+
+            clf = GridSearchCV(estimator, param_grid, cv=cv, scoring=scores, verbose=7, n_jobs=-1)
+            clf.fit(X_train, y_train)
+            # clf.cv_results_
+            MODEL = clf.best_estimator_
+            SCORE_TEST = clf.best_score_
+            PARAMS = clf.best_params_
+
+            # validation_set
+            y_pred = MODEL.predict(X_test)
+            # scorer=get_scorer(scores)
+            ACCURACY = accuracy_score(y_test, y_pred)
+            PRECISION = precision_score(y_test, y_pred, average=&#39;weighted&#39;)
+            RECALL = recall_score(y_test, y_pred, average=&#39;weighted&#39;)
+            F1 = f1_score(y_test, y_pred, average=&#39;weighted&#39;)
+
+            # get classification report
+            # print(y_test)
+            # print(y_pred)
+            # print(MODEL.classes_)
+            # D_rep = classification_report(y_test, y_pred, target_names=MODEL.classes_)
+            D_rep = pd.DataFrame()
+            D_trainingResults = D_trainingResults.append(pd.DataFrame([[model, MODEL, PARAMS, SCORE_TEST, ACCURACY, PRECISION, RECALL, F1, D_rep]],
+                                                                      columns=D_trainingResults.columns))
+        return D_trainingResults</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>abc.ABC</li>
+</ul>
+<h3>Subclasses</h3>
+<ul class="hlist">
+<li><a title="analogistics.learning.analogizers_grids.GridSearchAnalogizer" href="analogizers_grids.html#analogistics.learning.analogizers_grids.GridSearchAnalogizer">GridSearchAnalogizer</a></li>
+<li><a title="analogistics.learning.bayesians_grids.GridSearchBayesian" href="bayesians_grids.html#analogistics.learning.bayesians_grids.GridSearchBayesian">GridSearchBayesian</a></li>
+<li><a title="analogistics.learning.connectionists_grids.GridSearchConnectionist" href="connectionists_grids.html#analogistics.learning.connectionists_grids.GridSearchConnectionist">GridSearchConnectionist</a></li>
+<li><a title="analogistics.learning.ensemble_grids.GridSearchConnectionist" href="ensemble_grids.html#analogistics.learning.ensemble_grids.GridSearchConnectionist">GridSearchConnectionist</a></li>
+<li><a title="analogistics.learning.linear_grids.GridSearchLinear" href="linear_grids.html#analogistics.learning.linear_grids.GridSearchLinear">GridSearchLinear</a></li>
+<li><a title="analogistics.learning.symbolists_grids.GridSearchSymbolist" href="symbolists_grids.html#analogistics.learning.symbolists_grids.GridSearchSymbolist">GridSearchSymbolist</a></li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="analogistics.learning.grids.GridSearch.train_models_classification"><code class="name flex">
+<span>def <span class="ident">train_models_classification</span></span>(<span>self, X: pandas.core.frame.DataFrame, y: pandas.core.series.Series, test_size: float = 0.33, cv: int = 3, scores: str = 'accuracy') -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Train all the models of a classification grid using grid search with cross validation</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>Input target label series.</dd>
+<dt><strong><code>test_size</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Percentage size of the test set. Defaults to 0.33.</dd>
+<dt><strong><code>cv</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of folds of the cross-validation. Defaults to 3.</dd>
+<dt><strong><code>scores</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Metric to minimise in the training procedure. Defaults to 'accuracy'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_trainingResults (pd.DataFrame): Output DataFrame with the results of the models.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train_models_classification(self, X: pd.DataFrame, y: pd.Series,
+                                test_size: float = 0.33, cv: int = 3,
+                                scores: str = &#39;accuracy&#39;) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Train all the models of a classification grid using grid search with cross validation
+
+    Args:
+        X (pd.DataFrame): Input dataframe.
+        y (pd.Series): Input target label series.
+        test_size (float, optional): Percentage size of the test set. Defaults to 0.33.
+        cv (int, optional): Number of folds of the cross-validation. Defaults to 3.
+        scores (str, optional): Metric to minimise in the training procedure. Defaults to &#39;accuracy&#39;.
+
+    Returns:
+        D_trainingResults (pd.DataFrame): Output DataFrame with the results of the models.
+
+    &#34;&#34;&#34;
+    # get classification grid
+    models_classification = self.models_classification
+    # split into train and validation set
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+
+    # define evaluation dataframe
+    D_trainingResults = pd.DataFrame(columns=[&#39;MODEL_NAME&#39;, &#39;MODEL&#39;, &#39;PARAMS&#39;, &#39;SCORE_TEST&#39;,
+                                              &#39;ACCURACY&#39;,
+                                              &#39;PRECISION&#39;,
+                                              &#39;RECALL&#39;,
+                                              &#39;F1&#39;,
+                                              &#39;REPORT&#39;])
+
+    for model in models_classification.keys():
+        estimator = models_classification[model][&#39;estimator&#39;]
+        param_grid = models_classification[model][&#39;param&#39;]
+
+        clf = GridSearchCV(estimator, param_grid, cv=cv, scoring=scores, verbose=7, n_jobs=-1)
+        clf.fit(X_train, y_train)
+        # clf.cv_results_
+        MODEL = clf.best_estimator_
+        SCORE_TEST = clf.best_score_
+        PARAMS = clf.best_params_
+
+        # validation_set
+        y_pred = MODEL.predict(X_test)
+        # scorer=get_scorer(scores)
+        ACCURACY = accuracy_score(y_test, y_pred)
+        PRECISION = precision_score(y_test, y_pred, average=&#39;weighted&#39;)
+        RECALL = recall_score(y_test, y_pred, average=&#39;weighted&#39;)
+        F1 = f1_score(y_test, y_pred, average=&#39;weighted&#39;)
+
+        # get classification report
+        # print(y_test)
+        # print(y_pred)
+        # print(MODEL.classes_)
+        # D_rep = classification_report(y_test, y_pred, target_names=MODEL.classes_)
+        D_rep = pd.DataFrame()
+        D_trainingResults = D_trainingResults.append(pd.DataFrame([[model, MODEL, PARAMS, SCORE_TEST, ACCURACY, PRECISION, RECALL, F1, D_rep]],
+                                                                  columns=D_trainingResults.columns))
+    return D_trainingResults</code></pre>
+</details>
+</dd>
+<dt id="analogistics.learning.grids.GridSearch.train_models_regression"><code class="name flex">
+<span>def <span class="ident">train_models_regression</span></span>(<span>self, X: pandas.core.frame.DataFrame, y: pandas.core.series.Series, test_size: float = 0.33, cv: int = 5) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Train all the models of a regression grid using grid search with cross validation</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>Input target label series.</dd>
+<dt><strong><code>test_size</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Percentage size of the test set. Defaults to 0.33.</dd>
+<dt><strong><code>cv</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of folds of the cross-validation. Defaults to 5.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_trainingResults (pd.DataFrame): Output DataFrame with the results of the models.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def train_models_regression(self,
+                            X: pd.DataFrame, y: pd.Series,
+                            test_size: float = 0.33,
+                            cv: int = 5) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Train all the models of a regression grid using grid search with cross validation
+
+    Args:
+        X (pd.DataFrame): Input dataframe.
+        y (pd.Series): Input target label series.
+        test_size (float, optional): Percentage size of the test set. Defaults to 0.33.
+        cv (int, optional): Number of folds of the cross-validation. Defaults to 5.
+
+    Returns:
+        D_trainingResults (pd.DataFrame): Output DataFrame with the results of the models.
+
+    &#34;&#34;&#34;
+    # get regression grid
+    models_regression_grid = self.models_regression
+
+    # split into train and validation set
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42)
+
+    # define evaluation dataframe
+    D_trainingResults = pd.DataFrame(columns=[&#39;MODEL_NAME&#39;, &#39;MODEL&#39;,
+                                              &#39;PARAMS&#39;, &#39;SCORE_TEST&#39;,
+                                              &#39;SCORE_VALIDATION&#39;])
+
+    scores = &#39;neg_mean_squared_error&#39;
+    for model in models_regression_grid.keys():
+        estimator = models_regression_grid[model][&#39;estimator&#39;]
+        param_grid = models_regression_grid[model][&#39;param&#39;]
+
+        clf = GridSearchCV(estimator, param_grid, cv=cv, scoring=scores, verbose=10)
+        clf.fit(X_train, y_train)
+        # clf.cv_results_
+        MODEL = clf.best_estimator_
+        SCORE_TEST = clf.best_score_
+        PARAMS = clf.best_params_
+
+        # validation_set
+        y_pred = MODEL.predict(X_test)
+        # scorer=get_scorer(scores)
+        SCORE_VALIDATION = - mean_squared_error(y_test, y_pred)
+        D_trainingResults = D_trainingResults.append(pd.DataFrame([[model, MODEL, PARAMS, SCORE_TEST, SCORE_VALIDATION]],
+                                                                  columns=D_trainingResults.columns))
+    return D_trainingResults</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.learning" href="index.html">analogistics.learning</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="analogistics.learning.grids.GridSearch" href="#analogistics.learning.grids.GridSearch">GridSearch</a></code></h4>
+<ul class="">
+<li><code><a title="analogistics.learning.grids.GridSearch.train_models_classification" href="#analogistics.learning.grids.GridSearch.train_models_classification">train_models_classification</a></code></li>
+<li><code><a title="analogistics.learning.grids.GridSearch.train_models_regression" href="#analogistics.learning.grids.GridSearch.train_models_regression">train_models_regression</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P8_performance_assessment.terminal_assessment API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P8_performance_assessment.terminal_assessment</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from analogistics.supply_chain.P8_performance_assessment.vehicle_assessment import createTabellaMovimenti, defineRouteTable
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P9_workload_prediction.demand_assessment import getAdvanceInPlanning
+
+
+def createTabellaProductivityAllocationTerminal(D_mov: pd.DataFrame,
+                                                timefield: str = &#39;TIMESTAMP_IN&#39;,
+                                                locfrom: str = &#39;LOADING_NODE&#39;,
+                                                locto: str = &#39;DISCHARGING_NODE&#39;,
+                                                capacityField: str = &#39;QUANTITY&#39;,
+                                                voyagefield: str = &#39;VEHICLE_CODE&#39;,
+                                                timeColumns: dict = {},
+                                                censoredData: bool = False,
+                                                actual: str = &#39;PROVISIONAL&#39;,
+                                                splitInOut: bool = True):
+    &#34;&#34;&#34;
+    Define productivity table for a terminal (node) of the supply chain netowrk
+
+    Args:
+        D_mov (pd.DataFrame): Input movement dataframe.
+        timefield (str, optional): Column name containing movements timestamp. Defaults to &#39;TIMESTAMP_IN&#39;.
+        locfrom (str, optional): Column name containing the origin location code. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): Column name containing the destination location code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        capacityField (str, optional): Column name containing the quantity. Defaults to &#39;QUANTITY&#39;.
+        voyagefield (str, optional): Column name containing the route code. Defaults to &#39;VEHICLE_CODE&#39;.
+        timeColumns (dict, optional): Column names containing time windows. Defaults to {}.
+        censoredData (bool, optional): If true considers censored data. Defaults to False.
+        actual (str, optional): If provisional, consider provisional data. Actual data instead. Defaults to &#39;PROVISIONAL&#39;.
+        splitInOut (bool, optional): If true separate inbound and outbound movements. Defaults to True.
+
+    Returns:
+        pd.DataFrame: Output productivity dataframe.
+
+    &#34;&#34;&#34;
+
+    D = createTabellaMovimenti(D_mov=D_mov,
+                               locfrom=locfrom,
+                               locto=locto,
+                               capacityField=capacityField,
+                               timeColumns=timeColumns)
+
+    # define the routes
+    D_route, timestartfield, timeendfield = defineRouteTable(D, agregationVariables=[voyagefield, &#39;InOut&#39;],
+                                                             actual=actual)
+
+    if splitInOut:  # separate inbound and outbound productivity
+        D_terminal, timestartfield, timeendfield = defineRouteTable(D, agregationVariables=[voyagefield, &#39;InOut&#39;],
+                                                                    actual=actual)
+    else:  # merge inbound and outbound productivity
+        D_terminal, timestartfield, timeendfield = defineRouteTable(D, agregationVariables=[voyagefield],
+                                                                    actual=actual)
+
+    if len(D_terminal) == 0:
+        print(&#34;No terminal data&#34;)
+        return []
+
+    # identify first planning day
+    firstPlanningDay = min(D_mov[timefield].dt.date)
+
+    # Identify average number of day in advance in booking
+    _, df_advance = getAdvanceInPlanning(D_mov, loadingptafield=timeColumns[&#39;loadingpta&#39;])
+    mean_advanceInPlanning = df_advance.loc[&#39;ADVANCE_PLANNING_MEAN&#39;][&#39;VALUE&#39;]
+    std_advanceInPlanning = df_advance.loc[&#39;ADVANCE_PLANNING_STD&#39;][&#39;VALUE&#39;]
+    lowerBoundDataCensored = firstPlanningDay + pd.Timedelta(days=(mean_advanceInPlanning + std_advanceInPlanning))
+
+    # Identify last planning day
+    lastPlanningDay = max(D_mov[timefield].dt.date)
+
+    # Remove movements outside the reference time horizon
+    if(not(censoredData)):  # Avoid cendored data
+        D_terminal = D_terminal[(D_terminal[timestartfield] &gt; pd.to_datetime(lowerBoundDataCensored)) &amp; (D_terminal[timeendfield] &lt; pd.to_datetime(lastPlanningDay))]
+        D_terminal = D_terminal.reset_index(drop=True)
+
+    allocationDriverPerHour = D_terminal[timeendfield] - D_terminal[timestartfield]
+    allocationDriverPerHourD = allocationDriverPerHour.dt.components[&#39;days&#39;]
+    allocationDriverPerHourH = allocationDriverPerHour.dt.components[&#39;hours&#39;]
+    allocationDriverPerHourM = allocationDriverPerHour.dt.components[&#39;minutes&#39;]
+    allocationDriverPerHour = allocationDriverPerHourD * 24 + allocationDriverPerHourH + allocationDriverPerHourM / (60)
+
+    D_terminal[&#39;HoursAllocation&#39;] = allocationDriverPerHour
+    D_terminal[&#39;CurrentCapacity&#39;] = np.abs(D_terminal[&#39;Movementquantity&#39;]) / (D_terminal[&#39;HoursAllocation&#39;])
+
+    # Identify hourly productivity
+    handlingTime = D_terminal[timeendfield] - D_terminal[timestartfield]
+    handlingTimeH = handlingTime.dt.components[&#39;hours&#39;]
+    handlingTimeM = handlingTime.dt.components[&#39;minutes&#39;]
+    handlingTime = handlingTimeH + handlingTimeM / (60)
+    D_terminal[&#39;handlingTime&#39;] = handlingTime
+
+    hourProd = D_terminal[&#39;Movementquantity&#39;] / handlingTime
+    D_terminal[&#39;hourProductivity&#39;] = hourProd
+
+    return D_terminal
+
+
+def terminalStatistics(D_mov: pd.DataFrame,
+                       timefield: str = &#39;TIMESTAMP_IN&#39;,
+                       locfrom: str = &#39;LOADING_NODE&#39;,
+                       locto: str = &#39;DISCHARGING_NODE&#39;,
+                       voyagefield: str = &#39;VEHICLE_CODE&#39;,
+                       capacityField: str = &#39;QUANTITY&#39;,
+                       timeColumns: dict = {},
+                       censoredData: bool = False,
+                       actual: str = &#39;PROVISIONAL&#39;,
+                       splitInOut: bool = True):
+    &#34;&#34;&#34;
+    Produce statistics on the productivity of a terminal
+
+    Args:
+        D_mov (pd.DataFrame): Input movement dataframe.
+        timefield (str, optional): Column name containing movements timestamp. Defaults to &#39;TIMESTAMP_IN&#39;.
+        locfrom (str, optional): Column name containing the origin location code. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): Column name containing the destination location code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        voyagefield (str, optional): Column name containing the route code. Defaults to &#39;VEHICLE_CODE&#39;.
+        capacityField (str, optional): Column name containing the quantity. Defaults to &#39;QUANTITY&#39;.
+        timeColumns (dict, optional): Column names containing time windows. Defaults to {}.
+        censoredData (bool, optional): If true considers censored data. Defaults to False.
+        actual (str, optional): If provisional, consider provisional data. Defaults to &#39;PROVISIONAL&#39;.
+        splitInOut (bool, optional): If true separate inbound and outbound movements. Defaults to True.
+
+    Returns:
+        outputfigure (dict): dictionary of output figures.
+        D_terminal (pd.DataFrame): Productivity output dataframe.
+        D_coverages (pd.DataFrame): Productivity coverage dataframe.
+
+    &#34;&#34;&#34;
+
+    outputfigure = {}
+    D_terminal = pd.DataFrame()
+
+    # calculate coverages
+    if actual == &#39;PROVISIONAL&#39;:
+        colonneNecessarie = [&#39;loadingpta&#39;, &#39;loadingptd&#39;, &#39;dischargingpta&#39;, &#39;dischargingptd&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [locfrom, locto, timeColumns[&#39;loadingpta&#39;], timeColumns[&#39;loadingptd&#39;], timeColumns[&#39;dischargingpta&#39;], timeColumns[&#39;dischargingptd&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            D_coverages = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+    elif actual == &#39;ACTUAL&#39;:
+        colonneNecessarie = [&#39;loadingata&#39;, &#39;loadingatd&#39;, &#39;dischargingata&#39;, &#39;dischargingatd&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [locfrom, locto, timeColumns[&#39;loadingata&#39;], timeColumns[&#39;loadingatd&#39;], timeColumns[&#39;dischargingata&#39;], timeColumns[&#39;dischargingatd&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            D_coverages = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+    # assign accuracy
+    D_coverages = pd.DataFrame(accuracy)
+
+    # create table with terminal productivuty
+    D_terminal = createTabellaProductivityAllocationTerminal(D_mov,
+                                                             timefield=timefield,
+                                                             locfrom=locfrom,
+                                                             locto=locto,
+                                                             capacityField=capacityField,
+                                                             voyagefield=voyagefield,
+                                                             timeColumns=timeColumns,
+                                                             censoredData=censoredData,
+                                                             actual=actual,
+                                                             splitInOut=splitInOut)
+
+    BookingTrendcols = [&#39;Terminal&#39;, &#39;00&#39;, &#39;01&#39;, &#39;02&#39;, &#39;03&#39;, &#39;04&#39;, &#39;05&#39;,
+                        &#39;06&#39;, &#39;07&#39;, &#39;08&#39;, &#39;09&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;,
+                        &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;, &#39;21&#39;, &#39;22&#39;, &#39;23&#39;]
+    D_bookingTerminal = pd.DataFrame(columns=BookingTrendcols)
+    Terminals = np.unique(D_terminal.Location)
+    for i in range(0, len(Terminals)):
+
+        # Find correlation between quantity and handling time
+        terminal = Terminals[i]
+        dataTerminalTemp = D_terminal[D_terminal.Location == terminal]
+
+        for hh in [&#39;IN&#39;, &#39;OUT&#39;]:
+            dataTerminal = dataTerminalTemp[dataTerminalTemp.InOut == hh]
+            dataTerminal = dataTerminal.dropna()
+            dataTerminal = dataTerminal[dataTerminal[&#39;handlingTime&#39;] &gt; 0]  # remove nan times
+            if(len(dataTerminal) &gt; 1):
+
+                # Regression analysis
+                fig1 = plt.figure()
+                sns.regplot(dataTerminal[&#39;Movementquantity&#39;], dataTerminal[&#39;handlingTime&#39;], color=&#39;orange&#39;, marker=&#34;o&#34;)
+                plt.ylabel(&#39;Handling Time&#39;)
+                plt.xlabel(&#39;Handled quantity &#39; + hh)
+                plt.title(hh + &#39; Terminal: &#39; + str(terminal))
+                outputfigure[f&#34;productivity_IN_regression_{terminal}&#34;] = fig1
+
+                # analyse hourly productivity
+                fig2 = plt.figure()
+                # bins=np.arange(0,max(np.sqrt(max(np.abs(dataTerminal[&#39;hourProductivity&#39;]))),1))
+                plt.hist(dataTerminal[&#39;hourProductivity&#39;], color=&#39;orange&#39;)
+                plt.ylabel(&#39;Frequency&#39;)
+                plt.xlabel(hh + &#39; Movements per hour&#39;)
+                plt.title(&#39;Productivity &#39; + hh + &#39; Terminal : &#39; + str(terminal))
+                outputfigure[f&#34;productivity_IN_pdf_{terminal}&#34;] = fig2
+                plt.close(&#39;all&#39;)
+
+                # Identify time window trend
+                for j in range(0, len(dataTerminal)):
+
+                    # Setup hourly statistics
+                    H_00 = 0
+                    H_01 = 0
+                    H_02 = 0
+                    H_03 = 0
+                    H_04 = 0
+                    H_05 = 0
+                    H_06 = 0
+                    H_07 = 0
+                    H_08 = 0
+                    H_09 = 0
+                    H_10 = 0
+                    H_11 = 0
+                    H_12 = 0
+                    H_13 = 0
+                    H_14 = 0
+                    H_15 = 0
+                    H_16 = 0
+                    H_17 = 0
+                    H_18 = 0
+                    H_19 = 0
+                    H_20 = 0
+                    H_21 = 0
+                    H_22 = 0
+                    H_23 = 0
+
+                    caricoScarico = dataTerminal.iloc[j]
+                    if actual == &#39;PROVISIONAL&#39;:
+                        istInizio = caricoScarico.PTA
+                        istFine = caricoScarico.PTD
+                    elif actual == &#39;ACTUAL&#39;:
+                        istInizio = caricoScarico.ATA
+                        istFine = caricoScarico.ATD
+                    qty = caricoScarico.CurrentCapacity
+                    oraInizio = istInizio.hour
+                    oraFine = istFine.hour
+
+                    if(oraFine &gt; oraInizio):
+                        for k in range(oraInizio, oraFine + 1):
+                            if k == 0:
+                                H_00 = H_00 + qty
+                            elif k == 1:
+                                H_01 = H_01 + qty
+                            elif k == 2:
+                                H_02 = H_02 + qty
+                            elif k == 3:
+                                H_03 = H_03 + qty
+                            elif k == 4:
+                                H_04 = H_04 + qty
+                            elif k == 5:
+                                H_05 = H_05 + qty
+                            elif k == 6:
+                                H_06 = H_06 + qty
+                            elif k == 7:
+                                H_07 = H_07 + qty
+                            elif k == 8:
+                                H_08 = H_08 + qty
+                            elif k == 9:
+                                H_09 = H_09 + qty
+                            elif k == 10:
+                                H_10 = H_10 + qty
+                            elif k == 11:
+                                H_11 = H_11 + qty
+                            elif k == 12:
+                                H_12 = H_12 + qty
+                            elif k == 13:
+                                H_13 = H_13 + qty
+                            elif k == 14:
+                                H_14 = H_14 + qty
+                            elif k == 15:
+                                H_15 = H_15 + qty
+                            elif k == 16:
+                                H_16 = H_16 + qty
+                            elif k == 17:
+                                H_17 = H_17 + qty
+                            elif k == 18:
+                                H_18 = H_18 + qty
+                            elif k == 19:
+                                H_19 = H_19 + qty
+                            elif k == 20:
+                                H_20 = H_20 + qty
+                            elif k == 21:
+                                H_21 = H_21 + qty
+                            elif k == 22:
+                                H_22 = H_22 + qty
+                            elif k == 23:
+                                H_23 = H_23 + qty
+                    temp = pd.DataFrame([[terminal, H_00, H_01, H_02, H_03, H_04,
+                                          H_05, H_06, H_07, H_08, H_09, H_10, H_11,
+                                          H_12, H_13, H_14, H_15, H_16, H_17, H_18,
+                                          H_19, H_20, H_21, H_22, H_23]], columns=BookingTrendcols)
+                    D_bookingTerminal = D_bookingTerminal.append(temp)
+
+    # Identify the global trend
+    DailyWorkloadNetwork = D_bookingTerminal[[&#39;00&#39;, &#39;01&#39;, &#39;02&#39;, &#39;03&#39;, &#39;04&#39;, &#39;05&#39;, &#39;06&#39;,
+                                              &#39;07&#39;, &#39;08&#39;, &#39;09&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;,
+                                              &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;,
+                                              &#39;21&#39;, &#39;22&#39;, &#39;23&#39;]]
+    DailyWorkloadNetwork = DailyWorkloadNetwork.sum(axis=0, skipna=True)
+
+    fig1 = plt.figure()
+    plt.stem(DailyWorkloadNetwork)
+    plt.title(&#39;Network Handling time windows&#39;)
+    plt.ylabel(&#39;Total Container Handled&#39;)
+    plt.xlabel(&#39;Daily timeline&#39;)
+
+    outputfigure[&#34;productivity_workload_network&#34;] = fig1
+    # plt.close(&#39;all&#39;)
+
+    # define the workload profile for each terminal
+    for i in range(0, len(Terminals)):
+
+        terminal = Terminals[i]
+        DailyWorkloadTerminal = D_bookingTerminal[D_bookingTerminal.Terminal == terminal]
+
+        DailyWorkloadTerminal = DailyWorkloadTerminal[[&#39;00&#39;, &#39;01&#39;, &#39;02&#39;, &#39;03&#39;, &#39;04&#39;, &#39;05&#39;, &#39;06&#39;,
+                                                       &#39;07&#39;, &#39;08&#39;, &#39;09&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;,
+                                                       &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;,
+                                                       &#39;21&#39;, &#39;22&#39;, &#39;23&#39;]]
+        DailyWorkloadTerminal = DailyWorkloadTerminal.mean(axis=0, skipna=True)
+
+        fig1 = plt.figure()
+        plt.stem(DailyWorkloadTerminal)
+        plt.title(&#39;Terminal: &#39; + str(terminal) + &#39; Handling time windows&#39;)
+        plt.ylabel(&#39;Average Quantity Handled per hour&#39;)
+        plt.xlabel(&#39;Daily timeline&#39;)
+        outputfigure[f&#34;productivity_workload_{terminal}&#34;] = fig1
+        plt.close(&#39;all&#39;)
+    return outputfigure, D_terminal, D_coverages</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P8_performance_assessment.terminal_assessment.createTabellaProductivityAllocationTerminal"><code class="name flex">
+<span>def <span class="ident">createTabellaProductivityAllocationTerminal</span></span>(<span>D_mov: pandas.core.frame.DataFrame, timefield: str = 'TIMESTAMP_IN', locfrom: str = 'LOADING_NODE', locto: str = 'DISCHARGING_NODE', capacityField: str = 'QUANTITY', voyagefield: str = 'VEHICLE_CODE', timeColumns: dict = {}, censoredData: bool = False, actual: str = 'PROVISIONAL', splitInOut: bool = True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define productivity table for a terminal (node) of the supply chain netowrk</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input movement dataframe.</dd>
+<dt><strong><code>timefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing movements timestamp. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>locfrom</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing the origin location code. Defaults to 'LOADING_NODE'.</dd>
+<dt><strong><code>locto</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing the destination location code. Defaults to 'DISCHARGING_NODE'.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing the quantity. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>voyagefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing the route code. Defaults to 'VEHICLE_CODE'.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>dict</code>, optional</dt>
+<dd>Column names containing time windows. Defaults to {}.</dd>
+<dt><strong><code>censoredData</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If true considers censored data. Defaults to False.</dd>
+<dt><strong><code>actual</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>If provisional, consider provisional data. Actual data instead. Defaults to 'PROVISIONAL'.</dd>
+<dt><strong><code>splitInOut</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If true separate inbound and outbound movements. Defaults to True.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>Output productivity dataframe.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def createTabellaProductivityAllocationTerminal(D_mov: pd.DataFrame,
+                                                timefield: str = &#39;TIMESTAMP_IN&#39;,
+                                                locfrom: str = &#39;LOADING_NODE&#39;,
+                                                locto: str = &#39;DISCHARGING_NODE&#39;,
+                                                capacityField: str = &#39;QUANTITY&#39;,
+                                                voyagefield: str = &#39;VEHICLE_CODE&#39;,
+                                                timeColumns: dict = {},
+                                                censoredData: bool = False,
+                                                actual: str = &#39;PROVISIONAL&#39;,
+                                                splitInOut: bool = True):
+    &#34;&#34;&#34;
+    Define productivity table for a terminal (node) of the supply chain netowrk
+
+    Args:
+        D_mov (pd.DataFrame): Input movement dataframe.
+        timefield (str, optional): Column name containing movements timestamp. Defaults to &#39;TIMESTAMP_IN&#39;.
+        locfrom (str, optional): Column name containing the origin location code. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): Column name containing the destination location code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        capacityField (str, optional): Column name containing the quantity. Defaults to &#39;QUANTITY&#39;.
+        voyagefield (str, optional): Column name containing the route code. Defaults to &#39;VEHICLE_CODE&#39;.
+        timeColumns (dict, optional): Column names containing time windows. Defaults to {}.
+        censoredData (bool, optional): If true considers censored data. Defaults to False.
+        actual (str, optional): If provisional, consider provisional data. Actual data instead. Defaults to &#39;PROVISIONAL&#39;.
+        splitInOut (bool, optional): If true separate inbound and outbound movements. Defaults to True.
+
+    Returns:
+        pd.DataFrame: Output productivity dataframe.
+
+    &#34;&#34;&#34;
+
+    D = createTabellaMovimenti(D_mov=D_mov,
+                               locfrom=locfrom,
+                               locto=locto,
+                               capacityField=capacityField,
+                               timeColumns=timeColumns)
+
+    # define the routes
+    D_route, timestartfield, timeendfield = defineRouteTable(D, agregationVariables=[voyagefield, &#39;InOut&#39;],
+                                                             actual=actual)
+
+    if splitInOut:  # separate inbound and outbound productivity
+        D_terminal, timestartfield, timeendfield = defineRouteTable(D, agregationVariables=[voyagefield, &#39;InOut&#39;],
+                                                                    actual=actual)
+    else:  # merge inbound and outbound productivity
+        D_terminal, timestartfield, timeendfield = defineRouteTable(D, agregationVariables=[voyagefield],
+                                                                    actual=actual)
+
+    if len(D_terminal) == 0:
+        print(&#34;No terminal data&#34;)
+        return []
+
+    # identify first planning day
+    firstPlanningDay = min(D_mov[timefield].dt.date)
+
+    # Identify average number of day in advance in booking
+    _, df_advance = getAdvanceInPlanning(D_mov, loadingptafield=timeColumns[&#39;loadingpta&#39;])
+    mean_advanceInPlanning = df_advance.loc[&#39;ADVANCE_PLANNING_MEAN&#39;][&#39;VALUE&#39;]
+    std_advanceInPlanning = df_advance.loc[&#39;ADVANCE_PLANNING_STD&#39;][&#39;VALUE&#39;]
+    lowerBoundDataCensored = firstPlanningDay + pd.Timedelta(days=(mean_advanceInPlanning + std_advanceInPlanning))
+
+    # Identify last planning day
+    lastPlanningDay = max(D_mov[timefield].dt.date)
+
+    # Remove movements outside the reference time horizon
+    if(not(censoredData)):  # Avoid cendored data
+        D_terminal = D_terminal[(D_terminal[timestartfield] &gt; pd.to_datetime(lowerBoundDataCensored)) &amp; (D_terminal[timeendfield] &lt; pd.to_datetime(lastPlanningDay))]
+        D_terminal = D_terminal.reset_index(drop=True)
+
+    allocationDriverPerHour = D_terminal[timeendfield] - D_terminal[timestartfield]
+    allocationDriverPerHourD = allocationDriverPerHour.dt.components[&#39;days&#39;]
+    allocationDriverPerHourH = allocationDriverPerHour.dt.components[&#39;hours&#39;]
+    allocationDriverPerHourM = allocationDriverPerHour.dt.components[&#39;minutes&#39;]
+    allocationDriverPerHour = allocationDriverPerHourD * 24 + allocationDriverPerHourH + allocationDriverPerHourM / (60)
+
+    D_terminal[&#39;HoursAllocation&#39;] = allocationDriverPerHour
+    D_terminal[&#39;CurrentCapacity&#39;] = np.abs(D_terminal[&#39;Movementquantity&#39;]) / (D_terminal[&#39;HoursAllocation&#39;])
+
+    # Identify hourly productivity
+    handlingTime = D_terminal[timeendfield] - D_terminal[timestartfield]
+    handlingTimeH = handlingTime.dt.components[&#39;hours&#39;]
+    handlingTimeM = handlingTime.dt.components[&#39;minutes&#39;]
+    handlingTime = handlingTimeH + handlingTimeM / (60)
+    D_terminal[&#39;handlingTime&#39;] = handlingTime
+
+    hourProd = D_terminal[&#39;Movementquantity&#39;] / handlingTime
+    D_terminal[&#39;hourProductivity&#39;] = hourProd
+
+    return D_terminal</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.terminal_assessment.terminalStatistics"><code class="name flex">
+<span>def <span class="ident">terminalStatistics</span></span>(<span>D_mov: pandas.core.frame.DataFrame, timefield: str = 'TIMESTAMP_IN', locfrom: str = 'LOADING_NODE', locto: str = 'DISCHARGING_NODE', voyagefield: str = 'VEHICLE_CODE', capacityField: str = 'QUANTITY', timeColumns: dict = {}, censoredData: bool = False, actual: str = 'PROVISIONAL', splitInOut: bool = True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Produce statistics on the productivity of a terminal</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input movement dataframe.</dd>
+<dt><strong><code>timefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing movements timestamp. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>locfrom</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing the origin location code. Defaults to 'LOADING_NODE'.</dd>
+<dt><strong><code>locto</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing the destination location code. Defaults to 'DISCHARGING_NODE'.</dd>
+<dt><strong><code>voyagefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing the route code. Defaults to 'VEHICLE_CODE'.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing the quantity. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>dict</code>, optional</dt>
+<dd>Column names containing time windows. Defaults to {}.</dd>
+<dt><strong><code>censoredData</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If true considers censored data. Defaults to False.</dd>
+<dt><strong><code>actual</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>If provisional, consider provisional data. Defaults to 'PROVISIONAL'.</dd>
+<dt><strong><code>splitInOut</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If true separate inbound and outbound movements. Defaults to True.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>outputfigure (dict): dictionary of output figures.
+D_terminal (pd.DataFrame): Productivity output dataframe.
+D_coverages (pd.DataFrame): Productivity coverage dataframe.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def terminalStatistics(D_mov: pd.DataFrame,
+                       timefield: str = &#39;TIMESTAMP_IN&#39;,
+                       locfrom: str = &#39;LOADING_NODE&#39;,
+                       locto: str = &#39;DISCHARGING_NODE&#39;,
+                       voyagefield: str = &#39;VEHICLE_CODE&#39;,
+                       capacityField: str = &#39;QUANTITY&#39;,
+                       timeColumns: dict = {},
+                       censoredData: bool = False,
+                       actual: str = &#39;PROVISIONAL&#39;,
+                       splitInOut: bool = True):
+    &#34;&#34;&#34;
+    Produce statistics on the productivity of a terminal
+
+    Args:
+        D_mov (pd.DataFrame): Input movement dataframe.
+        timefield (str, optional): Column name containing movements timestamp. Defaults to &#39;TIMESTAMP_IN&#39;.
+        locfrom (str, optional): Column name containing the origin location code. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): Column name containing the destination location code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        voyagefield (str, optional): Column name containing the route code. Defaults to &#39;VEHICLE_CODE&#39;.
+        capacityField (str, optional): Column name containing the quantity. Defaults to &#39;QUANTITY&#39;.
+        timeColumns (dict, optional): Column names containing time windows. Defaults to {}.
+        censoredData (bool, optional): If true considers censored data. Defaults to False.
+        actual (str, optional): If provisional, consider provisional data. Defaults to &#39;PROVISIONAL&#39;.
+        splitInOut (bool, optional): If true separate inbound and outbound movements. Defaults to True.
+
+    Returns:
+        outputfigure (dict): dictionary of output figures.
+        D_terminal (pd.DataFrame): Productivity output dataframe.
+        D_coverages (pd.DataFrame): Productivity coverage dataframe.
+
+    &#34;&#34;&#34;
+
+    outputfigure = {}
+    D_terminal = pd.DataFrame()
+
+    # calculate coverages
+    if actual == &#39;PROVISIONAL&#39;:
+        colonneNecessarie = [&#39;loadingpta&#39;, &#39;loadingptd&#39;, &#39;dischargingpta&#39;, &#39;dischargingptd&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [locfrom, locto, timeColumns[&#39;loadingpta&#39;], timeColumns[&#39;loadingptd&#39;], timeColumns[&#39;dischargingpta&#39;], timeColumns[&#39;dischargingptd&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            D_coverages = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+    elif actual == &#39;ACTUAL&#39;:
+        colonneNecessarie = [&#39;loadingata&#39;, &#39;loadingatd&#39;, &#39;dischargingata&#39;, &#39;dischargingatd&#39;]
+        if all([column in timeColumns.keys() for column in colonneNecessarie]):
+            allcolumns = [locfrom, locto, timeColumns[&#39;loadingata&#39;], timeColumns[&#39;loadingatd&#39;], timeColumns[&#39;dischargingata&#39;], timeColumns[&#39;dischargingatd&#39;]]
+            accuracy, _ = getCoverageStats(D_mov, analysisFieldList=allcolumns, capacityField=&#39;QUANTITY&#39;)
+        else:
+            colonneMancanti = [column for column in colonneNecessarie if column not in timeColumns.keys()]
+            D_coverages = pd.DataFrame([f&#34;NO columns {colonneMancanti} in timeColumns&#34;])
+    # assign accuracy
+    D_coverages = pd.DataFrame(accuracy)
+
+    # create table with terminal productivuty
+    D_terminal = createTabellaProductivityAllocationTerminal(D_mov,
+                                                             timefield=timefield,
+                                                             locfrom=locfrom,
+                                                             locto=locto,
+                                                             capacityField=capacityField,
+                                                             voyagefield=voyagefield,
+                                                             timeColumns=timeColumns,
+                                                             censoredData=censoredData,
+                                                             actual=actual,
+                                                             splitInOut=splitInOut)
+
+    BookingTrendcols = [&#39;Terminal&#39;, &#39;00&#39;, &#39;01&#39;, &#39;02&#39;, &#39;03&#39;, &#39;04&#39;, &#39;05&#39;,
+                        &#39;06&#39;, &#39;07&#39;, &#39;08&#39;, &#39;09&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;,
+                        &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;, &#39;21&#39;, &#39;22&#39;, &#39;23&#39;]
+    D_bookingTerminal = pd.DataFrame(columns=BookingTrendcols)
+    Terminals = np.unique(D_terminal.Location)
+    for i in range(0, len(Terminals)):
+
+        # Find correlation between quantity and handling time
+        terminal = Terminals[i]
+        dataTerminalTemp = D_terminal[D_terminal.Location == terminal]
+
+        for hh in [&#39;IN&#39;, &#39;OUT&#39;]:
+            dataTerminal = dataTerminalTemp[dataTerminalTemp.InOut == hh]
+            dataTerminal = dataTerminal.dropna()
+            dataTerminal = dataTerminal[dataTerminal[&#39;handlingTime&#39;] &gt; 0]  # remove nan times
+            if(len(dataTerminal) &gt; 1):
+
+                # Regression analysis
+                fig1 = plt.figure()
+                sns.regplot(dataTerminal[&#39;Movementquantity&#39;], dataTerminal[&#39;handlingTime&#39;], color=&#39;orange&#39;, marker=&#34;o&#34;)
+                plt.ylabel(&#39;Handling Time&#39;)
+                plt.xlabel(&#39;Handled quantity &#39; + hh)
+                plt.title(hh + &#39; Terminal: &#39; + str(terminal))
+                outputfigure[f&#34;productivity_IN_regression_{terminal}&#34;] = fig1
+
+                # analyse hourly productivity
+                fig2 = plt.figure()
+                # bins=np.arange(0,max(np.sqrt(max(np.abs(dataTerminal[&#39;hourProductivity&#39;]))),1))
+                plt.hist(dataTerminal[&#39;hourProductivity&#39;], color=&#39;orange&#39;)
+                plt.ylabel(&#39;Frequency&#39;)
+                plt.xlabel(hh + &#39; Movements per hour&#39;)
+                plt.title(&#39;Productivity &#39; + hh + &#39; Terminal : &#39; + str(terminal))
+                outputfigure[f&#34;productivity_IN_pdf_{terminal}&#34;] = fig2
+                plt.close(&#39;all&#39;)
+
+                # Identify time window trend
+                for j in range(0, len(dataTerminal)):
+
+                    # Setup hourly statistics
+                    H_00 = 0
+                    H_01 = 0
+                    H_02 = 0
+                    H_03 = 0
+                    H_04 = 0
+                    H_05 = 0
+                    H_06 = 0
+                    H_07 = 0
+                    H_08 = 0
+                    H_09 = 0
+                    H_10 = 0
+                    H_11 = 0
+                    H_12 = 0
+                    H_13 = 0
+                    H_14 = 0
+                    H_15 = 0
+                    H_16 = 0
+                    H_17 = 0
+                    H_18 = 0
+                    H_19 = 0
+                    H_20 = 0
+                    H_21 = 0
+                    H_22 = 0
+                    H_23 = 0
+
+                    caricoScarico = dataTerminal.iloc[j]
+                    if actual == &#39;PROVISIONAL&#39;:
+                        istInizio = caricoScarico.PTA
+                        istFine = caricoScarico.PTD
+                    elif actual == &#39;ACTUAL&#39;:
+                        istInizio = caricoScarico.ATA
+                        istFine = caricoScarico.ATD
+                    qty = caricoScarico.CurrentCapacity
+                    oraInizio = istInizio.hour
+                    oraFine = istFine.hour
+
+                    if(oraFine &gt; oraInizio):
+                        for k in range(oraInizio, oraFine + 1):
+                            if k == 0:
+                                H_00 = H_00 + qty
+                            elif k == 1:
+                                H_01 = H_01 + qty
+                            elif k == 2:
+                                H_02 = H_02 + qty
+                            elif k == 3:
+                                H_03 = H_03 + qty
+                            elif k == 4:
+                                H_04 = H_04 + qty
+                            elif k == 5:
+                                H_05 = H_05 + qty
+                            elif k == 6:
+                                H_06 = H_06 + qty
+                            elif k == 7:
+                                H_07 = H_07 + qty
+                            elif k == 8:
+                                H_08 = H_08 + qty
+                            elif k == 9:
+                                H_09 = H_09 + qty
+                            elif k == 10:
+                                H_10 = H_10 + qty
+                            elif k == 11:
+                                H_11 = H_11 + qty
+                            elif k == 12:
+                                H_12 = H_12 + qty
+                            elif k == 13:
+                                H_13 = H_13 + qty
+                            elif k == 14:
+                                H_14 = H_14 + qty
+                            elif k == 15:
+                                H_15 = H_15 + qty
+                            elif k == 16:
+                                H_16 = H_16 + qty
+                            elif k == 17:
+                                H_17 = H_17 + qty
+                            elif k == 18:
+                                H_18 = H_18 + qty
+                            elif k == 19:
+                                H_19 = H_19 + qty
+                            elif k == 20:
+                                H_20 = H_20 + qty
+                            elif k == 21:
+                                H_21 = H_21 + qty
+                            elif k == 22:
+                                H_22 = H_22 + qty
+                            elif k == 23:
+                                H_23 = H_23 + qty
+                    temp = pd.DataFrame([[terminal, H_00, H_01, H_02, H_03, H_04,
+                                          H_05, H_06, H_07, H_08, H_09, H_10, H_11,
+                                          H_12, H_13, H_14, H_15, H_16, H_17, H_18,
+                                          H_19, H_20, H_21, H_22, H_23]], columns=BookingTrendcols)
+                    D_bookingTerminal = D_bookingTerminal.append(temp)
+
+    # Identify the global trend
+    DailyWorkloadNetwork = D_bookingTerminal[[&#39;00&#39;, &#39;01&#39;, &#39;02&#39;, &#39;03&#39;, &#39;04&#39;, &#39;05&#39;, &#39;06&#39;,
+                                              &#39;07&#39;, &#39;08&#39;, &#39;09&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;,
+                                              &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;,
+                                              &#39;21&#39;, &#39;22&#39;, &#39;23&#39;]]
+    DailyWorkloadNetwork = DailyWorkloadNetwork.sum(axis=0, skipna=True)
+
+    fig1 = plt.figure()
+    plt.stem(DailyWorkloadNetwork)
+    plt.title(&#39;Network Handling time windows&#39;)
+    plt.ylabel(&#39;Total Container Handled&#39;)
+    plt.xlabel(&#39;Daily timeline&#39;)
+
+    outputfigure[&#34;productivity_workload_network&#34;] = fig1
+    # plt.close(&#39;all&#39;)
+
+    # define the workload profile for each terminal
+    for i in range(0, len(Terminals)):
+
+        terminal = Terminals[i]
+        DailyWorkloadTerminal = D_bookingTerminal[D_bookingTerminal.Terminal == terminal]
+
+        DailyWorkloadTerminal = DailyWorkloadTerminal[[&#39;00&#39;, &#39;01&#39;, &#39;02&#39;, &#39;03&#39;, &#39;04&#39;, &#39;05&#39;, &#39;06&#39;,
+                                                       &#39;07&#39;, &#39;08&#39;, &#39;09&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;,
+                                                       &#39;14&#39;, &#39;15&#39;, &#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;,
+                                                       &#39;21&#39;, &#39;22&#39;, &#39;23&#39;]]
+        DailyWorkloadTerminal = DailyWorkloadTerminal.mean(axis=0, skipna=True)
+
+        fig1 = plt.figure()
+        plt.stem(DailyWorkloadTerminal)
+        plt.title(&#39;Terminal: &#39; + str(terminal) + &#39; Handling time windows&#39;)
+        plt.ylabel(&#39;Average Quantity Handled per hour&#39;)
+        plt.xlabel(&#39;Daily timeline&#39;)
+        outputfigure[f&#34;productivity_workload_{terminal}&#34;] = fig1
+        plt.close(&#39;all&#39;)
+    return outputfigure, D_terminal, D_coverages</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.terminal_assessment.createTabellaProductivityAllocationTerminal" href="#analogistics.supply_chain.P8_performance_assessment.terminal_assessment.createTabellaProductivityAllocationTerminal">createTabellaProductivityAllocationTerminal</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.terminal_assessment.terminalStatistics" href="#analogistics.supply_chain.P8_performance_assessment.terminal_assessment.terminalStatistics">terminalStatistics</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

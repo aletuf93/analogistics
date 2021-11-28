@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P8_performance_assessment.client_demand_assessment API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P8_performance_assessment.client_demand_assessment</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+from analogistics.explore import paretoChart
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+
+
+def clientStatistics(D_mov: pd.DataFrame,
+                     clientfield: str = &#39;KLANT&#39;,
+                     itemfamily: str = &#39;ContainerSize&#39;,
+                     capacityfield: str = &#39;QUANTITY&#39;):
+    &#34;&#34;&#34;
+    Produce statistics on the clients, given a DataFrame of movements
+
+    Args:
+        D_mov (pd.dataFrame): Input pandas dataframe with movements.
+        clientfield (str, optional): Column name with the client code. Defaults to &#39;KLANT&#39;.
+        itemfamily (str, optional): Column name with the category of the items. Defaults to &#39;ContainerSize&#39;.
+        capacityfield (str, optional): Column name with the item quantity. Defaults to &#39;QUANTITY&#39;.
+
+    Returns:
+        imageResult (dict): output dictionary containing figures.
+        df_results (pd.DataFrame): output pandas dataFrames.
+
+    &#34;&#34;&#34;
+
+    imageResult = {}
+    df_results = pd.DataFrame()
+
+    accuracy, _ = getCoverageStats(D_mov, clientfield, capacityField=&#39;QUANTITY&#39;)
+    D_OrderPerClient = D_mov.groupby([clientfield]).size().reset_index()
+    D_OrderPerClient = D_OrderPerClient.rename(columns={0: &#39;TotalOrders&#39;})
+    D_OrderPerClient = D_OrderPerClient.sort_values([clientfield])
+
+    # create pie chart
+    labels = D_OrderPerClient[clientfield]
+    sizes = D_OrderPerClient.TotalOrders
+    explode = 0.1 * np.ones(len(sizes))
+
+    fig1, ax1 = plt.subplots(figsize=(20, 10))
+    plt.pie(sizes, explode=explode, labels=labels, autopct=&#39;%1.1f%%&#39;,
+            shadow=True, startangle=90)
+    ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle
+    imageResult[&#39;clients_pie&#39;] = fig1
+
+    # Count movement type per client
+    D_movTypePerClient = D_mov.groupby([clientfield, itemfamily]).size().reset_index()
+    D_movTypePerClient = D_movTypePerClient.rename(columns={0: &#39;TotalContainer&#39;})
+    D_movTypePerClient = D_movTypePerClient.pivot(index=clientfield, columns=itemfamily, values=&#39;TotalContainer&#39;)
+
+    D = pd.merge(D_movTypePerClient, D_OrderPerClient,
+                 left_on=[clientfield], right_on=[clientfield])
+    D = D.fillna(0)
+
+    df_results = D
+    # add accuracy
+    df_results[&#39;accuracy&#39;] = [accuracy for i in range(0, len(df_results))]
+
+    # Pareto curve on capacity per client
+    D_capacityPerClient = D_mov.groupby([clientfield])[capacityfield].sum().reset_index()
+    fig1 = paretoChart(D_capacityPerClient, clientfield, capacityfield, &#39;Pareto clients&#39;)
+
+    imageResult[&#39;paretoClient&#39;] = fig1
+    return imageResult, df_results
+
+
+def paretoNodeClient(D_mov: pd.DataFrame,
+                     clientfield: str = &#39;KLANT&#39;,
+                     locationfromfield: str = &#39;LOADING_NODE&#39;,
+                     locationtofield: str = &#39;DISCHARGING_NODE&#39;,
+                     vehiclefield: str = &#39;VEHICLE_CODE&#39;,
+                     capacityField: str = &#39;QUANTITY&#39;
+                     ):
+    &#34;&#34;&#34;
+    Built a pareto cumulating the quantity loaded or offloaded by the clients
+    on the different locations (i.e. the nodes) of a supply chain network
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas dataframe with movements.
+        clientfield (str, optional): Column name with the client code. Defaults to &#39;KLANT&#39;.
+        locationfromfield (str, optional): Column name with the origin location code. Defaults to &#39;LOADING_NODE&#39;.
+        locationtofield (str, optional): Column name with the destination location code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        vehiclefield (str, optional): Column name with the vehicle code. Defaults to &#39;VEHICLE_CODE&#39;.
+        capacityField (str, optional): Column name with the transported quantity. Defaults to &#39;QUANTITY&#39;.
+
+    Returns:
+        outputfigure (dict): output dictionary containing figures.
+        output_df (dict): output dictionary containing dataframes.
+
+    &#34;&#34;&#34;
+    outputfigure = {}
+    output_df = {}
+
+    # if same field, it is not possible to cumulate values -&gt; no analysis
+    if (clientfield == locationfromfield) | (clientfield == locationtofield):
+        print(&#34;Same field for client and location from/to. Cannot proceed&#34;)
+        return outputfigure, output_df
+    for barge in set(D_mov[vehiclefield]):
+
+        # filter dataframe
+        D_clNode = D_mov[D_mov[vehiclefield] == barge]
+        if len(D_clNode) &gt; 0:
+            # Calculate coverages on count and quantities
+            accuracy, _ = getCoverageStats(D_clNode, [clientfield, locationfromfield,
+                                                      locationtofield, vehiclefield],
+                                           capacityField=capacityField)
+
+            D_clNode_from = pd.DataFrame(D_clNode.groupby([clientfield, locationtofield]).size()).reset_index()
+            D_clNode_from = D_clNode_from.rename(columns={locationtofield: &#39;Location&#39;})
+
+            D_clNode_to = pd.DataFrame(D_clNode.groupby([clientfield, locationfromfield]).size()).reset_index()
+            D_clNode_to = D_clNode_to.rename(columns={locationfromfield: &#39;Location&#39;})
+
+            D_clNode_all = pd.concat([D_clNode_from, D_clNode_to], axis=0)
+            D_clNode_all = D_clNode_all.sort_values(by=0, ascending=False)
+            D_clNode_all = D_clNode_all.dropna()
+            D_clNode_all = D_clNode_all.reset_index(drop=True)
+
+            # delete locations already visited
+            setLocation = []
+            for row in D_clNode_all.iterrows():
+                index = row[0]
+                rr = row[1]
+                if str(rr.Location).lower().strip() in setLocation:
+                    D_clNode_all = D_clNode_all.drop(index)
+                else:
+                    setLocation.append(str(rr.Location).lower().strip())
+
+            # add the nodes not cumulating any values
+            D_clNode_all = D_clNode_all.groupby([clientfield])[&#39;Location&#39;].nunique()
+            D_clNode_all = pd.DataFrame(D_clNode_all)
+            for client in set(D_clNode[clientfield]):
+                if client not in D_clNode_all.index.values:
+                    # print(client)
+                    temp = pd.DataFrame([0], index=[client], columns=[&#39;Location&#39;])
+                    D_clNode_all = pd.concat([D_clNode_all, temp])
+
+            D_clNode_all = pd.DataFrame(D_clNode_all)
+            D_clNode_all[&#39;Client&#39;] = D_clNode_all.index.values
+            D_clNode_all[&#39;accuracy&#39;] = [accuracy for i in range(0, len(D_clNode_all))]
+
+            titolo = f&#34;Vehicle Code: {barge}&#34;
+            fig = paretoChart(D_clNode_all, &#39;Client&#39;, &#39;Location&#39;, titolo)
+            outputfigure[f&#34;pareto_vehicle_{barge}&#34;] = fig
+            output_df[f&#34;pareto_vehicle_{barge}&#34;] = D_clNode_all
+    return outputfigure, output_df
+
+
+def violinPlantTerminal(D_mov: pd.DataFrame, plantField: str = &#39;LOADING_NODE&#39;,
+                        clientField: str = &#39;DISCHARGING_NODE&#39;,
+                        capacityField: str = &#39;QUANTITY&#39;):
+    &#34;&#34;&#34;
+    Build a plot with a violin for each node of the fistribution network,
+    indicating the deliered wuantitied towards each client
+
+    Args:
+        D_mov (pd.dataFrame): Input pandas dataframe with movements.
+        plantField (str, optional): Column name with the plant node code. Defaults to &#39;LOADING_NODE&#39;.
+        clientField (str, optional): Column name with the client code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        capacityField (str, optional): Column name with the transported quantit. Defaults to &#39;QUANTITY&#39;.
+
+    Returns:
+        output_figure (dict): output dictionary containing figures.
+        output_df (dict): output dictionary containing dataframes.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_df = {}
+
+    accuracy, _ = getCoverageStats(D_mov, [clientField, plantField], capacityField=capacityField)
+    df_out = pd.DataFrame([accuracy])
+
+    D_clientTerminal = D_mov.groupby([plantField, clientField]).sum()[capacityField].reset_index()
+
+    fig = plt.figure()
+    sns.violinplot(x=plantField, y=capacityField,
+                   data=D_clientTerminal, palette=&#34;muted&#34;)
+    output_figure[&#39;violin_plant_client&#39;] = fig
+    output_df[&#39;violin_plant_client_coverages&#39;] = df_out
+
+    return output_figure, output_df</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.clientStatistics"><code class="name flex">
+<span>def <span class="ident">clientStatistics</span></span>(<span>D_mov: pandas.core.frame.DataFrame, clientfield: str = 'KLANT', itemfamily: str = 'ContainerSize', capacityfield: str = 'QUANTITY')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Produce statistics on the clients, given a DataFrame of movements</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>Input pandas dataframe with movements.</dd>
+<dt><strong><code>clientfield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the client code. Defaults to 'KLANT'.</dd>
+<dt><strong><code>itemfamily</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the category of the items. Defaults to 'ContainerSize'.</dd>
+<dt><strong><code>capacityfield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the item quantity. Defaults to 'QUANTITY'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>imageResult (dict): output dictionary containing figures.
+df_results (pd.DataFrame): output pandas dataFrames.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clientStatistics(D_mov: pd.DataFrame,
+                     clientfield: str = &#39;KLANT&#39;,
+                     itemfamily: str = &#39;ContainerSize&#39;,
+                     capacityfield: str = &#39;QUANTITY&#39;):
+    &#34;&#34;&#34;
+    Produce statistics on the clients, given a DataFrame of movements
+
+    Args:
+        D_mov (pd.dataFrame): Input pandas dataframe with movements.
+        clientfield (str, optional): Column name with the client code. Defaults to &#39;KLANT&#39;.
+        itemfamily (str, optional): Column name with the category of the items. Defaults to &#39;ContainerSize&#39;.
+        capacityfield (str, optional): Column name with the item quantity. Defaults to &#39;QUANTITY&#39;.
+
+    Returns:
+        imageResult (dict): output dictionary containing figures.
+        df_results (pd.DataFrame): output pandas dataFrames.
+
+    &#34;&#34;&#34;
+
+    imageResult = {}
+    df_results = pd.DataFrame()
+
+    accuracy, _ = getCoverageStats(D_mov, clientfield, capacityField=&#39;QUANTITY&#39;)
+    D_OrderPerClient = D_mov.groupby([clientfield]).size().reset_index()
+    D_OrderPerClient = D_OrderPerClient.rename(columns={0: &#39;TotalOrders&#39;})
+    D_OrderPerClient = D_OrderPerClient.sort_values([clientfield])
+
+    # create pie chart
+    labels = D_OrderPerClient[clientfield]
+    sizes = D_OrderPerClient.TotalOrders
+    explode = 0.1 * np.ones(len(sizes))
+
+    fig1, ax1 = plt.subplots(figsize=(20, 10))
+    plt.pie(sizes, explode=explode, labels=labels, autopct=&#39;%1.1f%%&#39;,
+            shadow=True, startangle=90)
+    ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle
+    imageResult[&#39;clients_pie&#39;] = fig1
+
+    # Count movement type per client
+    D_movTypePerClient = D_mov.groupby([clientfield, itemfamily]).size().reset_index()
+    D_movTypePerClient = D_movTypePerClient.rename(columns={0: &#39;TotalContainer&#39;})
+    D_movTypePerClient = D_movTypePerClient.pivot(index=clientfield, columns=itemfamily, values=&#39;TotalContainer&#39;)
+
+    D = pd.merge(D_movTypePerClient, D_OrderPerClient,
+                 left_on=[clientfield], right_on=[clientfield])
+    D = D.fillna(0)
+
+    df_results = D
+    # add accuracy
+    df_results[&#39;accuracy&#39;] = [accuracy for i in range(0, len(df_results))]
+
+    # Pareto curve on capacity per client
+    D_capacityPerClient = D_mov.groupby([clientfield])[capacityfield].sum().reset_index()
+    fig1 = paretoChart(D_capacityPerClient, clientfield, capacityfield, &#39;Pareto clients&#39;)
+
+    imageResult[&#39;paretoClient&#39;] = fig1
+    return imageResult, df_results</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.paretoNodeClient"><code class="name flex">
+<span>def <span class="ident">paretoNodeClient</span></span>(<span>D_mov: pandas.core.frame.DataFrame, clientfield: str = 'KLANT', locationfromfield: str = 'LOADING_NODE', locationtofield: str = 'DISCHARGING_NODE', vehiclefield: str = 'VEHICLE_CODE', capacityField: str = 'QUANTITY')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Built a pareto cumulating the quantity loaded or offloaded by the clients
+on the different locations (i.e. the nodes) of a supply chain network</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas dataframe with movements.</dd>
+<dt><strong><code>clientfield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the client code. Defaults to 'KLANT'.</dd>
+<dt><strong><code>locationfromfield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the origin location code. Defaults to 'LOADING_NODE'.</dd>
+<dt><strong><code>locationtofield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the destination location code. Defaults to 'DISCHARGING_NODE'.</dd>
+<dt><strong><code>vehiclefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the vehicle code. Defaults to 'VEHICLE_CODE'.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the transported quantity. Defaults to 'QUANTITY'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>outputfigure (dict): output dictionary containing figures.
+output_df (dict): output dictionary containing dataframes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def paretoNodeClient(D_mov: pd.DataFrame,
+                     clientfield: str = &#39;KLANT&#39;,
+                     locationfromfield: str = &#39;LOADING_NODE&#39;,
+                     locationtofield: str = &#39;DISCHARGING_NODE&#39;,
+                     vehiclefield: str = &#39;VEHICLE_CODE&#39;,
+                     capacityField: str = &#39;QUANTITY&#39;
+                     ):
+    &#34;&#34;&#34;
+    Built a pareto cumulating the quantity loaded or offloaded by the clients
+    on the different locations (i.e. the nodes) of a supply chain network
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas dataframe with movements.
+        clientfield (str, optional): Column name with the client code. Defaults to &#39;KLANT&#39;.
+        locationfromfield (str, optional): Column name with the origin location code. Defaults to &#39;LOADING_NODE&#39;.
+        locationtofield (str, optional): Column name with the destination location code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        vehiclefield (str, optional): Column name with the vehicle code. Defaults to &#39;VEHICLE_CODE&#39;.
+        capacityField (str, optional): Column name with the transported quantity. Defaults to &#39;QUANTITY&#39;.
+
+    Returns:
+        outputfigure (dict): output dictionary containing figures.
+        output_df (dict): output dictionary containing dataframes.
+
+    &#34;&#34;&#34;
+    outputfigure = {}
+    output_df = {}
+
+    # if same field, it is not possible to cumulate values -&gt; no analysis
+    if (clientfield == locationfromfield) | (clientfield == locationtofield):
+        print(&#34;Same field for client and location from/to. Cannot proceed&#34;)
+        return outputfigure, output_df
+    for barge in set(D_mov[vehiclefield]):
+
+        # filter dataframe
+        D_clNode = D_mov[D_mov[vehiclefield] == barge]
+        if len(D_clNode) &gt; 0:
+            # Calculate coverages on count and quantities
+            accuracy, _ = getCoverageStats(D_clNode, [clientfield, locationfromfield,
+                                                      locationtofield, vehiclefield],
+                                           capacityField=capacityField)
+
+            D_clNode_from = pd.DataFrame(D_clNode.groupby([clientfield, locationtofield]).size()).reset_index()
+            D_clNode_from = D_clNode_from.rename(columns={locationtofield: &#39;Location&#39;})
+
+            D_clNode_to = pd.DataFrame(D_clNode.groupby([clientfield, locationfromfield]).size()).reset_index()
+            D_clNode_to = D_clNode_to.rename(columns={locationfromfield: &#39;Location&#39;})
+
+            D_clNode_all = pd.concat([D_clNode_from, D_clNode_to], axis=0)
+            D_clNode_all = D_clNode_all.sort_values(by=0, ascending=False)
+            D_clNode_all = D_clNode_all.dropna()
+            D_clNode_all = D_clNode_all.reset_index(drop=True)
+
+            # delete locations already visited
+            setLocation = []
+            for row in D_clNode_all.iterrows():
+                index = row[0]
+                rr = row[1]
+                if str(rr.Location).lower().strip() in setLocation:
+                    D_clNode_all = D_clNode_all.drop(index)
+                else:
+                    setLocation.append(str(rr.Location).lower().strip())
+
+            # add the nodes not cumulating any values
+            D_clNode_all = D_clNode_all.groupby([clientfield])[&#39;Location&#39;].nunique()
+            D_clNode_all = pd.DataFrame(D_clNode_all)
+            for client in set(D_clNode[clientfield]):
+                if client not in D_clNode_all.index.values:
+                    # print(client)
+                    temp = pd.DataFrame([0], index=[client], columns=[&#39;Location&#39;])
+                    D_clNode_all = pd.concat([D_clNode_all, temp])
+
+            D_clNode_all = pd.DataFrame(D_clNode_all)
+            D_clNode_all[&#39;Client&#39;] = D_clNode_all.index.values
+            D_clNode_all[&#39;accuracy&#39;] = [accuracy for i in range(0, len(D_clNode_all))]
+
+            titolo = f&#34;Vehicle Code: {barge}&#34;
+            fig = paretoChart(D_clNode_all, &#39;Client&#39;, &#39;Location&#39;, titolo)
+            outputfigure[f&#34;pareto_vehicle_{barge}&#34;] = fig
+            output_df[f&#34;pareto_vehicle_{barge}&#34;] = D_clNode_all
+    return outputfigure, output_df</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.violinPlantTerminal"><code class="name flex">
+<span>def <span class="ident">violinPlantTerminal</span></span>(<span>D_mov: pandas.core.frame.DataFrame, plantField: str = 'LOADING_NODE', clientField: str = 'DISCHARGING_NODE', capacityField: str = 'QUANTITY')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Build a plot with a violin for each node of the fistribution network,
+indicating the deliered wuantitied towards each client</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>Input pandas dataframe with movements.</dd>
+<dt><strong><code>plantField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the plant node code. Defaults to 'LOADING_NODE'.</dd>
+<dt><strong><code>clientField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the client code. Defaults to 'DISCHARGING_NODE'.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the transported quantit. Defaults to 'QUANTITY'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>output_figure (dict): output dictionary containing figures.
+output_df (dict): output dictionary containing dataframes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def violinPlantTerminal(D_mov: pd.DataFrame, plantField: str = &#39;LOADING_NODE&#39;,
+                        clientField: str = &#39;DISCHARGING_NODE&#39;,
+                        capacityField: str = &#39;QUANTITY&#39;):
+    &#34;&#34;&#34;
+    Build a plot with a violin for each node of the fistribution network,
+    indicating the deliered wuantitied towards each client
+
+    Args:
+        D_mov (pd.dataFrame): Input pandas dataframe with movements.
+        plantField (str, optional): Column name with the plant node code. Defaults to &#39;LOADING_NODE&#39;.
+        clientField (str, optional): Column name with the client code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        capacityField (str, optional): Column name with the transported quantit. Defaults to &#39;QUANTITY&#39;.
+
+    Returns:
+        output_figure (dict): output dictionary containing figures.
+        output_df (dict): output dictionary containing dataframes.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    output_df = {}
+
+    accuracy, _ = getCoverageStats(D_mov, [clientField, plantField], capacityField=capacityField)
+    df_out = pd.DataFrame([accuracy])
+
+    D_clientTerminal = D_mov.groupby([plantField, clientField]).sum()[capacityField].reset_index()
+
+    fig = plt.figure()
+    sns.violinplot(x=plantField, y=capacityField,
+                   data=D_clientTerminal, palette=&#34;muted&#34;)
+    output_figure[&#39;violin_plant_client&#39;] = fig
+    output_df[&#39;violin_plant_client_coverages&#39;] = df_out
+
+    return output_figure, output_df</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.clientStatistics" href="#analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.clientStatistics">clientStatistics</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.paretoNodeClient" href="#analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.paretoNodeClient">paretoNodeClient</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.violinPlantTerminal" href="#analogistics.supply_chain.P8_performance_assessment.client_demand_assessment.violinPlantTerminal">violinPlantTerminal</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

@@ -5,9 +5,9 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from analogistics.supply_chain.P8_performanceAssessment.vehicle_assessment import createTabellaMovimenti, defineRouteTable
-from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
-from analogistics.supply_chain.P9_workloadPrediction.demand_assessment import getAdvanceInPlanning
+from analogistics.supply_chain.P8_performance_assessment.vehicle_assessment import createTabellaMovimenti, defineRouteTable
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P9_workload_prediction.demand_assessment import getAdvanceInPlanning
 
 
 def createTabellaProductivityAllocationTerminal(D_mov: pd.DataFrame,

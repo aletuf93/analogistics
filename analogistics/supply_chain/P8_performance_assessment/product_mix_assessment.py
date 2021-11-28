@@ -3,8 +3,8 @@ import numpy as np
 import pandas as pd
 
 import matplotlib.pyplot as plt
-from analogistics.supply_chain.P8_performanceAssessment.vehicle_assessment import createTabellaMovimenti
-from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P8_performance_assessment.vehicle_assessment import createTabellaMovimenti
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
 
 
 def itemSharePieGraph(D_mov: pd.DataFrame, itemfield: str, capacityField: str = 'QUANTITY'):

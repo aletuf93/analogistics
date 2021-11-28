@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P9_workload_prediction.demand_predicter API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P9_workload_prediction.demand_predicter</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import datetime as date
+import numpy as np
+
+# import stat packages
+# from fbprophet import Prophet
+# from fbprophet.plot import plot_plotly
+# from sklearn.metrics import mean_squared_error
+
+# import plotly.offline as py
+
+from analogistics.statistics import time_series as ts
+# from logproj.utilities import creaCartella
+
+&#39;&#39;&#39;
+def predictWithFBPROPHET(D_series: pd.DataFrame, timeVariable: str, seriesVariable: str, prediction_results: str,
+                         titolo: str, samplingInterval: str = &#39;week&#39;, predictionsLength: int = 52):
+    &#34;&#34;&#34;
+
+    Args:
+        D_series (pd.Series): dataframe containing the timeseries and the values.
+        timeVariable (str): string with the name of the column of the dataframe containing timestamps.
+        seriesVariable (str): string with the name of the column of the dataframe containing values.
+        prediction_results (str): path where to save the output.
+        titolo (str): title to save the output figure.
+        samplingInterval (str, optional): if week it groups the series for week. Defaults to &#39;week&#39;.
+        predictionsLength (int, optional): int with the number of periods to predict. Defaults to 52.
+
+    Returns:
+        m (Prophet): output model.
+        forecast_fig (plt.figure): output figure with forecast.
+        components_fig (plt.figure): output figure with residuals.
+        MSE (float): MSE of the predictions.
+
+    &#34;&#34;&#34;
+
+    # extract time series
+    timeSeries = pd.DataFrame(D_series[[timeVariable, seriesVariable]])
+    timeSeries_analysis = timeSeries.set_index(timeVariable).resample(&#39;D&#39;).sum()
+    timeSeries_analysis[timeVariable] = timeSeries_analysis.index.values
+
+    if samplingInterval == &#39;month&#39;:
+        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, timeVariable, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;week&#39;:
+        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, timeVariable, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;day&#39;:
+        timeSeries_analysis = timeSeries_analysis[seriesVariable]
+
+    # prepare input dataframe
+    timeSeries_analysis = pd.DataFrame([timeSeries_analysis.index.values, timeSeries_analysis]).transpose()
+    timeSeries_analysis.columns = [&#39;ds&#39;, &#39;y&#39;]
+
+    m = Prophet()
+    m.fit(timeSeries_analysis)
+
+    # make predictions
+    future = m.make_future_dataframe(periods=predictionsLength)
+    # future.tail()
+
+    forecast = m.predict(future)
+    forecast[[&#39;ds&#39;, &#39;yhat&#39;, &#39;yhat_lower&#39;, &#39;yhat_upper&#39;]].tail()
+
+    # evaluate model goodness
+    MSE = mean_squared_error(timeSeries_analysis.y, forecast.yhat[0:len(timeSeries_analysis.y)])
+
+    # Output figure in matplotlib
+    forecast_fig = m.plot(forecast)
+    components_fig = m.plot_components(forecast)
+
+    # Output with plotly
+    fig = plot_plotly(m, forecast)  # This returns a plotly Figure
+    py.iplot(fig)
+    py.plot(fig, filename=f&#34;{prediction_results}\\prophet_{titolo}.html&#34;, auto_open=False)
+    return m, forecast_fig, components_fig, MSE
+
+&#39;&#39;&#39;
+
+
+def predictWithARIMA(D_series: pd.DataFrame, seriesVariable: str, samplingInterval: str = &#39;week&#39;,
+                     date_field: str = &#39;TIMESTAMP_IN&#39;, titolo: str = &#39;&#39;, signifAlpha: float = 0.05,
+                     maxValuesSelected: int = 2):
+    &#34;&#34;&#34;
+    applies predictions using ARIMA models
+
+    Args:
+        D_series (pd.DataFrame): Input dataFrame.
+        seriesVariable (str): string with the name of the column containing the series.
+        samplingInterval (str, optional): if week it groups the series for week. Defaults to &#39;week&#39;.
+        date_field (str, optional): string with the name of the column containing the datetime series. Defaults to &#39;TIMESTAMP_IN&#39;.
+        titolo (str, optional): title fo the figure. Defaults to &#39;&#39;.
+        signifAlpha (float, optional): significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller. Defaults to 0.05.
+        maxValuesSelected (int, optional): number of significant lags to consider in ACF and PACF. Defaults to 2.
+
+    Returns:
+        TYPE: fig_CF with the PACF and ACF figure.
+        TYPE: figure_forecast the forecast figure.
+        TYPE: figure_residuals the residual figure.
+        TYPE: resultModel the model resulting parameters.
+        TYPE: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # extract time series
+    timeSeries = pd.DataFrame(D_series[[date_field, seriesVariable]])
+    timeSeries_analysis = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+    timeSeries_analysis[date_field] = timeSeries_analysis.index.values
+
+    if samplingInterval == &#39;month&#39;:
+        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;week&#39;:
+        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;day&#39;:
+        timeSeries_analysis = timeSeries_analysis[seriesVariable]
+
+    # transform series to stationarity
+    seriesVariable = &#39;count_TIMESTAMP_IN&#39;
+    stationary_series, stationary_model = ts.transformSeriesToStationary(timeSeries_analysis, signifAlpha=signifAlpha)
+
+    # if transformed, then go on
+    if len(stationary_series) &gt; 1:
+
+        # detect ACF and PACF
+        fig_CF, D_acf_significant, D_pacf_significant = ts.ACF_PACF_plot(stationary_series)
+        params = ts.returnsignificantLags(D_pacf_significant, D_acf_significant, maxValuesSelected)
+
+        # Running ARIMA fit, consider that
+        figure_forecast, figure_residuals, resultModel = ts.SARIMAXfit(stationary_series, params)
+
+        return stationary_model, fig_CF, figure_forecast, figure_residuals, resultModel
+    else:  # cannot make the series stationary, cannot use ARIMA
+        return [], [], [], [], []
+
+
+def LOOP_PREDICT_SARIMA(D_time: pd.DataFrame, date_field: str, qtyVariable: str,
+                        countVariable: str, prediction_results_path: str, filterVariable: str = [],
+                        samplingInterval: str = &#39;week&#39;):
+    &#34;&#34;&#34;
+    Predict using SARIMA
+
+    Args:
+        D_time (pd.DataFrame): Input DataFrame.
+        date_field (str): column name with timestamps.
+        qtyVariable (str): column name with quantities.
+        countVariable (str): coulm name with count variable.
+        prediction_results_path (str): path to save results.
+        filterVariable (str, optional): filetring variable. Defaults to [].
+        samplingInterval (str, optional): sampling interval. Defaults to &#39;week&#39;.
+
+    Returns:
+        pd.DataFrame: results DataFrame.
+
+    &#34;&#34;&#34;
+
+    def _nestedPredictionSARIMA(D_results, ss, nomecartella):
+        # create folder with results
+        current_dir_results = os.path.join(prediction_results_path, f&#34;{str(nomecartella)}&#34;)
+        os.makedirs(current_dir_results, exist_ok=True)
+
+        print(f&#34;***********{ss}*************&#34;)
+        if len(ss) &gt; 0:
+            D_series = D_time[D_time[filterVariable] == ss]
+        else:
+            D_series = D_time
+
+        # save report txt
+        file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;w&#34;)
+        file.write(f&#34;{str(date.datetime.now())} STARTING PREDICTIONS \r&#34;)
+        file.close()
+
+        # set initial
+        tot_qty = np.nansum(D_series[qtyVariable])
+        tot_lns = np.nansum(D_series[countVariable])
+        QTY_STATIONARY_TRANSFORM = &#39;&#39;
+        QTY_SARIMA_MODEL = &#39;&#39;
+        QTY_SARIMA_ACCURACY = &#39;&#39;
+        LNS_STATIONARY_TRANSFORM = &#39;&#39;
+        LNS_SARIMA_MODEL = &#39;&#39;
+        LNS_SARIMA_ACCURACY = &#39;&#39;
+
+        if len(D_series) &gt;= 12:  # I need at least 12 points (e.g. 1 year expressed in  months)
+
+            # predict quantities
+            stationary_model, fig_CF, figure_forecast, figure_residuals, resultModel = predictWithARIMA(D_series,
+                                                                                                        seriesVariable=qtyVariable,
+                                                                                                        samplingInterval=samplingInterval,
+                                                                                                        date_field=date_field,
+                                                                                                        signifAlpha=0.05,
+                                                                                                        maxValuesSelected=2)
+
+            if len(stationary_model) &gt; 0:
+                # save figures
+                fig_CF.get_figure().savefig(f&#34;{current_dir_results}\\{ss}_quantities_CF.png&#34;)
+                figure_forecast.savefig(f&#34;{current_dir_results}\\{ss}_quantities_ARIMA_forecast.png&#34;)
+                figure_residuals.savefig(f&#34;{current_dir_results}\\{ss}_quantities_ARIMA_residuals.png&#34;)
+                plt.close(&#39;all&#39;)
+
+                # save params
+                QTY_STATIONARY_TRANSFORM = stationary_model
+                QTY_SARIMA_MODEL = str({&#39;p&#39;: resultModel[&#39;p&#39;],
+                                        &#39;d&#39;: resultModel[&#39;d&#39;],
+                                        &#39;q&#39;: resultModel[&#39;q&#39;]})
+                QTY_SARIMA_ACCURACY = resultModel[&#39;aic&#39;]
+
+                # save report txt
+                file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+                file.write(f&#34;{str(date.datetime.now())} quantities: Predictions built\r&#34;)
+                file.close()
+            else:
+                # save report txt
+                file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+                file.write(f&#34;{str(date.datetime.now())} quantities: no stationary series, no ARIMA Predictions built\r&#34;)
+                file.close()
+
+            # predict lines
+            stationary_model, fig_CF, figure_forecast, figure_residuals, resultModel = predictWithARIMA(D_series,
+                                                                                                        seriesVariable=countVariable,
+                                                                                                        samplingInterval=samplingInterval,
+                                                                                                        date_field=date_field,
+                                                                                                        signifAlpha=0.05,
+                                                                                                        maxValuesSelected=2)
+
+            if len(stationary_model) &gt; 0:  # if predictions were ok
+                # save figures
+                fig_CF.get_figure().savefig(f&#34;{current_dir_results}\\{ss}_lines_CF.png&#34;)
+                figure_forecast.savefig(f&#34;{current_dir_results}\\{ss}_lines_ARIMA_forecast.png&#34;)
+                figure_residuals.savefig(f&#34;{current_dir_results}\\{ss}_lines_ARIMA_residuals.png&#34;)
+                plt.close(&#39;all&#39;)
+
+                LNS_STATIONARY_TRANSFORM = stationary_model
+                LNS_SARIMA_MODEL = str({&#39;p&#39;: resultModel[&#39;p&#39;],
+                                        &#39;d&#39;: resultModel[&#39;d&#39;],
+                                        &#39;q&#39;: resultModel[&#39;q&#39;]})
+                LNS_SARIMA_ACCURACY = resultModel[&#39;aic&#39;]
+
+                # save report txt
+                file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+                file.write(f&#34;{str(date.datetime.now())} lines: Predictions built\r&#34;)
+                file.close()
+            else:
+                # save report txt
+                file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+                file.write(f&#34;{str(date.datetime.now())} lines: no stationary series, no ARIMA Predictions built\r&#34;)
+                file.close()
+
+        else:
+
+            # save report txt
+            file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;w&#34;)
+            file.write(f&#34;{str(date.datetime.now())} Not ehough input points to build a time series\r&#34;)
+            file.close()
+
+        # append results to dataframe
+        D_results = D_results.append(pd.DataFrame([[ss, tot_qty, tot_lns, QTY_STATIONARY_TRANSFORM, QTY_SARIMA_MODEL,
+                                                    QTY_SARIMA_ACCURACY, LNS_STATIONARY_TRANSFORM, LNS_SARIMA_MODEL,
+                                                    LNS_SARIMA_ACCURACY]], columns=D_results.columns))
+        return D_results
+
+    reportFilename = &#39;report_SARIMA&#39;
+
+    resultscolumn = [&#39;SERVICETYPE&#39;, &#39;QUANTITIES&#39;, &#39;LINES&#39;, &#39;QTY_STATIONARY_TRANSFORM&#39;,
+                     &#39;QTY_SARIMA_MODEL&#39;, &#39;QTY_SARIMA_ACCURACY&#39;, &#39;LNS_STATIONARY_TRANSFORM&#39;,
+                     &#39;LNS_SARIMA_MODEL&#39;, &#39;LNS_SARIMA_ACCURACY&#39;]
+
+    D_results = pd.DataFrame(columns=resultscolumn)
+
+    # define global trends
+    D_results = _nestedPredictionSARIMA(D_results, [], nomecartella=&#39;globalResults&#39;)
+
+    if len(filterVariable) &gt; 0:
+        # scan product families
+        st = list(set(D_time[filterVariable]))
+
+        for ss in st:
+            # ss=&#39;zz&#39;
+            try:
+                D_results = _nestedPredictionSARIMA(D_results, ss, nomecartella=ss)
+            except Exception as e:
+                print(f&#34;*=*=*=*=*=*=ERROR*=*=*= {e}&#34;)
+
+    # SAVE dataframe results
+    D_results.to_excel(f&#34;{prediction_results_path}\\pred_results_SARIMA.xlsx&#34;)
+    return True
+
+
+&#39;&#39;&#39;
+def LOOP_PREDICT_FBPROPHET(D_time: pd.DataFrame, timeVariable: str, qtyVariable: str,
+                           countVariable: str, prediction_results_path: str, filterVariable: str = [],
+                           samplingInterval: str = &#39;week&#39;):
+    &#34;&#34;&#34;
+    Predict using fbprophet
+
+    Args:
+        D_time (pd.DataFrame): Input dataFrame.
+        timeVariable (str): column name with timestamps.
+        qtyVariable (str): column name with quantity.
+        countVariable (str): column name with count.
+        prediction_results_path (str): results path name.
+        filterVariable (str, optional): column name to filter. Defaults to [].
+        samplingInterval (str, optional): sampling interval. Defaults to &#39;week&#39;.
+
+    Returns:
+        pd.dataFrame: Output restults dataFrame.
+
+    &#34;&#34;&#34;
+
+    def _nestedPredictionFBprophet(D_results, ss, nomecartella):
+        # create folder with results
+        current_dir_results = os.path.join(prediction_results_path, f&#34;{str(nomecartella)}&#34;)
+        os.makedirs(current_dir_results, exist_ok=True)
+
+        print(f&#34;***********{ss}*************&#34;)
+        if len(ss) &gt; 0:
+            D_series = D_time[D_time[filterVariable] == ss]
+        else:
+            D_series = D_time
+
+        # save report txt
+        file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+        file.write(f&#34;{str(date.datetime.now())} STARTING PREDICTIONS \r&#34;)
+        file.close()
+
+        # set initial
+        tot_qty = np.nansum(D_series[qtyVariable])
+        tot_lns = np.nansum(D_series[countVariable])
+        MSE_QTY = &#39;&#39;
+        MSE_LNS = &#39;&#39;
+
+        if len(D_series) &gt;= 12:  # I need at least 12 points (e.g. 1 year expressed in  months)
+
+            # predict quantities
+            m, forecast_fig, components_fig, MSE_result = predictWithFBPROPHET(D_series,
+                                                                               timeVariable,
+                                                                               qtyVariable,
+                                                                               current_dir_results,
+                                                                               samplingInterval=samplingInterval,
+                                                                               predictionsLength=52,
+                                                                               titolo=&#39;qty&#39;)
+
+            forecast_fig.savefig(f&#34;{current_dir_results}\\{ss}_quantities_FBPROPHET_forecast.png&#34;)
+            components_fig.savefig(f&#34;{current_dir_results}\\{ss}_quantities_FBPROPHET_comp.png&#34;)
+            plt.close(&#39;all&#39;)
+
+            # save params
+            MSE_QTY = MSE_result
+
+            # save report txt
+            file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+            file.write(f&#34;{str(date.datetime.now())} quantities: Predictions built\r&#34;)
+            file.close()
+
+            # predict quantities
+            m, forecast_fig, components_fig, MSE_result = predictWithFBPROPHET(D_series,
+                                                                               timeVariable,
+                                                                               countVariable,
+                                                                               current_dir_results,
+                                                                               samplingInterval=samplingInterval,
+                                                                               predictionsLength=52,
+                                                                               titolo=&#39;lines&#39;)
+
+            forecast_fig.savefig(f&#34;{current_dir_results}\\{ss}_quantities_FBPROPHET_forecast.png&#34;)
+            components_fig.savefig(f&#34;{current_dir_results}\\{ss}_quantities_FBPROPHET_comp.png&#34;)
+            plt.close(&#39;all&#39;)
+
+            # save params
+            MSE_LNS = MSE_result
+
+            # save report txt
+            file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+            file.write(f&#34;{str(date.datetime.now())} quantities: Predictions built\r&#34;)
+            file.close()
+
+        else:
+
+            # save report txt
+            file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;w&#34;)
+            file.write(f&#34;{str(date.datetime.now())} Not ehough input points to build a time series\r&#34;)
+            file.close()
+
+        # append results to dataframe
+        D_results = D_results.append(pd.DataFrame([[ss, tot_qty, tot_lns, MSE_QTY, MSE_LNS]],
+                                                  columns=D_results.columns))
+        return D_results
+
+    reportFilename = &#39;report_fbProphet&#39;
+    resultscolumn = [&#39;SERVICETYPE&#39;, &#39;QUANTITIES&#39;, &#39;LINES&#39;, &#39;MSE_QTY&#39;, &#39;MSE_LNS&#39;]
+    D_results = pd.DataFrame(columns=resultscolumn)
+
+    # define global trend
+    D_results = _nestedPredictionFBprophet(D_results, [], nomecartella=&#39;globalResults&#39;)
+
+    if len(filterVariable) &gt; 0:
+        # scan product families
+        st = list(set(D_time[filterVariable]))
+
+        for ss in st:
+            # ss=&#39;zz&#39;
+            try:
+                D_results = _nestedPredictionFBprophet(D_results, ss, nomecartella=ss)
+            except Exception as e:
+                print(f&#34;*=*=*=*=*=*=ERROR*=*=*= {e}&#34;)
+
+    # SAVE dataframe results
+    D_results.to_excel(f&#34;{prediction_results_path}\\pred_results_FBPROPHET.xlsx&#34;)
+    return True
+&#39;&#39;&#39;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P9_workload_prediction.demand_predicter.LOOP_PREDICT_SARIMA"><code class="name flex">
+<span>def <span class="ident">LOOP_PREDICT_SARIMA</span></span>(<span>D_time: pandas.core.frame.DataFrame, date_field: str, qtyVariable: str, countVariable: str, prediction_results_path: str, filterVariable: str = [], samplingInterval: str = 'week')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Predict using SARIMA</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_time</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input DataFrame.</dd>
+<dt><strong><code>date_field</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name with timestamps.</dd>
+<dt><strong><code>qtyVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name with quantities.</dd>
+<dt><strong><code>countVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>coulm name with count variable.</dd>
+<dt><strong><code>prediction_results_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>path to save results.</dd>
+<dt><strong><code>filterVariable</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>filetring variable. Defaults to [].</dd>
+<dt><strong><code>samplingInterval</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>sampling interval. Defaults to 'week'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>results DataFrame.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def LOOP_PREDICT_SARIMA(D_time: pd.DataFrame, date_field: str, qtyVariable: str,
+                        countVariable: str, prediction_results_path: str, filterVariable: str = [],
+                        samplingInterval: str = &#39;week&#39;):
+    &#34;&#34;&#34;
+    Predict using SARIMA
+
+    Args:
+        D_time (pd.DataFrame): Input DataFrame.
+        date_field (str): column name with timestamps.
+        qtyVariable (str): column name with quantities.
+        countVariable (str): coulm name with count variable.
+        prediction_results_path (str): path to save results.
+        filterVariable (str, optional): filetring variable. Defaults to [].
+        samplingInterval (str, optional): sampling interval. Defaults to &#39;week&#39;.
+
+    Returns:
+        pd.DataFrame: results DataFrame.
+
+    &#34;&#34;&#34;
+
+    def _nestedPredictionSARIMA(D_results, ss, nomecartella):
+        # create folder with results
+        current_dir_results = os.path.join(prediction_results_path, f&#34;{str(nomecartella)}&#34;)
+        os.makedirs(current_dir_results, exist_ok=True)
+
+        print(f&#34;***********{ss}*************&#34;)
+        if len(ss) &gt; 0:
+            D_series = D_time[D_time[filterVariable] == ss]
+        else:
+            D_series = D_time
+
+        # save report txt
+        file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;w&#34;)
+        file.write(f&#34;{str(date.datetime.now())} STARTING PREDICTIONS \r&#34;)
+        file.close()
+
+        # set initial
+        tot_qty = np.nansum(D_series[qtyVariable])
+        tot_lns = np.nansum(D_series[countVariable])
+        QTY_STATIONARY_TRANSFORM = &#39;&#39;
+        QTY_SARIMA_MODEL = &#39;&#39;
+        QTY_SARIMA_ACCURACY = &#39;&#39;
+        LNS_STATIONARY_TRANSFORM = &#39;&#39;
+        LNS_SARIMA_MODEL = &#39;&#39;
+        LNS_SARIMA_ACCURACY = &#39;&#39;
+
+        if len(D_series) &gt;= 12:  # I need at least 12 points (e.g. 1 year expressed in  months)
+
+            # predict quantities
+            stationary_model, fig_CF, figure_forecast, figure_residuals, resultModel = predictWithARIMA(D_series,
+                                                                                                        seriesVariable=qtyVariable,
+                                                                                                        samplingInterval=samplingInterval,
+                                                                                                        date_field=date_field,
+                                                                                                        signifAlpha=0.05,
+                                                                                                        maxValuesSelected=2)
+
+            if len(stationary_model) &gt; 0:
+                # save figures
+                fig_CF.get_figure().savefig(f&#34;{current_dir_results}\\{ss}_quantities_CF.png&#34;)
+                figure_forecast.savefig(f&#34;{current_dir_results}\\{ss}_quantities_ARIMA_forecast.png&#34;)
+                figure_residuals.savefig(f&#34;{current_dir_results}\\{ss}_quantities_ARIMA_residuals.png&#34;)
+                plt.close(&#39;all&#39;)
+
+                # save params
+                QTY_STATIONARY_TRANSFORM = stationary_model
+                QTY_SARIMA_MODEL = str({&#39;p&#39;: resultModel[&#39;p&#39;],
+                                        &#39;d&#39;: resultModel[&#39;d&#39;],
+                                        &#39;q&#39;: resultModel[&#39;q&#39;]})
+                QTY_SARIMA_ACCURACY = resultModel[&#39;aic&#39;]
+
+                # save report txt
+                file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+                file.write(f&#34;{str(date.datetime.now())} quantities: Predictions built\r&#34;)
+                file.close()
+            else:
+                # save report txt
+                file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+                file.write(f&#34;{str(date.datetime.now())} quantities: no stationary series, no ARIMA Predictions built\r&#34;)
+                file.close()
+
+            # predict lines
+            stationary_model, fig_CF, figure_forecast, figure_residuals, resultModel = predictWithARIMA(D_series,
+                                                                                                        seriesVariable=countVariable,
+                                                                                                        samplingInterval=samplingInterval,
+                                                                                                        date_field=date_field,
+                                                                                                        signifAlpha=0.05,
+                                                                                                        maxValuesSelected=2)
+
+            if len(stationary_model) &gt; 0:  # if predictions were ok
+                # save figures
+                fig_CF.get_figure().savefig(f&#34;{current_dir_results}\\{ss}_lines_CF.png&#34;)
+                figure_forecast.savefig(f&#34;{current_dir_results}\\{ss}_lines_ARIMA_forecast.png&#34;)
+                figure_residuals.savefig(f&#34;{current_dir_results}\\{ss}_lines_ARIMA_residuals.png&#34;)
+                plt.close(&#39;all&#39;)
+
+                LNS_STATIONARY_TRANSFORM = stationary_model
+                LNS_SARIMA_MODEL = str({&#39;p&#39;: resultModel[&#39;p&#39;],
+                                        &#39;d&#39;: resultModel[&#39;d&#39;],
+                                        &#39;q&#39;: resultModel[&#39;q&#39;]})
+                LNS_SARIMA_ACCURACY = resultModel[&#39;aic&#39;]
+
+                # save report txt
+                file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+                file.write(f&#34;{str(date.datetime.now())} lines: Predictions built\r&#34;)
+                file.close()
+            else:
+                # save report txt
+                file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;a&#34;)
+                file.write(f&#34;{str(date.datetime.now())} lines: no stationary series, no ARIMA Predictions built\r&#34;)
+                file.close()
+
+        else:
+
+            # save report txt
+            file = open(f&#34;{current_dir_results}\\{reportFilename}.txt&#34;, &#34;w&#34;)
+            file.write(f&#34;{str(date.datetime.now())} Not ehough input points to build a time series\r&#34;)
+            file.close()
+
+        # append results to dataframe
+        D_results = D_results.append(pd.DataFrame([[ss, tot_qty, tot_lns, QTY_STATIONARY_TRANSFORM, QTY_SARIMA_MODEL,
+                                                    QTY_SARIMA_ACCURACY, LNS_STATIONARY_TRANSFORM, LNS_SARIMA_MODEL,
+                                                    LNS_SARIMA_ACCURACY]], columns=D_results.columns))
+        return D_results
+
+    reportFilename = &#39;report_SARIMA&#39;
+
+    resultscolumn = [&#39;SERVICETYPE&#39;, &#39;QUANTITIES&#39;, &#39;LINES&#39;, &#39;QTY_STATIONARY_TRANSFORM&#39;,
+                     &#39;QTY_SARIMA_MODEL&#39;, &#39;QTY_SARIMA_ACCURACY&#39;, &#39;LNS_STATIONARY_TRANSFORM&#39;,
+                     &#39;LNS_SARIMA_MODEL&#39;, &#39;LNS_SARIMA_ACCURACY&#39;]
+
+    D_results = pd.DataFrame(columns=resultscolumn)
+
+    # define global trends
+    D_results = _nestedPredictionSARIMA(D_results, [], nomecartella=&#39;globalResults&#39;)
+
+    if len(filterVariable) &gt; 0:
+        # scan product families
+        st = list(set(D_time[filterVariable]))
+
+        for ss in st:
+            # ss=&#39;zz&#39;
+            try:
+                D_results = _nestedPredictionSARIMA(D_results, ss, nomecartella=ss)
+            except Exception as e:
+                print(f&#34;*=*=*=*=*=*=ERROR*=*=*= {e}&#34;)
+
+    # SAVE dataframe results
+    D_results.to_excel(f&#34;{prediction_results_path}\\pred_results_SARIMA.xlsx&#34;)
+    return True</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P9_workload_prediction.demand_predicter.predictWithARIMA"><code class="name flex">
+<span>def <span class="ident">predictWithARIMA</span></span>(<span>D_series: pandas.core.frame.DataFrame, seriesVariable: str, samplingInterval: str = 'week', date_field: str = 'TIMESTAMP_IN', titolo: str = '', signifAlpha: float = 0.05, maxValuesSelected: int = 2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>applies predictions using ARIMA models</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_series</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataFrame.</dd>
+<dt><strong><code>seriesVariable</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the name of the column containing the series.</dd>
+<dt><strong><code>samplingInterval</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>if week it groups the series for week. Defaults to 'week'.</dd>
+<dt><strong><code>date_field</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string with the name of the column containing the datetime series. Defaults to 'TIMESTAMP_IN'.</dd>
+<dt><strong><code>titolo</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>title fo the figure. Defaults to ''.</dd>
+<dt><strong><code>signifAlpha</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller. Defaults to 0.05.</dd>
+<dt><strong><code>maxValuesSelected</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>number of significant lags to consider in ACF and PACF. Defaults to 2.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>TYPE</code></dt>
+<dd>fig_CF with the PACF and ACF figure.</dd>
+<dt><code>TYPE</code></dt>
+<dd>figure_forecast the forecast figure.</dd>
+<dt><code>TYPE</code></dt>
+<dd>figure_residuals the residual figure.</dd>
+<dt><code>TYPE</code></dt>
+<dd>resultModel the model resulting parameters.</dd>
+<dt><code>TYPE</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def predictWithARIMA(D_series: pd.DataFrame, seriesVariable: str, samplingInterval: str = &#39;week&#39;,
+                     date_field: str = &#39;TIMESTAMP_IN&#39;, titolo: str = &#39;&#39;, signifAlpha: float = 0.05,
+                     maxValuesSelected: int = 2):
+    &#34;&#34;&#34;
+    applies predictions using ARIMA models
+
+    Args:
+        D_series (pd.DataFrame): Input dataFrame.
+        seriesVariable (str): string with the name of the column containing the series.
+        samplingInterval (str, optional): if week it groups the series for week. Defaults to &#39;week&#39;.
+        date_field (str, optional): string with the name of the column containing the datetime series. Defaults to &#39;TIMESTAMP_IN&#39;.
+        titolo (str, optional): title fo the figure. Defaults to &#39;&#39;.
+        signifAlpha (float, optional): significance level (0.1 , 0.05, 0.01) to accept or reject the null hypothesis of Dickey fuller. Defaults to 0.05.
+        maxValuesSelected (int, optional): number of significant lags to consider in ACF and PACF. Defaults to 2.
+
+    Returns:
+        TYPE: fig_CF with the PACF and ACF figure.
+        TYPE: figure_forecast the forecast figure.
+        TYPE: figure_residuals the residual figure.
+        TYPE: resultModel the model resulting parameters.
+        TYPE: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # extract time series
+    timeSeries = pd.DataFrame(D_series[[date_field, seriesVariable]])
+    timeSeries_analysis = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
+    timeSeries_analysis[date_field] = timeSeries_analysis.index.values
+
+    if samplingInterval == &#39;month&#39;:
+        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;week&#39;:
+        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+    elif samplingInterval == &#39;day&#39;:
+        timeSeries_analysis = timeSeries_analysis[seriesVariable]
+
+    # transform series to stationarity
+    seriesVariable = &#39;count_TIMESTAMP_IN&#39;
+    stationary_series, stationary_model = ts.transformSeriesToStationary(timeSeries_analysis, signifAlpha=signifAlpha)
+
+    # if transformed, then go on
+    if len(stationary_series) &gt; 1:
+
+        # detect ACF and PACF
+        fig_CF, D_acf_significant, D_pacf_significant = ts.ACF_PACF_plot(stationary_series)
+        params = ts.returnsignificantLags(D_pacf_significant, D_acf_significant, maxValuesSelected)
+
+        # Running ARIMA fit, consider that
+        figure_forecast, figure_residuals, resultModel = ts.SARIMAXfit(stationary_series, params)
+
+        return stationary_model, fig_CF, figure_forecast, figure_residuals, resultModel
+    else:  # cannot make the series stationary, cannot use ARIMA
+        return [], [], [], [], []</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction" href="index.html">analogistics.supply_chain.P9_workload_prediction</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.demand_predicter.LOOP_PREDICT_SARIMA" href="#analogistics.supply_chain.P9_workload_prediction.demand_predicter.LOOP_PREDICT_SARIMA">LOOP_PREDICT_SARIMA</a></code></li>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.demand_predicter.predictWithARIMA" href="#analogistics.supply_chain.P9_workload_prediction.demand_predicter.predictWithARIMA">predictWithARIMA</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

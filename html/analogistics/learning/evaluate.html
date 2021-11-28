@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.learning.evaluate API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.learning.evaluate</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.preprocessing import scale
+from sklearn import tree
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+
+
+def plot_confusion_matrix_fromAvecm(ave_cm,
+                                    classes: list,
+                                    normalize: bool = True,
+                                    title: str = None,
+                                    cmap: plt.cm = plt.cm.Blues) -&gt; plt.Figure:
+    &#34;&#34;&#34;
+    This function prints and plots the confusion matrix from an average-precomputed confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+
+    Args:
+        ave_cm (TYPE): DESCRIPTION.
+        classes (list): DESCRIPTION.
+        normalize (bool, optional): DESCRIPTION. Defaults to True.
+        title (str, optional): DESCRIPTION. Defaults to None.
+        cmap (plt.cm, optional): DESCRIPTION. Defaults to plt.cm.Blues.
+
+    Returns:
+        fig (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    if not title:
+        if normalize:
+            title = &#39;Normalized confusion matrix&#39;
+        else:
+            title = &#39;Confusion matrix, without normalization&#39;
+
+    # Compute confusion matrix
+    cm = ave_cm
+
+    # Only use the labels that appear in the data
+    # classes = classes[unique_labels(y_true, y_pred)]
+    if normalize:
+        cm = cm.astype(&#39;float&#39;) / cm.sum(axis=1)[:, np.newaxis]
+        print(&#34;Normalized confusion matrix&#34;)
+    else:
+        print(&#39;Confusion matrix, without normalization&#39;)
+
+    print(cm)
+
+    fig, ax = plt.subplots()
+    im = ax.imshow(cm, interpolation=&#39;nearest&#39;, cmap=cmap)
+    ax.figure.colorbar(im, ax=ax)
+    # We want to show all ticks...
+    ax.set(xticks=np.arange(cm.shape[1]),
+           yticks=np.arange(cm.shape[0]),
+           # ... and label them with the respective list entries
+           xticklabels=classes, yticklabels=classes,
+           title=title,
+           ylabel=&#39;True label&#39;,
+           xlabel=&#39;Predicted label&#39;)
+
+    # Rotate the tick labels and set their alignment.
+    plt.setp(ax.get_xticklabels(), rotation=45, ha=&#34;right&#34;,
+             rotation_mode=&#34;anchor&#34;)
+
+    # Loop over data dimensions and create text annotations.
+    fmt = &#39;.2f&#39; if normalize else &#39;d&#39;
+    thresh = cm.max() / 2.
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            ax.text(j, i, format(cm[i, j], fmt),
+                    ha=&#34;center&#34;, va=&#34;center&#34;,
+                    color=&#34;white&#34; if cm[i, j] &gt; thresh else &#34;black&#34;)
+    fig.tight_layout()
+    return fig
+
+
+def analyseClassificationCoefficients(X: pd.DataFrame,
+                                      y: pd.Series,
+                                      D_learning_results: pd.DataFrame,
+                                      outputPath: str) -&gt; dict:
+    &#34;&#34;&#34;
+    This function evaluates the importance coefficients of the input features of a model
+
+    Args:
+        X (pd.DataFrame): Input pandas dataFrame.
+        y (pd.Series): Input pandas series sith target label.
+        D_learning_results (pd.DataFrame): Results dataframe obstained from a grid search (analytics.learning.grids).
+        outputPath (str): Output filename path to save the results.
+
+    Returns:
+        dict: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    output_figures = {}
+    # define the confusion matrix
+    x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
+
+    for index, row in D_learning_results.iterrows():
+
+        y_pred = row[&#39;MODEL&#39;].predict(x_test)
+        cm = confusion_matrix(y_test, y_pred)
+
+        # plot the confusion matrix
+        fig = plt.figure(figsize=(9, 9))
+        ax = fig.gca()
+        sns.heatmap(cm, annot=True, fmt=&#34;.3f&#34;, linewidths=.5, square=True, cmap=&#39;Blues_r&#39;)
+        plt.ylabel(&#39;Actual label&#39;)
+        plt.xlabel(&#39;Predicted label&#39;)
+        ax.set(xticks=np.arange(cm.shape[1]),
+               yticks=np.arange(cm.shape[0]))
+        ax.set_xticklabels(labels=row[&#39;MODEL&#39;].classes_, rotation=45)
+        ax.set_yticklabels(labels=row[&#39;MODEL&#39;].classes_, rotation=45)
+
+        all_sample_title = &#39;Accuracy Score: {0}&#39;.format(np.round(row[&#39;SCORE_TEST&#39;], 2))
+        plt.title(f&#34;Model: {row[&#39;MODEL_NAME&#39;]}, {all_sample_title}&#34;, size=15)
+        output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_confusionMatrix&#34;] = fig
+
+        # analyse output for QDA
+        if row[&#39;MODEL_NAME&#39;] == &#39;quadratic_discriminant_analysis&#39;:
+            # Print the mean for each class
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # extract coefficients riprendere da qui
+            fig = plt.figure(figsize=(12, 10))
+            means = row[&#39;MODEL&#39;].means_
+
+            means_scaled = scale(means)
+
+            plt.imshow(means_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;QDA means per class&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_means&#34;] = fig
+
+        # analyse output for LDA
+        elif row[&#39;MODEL_NAME&#39;] == &#39;linear_discriminant_analysis&#39;:
+            # Print coefficients
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # extract coefficients riprendere da qui
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].coef_
+
+            coefficients_scaled = scale(coefficients)
+
+            plt.imshow(coefficients_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;LDA coefficients&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_coefficients&#34;] = fig
+
+        # analyse output for logistic regression
+        elif row[&#39;MODEL_NAME&#39;] == &#39;logistic_regression&#39;:
+            # Print coefficients
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # extract coefficients riprendere da qui
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].coef_
+
+            coefficients_scaled = scale(coefficients)
+
+            plt.imshow(coefficients_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;Logistic regression coefficients&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_coefficients&#34;] = fig
+        elif row[&#39;MODEL_NAME&#39;] == &#39;naive bayes&#39;:
+
+            # Print coefficients
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # print variance
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].sigma_
+
+            coefficients_scaled = scale(coefficients)
+
+            plt.imshow(coefficients_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;Naive bayes sigma&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_sigma&#34;] = fig
+
+            # print mean
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].theta_
+
+            coefficients_scaled = scale(coefficients)
+
+            plt.imshow(coefficients_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;Naive bayes theta&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_theta&#34;] = fig
+
+        elif row[&#39;MODEL_NAME&#39;] == &#39;decision tree&#39;:
+
+            # Print coefficients
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # print variance
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].feature_importances_
+
+            # coefficients_scaled = scale(coefficients)
+
+            plt.bar(features_list, coefficients)
+            ax = fig.gca()
+
+            # set xticks
+            # ax.set_xticks(range(0,len(features_list)))
+            ax.set_xticklabels(features_list, rotation=45)
+
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Feature importance&#39;)
+            plt.title(&#39;Decision tree Gini importance&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_Gini&#34;] = fig
+
+            # save the decision tree
+            dotfile = open(f&#34;{outputPath}//dt.dot&#34;, &#39;w&#39;)
+            tree.export_graphviz(row[&#39;MODEL&#39;],
+                                 out_file=dotfile,
+                                 feature_names=features_list,
+                                 class_names=row[&#39;MODEL&#39;].classes_,
+                                 rounded=True,
+                                 proportion=False,
+                                 precision=2,
+                                 filled=True)
+            dotfile.close()
+
+            # http://webgraphviz.com/
+
+        else:
+            print(f&#34;{row[&#39;MODEL_NAME&#39;]}, model not considered&#34;)
+    return output_figures</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.learning.evaluate.analyseClassificationCoefficients"><code class="name flex">
+<span>def <span class="ident">analyseClassificationCoefficients</span></span>(<span>X: pandas.core.frame.DataFrame, y: pandas.core.series.Series, D_learning_results: pandas.core.frame.DataFrame, outputPath: str) -> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function evaluates the importance coefficients of the input features of a model</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas dataFrame.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>Input pandas series sith target label.</dd>
+<dt><strong><code>D_learning_results</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Results dataframe obstained from a grid search (analytics.learning.grids).</dd>
+<dt><strong><code>outputPath</code></strong> :&ensp;<code>str</code></dt>
+<dd>Output filename path to save the results.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyseClassificationCoefficients(X: pd.DataFrame,
+                                      y: pd.Series,
+                                      D_learning_results: pd.DataFrame,
+                                      outputPath: str) -&gt; dict:
+    &#34;&#34;&#34;
+    This function evaluates the importance coefficients of the input features of a model
+
+    Args:
+        X (pd.DataFrame): Input pandas dataFrame.
+        y (pd.Series): Input pandas series sith target label.
+        D_learning_results (pd.DataFrame): Results dataframe obstained from a grid search (analytics.learning.grids).
+        outputPath (str): Output filename path to save the results.
+
+    Returns:
+        dict: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    output_figures = {}
+    # define the confusion matrix
+    x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
+
+    for index, row in D_learning_results.iterrows():
+
+        y_pred = row[&#39;MODEL&#39;].predict(x_test)
+        cm = confusion_matrix(y_test, y_pred)
+
+        # plot the confusion matrix
+        fig = plt.figure(figsize=(9, 9))
+        ax = fig.gca()
+        sns.heatmap(cm, annot=True, fmt=&#34;.3f&#34;, linewidths=.5, square=True, cmap=&#39;Blues_r&#39;)
+        plt.ylabel(&#39;Actual label&#39;)
+        plt.xlabel(&#39;Predicted label&#39;)
+        ax.set(xticks=np.arange(cm.shape[1]),
+               yticks=np.arange(cm.shape[0]))
+        ax.set_xticklabels(labels=row[&#39;MODEL&#39;].classes_, rotation=45)
+        ax.set_yticklabels(labels=row[&#39;MODEL&#39;].classes_, rotation=45)
+
+        all_sample_title = &#39;Accuracy Score: {0}&#39;.format(np.round(row[&#39;SCORE_TEST&#39;], 2))
+        plt.title(f&#34;Model: {row[&#39;MODEL_NAME&#39;]}, {all_sample_title}&#34;, size=15)
+        output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_confusionMatrix&#34;] = fig
+
+        # analyse output for QDA
+        if row[&#39;MODEL_NAME&#39;] == &#39;quadratic_discriminant_analysis&#39;:
+            # Print the mean for each class
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # extract coefficients riprendere da qui
+            fig = plt.figure(figsize=(12, 10))
+            means = row[&#39;MODEL&#39;].means_
+
+            means_scaled = scale(means)
+
+            plt.imshow(means_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;QDA means per class&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_means&#34;] = fig
+
+        # analyse output for LDA
+        elif row[&#39;MODEL_NAME&#39;] == &#39;linear_discriminant_analysis&#39;:
+            # Print coefficients
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # extract coefficients riprendere da qui
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].coef_
+
+            coefficients_scaled = scale(coefficients)
+
+            plt.imshow(coefficients_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;LDA coefficients&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_coefficients&#34;] = fig
+
+        # analyse output for logistic regression
+        elif row[&#39;MODEL_NAME&#39;] == &#39;logistic_regression&#39;:
+            # Print coefficients
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # extract coefficients riprendere da qui
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].coef_
+
+            coefficients_scaled = scale(coefficients)
+
+            plt.imshow(coefficients_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;Logistic regression coefficients&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_coefficients&#34;] = fig
+        elif row[&#39;MODEL_NAME&#39;] == &#39;naive bayes&#39;:
+
+            # Print coefficients
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # print variance
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].sigma_
+
+            coefficients_scaled = scale(coefficients)
+
+            plt.imshow(coefficients_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;Naive bayes sigma&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_sigma&#34;] = fig
+
+            # print mean
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].theta_
+
+            coefficients_scaled = scale(coefficients)
+
+            plt.imshow(coefficients_scaled, cmap=&#39;bwr&#39;)
+            ax = fig.gca()
+
+            # set xticks
+            ax.set_xticks(range(0, len(features_list)))
+            ax.set_xticklabels(features_list, rotation=90)
+
+            # set yticks
+            ax.set_yticks(range(0, len(row[&#39;MODEL&#39;].classes_)))
+            ax.set_yticklabels(row[&#39;MODEL&#39;].classes_, rotation=45)
+
+            plt.colorbar()
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Classes&#39;)
+            plt.title(&#39;Naive bayes theta&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_theta&#34;] = fig
+
+        elif row[&#39;MODEL_NAME&#39;] == &#39;decision tree&#39;:
+
+            # Print coefficients
+            # create a dataframe with one row for each feature of X
+            features_list = list(X.columns)
+
+            # print variance
+            fig = plt.figure(figsize=(12, 10))
+            coefficients = row[&#39;MODEL&#39;].feature_importances_
+
+            # coefficients_scaled = scale(coefficients)
+
+            plt.bar(features_list, coefficients)
+            ax = fig.gca()
+
+            # set xticks
+            # ax.set_xticks(range(0,len(features_list)))
+            ax.set_xticklabels(features_list, rotation=45)
+
+            plt.xlabel(&#39;Feature name&#39;)
+            plt.ylabel(&#39;Feature importance&#39;)
+            plt.title(&#39;Decision tree Gini importance&#39;)
+            output_figures[f&#34;{row[&#39;MODEL_NAME&#39;]}_Gini&#34;] = fig
+
+            # save the decision tree
+            dotfile = open(f&#34;{outputPath}//dt.dot&#34;, &#39;w&#39;)
+            tree.export_graphviz(row[&#39;MODEL&#39;],
+                                 out_file=dotfile,
+                                 feature_names=features_list,
+                                 class_names=row[&#39;MODEL&#39;].classes_,
+                                 rounded=True,
+                                 proportion=False,
+                                 precision=2,
+                                 filled=True)
+            dotfile.close()
+
+            # http://webgraphviz.com/
+
+        else:
+            print(f&#34;{row[&#39;MODEL_NAME&#39;]}, model not considered&#34;)
+    return output_figures</code></pre>
+</details>
+</dd>
+<dt id="analogistics.learning.evaluate.plot_confusion_matrix_fromAvecm"><code class="name flex">
+<span>def <span class="ident">plot_confusion_matrix_fromAvecm</span></span>(<span>ave_cm, classes: list, normalize: bool = True, title: str = None, cmap: <module 'matplotlib.cm' from 'C:\\Users\\aletu\\.conda\\envs\\analogistics3\\lib\\site-packages\\matplotlib\\cm.py'> = &lt;matplotlib.colors.LinearSegmentedColormap object&gt;) -> matplotlib.figure.Figure</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function prints and plots the confusion matrix from an average-precomputed confusion matrix.
+Normalization can be applied by setting <code>normalize=True</code>.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>ave_cm</code></strong> :&ensp;<code>TYPE</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>classes</code></strong> :&ensp;<code>list</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>normalize</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>DESCRIPTION. Defaults to True.</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>DESCRIPTION. Defaults to None.</dd>
+<dt><strong><code>cmap</code></strong> :&ensp;<code>plt.cm</code>, optional</dt>
+<dd>DESCRIPTION. Defaults to plt.cm.Blues.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_confusion_matrix_fromAvecm(ave_cm,
+                                    classes: list,
+                                    normalize: bool = True,
+                                    title: str = None,
+                                    cmap: plt.cm = plt.cm.Blues) -&gt; plt.Figure:
+    &#34;&#34;&#34;
+    This function prints and plots the confusion matrix from an average-precomputed confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+
+    Args:
+        ave_cm (TYPE): DESCRIPTION.
+        classes (list): DESCRIPTION.
+        normalize (bool, optional): DESCRIPTION. Defaults to True.
+        title (str, optional): DESCRIPTION. Defaults to None.
+        cmap (plt.cm, optional): DESCRIPTION. Defaults to plt.cm.Blues.
+
+    Returns:
+        fig (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    if not title:
+        if normalize:
+            title = &#39;Normalized confusion matrix&#39;
+        else:
+            title = &#39;Confusion matrix, without normalization&#39;
+
+    # Compute confusion matrix
+    cm = ave_cm
+
+    # Only use the labels that appear in the data
+    # classes = classes[unique_labels(y_true, y_pred)]
+    if normalize:
+        cm = cm.astype(&#39;float&#39;) / cm.sum(axis=1)[:, np.newaxis]
+        print(&#34;Normalized confusion matrix&#34;)
+    else:
+        print(&#39;Confusion matrix, without normalization&#39;)
+
+    print(cm)
+
+    fig, ax = plt.subplots()
+    im = ax.imshow(cm, interpolation=&#39;nearest&#39;, cmap=cmap)
+    ax.figure.colorbar(im, ax=ax)
+    # We want to show all ticks...
+    ax.set(xticks=np.arange(cm.shape[1]),
+           yticks=np.arange(cm.shape[0]),
+           # ... and label them with the respective list entries
+           xticklabels=classes, yticklabels=classes,
+           title=title,
+           ylabel=&#39;True label&#39;,
+           xlabel=&#39;Predicted label&#39;)
+
+    # Rotate the tick labels and set their alignment.
+    plt.setp(ax.get_xticklabels(), rotation=45, ha=&#34;right&#34;,
+             rotation_mode=&#34;anchor&#34;)
+
+    # Loop over data dimensions and create text annotations.
+    fmt = &#39;.2f&#39; if normalize else &#39;d&#39;
+    thresh = cm.max() / 2.
+    for i in range(cm.shape[0]):
+        for j in range(cm.shape[1]):
+            ax.text(j, i, format(cm[i, j], fmt),
+                    ha=&#34;center&#34;, va=&#34;center&#34;,
+                    color=&#34;white&#34; if cm[i, j] &gt; thresh else &#34;black&#34;)
+    fig.tight_layout()
+    return fig</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.learning" href="index.html">analogistics.learning</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.learning.evaluate.analyseClassificationCoefficients" href="#analogistics.learning.evaluate.analyseClassificationCoefficients">analyseClassificationCoefficients</a></code></li>
+<li><code><a title="analogistics.learning.evaluate.plot_confusion_matrix_fromAvecm" href="#analogistics.learning.evaluate.plot_confusion_matrix_fromAvecm">plot_confusion_matrix_fromAvecm</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

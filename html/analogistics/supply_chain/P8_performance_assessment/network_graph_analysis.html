@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P8_performance_assessment.network_graph_analysis API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P8_performance_assessment.network_graph_analysis</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+import numpy as np
+import osmnx as ox
+import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly.graph_objects as go
+import pandas as pd
+import networkx as nx
+import ast
+
+from analogistics.statistics import time_series as ts
+from analogistics.clean import cleanUsingIQR
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+
+
+def networkRaysPlot(D_mov: pd.DataFrame, timecol: str, lonCol_to: str, latCol_to: str,
+                    lonCol_from: str, latCol_from: str,
+                    G: nx.Graph, capacityField: str = &#39;QUANTITY&#39;, sampleInterval: str = &#39;week&#39;,):
+    &#39;&#39;&#39;
+    the function plot rays on a graph G to represent the flow of a supply chain network
+
+    D_mov is the input dataframe
+    timecol is the column string with timestamp information
+    lonCol_to is the column with the longitude of the origin points
+    latCol_to is the column with the latitude of the origin points
+    lonCol_from is the column with the longitude of the origin points
+    latCol_from is the column with the latitude of the origin points
+    G is a network graph to plot in background
+    capacityField is a field of capacity to calculate coverages
+    sampleInterval is the sampling interval od D_mov: day, week, month, year
+    &#39;&#39;&#39;
+
+    output_figure = {}
+    output_coverages = {}
+
+    D_mov[&#39;TIME_PERIOD&#39;] = ts.sampleTimeSeries(D_mov[timecol], sampleInterval)
+
+    # get coverages
+    analysisFieldList = [lonCol_to, latCol_to, lonCol_from, latCol_from]
+    outputCoverages, _ = getCoverageStats(D_mov, analysisFieldList, capacityField=capacityField)
+    outputCoverages = pd.DataFrame(outputCoverages)
+    output_coverages[f&#34;Network_rays_{sampleInterval}&#34;] = outputCoverages
+
+    # group movements
+    D_groupFlows = D_mov.groupby([&#39;TIME_PERIOD&#39;, lonCol_to, latCol_to, lonCol_from, latCol_from]).size().reset_index()
+    D_groupFlows[&#39;FLOW_NORM&#39;] = (0.0001 + D_groupFlows[0] - min(D_groupFlows[0])) / (max(D_groupFlows[0]) - min(D_groupFlows[0])) * 3
+
+    # plot figures
+    D_groupFlows = D_groupFlows.sort_values(by=&#39;TIME_PERIOD&#39;)
+    for period in D_groupFlows[&#39;TIME_PERIOD&#39;].drop_duplicates():
+        D_groupFlows_filtered = D_groupFlows[D_groupFlows[&#39;TIME_PERIOD&#39;] == period]
+
+        # if a road network graph is given, then plot it
+        if G == []:
+            fig1 = plt.figure()
+            ax = fig1.gca()
+        else:
+            fig1, ax = ox.plot_graph(G, bgcolor=&#39;k&#39;,
+                                     node_size=1, node_color=&#39;#999999&#39;,
+                                     node_edgecolor=&#39;none&#39;, node_zorder=2,
+                                     edge_color=&#39;#555555&#39;, edge_linewidth=0.5,
+                                     edge_alpha=1, show=False)
+            plt.legend([&#39;Node&#39;, &#39;Edges&#39;])
+
+        # represent the rays
+        for i in range(0, len(D_groupFlows_filtered)):
+            x_from = D_groupFlows_filtered[lonCol_from].iloc[i]
+            y_from = D_groupFlows_filtered[latCol_from].iloc[i]
+            x_to = D_groupFlows_filtered[lonCol_to].iloc[i]
+            y_to = D_groupFlows_filtered[latCol_to].iloc[i]
+            c = D_groupFlows_filtered[&#39;FLOW_NORM&#39;].iloc[i]
+
+            ax.plot([x_from, x_to], [y_from, y_to], color=&#39;orange&#39;, linewidth=c)
+            ax.set_title(f&#34;Network rays {period}&#34;)
+
+            fig1 = ax.figure
+            fig1.show()
+            output_figure[f&#34;Network_rays_{sampleInterval}_{period}&#34;] = fig1
+            plt.close(&#39;all&#39;)
+    return output_figure, output_coverages
+
+
+def networkRoadsRoutePlot(D_arcs: pd.DataFrame, lonCol_from: str, latCol_from: str,
+                          latCol_to: str, lonCol_to: str, G: nx.Graph):
+    &#34;&#34;&#34;
+    Define a road graoh highlighting the travelled arcs
+
+    Args:
+        D_arcs (pd.DataFrame): dataframe containing one row for each arc travelled.
+        lonCol_from (str): column with the longitude of the origin points.
+        latCol_from (str): column with the latitude of the origin points.
+        latCol_to (str): column with the longitude of the origin points.
+        lonCol_to (str): column with the latitude of the origin points.
+        G (nx.Graph): network graph to plot on.
+
+    Returns:
+        dict: Output dictionary containing figures.
+
+    &#34;&#34;&#34;
+
+    def _returnDummyColumnsFromList(D: pd.DataFrame, columnName: str):
+        &#39;&#39;&#39;
+        extract the value from a pandas cell where a list is saved
+
+        Parameters
+        ----------
+        D : TYPE pandas dataframe
+            DESCRIPTION.
+        columnName : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        s : TYPE column string name
+            DESCRIPTION.
+
+        &#39;&#39;&#39;
+        x = D[columnName].values
+        # print(x)
+        # print(type(x))
+        newList = []
+        for j in x:
+            for i in j:
+                i = str(i)
+                yyy = i.replace(&#39;nan,&#39;, &#39;&#39;)
+                yyy = yyy.replace(&#39;nan&#39;, &#39;&#39;)
+                newList.append(ast.literal_eval(yyy))
+
+        s = pd.Series(newList)
+        # X_add=pd.get_dummies(s.apply(pd.Series).stack()).sum(level=0)
+        # print(s)
+        return s
+
+    output_figures = {}
+
+    D_arcs_filtered = D_arcs[[lonCol_from, latCol_from, latCol_to, lonCol_to]]
+
+    D_arcs_filtered[lonCol_from] = [k for k in _returnDummyColumnsFromList(D_arcs_filtered, lonCol_from)]
+    D_arcs_filtered[latCol_from] = [k for k in _returnDummyColumnsFromList(D_arcs_filtered, latCol_from)]
+    D_arcs_filtered[latCol_to] = [k for k in _returnDummyColumnsFromList(D_arcs_filtered, latCol_to)]
+    D_arcs_filtered[lonCol_to] = [k for k in _returnDummyColumnsFromList(D_arcs_filtered, lonCol_to)]
+
+    all_variables = [lonCol_from, latCol_from, latCol_to, lonCol_to]
+    for i in range(0, len(D_arcs_filtered)):
+        for variable in all_variables:
+            if isinstance(D_arcs_filtered[variable].iloc[i], float):
+                D_arcs_filtered[variable].iloc[i] = D_arcs_filtered[variable].iloc[i]
+
+            elif isinstance(D_arcs_filtered[variable].iloc[i], list) &amp; len(D_arcs_filtered[variable].iloc[i]) &gt; 0:
+                D_arcs_filtered[variable].iloc[i] = D_arcs_filtered[variable].iloc[i][0]
+            else:
+                D_arcs_filtered[variable].iloc[i] = np.nan
+
+    D_arcs_filtered = D_arcs_filtered.dropna()
+    D_arcs_filtered_grouped = D_arcs_filtered.groupby([lonCol_from, latCol_from,
+                                                       latCol_to, lonCol_to]).size().reset_index()
+
+    routes = []
+    for i in range(0, len(D_arcs_filtered_grouped)):
+        lat_from = D_arcs_filtered_grouped[latCol_from].iloc[i]
+        lon_from = D_arcs_filtered_grouped[lonCol_from].iloc[i]
+        lat_to = D_arcs_filtered_grouped[latCol_to].iloc[i]
+        lon_to = D_arcs_filtered_grouped[lonCol_to].iloc[i]
+
+        # find closest node
+        node_from = ox.get_nearest_node(G, (lat_from, lon_from), method=&#39;euclidean&#39;)
+        node_to = ox.get_nearest_node(G, (lat_to, lon_to), method=&#39;euclidean&#39;)
+
+        # calculate shortest paths for the 2 routes
+        route = nx.shortest_path(G, node_from, node_to, weight=&#39;length&#39;)
+        routes.append(route)
+    fig, ax = ox.plot_graph_routes(G, routes, route_color=&#39;orange&#39;, route_linewidth=3,
+                                   node_size=0,
+                                   orig_dest_node_size=0)
+
+    output_figures[&#39;Network arcs&#39;] = fig
+    return output_figures
+
+
+def supplyChainMap(D_table: pd.DataFrame, latCol: str, lonCol: str,
+                   descrCol: str, color: str, size: str, cleanOutliers: bool = False):
+    &#34;&#34;&#34;
+    Represents the nodes of a supply Chain Network on a map
+
+    Args:
+        D_table (pd.DataFrame): input dataframe.
+        latCol (str): string of the column with latitudes.
+        lonCol (str): string of the column with longitudes.
+        descrCol (str): string of the column with the description of a node.
+        color (str): string of the column with different values for different colors.
+        size (str): string of the column with the size of a node.
+        cleanOutliers (bool, optional): if True to clean outliers using IQR. Defaults to False.
+
+    Returns:
+        fig (dict): Output dictionary containing figures.
+        output_coverages (dict): Output dictionary containing coverage statistics.
+
+    &#34;&#34;&#34;
+
+    output_coverages = {}
+
+    analysisFieldList = [latCol, lonCol]
+    outputCoverages, _ = getCoverageStats(D_table, analysisFieldList, capacityField=size)
+    if cleanOutliers:
+        D_table, coverages, = cleanUsingIQR(D_table, [latCol, lonCol])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+    fig = px.scatter_mapbox(D_table, lat=latCol, lon=lonCol,
+                            hover_name=descrCol, size=size, color=color)
+    fig.update_layout(mapbox_style=&#34;open-street-map&#34;)
+
+    return fig, output_coverages
+
+
+def supplyChainCentersOfMass(D_plant: pd.DataFrame, D_mov: pd.DataFrame,
+                             latCol_plant: str, lonCol_plant: str,
+                             node_from: str, node_to: str, lonCol_to: str, latCol_to: str,
+                             capacityField: str = &#39;QUANTITY&#39;, cleanOutliers: bool = False):
+    &#34;&#34;&#34;
+    Represents the center of mass of a supply chain. Represent the plant of the network and the center of mass considering
+    latitude and longitude of the other nodes of the network. The assignment
+    of nodes and plants is based on the movement dataframe D_mov
+
+    Args:
+        D_plant (pd.DataFrame): dataframe with plant information.
+        D_mov (pd.DataFrame): dataframe with movements information.
+        latCol_plant (str): string of the column with the plant latitude.
+        lonCol_plant (str): string of the column with the plant longitude.
+        node_from (str): string of the column with the node code from in D_mov.
+        node_to (str): string of the column with the node code from in D_mov.
+        lonCol_to (str): string of the column with the discharging node longitude in D_mov.
+        latCol_to (str): string of the column with the discharging node latitude in D_mov.
+        capacityField (str, optional): sting of the column with the quantity handled. Defaults to &#39;QUANTITY&#39;.
+        cleanOutliers (bool, optional): if True to clean outliers using IQR. Defaults to False.
+
+    Returns:
+        fig (dict): Output dictionary containing figures.
+        output_coverages (dict): Output dictionary containing coverage statistics.
+
+    &#34;&#34;&#34;
+
+    output_coverages = {}
+
+    # get coverages and clean outliers
+    analysisFieldList = [node_from, node_to, lonCol_to, latCol_to]
+    outputCoverages, _ = getCoverageStats(D_mov, analysisFieldList, capacityField=capacityField)
+    D_mov_filtered = D_mov.dropna(subset=analysisFieldList)
+
+    if cleanOutliers:
+        D_mov_filtered, coverages, = cleanUsingIQR(D_mov_filtered, [lonCol_to, latCol_to])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+
+    # calculate the center of mass
+    D_plant[&#39;lon_ave&#39;] = D_plant[&#39;lat_ave&#39;] = np.nan
+    for index, row in D_plant.iterrows():
+
+        D_table_plant = D_mov_filtered[D_mov_filtered[node_from] == row[&#39;_id&#39;]]
+        lon_ave = np.nanmean(D_table_plant[lonCol_to])
+        lat_ave = np.nanmean(D_table_plant[latCol_to])
+        D_plant[&#39;lon_ave&#39;].loc[index] = lon_ave
+        D_plant[&#39;lat_ave&#39;].loc[index] = lat_ave
+
+    fig = go.Figure(go.Scattermapbox(lat=D_plant[latCol_plant],
+                                     lon=D_plant[lonCol_plant],
+                                     mode=&#39;markers&#39;,
+                                     marker=go.scattermapbox.Marker(size=14,
+                                                                    color=&#39;blue&#39;
+                                                                    ),
+                                     text=&#39;ASIS&#39;,
+                                     name=&#39;Actual Plants&#39;
+                                     ))
+
+    fig.add_trace(go.Scattermapbox(
+                  lat=D_plant[&#39;lat_ave&#39;],
+                  lon=D_plant[&#39;lon_ave&#39;],
+                  mode=&#39;markers&#39;,
+                  marker=go.scattermapbox.Marker(size=14,
+                                                 color=&#39;red&#39;,
+                                                 # symbol=&#39;cross&#39;
+                                                 ),
+                  text=&#34;CENTER OF MASS&#34;,
+                  name=&#39;Centers of mass&#39;
+                  )
+                  )
+    # represent the covering for each plant
+    D_covering = D_mov_filtered.groupby([node_from, node_to, latCol_to, lonCol_to]).size().reset_index()
+    D_covering[node_from] = D_covering[node_from].astype(str)
+    fig_nodes = supplyChainMap(D_table=D_covering,
+                               latCol=latCol_to,
+                               lonCol=lonCol_to,
+                               descrCol=node_to,
+                               size=0,
+                               color=node_from,
+                               cleanOutliers=False)[0]
+    for i in range(0, len(fig_nodes.data)):
+        fig.add_trace(fig_nodes.data[i])
+    fig.update_layout(mapbox_style=&#34;open-street-map&#34;)
+    return fig, output_coverages
+
+
+def supplyChainCovering(D_plant: pd.DataFrame, D_mov: pd.DataFrame,
+                        latCol_plant: str, lonCol_plant: str, node_from: str, node_to: str,
+                        lonCol_to: str, latCol_to: str, capacityField: str = &#39;QUANTITY&#39;,
+                        cleanOutliers: bool = False):
+    &#34;&#34;&#34;
+    represent the assignment of nodes an plant with different colors
+
+    Args:
+        D_plant (pd.DataFrame): dataframe with plant information.
+        D_mov (pd.DataFrame): dataframe with movements information.
+        latCol_plant (str): string of the column with the plant latitude.
+        lonCol_plant (str): string of the column with the plant longitude.
+        node_from (str): string of the column with the node code from in D_mov.
+        node_to (str): string of the column with the node code from in D_mov.
+        lonCol_to (str): string of the column with the discharging node longitude in D_mov.
+        latCol_to (str): string of the column with the discharging node latitude in D_mov.
+        capacityField (str, optional): sting of the column with the quantity handled. Defaults to &#39;QUANTITY&#39;.
+        cleanOutliers (bool, optional):  if True to clean outliers using IQR. Defaults to False.
+
+    Returns:
+        fig (dict): Output dictionary containing figures.
+        output_coverages (dict): Output dictionary containing coverage statistics.
+
+    &#34;&#34;&#34;
+
+    output_coverages = {}
+
+    # get coverages and clean outliers
+    analysisFieldList = [node_from, node_to, lonCol_to, latCol_to]
+    outputCoverages, _ = getCoverageStats(D_mov, analysisFieldList, capacityField=capacityField)
+    D_mov_filtered = D_mov.dropna(subset=analysisFieldList)
+
+    if cleanOutliers:
+        D_mov_filtered, coverages, = cleanUsingIQR(D_mov_filtered, [lonCol_to, latCol_to])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+
+    # represent the covering for each plant
+    D_covering = D_mov_filtered.groupby([node_from, node_to, latCol_to, lonCol_to]).size().reset_index()
+    D_covering[node_from] = D_covering[node_from].astype(str)
+    fig_covering = supplyChainMap(D_table=D_covering,
+                                  latCol=latCol_to,
+                                  lonCol=lonCol_to,
+                                  descrCol=node_to,
+                                  size=0,
+                                  color=node_from,
+                                  cleanOutliers=False)[0]
+
+    fig_covering.update_layout(mapbox_style=&#34;open-street-map&#34;)
+    return fig_covering, output_coverages
+
+
+def networkRouteDistance(D_arcs: pd.DataFrame, lonCol: str,
+                         latCol: str, G: nx.Graph):
+    &#34;&#34;&#34;
+    calculate route distance
+
+    Args:
+        D_arcs (pd.DataFrame): Input dataframe contining arcs.
+        lonCol (str): column name containing longitude.
+        latCol (str): column name containing latitude.
+        G (nx.Graph): distance graph.
+
+    Returns:
+        output_figures (list): list containing figure indicating the travelled arcs on the graph.
+        distance_array (list): array of the partial distances travelled between the nodes.
+
+    &#34;&#34;&#34;
+
+    output_figures = []
+    routes = []
+    distance_array = [0]
+
+    for i in range(1, len(D_arcs)):
+        lat_from = D_arcs[latCol].iloc[i - 1]
+        lon_from = D_arcs[lonCol].iloc[i - 1]
+        lat_to = D_arcs[latCol].iloc[i]
+        lon_to = D_arcs[lonCol].iloc[i]
+
+        node_from = ox.get_nearest_node(G, (lat_from, lon_from), method=&#39;euclidean&#39;)
+        node_to = ox.get_nearest_node(G, (lat_to, lon_to), method=&#39;euclidean&#39;)
+
+        # calculate shortest paths for the 2 routes
+        try:
+            route = nx.shortest_path(G, node_from, node_to, weight=&#39;length&#39;)
+            routes.append(route)
+        except Exception as e:
+            print(e)
+
+        try:
+            distance = nx.shortest_path_length(G, node_from, node_to, weight=&#39;length&#39;)
+            distance_array.append(distance)
+        except Exception as e:
+            print(e)
+            distance_array.append(np.nan)
+
+    fig, ax = ox.plot_graph_routes(G, routes, route_color=&#39;orange&#39;, route_linewidth=3,
+                                   node_size=0,
+                                   orig_dest_node_size=0)
+
+    output_figures = fig
+    return output_figures, distance_array</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRaysPlot"><code class="name flex">
+<span>def <span class="ident">networkRaysPlot</span></span>(<span>D_mov: pandas.core.frame.DataFrame, timecol: str, lonCol_to: str, latCol_to: str, lonCol_from: str, latCol_from: str, G: networkx.classes.graph.Graph, capacityField: str = 'QUANTITY', sampleInterval: str = 'week')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>the function plot rays on a graph G to represent the flow of a supply chain network</p>
+<p>D_mov is the input dataframe
+timecol is the column string with timestamp information
+lonCol_to is the column with the longitude of the origin points
+latCol_to is the column with the latitude of the origin points
+lonCol_from is the column with the longitude of the origin points
+latCol_from is the column with the latitude of the origin points
+G is a network graph to plot in background
+capacityField is a field of capacity to calculate coverages
+sampleInterval is the sampling interval od D_mov: day, week, month, year</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def networkRaysPlot(D_mov: pd.DataFrame, timecol: str, lonCol_to: str, latCol_to: str,
+                    lonCol_from: str, latCol_from: str,
+                    G: nx.Graph, capacityField: str = &#39;QUANTITY&#39;, sampleInterval: str = &#39;week&#39;,):
+    &#39;&#39;&#39;
+    the function plot rays on a graph G to represent the flow of a supply chain network
+
+    D_mov is the input dataframe
+    timecol is the column string with timestamp information
+    lonCol_to is the column with the longitude of the origin points
+    latCol_to is the column with the latitude of the origin points
+    lonCol_from is the column with the longitude of the origin points
+    latCol_from is the column with the latitude of the origin points
+    G is a network graph to plot in background
+    capacityField is a field of capacity to calculate coverages
+    sampleInterval is the sampling interval od D_mov: day, week, month, year
+    &#39;&#39;&#39;
+
+    output_figure = {}
+    output_coverages = {}
+
+    D_mov[&#39;TIME_PERIOD&#39;] = ts.sampleTimeSeries(D_mov[timecol], sampleInterval)
+
+    # get coverages
+    analysisFieldList = [lonCol_to, latCol_to, lonCol_from, latCol_from]
+    outputCoverages, _ = getCoverageStats(D_mov, analysisFieldList, capacityField=capacityField)
+    outputCoverages = pd.DataFrame(outputCoverages)
+    output_coverages[f&#34;Network_rays_{sampleInterval}&#34;] = outputCoverages
+
+    # group movements
+    D_groupFlows = D_mov.groupby([&#39;TIME_PERIOD&#39;, lonCol_to, latCol_to, lonCol_from, latCol_from]).size().reset_index()
+    D_groupFlows[&#39;FLOW_NORM&#39;] = (0.0001 + D_groupFlows[0] - min(D_groupFlows[0])) / (max(D_groupFlows[0]) - min(D_groupFlows[0])) * 3
+
+    # plot figures
+    D_groupFlows = D_groupFlows.sort_values(by=&#39;TIME_PERIOD&#39;)
+    for period in D_groupFlows[&#39;TIME_PERIOD&#39;].drop_duplicates():
+        D_groupFlows_filtered = D_groupFlows[D_groupFlows[&#39;TIME_PERIOD&#39;] == period]
+
+        # if a road network graph is given, then plot it
+        if G == []:
+            fig1 = plt.figure()
+            ax = fig1.gca()
+        else:
+            fig1, ax = ox.plot_graph(G, bgcolor=&#39;k&#39;,
+                                     node_size=1, node_color=&#39;#999999&#39;,
+                                     node_edgecolor=&#39;none&#39;, node_zorder=2,
+                                     edge_color=&#39;#555555&#39;, edge_linewidth=0.5,
+                                     edge_alpha=1, show=False)
+            plt.legend([&#39;Node&#39;, &#39;Edges&#39;])
+
+        # represent the rays
+        for i in range(0, len(D_groupFlows_filtered)):
+            x_from = D_groupFlows_filtered[lonCol_from].iloc[i]
+            y_from = D_groupFlows_filtered[latCol_from].iloc[i]
+            x_to = D_groupFlows_filtered[lonCol_to].iloc[i]
+            y_to = D_groupFlows_filtered[latCol_to].iloc[i]
+            c = D_groupFlows_filtered[&#39;FLOW_NORM&#39;].iloc[i]
+
+            ax.plot([x_from, x_to], [y_from, y_to], color=&#39;orange&#39;, linewidth=c)
+            ax.set_title(f&#34;Network rays {period}&#34;)
+
+            fig1 = ax.figure
+            fig1.show()
+            output_figure[f&#34;Network_rays_{sampleInterval}_{period}&#34;] = fig1
+            plt.close(&#39;all&#39;)
+    return output_figure, output_coverages</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRoadsRoutePlot"><code class="name flex">
+<span>def <span class="ident">networkRoadsRoutePlot</span></span>(<span>D_arcs: pandas.core.frame.DataFrame, lonCol_from: str, latCol_from: str, latCol_to: str, lonCol_to: str, G: networkx.classes.graph.Graph)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define a road graoh highlighting the travelled arcs</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_arcs</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe containing one row for each arc travelled.</dd>
+<dt><strong><code>lonCol_from</code></strong> :&ensp;<code>str</code></dt>
+<dd>column with the longitude of the origin points.</dd>
+<dt><strong><code>latCol_from</code></strong> :&ensp;<code>str</code></dt>
+<dd>column with the latitude of the origin points.</dd>
+<dt><strong><code>latCol_to</code></strong> :&ensp;<code>str</code></dt>
+<dd>column with the longitude of the origin points.</dd>
+<dt><strong><code>lonCol_to</code></strong> :&ensp;<code>str</code></dt>
+<dd>column with the latitude of the origin points.</dd>
+<dt><strong><code>G</code></strong> :&ensp;<code>nx.Graph</code></dt>
+<dd>network graph to plot on.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Output dictionary containing figures.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def networkRoadsRoutePlot(D_arcs: pd.DataFrame, lonCol_from: str, latCol_from: str,
+                          latCol_to: str, lonCol_to: str, G: nx.Graph):
+    &#34;&#34;&#34;
+    Define a road graoh highlighting the travelled arcs
+
+    Args:
+        D_arcs (pd.DataFrame): dataframe containing one row for each arc travelled.
+        lonCol_from (str): column with the longitude of the origin points.
+        latCol_from (str): column with the latitude of the origin points.
+        latCol_to (str): column with the longitude of the origin points.
+        lonCol_to (str): column with the latitude of the origin points.
+        G (nx.Graph): network graph to plot on.
+
+    Returns:
+        dict: Output dictionary containing figures.
+
+    &#34;&#34;&#34;
+
+    def _returnDummyColumnsFromList(D: pd.DataFrame, columnName: str):
+        &#39;&#39;&#39;
+        extract the value from a pandas cell where a list is saved
+
+        Parameters
+        ----------
+        D : TYPE pandas dataframe
+            DESCRIPTION.
+        columnName : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        s : TYPE column string name
+            DESCRIPTION.
+
+        &#39;&#39;&#39;
+        x = D[columnName].values
+        # print(x)
+        # print(type(x))
+        newList = []
+        for j in x:
+            for i in j:
+                i = str(i)
+                yyy = i.replace(&#39;nan,&#39;, &#39;&#39;)
+                yyy = yyy.replace(&#39;nan&#39;, &#39;&#39;)
+                newList.append(ast.literal_eval(yyy))
+
+        s = pd.Series(newList)
+        # X_add=pd.get_dummies(s.apply(pd.Series).stack()).sum(level=0)
+        # print(s)
+        return s
+
+    output_figures = {}
+
+    D_arcs_filtered = D_arcs[[lonCol_from, latCol_from, latCol_to, lonCol_to]]
+
+    D_arcs_filtered[lonCol_from] = [k for k in _returnDummyColumnsFromList(D_arcs_filtered, lonCol_from)]
+    D_arcs_filtered[latCol_from] = [k for k in _returnDummyColumnsFromList(D_arcs_filtered, latCol_from)]
+    D_arcs_filtered[latCol_to] = [k for k in _returnDummyColumnsFromList(D_arcs_filtered, latCol_to)]
+    D_arcs_filtered[lonCol_to] = [k for k in _returnDummyColumnsFromList(D_arcs_filtered, lonCol_to)]
+
+    all_variables = [lonCol_from, latCol_from, latCol_to, lonCol_to]
+    for i in range(0, len(D_arcs_filtered)):
+        for variable in all_variables:
+            if isinstance(D_arcs_filtered[variable].iloc[i], float):
+                D_arcs_filtered[variable].iloc[i] = D_arcs_filtered[variable].iloc[i]
+
+            elif isinstance(D_arcs_filtered[variable].iloc[i], list) &amp; len(D_arcs_filtered[variable].iloc[i]) &gt; 0:
+                D_arcs_filtered[variable].iloc[i] = D_arcs_filtered[variable].iloc[i][0]
+            else:
+                D_arcs_filtered[variable].iloc[i] = np.nan
+
+    D_arcs_filtered = D_arcs_filtered.dropna()
+    D_arcs_filtered_grouped = D_arcs_filtered.groupby([lonCol_from, latCol_from,
+                                                       latCol_to, lonCol_to]).size().reset_index()
+
+    routes = []
+    for i in range(0, len(D_arcs_filtered_grouped)):
+        lat_from = D_arcs_filtered_grouped[latCol_from].iloc[i]
+        lon_from = D_arcs_filtered_grouped[lonCol_from].iloc[i]
+        lat_to = D_arcs_filtered_grouped[latCol_to].iloc[i]
+        lon_to = D_arcs_filtered_grouped[lonCol_to].iloc[i]
+
+        # find closest node
+        node_from = ox.get_nearest_node(G, (lat_from, lon_from), method=&#39;euclidean&#39;)
+        node_to = ox.get_nearest_node(G, (lat_to, lon_to), method=&#39;euclidean&#39;)
+
+        # calculate shortest paths for the 2 routes
+        route = nx.shortest_path(G, node_from, node_to, weight=&#39;length&#39;)
+        routes.append(route)
+    fig, ax = ox.plot_graph_routes(G, routes, route_color=&#39;orange&#39;, route_linewidth=3,
+                                   node_size=0,
+                                   orig_dest_node_size=0)
+
+    output_figures[&#39;Network arcs&#39;] = fig
+    return output_figures</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRouteDistance"><code class="name flex">
+<span>def <span class="ident">networkRouteDistance</span></span>(<span>D_arcs: pandas.core.frame.DataFrame, lonCol: str, latCol: str, G: networkx.classes.graph.Graph)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculate route distance</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_arcs</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe contining arcs.</dd>
+<dt><strong><code>lonCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name containing longitude.</dd>
+<dt><strong><code>latCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name containing latitude.</dd>
+<dt><strong><code>G</code></strong> :&ensp;<code>nx.Graph</code></dt>
+<dd>distance graph.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>output_figures (list): list containing figure indicating the travelled arcs on the graph.
+distance_array (list): array of the partial distances travelled between the nodes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def networkRouteDistance(D_arcs: pd.DataFrame, lonCol: str,
+                         latCol: str, G: nx.Graph):
+    &#34;&#34;&#34;
+    calculate route distance
+
+    Args:
+        D_arcs (pd.DataFrame): Input dataframe contining arcs.
+        lonCol (str): column name containing longitude.
+        latCol (str): column name containing latitude.
+        G (nx.Graph): distance graph.
+
+    Returns:
+        output_figures (list): list containing figure indicating the travelled arcs on the graph.
+        distance_array (list): array of the partial distances travelled between the nodes.
+
+    &#34;&#34;&#34;
+
+    output_figures = []
+    routes = []
+    distance_array = [0]
+
+    for i in range(1, len(D_arcs)):
+        lat_from = D_arcs[latCol].iloc[i - 1]
+        lon_from = D_arcs[lonCol].iloc[i - 1]
+        lat_to = D_arcs[latCol].iloc[i]
+        lon_to = D_arcs[lonCol].iloc[i]
+
+        node_from = ox.get_nearest_node(G, (lat_from, lon_from), method=&#39;euclidean&#39;)
+        node_to = ox.get_nearest_node(G, (lat_to, lon_to), method=&#39;euclidean&#39;)
+
+        # calculate shortest paths for the 2 routes
+        try:
+            route = nx.shortest_path(G, node_from, node_to, weight=&#39;length&#39;)
+            routes.append(route)
+        except Exception as e:
+            print(e)
+
+        try:
+            distance = nx.shortest_path_length(G, node_from, node_to, weight=&#39;length&#39;)
+            distance_array.append(distance)
+        except Exception as e:
+            print(e)
+            distance_array.append(np.nan)
+
+    fig, ax = ox.plot_graph_routes(G, routes, route_color=&#39;orange&#39;, route_linewidth=3,
+                                   node_size=0,
+                                   orig_dest_node_size=0)
+
+    output_figures = fig
+    return output_figures, distance_array</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainCentersOfMass"><code class="name flex">
+<span>def <span class="ident">supplyChainCentersOfMass</span></span>(<span>D_plant: pandas.core.frame.DataFrame, D_mov: pandas.core.frame.DataFrame, latCol_plant: str, lonCol_plant: str, node_from: str, node_to: str, lonCol_to: str, latCol_to: str, capacityField: str = 'QUANTITY', cleanOutliers: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents the center of mass of a supply chain. Represent the plant of the network and the center of mass considering
+latitude and longitude of the other nodes of the network. The assignment
+of nodes and plants is based on the movement dataframe D_mov</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_plant</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe with plant information.</dd>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe with movements information.</dd>
+<dt><strong><code>latCol_plant</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the plant latitude.</dd>
+<dt><strong><code>lonCol_plant</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the plant longitude.</dd>
+<dt><strong><code>node_from</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the node code from in D_mov.</dd>
+<dt><strong><code>node_to</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the node code from in D_mov.</dd>
+<dt><strong><code>lonCol_to</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the discharging node longitude in D_mov.</dd>
+<dt><strong><code>latCol_to</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the discharging node latitude in D_mov.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>sting of the column with the quantity handled. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>cleanOutliers</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>if True to clean outliers using IQR. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig (dict): Output dictionary containing figures.
+output_coverages (dict): Output dictionary containing coverage statistics.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def supplyChainCentersOfMass(D_plant: pd.DataFrame, D_mov: pd.DataFrame,
+                             latCol_plant: str, lonCol_plant: str,
+                             node_from: str, node_to: str, lonCol_to: str, latCol_to: str,
+                             capacityField: str = &#39;QUANTITY&#39;, cleanOutliers: bool = False):
+    &#34;&#34;&#34;
+    Represents the center of mass of a supply chain. Represent the plant of the network and the center of mass considering
+    latitude and longitude of the other nodes of the network. The assignment
+    of nodes and plants is based on the movement dataframe D_mov
+
+    Args:
+        D_plant (pd.DataFrame): dataframe with plant information.
+        D_mov (pd.DataFrame): dataframe with movements information.
+        latCol_plant (str): string of the column with the plant latitude.
+        lonCol_plant (str): string of the column with the plant longitude.
+        node_from (str): string of the column with the node code from in D_mov.
+        node_to (str): string of the column with the node code from in D_mov.
+        lonCol_to (str): string of the column with the discharging node longitude in D_mov.
+        latCol_to (str): string of the column with the discharging node latitude in D_mov.
+        capacityField (str, optional): sting of the column with the quantity handled. Defaults to &#39;QUANTITY&#39;.
+        cleanOutliers (bool, optional): if True to clean outliers using IQR. Defaults to False.
+
+    Returns:
+        fig (dict): Output dictionary containing figures.
+        output_coverages (dict): Output dictionary containing coverage statistics.
+
+    &#34;&#34;&#34;
+
+    output_coverages = {}
+
+    # get coverages and clean outliers
+    analysisFieldList = [node_from, node_to, lonCol_to, latCol_to]
+    outputCoverages, _ = getCoverageStats(D_mov, analysisFieldList, capacityField=capacityField)
+    D_mov_filtered = D_mov.dropna(subset=analysisFieldList)
+
+    if cleanOutliers:
+        D_mov_filtered, coverages, = cleanUsingIQR(D_mov_filtered, [lonCol_to, latCol_to])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+
+    # calculate the center of mass
+    D_plant[&#39;lon_ave&#39;] = D_plant[&#39;lat_ave&#39;] = np.nan
+    for index, row in D_plant.iterrows():
+
+        D_table_plant = D_mov_filtered[D_mov_filtered[node_from] == row[&#39;_id&#39;]]
+        lon_ave = np.nanmean(D_table_plant[lonCol_to])
+        lat_ave = np.nanmean(D_table_plant[latCol_to])
+        D_plant[&#39;lon_ave&#39;].loc[index] = lon_ave
+        D_plant[&#39;lat_ave&#39;].loc[index] = lat_ave
+
+    fig = go.Figure(go.Scattermapbox(lat=D_plant[latCol_plant],
+                                     lon=D_plant[lonCol_plant],
+                                     mode=&#39;markers&#39;,
+                                     marker=go.scattermapbox.Marker(size=14,
+                                                                    color=&#39;blue&#39;
+                                                                    ),
+                                     text=&#39;ASIS&#39;,
+                                     name=&#39;Actual Plants&#39;
+                                     ))
+
+    fig.add_trace(go.Scattermapbox(
+                  lat=D_plant[&#39;lat_ave&#39;],
+                  lon=D_plant[&#39;lon_ave&#39;],
+                  mode=&#39;markers&#39;,
+                  marker=go.scattermapbox.Marker(size=14,
+                                                 color=&#39;red&#39;,
+                                                 # symbol=&#39;cross&#39;
+                                                 ),
+                  text=&#34;CENTER OF MASS&#34;,
+                  name=&#39;Centers of mass&#39;
+                  )
+                  )
+    # represent the covering for each plant
+    D_covering = D_mov_filtered.groupby([node_from, node_to, latCol_to, lonCol_to]).size().reset_index()
+    D_covering[node_from] = D_covering[node_from].astype(str)
+    fig_nodes = supplyChainMap(D_table=D_covering,
+                               latCol=latCol_to,
+                               lonCol=lonCol_to,
+                               descrCol=node_to,
+                               size=0,
+                               color=node_from,
+                               cleanOutliers=False)[0]
+    for i in range(0, len(fig_nodes.data)):
+        fig.add_trace(fig_nodes.data[i])
+    fig.update_layout(mapbox_style=&#34;open-street-map&#34;)
+    return fig, output_coverages</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainCovering"><code class="name flex">
+<span>def <span class="ident">supplyChainCovering</span></span>(<span>D_plant: pandas.core.frame.DataFrame, D_mov: pandas.core.frame.DataFrame, latCol_plant: str, lonCol_plant: str, node_from: str, node_to: str, lonCol_to: str, latCol_to: str, capacityField: str = 'QUANTITY', cleanOutliers: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>represent the assignment of nodes an plant with different colors</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_plant</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe with plant information.</dd>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe with movements information.</dd>
+<dt><strong><code>latCol_plant</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the plant latitude.</dd>
+<dt><strong><code>lonCol_plant</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the plant longitude.</dd>
+<dt><strong><code>node_from</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the node code from in D_mov.</dd>
+<dt><strong><code>node_to</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the node code from in D_mov.</dd>
+<dt><strong><code>lonCol_to</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the discharging node longitude in D_mov.</dd>
+<dt><strong><code>latCol_to</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the discharging node latitude in D_mov.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>sting of the column with the quantity handled. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>cleanOutliers</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>if True to clean outliers using IQR. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig (dict): Output dictionary containing figures.
+output_coverages (dict): Output dictionary containing coverage statistics.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def supplyChainCovering(D_plant: pd.DataFrame, D_mov: pd.DataFrame,
+                        latCol_plant: str, lonCol_plant: str, node_from: str, node_to: str,
+                        lonCol_to: str, latCol_to: str, capacityField: str = &#39;QUANTITY&#39;,
+                        cleanOutliers: bool = False):
+    &#34;&#34;&#34;
+    represent the assignment of nodes an plant with different colors
+
+    Args:
+        D_plant (pd.DataFrame): dataframe with plant information.
+        D_mov (pd.DataFrame): dataframe with movements information.
+        latCol_plant (str): string of the column with the plant latitude.
+        lonCol_plant (str): string of the column with the plant longitude.
+        node_from (str): string of the column with the node code from in D_mov.
+        node_to (str): string of the column with the node code from in D_mov.
+        lonCol_to (str): string of the column with the discharging node longitude in D_mov.
+        latCol_to (str): string of the column with the discharging node latitude in D_mov.
+        capacityField (str, optional): sting of the column with the quantity handled. Defaults to &#39;QUANTITY&#39;.
+        cleanOutliers (bool, optional):  if True to clean outliers using IQR. Defaults to False.
+
+    Returns:
+        fig (dict): Output dictionary containing figures.
+        output_coverages (dict): Output dictionary containing coverage statistics.
+
+    &#34;&#34;&#34;
+
+    output_coverages = {}
+
+    # get coverages and clean outliers
+    analysisFieldList = [node_from, node_to, lonCol_to, latCol_to]
+    outputCoverages, _ = getCoverageStats(D_mov, analysisFieldList, capacityField=capacityField)
+    D_mov_filtered = D_mov.dropna(subset=analysisFieldList)
+
+    if cleanOutliers:
+        D_mov_filtered, coverages, = cleanUsingIQR(D_mov_filtered, [lonCol_to, latCol_to])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+
+    # represent the covering for each plant
+    D_covering = D_mov_filtered.groupby([node_from, node_to, latCol_to, lonCol_to]).size().reset_index()
+    D_covering[node_from] = D_covering[node_from].astype(str)
+    fig_covering = supplyChainMap(D_table=D_covering,
+                                  latCol=latCol_to,
+                                  lonCol=lonCol_to,
+                                  descrCol=node_to,
+                                  size=0,
+                                  color=node_from,
+                                  cleanOutliers=False)[0]
+
+    fig_covering.update_layout(mapbox_style=&#34;open-street-map&#34;)
+    return fig_covering, output_coverages</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainMap"><code class="name flex">
+<span>def <span class="ident">supplyChainMap</span></span>(<span>D_table: pandas.core.frame.DataFrame, latCol: str, lonCol: str, descrCol: str, color: str, size: str, cleanOutliers: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represents the nodes of a supply Chain Network on a map</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_table</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input dataframe.</dd>
+<dt><strong><code>latCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with latitudes.</dd>
+<dt><strong><code>lonCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with longitudes.</dd>
+<dt><strong><code>descrCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the description of a node.</dd>
+<dt><strong><code>color</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with different values for different colors.</dd>
+<dt><strong><code>size</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with the size of a node.</dd>
+<dt><strong><code>cleanOutliers</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>if True to clean outliers using IQR. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig (dict): Output dictionary containing figures.
+output_coverages (dict): Output dictionary containing coverage statistics.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def supplyChainMap(D_table: pd.DataFrame, latCol: str, lonCol: str,
+                   descrCol: str, color: str, size: str, cleanOutliers: bool = False):
+    &#34;&#34;&#34;
+    Represents the nodes of a supply Chain Network on a map
+
+    Args:
+        D_table (pd.DataFrame): input dataframe.
+        latCol (str): string of the column with latitudes.
+        lonCol (str): string of the column with longitudes.
+        descrCol (str): string of the column with the description of a node.
+        color (str): string of the column with different values for different colors.
+        size (str): string of the column with the size of a node.
+        cleanOutliers (bool, optional): if True to clean outliers using IQR. Defaults to False.
+
+    Returns:
+        fig (dict): Output dictionary containing figures.
+        output_coverages (dict): Output dictionary containing coverage statistics.
+
+    &#34;&#34;&#34;
+
+    output_coverages = {}
+
+    analysisFieldList = [latCol, lonCol]
+    outputCoverages, _ = getCoverageStats(D_table, analysisFieldList, capacityField=size)
+    if cleanOutliers:
+        D_table, coverages, = cleanUsingIQR(D_table, [latCol, lonCol])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+    fig = px.scatter_mapbox(D_table, lat=latCol, lon=lonCol,
+                            hover_name=descrCol, size=size, color=color)
+    fig.update_layout(mapbox_style=&#34;open-street-map&#34;)
+
+    return fig, output_coverages</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRaysPlot" href="#analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRaysPlot">networkRaysPlot</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRoadsRoutePlot" href="#analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRoadsRoutePlot">networkRoadsRoutePlot</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRouteDistance" href="#analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.networkRouteDistance">networkRouteDistance</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainCentersOfMass" href="#analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainCentersOfMass">supplyChainCentersOfMass</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainCovering" href="#analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainCovering">supplyChainCovering</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainMap" href="#analogistics.supply_chain.P8_performance_assessment.network_graph_analysis.supplyChainMap">supplyChainMap</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

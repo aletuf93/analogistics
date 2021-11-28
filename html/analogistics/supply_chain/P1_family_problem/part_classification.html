@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P1_family_problem.part_classification API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P1_family_problem.part_classification</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def calculateADICV2(D_mov: pd.DataFrame, itemfield: str, qtyfield: str, dateVar: str) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Calculate the ADI and CV2 of an Item
+
+    Args:
+        D_mov (pd.DataFrame): Input movements DataFrame.
+        itemfield (str): Column name of the item code.
+        qtyfield (str): Column name of the quantity.
+        dateVar (str): Column name of the timestamp.
+
+    Returns:
+        D_demandPatterns (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # identify the number of days of the input dataset
+    N_Days = max(D_mov[dateVar]) - min(D_mov[dateVar])
+    N_Days = N_Days.days
+
+    D_demandPatterns = pd.DataFrame(columns=[&#39;ITEMCODE&#39;, &#39;ADI&#39;, &#39;CV2&#39;])
+    for item in set(D_mov[itemfield]):
+        # item=&#39;17092774&#39;
+        df_filtered = D_mov[D_mov[itemfield] == item]
+        CV2 = (np.std(df_filtered[qtyfield]) / np.mean(df_filtered[qtyfield])) ** 2
+
+        # ADI in days
+        df_filtered = df_filtered.sort_values(by=dateVar)
+        ADI = len(df_filtered) / N_Days
+        D_demandPatterns = D_demandPatterns.append(pd.DataFrame([[item, ADI, CV2]], columns=D_demandPatterns.columns))
+        return D_demandPatterns
+
+
+def returnsparePartclassification(ADI: float, CV2: float) -&gt; str:
+    &#34;&#34;&#34;
+    return the demand pattern of the spare part
+
+    Args:
+        ADI (float): identify the ADI value of a spare part.
+        CV2 (float): identify the CV2 value of a spare part.
+
+    Returns:
+        str: String indicating the demand pattern.
+
+    &#34;&#34;&#34;
+
+    if (ADI &gt; 1.32) &amp; (CV2 &gt; 0.49):
+        return &#34;LUMPY&#34;
+    elif (ADI &lt;= 1.32) &amp; (CV2 &gt; 0.49):
+        return &#34;ERRATIC&#34;
+    elif (ADI &gt; 1.32) &amp; (CV2 &lt;= 0.49):
+        return &#34;INTERMITTENT&#34;
+    elif (ADI &lt;= 1.32) &amp; (CV2 &lt;= 0.49):
+        return &#34;STABLE&#34;
+
+
+def demandPatternADICV2(df_results: pd.DataFrame, setTitle: str, draw: bool = False):
+    &#34;&#34;&#34;
+    Plot the demand patterns
+
+    Args:
+        df_results (pd.DataFrame): Input DataFrame with columns: ADI (with the ADI value); CV2 (with the CV2 value);
+        frequency (with the number of lines for each itemcode).
+        setTitle (str): title of the figure.
+        draw (bool, optional): If true plot the graph, otherwise only output the numbers. Defaults to False.
+
+    Returns:
+        fig (plt.figure): Output Figure.
+        fig1 (plt.figure): Output Figure.
+        numLumpy (float): Number of Lumpy items.
+        numIntermittent (float): Number of Intermittent items.
+        numErratic (float): Number of Erratic items.
+        numStable (float): Number of stable items.
+
+    &#34;&#34;&#34;
+
+    fig = fig1 = []
+    df_results = df_results.dropna()
+    if len(df_results) &gt; 0:
+        # calculate numerical results
+        numLumpy = len(df_results[(df_results.ADI &lt;= 1.32) &amp; (df_results.CV2 &gt; 0.49)])
+        numErratic = len(df_results[(df_results.ADI &gt; 1.32) &amp; (df_results.CV2 &gt; 0.49)])
+        numIntermittent = len(df_results[(df_results.ADI &lt;= 1.32) &amp; (df_results.CV2 &lt;= 0.49)])
+        numStable = len(df_results[(df_results.ADI &gt; 1.32) &amp; (df_results.CV2 &lt;= 0.49)])
+        totParts = numLumpy + numErratic + numIntermittent + numStable
+
+        if draw:
+            # if totParts==len(df_results):
+            A = np.array([[numLumpy, numErratic], [numIntermittent, numStable]])
+            A_text = np.array([[f&#34;Lumpy \n {numLumpy} parts \n Perc: {np.round(numLumpy*100/totParts, 2)} %&#34;, f&#34;Erratic \n {numErratic} parts \n Perc: {np.round(numErratic*100/totParts, 2)} %&#34;],
+                               [f&#34;Intermittent \n {numIntermittent} parts \n Perc: {np.round(numIntermittent*100/totParts, 2)} %&#34;, f&#34;Stable \n {numStable} parts \n Perc: {np.round(numStable*100/totParts, 2)} %&#34;]])
+            fig, ax = plt.subplots()
+            im = ax.imshow(A, cmap=&#34;YlOrRd&#34;)
+
+            plt.title(f&#34;Parts set: {setTitle}&#34;)
+
+            im.axes.get_xaxis().set_visible(False)
+            im.axes.get_yaxis().set_visible(False)
+
+            for i in range(0, 2):
+                for j in range(0, 2):
+                    ax.text(j, i, A_text[i, j],
+                            ha=&#34;center&#34;, va=&#34;center&#34;, color=&#34;k&#34;)
+
+            # plot ADI and CV2
+
+            fig1 = plt.figure()
+            plt.scatter(df_results[&#39;ADI&#39;], df_results[&#39;CV2&#39;], df_results[&#39;frequency&#39;],
+                        color=&#39;skyblue&#39;, marker=&#39;o&#39;)
+            plt.axvline(x=1.32, c=&#39;orange&#39;, linestyle=&#39;--&#39;)
+            plt.axhline(y=0.49, c=&#39;orange&#39;, linestyle=&#39;--&#39;)
+            plt.xlabel(&#39;ADI&#39;)
+            plt.ylabel(&#39;CV2&#39;)
+            plt.title(f&#34;Demand pattern: {setTitle}&#34;)
+
+    return fig, fig1, numLumpy, numIntermittent, numErratic, numStable</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P1_family_problem.part_classification.calculateADICV2"><code class="name flex">
+<span>def <span class="ident">calculateADICV2</span></span>(<span>D_mov: pandas.core.frame.DataFrame, itemfield: str, qtyfield: str, dateVar: str) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate the ADI and CV2 of an Item</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input movements DataFrame.</dd>
+<dt><strong><code>itemfield</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name of the item code.</dd>
+<dt><strong><code>qtyfield</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name of the quantity.</dd>
+<dt><strong><code>dateVar</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name of the timestamp.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_demandPatterns (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateADICV2(D_mov: pd.DataFrame, itemfield: str, qtyfield: str, dateVar: str) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Calculate the ADI and CV2 of an Item
+
+    Args:
+        D_mov (pd.DataFrame): Input movements DataFrame.
+        itemfield (str): Column name of the item code.
+        qtyfield (str): Column name of the quantity.
+        dateVar (str): Column name of the timestamp.
+
+    Returns:
+        D_demandPatterns (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # identify the number of days of the input dataset
+    N_Days = max(D_mov[dateVar]) - min(D_mov[dateVar])
+    N_Days = N_Days.days
+
+    D_demandPatterns = pd.DataFrame(columns=[&#39;ITEMCODE&#39;, &#39;ADI&#39;, &#39;CV2&#39;])
+    for item in set(D_mov[itemfield]):
+        # item=&#39;17092774&#39;
+        df_filtered = D_mov[D_mov[itemfield] == item]
+        CV2 = (np.std(df_filtered[qtyfield]) / np.mean(df_filtered[qtyfield])) ** 2
+
+        # ADI in days
+        df_filtered = df_filtered.sort_values(by=dateVar)
+        ADI = len(df_filtered) / N_Days
+        D_demandPatterns = D_demandPatterns.append(pd.DataFrame([[item, ADI, CV2]], columns=D_demandPatterns.columns))
+        return D_demandPatterns</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P1_family_problem.part_classification.demandPatternADICV2"><code class="name flex">
+<span>def <span class="ident">demandPatternADICV2</span></span>(<span>df_results: pandas.core.frame.DataFrame, setTitle: str, draw: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the demand patterns</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df_results</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input DataFrame with columns: ADI (with the ADI value); CV2 (with the CV2 value);</dd>
+<dt>frequency (with the number of lines for each itemcode).</dt>
+<dt><strong><code>setTitle</code></strong> :&ensp;<code>str</code></dt>
+<dd>title of the figure.</dd>
+<dt><strong><code>draw</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If true plot the graph, otherwise only output the numbers. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig (plt.figure): Output Figure.
+fig1 (plt.figure): Output Figure.
+numLumpy (float): Number of Lumpy items.
+numIntermittent (float): Number of Intermittent items.
+numErratic (float): Number of Erratic items.
+numStable (float): Number of stable items.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def demandPatternADICV2(df_results: pd.DataFrame, setTitle: str, draw: bool = False):
+    &#34;&#34;&#34;
+    Plot the demand patterns
+
+    Args:
+        df_results (pd.DataFrame): Input DataFrame with columns: ADI (with the ADI value); CV2 (with the CV2 value);
+        frequency (with the number of lines for each itemcode).
+        setTitle (str): title of the figure.
+        draw (bool, optional): If true plot the graph, otherwise only output the numbers. Defaults to False.
+
+    Returns:
+        fig (plt.figure): Output Figure.
+        fig1 (plt.figure): Output Figure.
+        numLumpy (float): Number of Lumpy items.
+        numIntermittent (float): Number of Intermittent items.
+        numErratic (float): Number of Erratic items.
+        numStable (float): Number of stable items.
+
+    &#34;&#34;&#34;
+
+    fig = fig1 = []
+    df_results = df_results.dropna()
+    if len(df_results) &gt; 0:
+        # calculate numerical results
+        numLumpy = len(df_results[(df_results.ADI &lt;= 1.32) &amp; (df_results.CV2 &gt; 0.49)])
+        numErratic = len(df_results[(df_results.ADI &gt; 1.32) &amp; (df_results.CV2 &gt; 0.49)])
+        numIntermittent = len(df_results[(df_results.ADI &lt;= 1.32) &amp; (df_results.CV2 &lt;= 0.49)])
+        numStable = len(df_results[(df_results.ADI &gt; 1.32) &amp; (df_results.CV2 &lt;= 0.49)])
+        totParts = numLumpy + numErratic + numIntermittent + numStable
+
+        if draw:
+            # if totParts==len(df_results):
+            A = np.array([[numLumpy, numErratic], [numIntermittent, numStable]])
+            A_text = np.array([[f&#34;Lumpy \n {numLumpy} parts \n Perc: {np.round(numLumpy*100/totParts, 2)} %&#34;, f&#34;Erratic \n {numErratic} parts \n Perc: {np.round(numErratic*100/totParts, 2)} %&#34;],
+                               [f&#34;Intermittent \n {numIntermittent} parts \n Perc: {np.round(numIntermittent*100/totParts, 2)} %&#34;, f&#34;Stable \n {numStable} parts \n Perc: {np.round(numStable*100/totParts, 2)} %&#34;]])
+            fig, ax = plt.subplots()
+            im = ax.imshow(A, cmap=&#34;YlOrRd&#34;)
+
+            plt.title(f&#34;Parts set: {setTitle}&#34;)
+
+            im.axes.get_xaxis().set_visible(False)
+            im.axes.get_yaxis().set_visible(False)
+
+            for i in range(0, 2):
+                for j in range(0, 2):
+                    ax.text(j, i, A_text[i, j],
+                            ha=&#34;center&#34;, va=&#34;center&#34;, color=&#34;k&#34;)
+
+            # plot ADI and CV2
+
+            fig1 = plt.figure()
+            plt.scatter(df_results[&#39;ADI&#39;], df_results[&#39;CV2&#39;], df_results[&#39;frequency&#39;],
+                        color=&#39;skyblue&#39;, marker=&#39;o&#39;)
+            plt.axvline(x=1.32, c=&#39;orange&#39;, linestyle=&#39;--&#39;)
+            plt.axhline(y=0.49, c=&#39;orange&#39;, linestyle=&#39;--&#39;)
+            plt.xlabel(&#39;ADI&#39;)
+            plt.ylabel(&#39;CV2&#39;)
+            plt.title(f&#34;Demand pattern: {setTitle}&#34;)
+
+    return fig, fig1, numLumpy, numIntermittent, numErratic, numStable</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P1_family_problem.part_classification.returnsparePartclassification"><code class="name flex">
+<span>def <span class="ident">returnsparePartclassification</span></span>(<span>ADI: float, CV2: float) -> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>return the demand pattern of the spare part</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>ADI</code></strong> :&ensp;<code>float</code></dt>
+<dd>identify the ADI value of a spare part.</dd>
+<dt><strong><code>CV2</code></strong> :&ensp;<code>float</code></dt>
+<dd>identify the CV2 value of a spare part.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>String indicating the demand pattern.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def returnsparePartclassification(ADI: float, CV2: float) -&gt; str:
+    &#34;&#34;&#34;
+    return the demand pattern of the spare part
+
+    Args:
+        ADI (float): identify the ADI value of a spare part.
+        CV2 (float): identify the CV2 value of a spare part.
+
+    Returns:
+        str: String indicating the demand pattern.
+
+    &#34;&#34;&#34;
+
+    if (ADI &gt; 1.32) &amp; (CV2 &gt; 0.49):
+        return &#34;LUMPY&#34;
+    elif (ADI &lt;= 1.32) &amp; (CV2 &gt; 0.49):
+        return &#34;ERRATIC&#34;
+    elif (ADI &gt; 1.32) &amp; (CV2 &lt;= 0.49):
+        return &#34;INTERMITTENT&#34;
+    elif (ADI &lt;= 1.32) &amp; (CV2 &lt;= 0.49):
+        return &#34;STABLE&#34;</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P1_family_problem" href="index.html">analogistics.supply_chain.P1_family_problem</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P1_family_problem.part_classification.calculateADICV2" href="#analogistics.supply_chain.P1_family_problem.part_classification.calculateADICV2">calculateADICV2</a></code></li>
+<li><code><a title="analogistics.supply_chain.P1_family_problem.part_classification.demandPatternADICV2" href="#analogistics.supply_chain.P1_family_problem.part_classification.demandPatternADICV2">demandPatternADICV2</a></code></li>
+<li><code><a title="analogistics.supply_chain.P1_family_problem.part_classification.returnsparePartclassification" href="#analogistics.supply_chain.P1_family_problem.part_classification.returnsparePartclassification">returnsparePartclassification</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

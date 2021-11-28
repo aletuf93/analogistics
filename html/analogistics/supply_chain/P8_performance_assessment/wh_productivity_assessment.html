@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+import pandas as pd
+import matplotlib.pyplot as plt
+from analogistics.clean import cleanUsingIQR
+
+
+def spaceProductivity(D_movements: pd.DataFrame, variableToPlot: str, inout_column: str,
+                      x_col: str, y_col: str, z_col: str, graphType: str = &#39;2D&#39;, cleanData: bool = False):
+    &#34;&#34;&#34;
+    3D warehouse productivity plot
+
+    Args:
+        D_movements (pd.dataFrame): pandas dataframe with movements.
+        variableToPlot (str): string with the column to plot. or &#34;popularity&#34; for movement count.
+        inout_column (str): string of the column with inout.
+        x_col (str): string of the column with x coordinates.
+        y_col (str): string of the column with y coordinates.
+        z_col (str): string of the column with z coordinates.
+        graphType (str, optional): The default is &#39;2D&#39;. 2D or 3D depending on the graph type. Defaults to &#39;2D&#39;.
+        cleanData (bool, optional): if True, IQR is used to clean popularity of each location. Defaults to False.
+
+    Returns:
+        dict: Output dictionary with figures.
+
+    &#34;&#34;&#34;
+
+    def _scaleSize(series):
+        if min(series) == max(series):
+            return [1 for i in range(0, len(series))]
+        else:
+            return (series - min(series)) / (max(series) - min(series))
+
+    figure_output = {}
+    # group data
+    if variableToPlot == &#39;popularity&#39;:
+        if graphType == &#39;3D&#39;:
+            D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column, x_col, y_col, z_col]).size().reset_index()
+            D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;, &#39;LOCCODEZ&#39;, &#39;POPULARITY&#39;]
+        elif graphType == &#39;2D&#39;:
+            D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column, x_col, y_col]).size().reset_index()
+            D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;, &#39;POPULARITY&#39;]
+    else:
+        if graphType == &#39;3D&#39;:
+            D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column, x_col, y_col, z_col]).sum()[variableToPlot].reset_index()
+            D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;, &#39;LOCCODEZ&#39;, &#39;POPULARITY&#39;]
+        elif graphType == &#39;2D&#39;:
+            D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column, x_col, y_col]).sum()[variableToPlot].reset_index()
+            D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;, &#39;POPULARITY&#39;]
+
+    # split data into inbound and outbound
+    D_loc_positive = D_mov[D_mov[inout_column] == &#39;+&#39;]
+    D_loc_negative = D_mov[D_mov[inout_column] == &#39;-&#39;]
+
+    # render inbound figure
+    if len(D_loc_positive) &gt; 0:
+
+        # clean data
+        if cleanData:
+            D_warehouse_grouped, _ = cleanUsingIQR(D_loc_positive, features=[&#39;POPULARITY&#39;], capacityField=[])
+        else:
+            D_warehouse_grouped = D_loc_positive
+        # create figures
+        for period in set(D_warehouse_grouped[&#39;PERIOD&#39;]):
+            # period = list(set(D_warehouse_grouped[&#39;PERIOD&#39;]))[0]
+            D_warehouse_grouped_filtered = D_warehouse_grouped[D_warehouse_grouped[&#39;PERIOD&#39;] == period]
+            D_warehouse_grouped_filtered[&#39;SIZE&#39;] = _scaleSize(D_warehouse_grouped_filtered[&#39;POPULARITY&#39;])
+
+            # scale size
+            D_warehouse_grouped_filtered[&#39;SIZE&#39;] = 100 * D_warehouse_grouped_filtered[&#39;SIZE&#39;]
+
+            # graphType 2-Dimensional
+            if graphType == &#39;2D&#39;:
+                fig1 = plt.figure()
+                plt.scatter(D_warehouse_grouped_filtered[&#39;LOCCODEX&#39;],
+                            D_warehouse_grouped_filtered[&#39;LOCCODEY&#39;],
+                            D_warehouse_grouped_filtered[&#39;SIZE&#39;],
+                            c=D_warehouse_grouped_filtered[&#39;SIZE&#39;])
+                plt.colorbar()
+                plt.title(f&#34;Warehouse INBOUND productivity, period:{period}&#34;)
+                plt.xlabel(&#34;Warehouse front (x)&#34;)
+                plt.ylabel(&#34;Warehouse depth (y)&#34;)
+                figure_output[f&#34;IN_productivity_2D_{period}&#34;] = fig1
+
+            # graphtype 3-Dimensional
+            elif graphType == &#39;3D&#39;:
+                fig1 = plt.figure()
+                fig1.add_subplot(111, projection=&#39;3d&#39;)
+                plt.scatter(x=D_warehouse_grouped_filtered[&#39;LOCCODEX&#39;],
+                            y=D_warehouse_grouped_filtered[&#39;LOCCODEY&#39;],
+                            zs=D_warehouse_grouped_filtered[&#39;LOCCODEZ&#39;],
+                            s=D_warehouse_grouped_filtered[&#39;SIZE&#39;],
+                            c=D_warehouse_grouped_filtered[&#39;SIZE&#39;]
+                            )
+                plt.colorbar()
+                plt.xlabel(&#34;Warehouse front (x)&#34;)
+                plt.ylabel(&#34;Warehouse depth (y)&#34;)
+                plt.title(f&#34;Warehouse INBOUND productivity, period:{period}&#34;)
+                figure_output[f&#34;IN_productivity_3D_{period}&#34;] = fig1
+
+    # render outbound figure
+    if len(D_loc_negative) &gt; 0:
+
+        # clean data
+        if cleanData:
+            D_warehouse_grouped, _ = cleanUsingIQR(D_loc_negative, features=[&#39;POPULARITY&#39;], capacityField=[])
+        else:
+            D_warehouse_grouped = D_loc_negative
+        # create figures
+        for period in set(D_warehouse_grouped[&#39;PERIOD&#39;]):
+            # period = list(set(D_warehouse_grouped[&#39;PERIOD&#39;]))[0]
+            D_warehouse_grouped_filtered = D_warehouse_grouped[D_warehouse_grouped[&#39;PERIOD&#39;] == period]
+            D_warehouse_grouped_filtered[&#39;SIZE&#39;] = _scaleSize(D_warehouse_grouped_filtered[&#39;POPULARITY&#39;])
+
+            # scale size
+            D_warehouse_grouped_filtered[&#39;SIZE&#39;] = 100 * D_warehouse_grouped_filtered[&#39;SIZE&#39;]
+
+            # graphType 2-Dimensional
+            if graphType == &#39;2D&#39;:
+                fig1 = plt.figure()
+                plt.scatter(D_warehouse_grouped_filtered[&#39;LOCCODEX&#39;],
+                            D_warehouse_grouped_filtered[&#39;LOCCODEY&#39;],
+                            D_warehouse_grouped_filtered[&#39;SIZE&#39;],
+                            c=D_warehouse_grouped_filtered[&#39;SIZE&#39;])
+                plt.colorbar()
+                plt.title(f&#34;Warehouse OUTBOUND productivity, period:{period}&#34;)
+                plt.xlabel(&#34;Warehouse front (x)&#34;)
+                plt.ylabel(&#34;Warehouse depth (y)&#34;)
+                figure_output[f&#34;OUT_productivity_2D_{period}&#34;] = fig1
+
+            # graphtype 3-Dimensional
+            elif graphType == &#39;3D&#39;:
+                fig1 = plt.figure()
+                fig1.add_subplot(111, projection=&#39;3d&#39;)
+                plt.scatter(x=D_warehouse_grouped_filtered[&#39;LOCCODEX&#39;],
+                            y=D_warehouse_grouped_filtered[&#39;LOCCODEY&#39;],
+                            zs=D_warehouse_grouped_filtered[&#39;LOCCODEZ&#39;],
+                            s=D_warehouse_grouped_filtered[&#39;SIZE&#39;],
+                            c=D_warehouse_grouped_filtered[&#39;SIZE&#39;]
+                            )
+                plt.colorbar()
+                plt.xlabel(&#34;Warehouse front (x)&#34;)
+                plt.ylabel(&#34;Warehouse depth (y)&#34;)
+                plt.title(f&#34;Warehouse OUTBOUND productivity, period:{period}&#34;)
+                figure_output[f&#34;OUT_productivity_3D_{period}&#34;] = fig1
+    return figure_output
+
+
+def timeProductivity(D_movements: pd.DataFrame, variableToPlot: str, inout_column: str):
+    &#34;&#34;&#34;
+    time productivity plots
+
+    Args:
+        D_movements (pd.DataFrame): input movements dataframe.
+        variableToPlot (str): string with the column to plot. or &#34;popularity&#34; for movement count.
+        inout_column (str): string of the inout column.
+
+    Returns:
+        figure_output (TYPE): dictionary with output figures.
+
+    &#34;&#34;&#34;
+
+    figure_output = {}
+
+    if variableToPlot == &#39;popularity&#39;:
+        D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column]).size().reset_index()
+
+    else:
+        D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column]).sum()[variableToPlot].reset_index()
+    D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;MOVEMENTS&#39;]
+
+    D_loc_positive = D_mov[D_mov[inout_column] == &#39;+&#39;]
+    D_loc_negative = D_mov[D_mov[inout_column] == &#39;-&#39;]
+
+    # render inbound figure
+    if len(D_loc_positive) &gt; 0:
+
+        fig1 = plt.figure()
+        plt.plot(D_loc_positive[&#39;PERIOD&#39;],
+                 D_loc_positive[&#39;MOVEMENTS&#39;])
+        plt.title(&#34;Warehouse INBOUND productivity&#34;)
+        plt.xticks(rotation=45)
+        plt.xlabel(&#34;Timeline&#34;)
+        plt.ylabel(&#34;N. of lines&#34;)
+        figure_output[&#34;IN_productivity_trend&#34;] = fig1
+
+    # render inbound figure
+    if len(D_loc_negative) &gt; 0:
+
+        fig1 = plt.figure()
+        plt.plot(D_loc_negative[&#39;PERIOD&#39;],
+                 D_loc_negative[&#39;MOVEMENTS&#39;])
+        plt.title(&#34;Warehouse OUTBOUND productivity&#34;)
+        plt.xticks(rotation=45)
+        plt.xlabel(&#34;Timeline&#34;)
+        plt.ylabel(&#34;N. of lines&#34;)
+        figure_output[&#34;OUT_productivity_trend&#34;] = fig1
+    return figure_output
+
+
+def movementsStatistics(D_movements: pd.DataFrame):
+    &#34;&#34;&#34;
+    Calculate statistics on the movements of a warehouse.
+
+    Args:
+        D_movements (pd.dataFrame): Input movements dataframe.
+
+    Returns:
+        D_wh_stat (pd.dataFrame): Output statistics DataFrame.
+
+    &#34;&#34;&#34;
+
+    D_wh_stat = pd.DataFrame(columns=[&#39;Description&#39;, &#39;value&#39;])
+
+    # calculate the number of movements
+    n_mov = len(D_movements)
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Movements&#39;, n_mov]], columns=D_wh_stat.columns))
+
+    # calculate the inbound movements
+    D_in = D_movements[D_movements[&#39;INOUT&#39;] == &#39;+&#39;]
+    n_mov_in = len(D_in)
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Movements INBOUND&#39;, n_mov_in]], columns=D_wh_stat.columns))
+
+    # calculate the inbound movements
+    D_out = D_movements[D_movements[&#39;INOUT&#39;] == &#39;-&#39;]
+    n_mov_out = len(D_out)
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Movements OUTBOUND&#39;, n_mov_out]], columns=D_wh_stat.columns))
+
+    # calculate the number of movement days
+    n_days = (max(D_movements[&#39;TIMESTAMP_IN&#39;]) - min(D_movements[&#39;TIMESTAMP_IN&#39;])).days
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Days&#39;, n_days]], columns=D_wh_stat.columns))
+
+    # check layout data
+    D_lay = D_movements.dropna(subset=[&#39;RACK&#39;])[&#39;RACK&#39;].drop_duplicates()
+    if len(D_lay) &gt; 2:
+        lay = &#39;OK&#39;
+    else:
+        lay = &#39;NO&#39;
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Layout data&#39;, lay]], columns=D_wh_stat.columns))
+
+    # check coordinates data
+    D_lay = D_movements.dropna(subset=[&#39;LOCCODEX&#39;])[&#39;LOCCODEX&#39;].drop_duplicates()
+    if len(D_lay) &gt; 2:
+        lay = &#39;OK&#39;
+    else:
+        lay = &#39;NO&#39;
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Coordinates data&#39;, lay]], columns=D_wh_stat.columns))
+
+    # calcualte the number of storage locations
+    n_loc = len(D_movements[&#39;IDLOCATION&#39;].drop_duplicates())
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Locations&#39;, n_loc]], columns=D_wh_stat.columns))
+
+    # calcualte the number of storage locations
+    n_idwh = len(D_movements[&#39;IDWH&#39;].drop_duplicates())
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Wh systems&#39;, n_idwh]], columns=D_wh_stat.columns))
+
+    # calculate the number of SKUs
+    n_skus = len(D_movements[&#39;ITEMCODE&#39;].drop_duplicates())
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. SKUs&#39;, n_skus]], columns=D_wh_stat.columns))
+
+    # check volume data
+    D_lay = D_movements.dropna(subset=[&#39;VOLUME&#39;])[&#39;VOLUME&#39;].drop_duplicates()
+    if len(D_lay) &gt; 2:
+        vol = &#39;OK&#39;
+    else:
+        vol = &#39;NO&#39;
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Volume data&#39;, vol]], columns=D_wh_stat.columns))
+
+    # check pickinglist data
+    D_lay = D_movements.dropna(subset=[&#39;PICKINGLIST&#39;])[&#39;PICKINGLIST&#39;].drop_duplicates()
+    if len(D_lay) &gt; 2:
+        vol = &#39;OK&#39;
+    else:
+        vol = &#39;NO&#39;
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Picking list data&#39;, vol]], columns=D_wh_stat.columns))
+
+    return D_wh_stat</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.movementsStatistics"><code class="name flex">
+<span>def <span class="ident">movementsStatistics</span></span>(<span>D_movements: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate statistics on the movements of a warehouse.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_movements</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>Input movements dataframe.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_wh_stat (pd.dataFrame): Output statistics DataFrame.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def movementsStatistics(D_movements: pd.DataFrame):
+    &#34;&#34;&#34;
+    Calculate statistics on the movements of a warehouse.
+
+    Args:
+        D_movements (pd.dataFrame): Input movements dataframe.
+
+    Returns:
+        D_wh_stat (pd.dataFrame): Output statistics DataFrame.
+
+    &#34;&#34;&#34;
+
+    D_wh_stat = pd.DataFrame(columns=[&#39;Description&#39;, &#39;value&#39;])
+
+    # calculate the number of movements
+    n_mov = len(D_movements)
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Movements&#39;, n_mov]], columns=D_wh_stat.columns))
+
+    # calculate the inbound movements
+    D_in = D_movements[D_movements[&#39;INOUT&#39;] == &#39;+&#39;]
+    n_mov_in = len(D_in)
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Movements INBOUND&#39;, n_mov_in]], columns=D_wh_stat.columns))
+
+    # calculate the inbound movements
+    D_out = D_movements[D_movements[&#39;INOUT&#39;] == &#39;-&#39;]
+    n_mov_out = len(D_out)
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Movements OUTBOUND&#39;, n_mov_out]], columns=D_wh_stat.columns))
+
+    # calculate the number of movement days
+    n_days = (max(D_movements[&#39;TIMESTAMP_IN&#39;]) - min(D_movements[&#39;TIMESTAMP_IN&#39;])).days
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Days&#39;, n_days]], columns=D_wh_stat.columns))
+
+    # check layout data
+    D_lay = D_movements.dropna(subset=[&#39;RACK&#39;])[&#39;RACK&#39;].drop_duplicates()
+    if len(D_lay) &gt; 2:
+        lay = &#39;OK&#39;
+    else:
+        lay = &#39;NO&#39;
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Layout data&#39;, lay]], columns=D_wh_stat.columns))
+
+    # check coordinates data
+    D_lay = D_movements.dropna(subset=[&#39;LOCCODEX&#39;])[&#39;LOCCODEX&#39;].drop_duplicates()
+    if len(D_lay) &gt; 2:
+        lay = &#39;OK&#39;
+    else:
+        lay = &#39;NO&#39;
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Coordinates data&#39;, lay]], columns=D_wh_stat.columns))
+
+    # calcualte the number of storage locations
+    n_loc = len(D_movements[&#39;IDLOCATION&#39;].drop_duplicates())
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Locations&#39;, n_loc]], columns=D_wh_stat.columns))
+
+    # calcualte the number of storage locations
+    n_idwh = len(D_movements[&#39;IDWH&#39;].drop_duplicates())
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. Wh systems&#39;, n_idwh]], columns=D_wh_stat.columns))
+
+    # calculate the number of SKUs
+    n_skus = len(D_movements[&#39;ITEMCODE&#39;].drop_duplicates())
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Num. SKUs&#39;, n_skus]], columns=D_wh_stat.columns))
+
+    # check volume data
+    D_lay = D_movements.dropna(subset=[&#39;VOLUME&#39;])[&#39;VOLUME&#39;].drop_duplicates()
+    if len(D_lay) &gt; 2:
+        vol = &#39;OK&#39;
+    else:
+        vol = &#39;NO&#39;
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Volume data&#39;, vol]], columns=D_wh_stat.columns))
+
+    # check pickinglist data
+    D_lay = D_movements.dropna(subset=[&#39;PICKINGLIST&#39;])[&#39;PICKINGLIST&#39;].drop_duplicates()
+    if len(D_lay) &gt; 2:
+        vol = &#39;OK&#39;
+    else:
+        vol = &#39;NO&#39;
+    D_wh_stat = D_wh_stat.append(pd.DataFrame([[&#39;Picking list data&#39;, vol]], columns=D_wh_stat.columns))
+
+    return D_wh_stat</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.spaceProductivity"><code class="name flex">
+<span>def <span class="ident">spaceProductivity</span></span>(<span>D_movements: pandas.core.frame.DataFrame, variableToPlot: str, inout_column: str, x_col: str, y_col: str, z_col: str, graphType: str = '2D', cleanData: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>3D warehouse productivity plot</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_movements</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>pandas dataframe with movements.</dd>
+<dt><strong><code>variableToPlot</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the column to plot. or "popularity" for movement count.</dd>
+<dt><strong><code>inout_column</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with inout.</dd>
+<dt><strong><code>x_col</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with x coordinates.</dd>
+<dt><strong><code>y_col</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with y coordinates.</dd>
+<dt><strong><code>z_col</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the column with z coordinates.</dd>
+<dt><strong><code>graphType</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>The default is '2D'. 2D or 3D depending on the graph type. Defaults to '2D'.</dd>
+<dt><strong><code>cleanData</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>if True, IQR is used to clean popularity of each location. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Output dictionary with figures.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def spaceProductivity(D_movements: pd.DataFrame, variableToPlot: str, inout_column: str,
+                      x_col: str, y_col: str, z_col: str, graphType: str = &#39;2D&#39;, cleanData: bool = False):
+    &#34;&#34;&#34;
+    3D warehouse productivity plot
+
+    Args:
+        D_movements (pd.dataFrame): pandas dataframe with movements.
+        variableToPlot (str): string with the column to plot. or &#34;popularity&#34; for movement count.
+        inout_column (str): string of the column with inout.
+        x_col (str): string of the column with x coordinates.
+        y_col (str): string of the column with y coordinates.
+        z_col (str): string of the column with z coordinates.
+        graphType (str, optional): The default is &#39;2D&#39;. 2D or 3D depending on the graph type. Defaults to &#39;2D&#39;.
+        cleanData (bool, optional): if True, IQR is used to clean popularity of each location. Defaults to False.
+
+    Returns:
+        dict: Output dictionary with figures.
+
+    &#34;&#34;&#34;
+
+    def _scaleSize(series):
+        if min(series) == max(series):
+            return [1 for i in range(0, len(series))]
+        else:
+            return (series - min(series)) / (max(series) - min(series))
+
+    figure_output = {}
+    # group data
+    if variableToPlot == &#39;popularity&#39;:
+        if graphType == &#39;3D&#39;:
+            D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column, x_col, y_col, z_col]).size().reset_index()
+            D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;, &#39;LOCCODEZ&#39;, &#39;POPULARITY&#39;]
+        elif graphType == &#39;2D&#39;:
+            D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column, x_col, y_col]).size().reset_index()
+            D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;, &#39;POPULARITY&#39;]
+    else:
+        if graphType == &#39;3D&#39;:
+            D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column, x_col, y_col, z_col]).sum()[variableToPlot].reset_index()
+            D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;, &#39;LOCCODEZ&#39;, &#39;POPULARITY&#39;]
+        elif graphType == &#39;2D&#39;:
+            D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column, x_col, y_col]).sum()[variableToPlot].reset_index()
+            D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;, &#39;POPULARITY&#39;]
+
+    # split data into inbound and outbound
+    D_loc_positive = D_mov[D_mov[inout_column] == &#39;+&#39;]
+    D_loc_negative = D_mov[D_mov[inout_column] == &#39;-&#39;]
+
+    # render inbound figure
+    if len(D_loc_positive) &gt; 0:
+
+        # clean data
+        if cleanData:
+            D_warehouse_grouped, _ = cleanUsingIQR(D_loc_positive, features=[&#39;POPULARITY&#39;], capacityField=[])
+        else:
+            D_warehouse_grouped = D_loc_positive
+        # create figures
+        for period in set(D_warehouse_grouped[&#39;PERIOD&#39;]):
+            # period = list(set(D_warehouse_grouped[&#39;PERIOD&#39;]))[0]
+            D_warehouse_grouped_filtered = D_warehouse_grouped[D_warehouse_grouped[&#39;PERIOD&#39;] == period]
+            D_warehouse_grouped_filtered[&#39;SIZE&#39;] = _scaleSize(D_warehouse_grouped_filtered[&#39;POPULARITY&#39;])
+
+            # scale size
+            D_warehouse_grouped_filtered[&#39;SIZE&#39;] = 100 * D_warehouse_grouped_filtered[&#39;SIZE&#39;]
+
+            # graphType 2-Dimensional
+            if graphType == &#39;2D&#39;:
+                fig1 = plt.figure()
+                plt.scatter(D_warehouse_grouped_filtered[&#39;LOCCODEX&#39;],
+                            D_warehouse_grouped_filtered[&#39;LOCCODEY&#39;],
+                            D_warehouse_grouped_filtered[&#39;SIZE&#39;],
+                            c=D_warehouse_grouped_filtered[&#39;SIZE&#39;])
+                plt.colorbar()
+                plt.title(f&#34;Warehouse INBOUND productivity, period:{period}&#34;)
+                plt.xlabel(&#34;Warehouse front (x)&#34;)
+                plt.ylabel(&#34;Warehouse depth (y)&#34;)
+                figure_output[f&#34;IN_productivity_2D_{period}&#34;] = fig1
+
+            # graphtype 3-Dimensional
+            elif graphType == &#39;3D&#39;:
+                fig1 = plt.figure()
+                fig1.add_subplot(111, projection=&#39;3d&#39;)
+                plt.scatter(x=D_warehouse_grouped_filtered[&#39;LOCCODEX&#39;],
+                            y=D_warehouse_grouped_filtered[&#39;LOCCODEY&#39;],
+                            zs=D_warehouse_grouped_filtered[&#39;LOCCODEZ&#39;],
+                            s=D_warehouse_grouped_filtered[&#39;SIZE&#39;],
+                            c=D_warehouse_grouped_filtered[&#39;SIZE&#39;]
+                            )
+                plt.colorbar()
+                plt.xlabel(&#34;Warehouse front (x)&#34;)
+                plt.ylabel(&#34;Warehouse depth (y)&#34;)
+                plt.title(f&#34;Warehouse INBOUND productivity, period:{period}&#34;)
+                figure_output[f&#34;IN_productivity_3D_{period}&#34;] = fig1
+
+    # render outbound figure
+    if len(D_loc_negative) &gt; 0:
+
+        # clean data
+        if cleanData:
+            D_warehouse_grouped, _ = cleanUsingIQR(D_loc_negative, features=[&#39;POPULARITY&#39;], capacityField=[])
+        else:
+            D_warehouse_grouped = D_loc_negative
+        # create figures
+        for period in set(D_warehouse_grouped[&#39;PERIOD&#39;]):
+            # period = list(set(D_warehouse_grouped[&#39;PERIOD&#39;]))[0]
+            D_warehouse_grouped_filtered = D_warehouse_grouped[D_warehouse_grouped[&#39;PERIOD&#39;] == period]
+            D_warehouse_grouped_filtered[&#39;SIZE&#39;] = _scaleSize(D_warehouse_grouped_filtered[&#39;POPULARITY&#39;])
+
+            # scale size
+            D_warehouse_grouped_filtered[&#39;SIZE&#39;] = 100 * D_warehouse_grouped_filtered[&#39;SIZE&#39;]
+
+            # graphType 2-Dimensional
+            if graphType == &#39;2D&#39;:
+                fig1 = plt.figure()
+                plt.scatter(D_warehouse_grouped_filtered[&#39;LOCCODEX&#39;],
+                            D_warehouse_grouped_filtered[&#39;LOCCODEY&#39;],
+                            D_warehouse_grouped_filtered[&#39;SIZE&#39;],
+                            c=D_warehouse_grouped_filtered[&#39;SIZE&#39;])
+                plt.colorbar()
+                plt.title(f&#34;Warehouse OUTBOUND productivity, period:{period}&#34;)
+                plt.xlabel(&#34;Warehouse front (x)&#34;)
+                plt.ylabel(&#34;Warehouse depth (y)&#34;)
+                figure_output[f&#34;OUT_productivity_2D_{period}&#34;] = fig1
+
+            # graphtype 3-Dimensional
+            elif graphType == &#39;3D&#39;:
+                fig1 = plt.figure()
+                fig1.add_subplot(111, projection=&#39;3d&#39;)
+                plt.scatter(x=D_warehouse_grouped_filtered[&#39;LOCCODEX&#39;],
+                            y=D_warehouse_grouped_filtered[&#39;LOCCODEY&#39;],
+                            zs=D_warehouse_grouped_filtered[&#39;LOCCODEZ&#39;],
+                            s=D_warehouse_grouped_filtered[&#39;SIZE&#39;],
+                            c=D_warehouse_grouped_filtered[&#39;SIZE&#39;]
+                            )
+                plt.colorbar()
+                plt.xlabel(&#34;Warehouse front (x)&#34;)
+                plt.ylabel(&#34;Warehouse depth (y)&#34;)
+                plt.title(f&#34;Warehouse OUTBOUND productivity, period:{period}&#34;)
+                figure_output[f&#34;OUT_productivity_3D_{period}&#34;] = fig1
+    return figure_output</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.timeProductivity"><code class="name flex">
+<span>def <span class="ident">timeProductivity</span></span>(<span>D_movements: pandas.core.frame.DataFrame, variableToPlot: str, inout_column: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>time productivity plots</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_movements</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input movements dataframe.</dd>
+<dt><strong><code>variableToPlot</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the column to plot. or "popularity" for movement count.</dd>
+<dt><strong><code>inout_column</code></strong> :&ensp;<code>str</code></dt>
+<dd>string of the inout column.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>figure_output (TYPE): dictionary with output figures.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def timeProductivity(D_movements: pd.DataFrame, variableToPlot: str, inout_column: str):
+    &#34;&#34;&#34;
+    time productivity plots
+
+    Args:
+        D_movements (pd.DataFrame): input movements dataframe.
+        variableToPlot (str): string with the column to plot. or &#34;popularity&#34; for movement count.
+        inout_column (str): string of the inout column.
+
+    Returns:
+        figure_output (TYPE): dictionary with output figures.
+
+    &#34;&#34;&#34;
+
+    figure_output = {}
+
+    if variableToPlot == &#39;popularity&#39;:
+        D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column]).size().reset_index()
+
+    else:
+        D_mov = D_movements.groupby([&#39;PERIOD&#39;, inout_column]).sum()[variableToPlot].reset_index()
+    D_mov.columns = [&#39;PERIOD&#39;, &#39;INOUT&#39;, &#39;MOVEMENTS&#39;]
+
+    D_loc_positive = D_mov[D_mov[inout_column] == &#39;+&#39;]
+    D_loc_negative = D_mov[D_mov[inout_column] == &#39;-&#39;]
+
+    # render inbound figure
+    if len(D_loc_positive) &gt; 0:
+
+        fig1 = plt.figure()
+        plt.plot(D_loc_positive[&#39;PERIOD&#39;],
+                 D_loc_positive[&#39;MOVEMENTS&#39;])
+        plt.title(&#34;Warehouse INBOUND productivity&#34;)
+        plt.xticks(rotation=45)
+        plt.xlabel(&#34;Timeline&#34;)
+        plt.ylabel(&#34;N. of lines&#34;)
+        figure_output[&#34;IN_productivity_trend&#34;] = fig1
+
+    # render inbound figure
+    if len(D_loc_negative) &gt; 0:
+
+        fig1 = plt.figure()
+        plt.plot(D_loc_negative[&#39;PERIOD&#39;],
+                 D_loc_negative[&#39;MOVEMENTS&#39;])
+        plt.title(&#34;Warehouse OUTBOUND productivity&#34;)
+        plt.xticks(rotation=45)
+        plt.xlabel(&#34;Timeline&#34;)
+        plt.ylabel(&#34;N. of lines&#34;)
+        figure_output[&#34;OUT_productivity_trend&#34;] = fig1
+    return figure_output</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.movementsStatistics" href="#analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.movementsStatistics">movementsStatistics</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.spaceProductivity" href="#analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.spaceProductivity">spaceProductivity</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.timeProductivity" href="#analogistics.supply_chain.P8_performance_assessment.wh_productivity_assessment.timeProductivity">timeProductivity</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from analogistics.clean import cleanUsingIQR
 
 
-def spaceProductivity(D_movements: pd.dataFrame, variableToPlot: str, inout_column: str,
+def spaceProductivity(D_movements: pd.DataFrame, variableToPlot: str, inout_column: str,
                       x_col: str, y_col: str, z_col: str, graphType: str = '2D', cleanData: bool = False):
     """
     3D warehouse productivity plot
@@ -197,7 +197,7 @@ def timeProductivity(D_movements: pd.DataFrame, variableToPlot: str, inout_colum
     return figure_output
 
 
-def movementsStatistics(D_movements: pd.dataFrame):
+def movementsStatistics(D_movements: pd.DataFrame):
     """
     Calculate statistics on the movements of a warehouse.
 

@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P8_performance_assessment.wh_indexes API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P8_performance_assessment.wh_indexes</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from analogistics.statistics import time_series as ts
+from analogistics.supply_chain.information_framework import movementfunctionfromInventory
+from analogistics.explore import paretoDataframe
+
+
+def calculatePopularity(movements: pd.Series):
+    &#34;&#34;&#34;
+    Define the popularity for a SKU
+
+    Args:
+        movements (pd.Series): series of the movement with one item per day.
+
+    Returns:
+        pop_in (float): relative popularity IN per day.
+        pop_out (float): realtiva popularity OUT per day.
+        pop_absolute_in (float): popularity IN per day.
+        pop_absolute_out (float): popularity OUT per day.
+
+    &#34;&#34;&#34;
+
+    pop_in = len(movements[movements &gt; 0]) / len(movements)
+    pop_out = len(movements[movements &lt; 0]) / len(movements)
+    pop_absolute_in = len(movements[movements &gt; 0])
+    pop_absolute_out = len(movements[movements &lt; 0])
+    return pop_in, pop_out, pop_absolute_in, pop_absolute_out
+
+
+def calculateCOI(inventory: pd.Series):
+    &#34;&#34;&#34;
+    Calculate the COI index of an SKU, given the inventory function
+
+    Args:
+        inventory (pd.Series): series of the inventory of an SKU.
+
+    Returns:
+        COI_in (float): COI index IN.
+        COI_out (float): COI index OUT.
+
+    &#34;&#34;&#34;
+
+    # define inventory from movements
+    movements = movementfunctionfromInventory(inventory)
+    movements = movements.dropna()
+    pop_in, pop_out, _, _ = calculatePopularity(movements[&#39;QUANTITY&#39;])
+
+    # calculate daily COI
+    I_t_avg = np.nanmean(inventory)
+    if I_t_avg &gt; 0:
+        COI_in = pop_in / I_t_avg
+        COI_out = pop_out / I_t_avg
+    else:
+        COI_in = COI_out = np.nan
+
+    return COI_in, COI_out
+
+
+def calculateTurn(inventory: pd.Series):
+    &#34;&#34;&#34;
+    Calculate the TURN index of an SKU, given the inventory function
+
+    Args:
+        inventory (pd.series): series of the inventory of an SKU.
+
+    Returns:
+        turn (float): Output turn index.
+    &#34;&#34;&#34;
+
+    # define inventory from movements
+    movements = movementfunctionfromInventory(inventory)
+    movements = movements.dropna()
+
+    # calculate the average outbound quantity per day
+    out_qty_day = -np.sum(movements[movements[&#39;QUANTITY&#39;] &lt; 0][&#39;QUANTITY&#39;]) / len(movements)
+
+    # calculate average inventory quantity
+    I_t_avg = np.nanmean(inventory)
+    if I_t_avg &gt; 0:
+        turn = out_qty_day / I_t_avg
+    else:
+        turn = np.nan
+
+    return turn
+
+
+def calculateOrderCompletion(D_mov: pd.DataFrame, itemcode: str,
+                             itemfield: str = &#39;ITEMCODE&#39;, ordercodefield: str = &#39;ORDERCODE&#39;):
+    &#34;&#34;&#34;
+    calculate the Order Completion (OC) index
+
+    Args:
+        D_mov (pd.DataFrame): dataframe with movements reporting ordercode and itemcode columns.
+        itemcode (str): itemcode to calculate the order competion (OC) index.
+        itemfield (str, optional): string name of D_mov clumn with itemcode. Defaults to &#39;ITEMCODE&#39;.
+        ordercodefield (str, optional): string name of D_mov clumn with ordercode. Defaults to &#39;ORDERCODE&#39;.
+
+    Returns:
+        OC (float): Output OC index.
+
+    &#34;&#34;&#34;
+
+    # clean data
+    D_mov = D_mov[[itemfield, ordercodefield]]
+    D_mov = D_mov[D_mov[ordercodefield] != &#39;nan&#39;]
+    D_mov = D_mov.dropna()
+    D_mov = D_mov.reset_index()
+
+    orders = list(set(D_mov[D_mov[itemfield] == itemcode][ordercodefield]))
+
+    idx = [j in orders for j in D_mov[ordercodefield]]
+    D_orders = D_mov.loc[idx]
+
+    OC = 0
+    for ordercode in orders:
+        D_orders_filtered = D_orders[D_orders[ordercodefield] == ordercode]
+        OC = OC + 1 / len(D_orders_filtered)
+    return OC
+
+
+def fourierAnalysisInventory(inventory: pd.Series):
+    &#34;&#34;&#34;
+    fourier analysis of the inventory curve
+
+    Args:
+        inventory (pd.series): list of inventory values.
+
+    Returns:
+        first_carrier (TYPE): frequency (in 1/days) with the highest amplitude value.
+        period (TYPE): period (in days) associated with the frequency with the highest amplitude value.
+
+    &#34;&#34;&#34;
+
+    D = ts.fourierAnalysis(np.array(inventory))
+    D = D.sort_values(by=&#39;Amplitude&#39;, ascending=False)
+    first_carrier = D.iloc[0][&#39;Frequency_domain_value&#39;]  # 1 / days
+    period = 1 / first_carrier
+    return first_carrier, period
+
+
+def updatePopularity(D_SKUs: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update the popularity index
+
+    Args:
+        D_SKUs (pd.dataFrame): Input dataframe with SKUs.
+
+    Returns:
+        D_SKUs (pd.DataFrame): Output DataFrame with updated popularity.
+
+    &#34;&#34;&#34;
+
+    # create results columns
+    D_SKUs[&#39;POP_IN&#39;] = np.nan
+    D_SKUs[&#39;POP_OUT&#39;] = np.nan
+    D_SKUs[&#39;POP_IN_TOT&#39;] = np.nan
+    D_SKUs[&#39;POP_OUT_TOT&#39;] = np.nan
+
+    for index, row in D_SKUs.iterrows():
+        # select inventory curve
+        I_t = D_SKUs.loc[index][&#39;INVENTORY_QTY&#39;]
+        # calculate the popularity
+        movements = movementfunctionfromInventory(I_t)
+        movements = movements.dropna()
+        if len(movements) &gt; 0:
+            POP_IN, POP_OUT, POP_IN_TOT, POP_OUT_TOT = calculatePopularity(movements[&#39;QUANTITY&#39;])
+
+            # update the dataframe
+            D_SKUs.at[index, &#39;POP_IN&#39;] = POP_IN
+            D_SKUs.at[index, &#39;POP_OUT&#39;] = POP_OUT
+            D_SKUs.at[index, &#39;POP_IN_TOT&#39;] = POP_IN_TOT
+            D_SKUs.at[index, &#39;POP_OUT_TOT&#39;] = POP_OUT_TOT
+    return D_SKUs
+
+
+def updateCOI(D_SKUs: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update the COI index
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+
+    Returns:
+        D_SKUs (pd.DataFrame): Output DataFrame with updated COI.
+
+    &#34;&#34;&#34;
+
+    # create result columns
+    D_SKUs[&#39;COI_IN&#39;] = np.nan
+    D_SKUs[&#39;COI_OUT&#39;] = np.nan
+    for index, row in D_SKUs.iterrows():
+        # select inventory curve
+        I_t = D_SKUs.loc[index][&#39;INVENTORY_QTY&#39;]
+        # calculate the popularity
+        movements = movementfunctionfromInventory(I_t)
+        movements = movements.dropna()
+        if len(movements) &gt; 0:
+            COI_IN, COI_OUT = calculateCOI(I_t)
+
+            # update the dataframe
+            D_SKUs.at[index, &#39;COI_IN&#39;] = COI_IN
+            D_SKUs.at[index, &#39;COI_OUT&#39;] = COI_OUT
+
+    return D_SKUs
+
+
+def updateTURN(D_SKUs: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update TURN index
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+
+    Returns:
+        D_SKUs (TYPE): Output DataFrame with updated TURN.
+
+    &#34;&#34;&#34;
+
+    # create result columns
+    D_SKUs[&#39;TURN&#39;] = np.nan
+
+    for index, row in D_SKUs.iterrows():
+        # select inventory curve
+        I_t = D_SKUs.loc[index][&#39;INVENTORY_QTY&#39;]
+        # calculate the popularity
+        movements = movementfunctionfromInventory(I_t)
+        movements = movements.dropna()
+        if len(movements) &gt; 0:
+            TURN = calculateTurn(I_t)
+
+            # update the dataframe
+            D_SKUs.at[index, &#39;TURN&#39;] = TURN
+
+    return D_SKUs
+
+
+def updateOrderCompletion(D_SKUs: pd.DataFrame, D_mov: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update OC index
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+        D_mov (pd.DataFrame): Input dataframe with movements.
+
+    Returns:
+        D_SKUs (pd.dataFrame): Output DataFrame with updated OC.
+
+    &#34;&#34;&#34;
+
+    # create result columns
+    D_SKUs[&#39;OC&#39;] = np.nan
+
+    for index, row in D_SKUs.iterrows():
+
+        part = row[&#39;ITEMCODE&#39;]
+
+        # calculate the popularity
+        OC = calculateOrderCompletion(D_mov, part, itemfield=&#39;ITEMCODE&#39;, ordercodefield=&#39;ORDERCODE&#39;)
+
+        # update the dataframe
+        D_SKUs.at[index, &#39;OC&#39;] = OC
+
+    return D_SKUs
+
+
+def updateFourieranalysis(D_SKUs: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update the Fourier Analysis
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+
+    Returns:
+        D_SKUs (pd.DataFrame): Output DataFrame with updated fourier analysis.
+
+    &#34;&#34;&#34;
+
+    # create result columns
+    D_SKUs[&#39;FOURIER_CARRIER&#39;] = np.nan
+    D_SKUs[&#39;FOURIER_PERIOD&#39;] = np.nan
+
+    for index, row in D_SKUs.iterrows():
+        # select inventory curve
+        I_t = D_SKUs.loc[index][&#39;INVENTORY_QTY&#39;]
+        # calculate the popularity
+        movements = movementfunctionfromInventory(I_t)
+        movements = movements.dropna()
+        if len(movements) &gt; 0:
+            carrier, period = fourierAnalysisInventory(I_t)
+
+            # update the dataframe
+            D_SKUs.at[index, &#39;FOURIER_CARRIER&#39;] = carrier
+            D_SKUs.at[index, &#39;FOURIER_PERIOD&#39;] = period
+
+    return D_SKUs
+
+
+# %% PARETO AND HISTOGRAM PLOT
+
+def whIndexParetoPlot(D_SKUs: pd.DataFrame, columnIndex: str):
+    &#34;&#34;&#34;
+    Define the Pareto and histogram plot for a WH index
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+        columnIndex (str): Name of the index to plot.
+
+    Returns:
+        output_figures (dict): Output dictionary with figures.
+
+    &#34;&#34;&#34;
+
+    output_figures = {}
+
+    # define the pareto values
+    D_SKUs_pop = paretoDataframe(D_SKUs, columnIndex)
+
+    # build the pareto figures
+    fig1 = plt.figure()
+    plt.plot(np.arange(0, len(D_SKUs_pop)), D_SKUs_pop[f&#34;{columnIndex}_CUM&#34;], color=&#39;orange&#39;)
+    plt.title(f&#34;{columnIndex} Pareto curve&#34;)
+    plt.xlabel(&#34;N. of SKUs&#34;)
+    plt.ylabel(&#34;Popularity percentage&#34;)
+
+    # save the Pareto figure
+    output_figures[f&#34;{columnIndex}_pareto&#34;] = fig1
+
+    fig2 = plt.figure()
+    plt.hist(D_SKUs_pop[columnIndex], color=&#39;orange&#39;)
+    plt.title(f&#34;{columnIndex} histogram&#34;)
+    plt.xlabel(f&#34;{columnIndex}&#34;)
+    plt.ylabel(&#34;Frequency&#34;)
+
+    # save the Pareto figure
+    output_figures[f&#34;{columnIndex}_hist&#34;] = fig2
+
+    return output_figures</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateCOI"><code class="name flex">
+<span>def <span class="ident">calculateCOI</span></span>(<span>inventory: pandas.core.series.Series)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate the COI index of an SKU, given the inventory function</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>inventory</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>series of the inventory of an SKU.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>COI_in (float): COI index IN.
+COI_out (float): COI index OUT.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateCOI(inventory: pd.Series):
+    &#34;&#34;&#34;
+    Calculate the COI index of an SKU, given the inventory function
+
+    Args:
+        inventory (pd.Series): series of the inventory of an SKU.
+
+    Returns:
+        COI_in (float): COI index IN.
+        COI_out (float): COI index OUT.
+
+    &#34;&#34;&#34;
+
+    # define inventory from movements
+    movements = movementfunctionfromInventory(inventory)
+    movements = movements.dropna()
+    pop_in, pop_out, _, _ = calculatePopularity(movements[&#39;QUANTITY&#39;])
+
+    # calculate daily COI
+    I_t_avg = np.nanmean(inventory)
+    if I_t_avg &gt; 0:
+        COI_in = pop_in / I_t_avg
+        COI_out = pop_out / I_t_avg
+    else:
+        COI_in = COI_out = np.nan
+
+    return COI_in, COI_out</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateOrderCompletion"><code class="name flex">
+<span>def <span class="ident">calculateOrderCompletion</span></span>(<span>D_mov: pandas.core.frame.DataFrame, itemcode: str, itemfield: str = 'ITEMCODE', ordercodefield: str = 'ORDERCODE')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculate the Order Completion (OC) index</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe with movements reporting ordercode and itemcode columns.</dd>
+<dt><strong><code>itemcode</code></strong> :&ensp;<code>str</code></dt>
+<dd>itemcode to calculate the order competion (OC) index.</dd>
+<dt><strong><code>itemfield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string name of D_mov clumn with itemcode. Defaults to 'ITEMCODE'.</dd>
+<dt><strong><code>ordercodefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>string name of D_mov clumn with ordercode. Defaults to 'ORDERCODE'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>OC (float): Output OC index.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateOrderCompletion(D_mov: pd.DataFrame, itemcode: str,
+                             itemfield: str = &#39;ITEMCODE&#39;, ordercodefield: str = &#39;ORDERCODE&#39;):
+    &#34;&#34;&#34;
+    calculate the Order Completion (OC) index
+
+    Args:
+        D_mov (pd.DataFrame): dataframe with movements reporting ordercode and itemcode columns.
+        itemcode (str): itemcode to calculate the order competion (OC) index.
+        itemfield (str, optional): string name of D_mov clumn with itemcode. Defaults to &#39;ITEMCODE&#39;.
+        ordercodefield (str, optional): string name of D_mov clumn with ordercode. Defaults to &#39;ORDERCODE&#39;.
+
+    Returns:
+        OC (float): Output OC index.
+
+    &#34;&#34;&#34;
+
+    # clean data
+    D_mov = D_mov[[itemfield, ordercodefield]]
+    D_mov = D_mov[D_mov[ordercodefield] != &#39;nan&#39;]
+    D_mov = D_mov.dropna()
+    D_mov = D_mov.reset_index()
+
+    orders = list(set(D_mov[D_mov[itemfield] == itemcode][ordercodefield]))
+
+    idx = [j in orders for j in D_mov[ordercodefield]]
+    D_orders = D_mov.loc[idx]
+
+    OC = 0
+    for ordercode in orders:
+        D_orders_filtered = D_orders[D_orders[ordercodefield] == ordercode]
+        OC = OC + 1 / len(D_orders_filtered)
+    return OC</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculatePopularity"><code class="name flex">
+<span>def <span class="ident">calculatePopularity</span></span>(<span>movements: pandas.core.series.Series)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define the popularity for a SKU</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>movements</code></strong> :&ensp;<code>pd.Series</code></dt>
+<dd>series of the movement with one item per day.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>pop_in (float): relative popularity IN per day.
+pop_out (float): realtiva popularity OUT per day.
+pop_absolute_in (float): popularity IN per day.
+pop_absolute_out (float): popularity OUT per day.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculatePopularity(movements: pd.Series):
+    &#34;&#34;&#34;
+    Define the popularity for a SKU
+
+    Args:
+        movements (pd.Series): series of the movement with one item per day.
+
+    Returns:
+        pop_in (float): relative popularity IN per day.
+        pop_out (float): realtiva popularity OUT per day.
+        pop_absolute_in (float): popularity IN per day.
+        pop_absolute_out (float): popularity OUT per day.
+
+    &#34;&#34;&#34;
+
+    pop_in = len(movements[movements &gt; 0]) / len(movements)
+    pop_out = len(movements[movements &lt; 0]) / len(movements)
+    pop_absolute_in = len(movements[movements &gt; 0])
+    pop_absolute_out = len(movements[movements &lt; 0])
+    return pop_in, pop_out, pop_absolute_in, pop_absolute_out</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateTurn"><code class="name flex">
+<span>def <span class="ident">calculateTurn</span></span>(<span>inventory: pandas.core.series.Series)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate the TURN index of an SKU, given the inventory function</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>inventory</code></strong> :&ensp;<code>pd.series</code></dt>
+<dd>series of the inventory of an SKU.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>turn (float): Output turn index.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateTurn(inventory: pd.Series):
+    &#34;&#34;&#34;
+    Calculate the TURN index of an SKU, given the inventory function
+
+    Args:
+        inventory (pd.series): series of the inventory of an SKU.
+
+    Returns:
+        turn (float): Output turn index.
+    &#34;&#34;&#34;
+
+    # define inventory from movements
+    movements = movementfunctionfromInventory(inventory)
+    movements = movements.dropna()
+
+    # calculate the average outbound quantity per day
+    out_qty_day = -np.sum(movements[movements[&#39;QUANTITY&#39;] &lt; 0][&#39;QUANTITY&#39;]) / len(movements)
+
+    # calculate average inventory quantity
+    I_t_avg = np.nanmean(inventory)
+    if I_t_avg &gt; 0:
+        turn = out_qty_day / I_t_avg
+    else:
+        turn = np.nan
+
+    return turn</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.fourierAnalysisInventory"><code class="name flex">
+<span>def <span class="ident">fourierAnalysisInventory</span></span>(<span>inventory: pandas.core.series.Series)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>fourier analysis of the inventory curve</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>inventory</code></strong> :&ensp;<code>pd.series</code></dt>
+<dd>list of inventory values.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>first_carrier (TYPE): frequency (in 1/days) with the highest amplitude value.
+period (TYPE): period (in days) associated with the frequency with the highest amplitude value.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fourierAnalysisInventory(inventory: pd.Series):
+    &#34;&#34;&#34;
+    fourier analysis of the inventory curve
+
+    Args:
+        inventory (pd.series): list of inventory values.
+
+    Returns:
+        first_carrier (TYPE): frequency (in 1/days) with the highest amplitude value.
+        period (TYPE): period (in days) associated with the frequency with the highest amplitude value.
+
+    &#34;&#34;&#34;
+
+    D = ts.fourierAnalysis(np.array(inventory))
+    D = D.sort_values(by=&#39;Amplitude&#39;, ascending=False)
+    first_carrier = D.iloc[0][&#39;Frequency_domain_value&#39;]  # 1 / days
+    period = 1 / first_carrier
+    return first_carrier, period</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateCOI"><code class="name flex">
+<span>def <span class="ident">updateCOI</span></span>(<span>D_SKUs: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update the COI index</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_SKUs</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe with SKUs.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_SKUs (pd.DataFrame): Output DataFrame with updated COI.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def updateCOI(D_SKUs: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update the COI index
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+
+    Returns:
+        D_SKUs (pd.DataFrame): Output DataFrame with updated COI.
+
+    &#34;&#34;&#34;
+
+    # create result columns
+    D_SKUs[&#39;COI_IN&#39;] = np.nan
+    D_SKUs[&#39;COI_OUT&#39;] = np.nan
+    for index, row in D_SKUs.iterrows():
+        # select inventory curve
+        I_t = D_SKUs.loc[index][&#39;INVENTORY_QTY&#39;]
+        # calculate the popularity
+        movements = movementfunctionfromInventory(I_t)
+        movements = movements.dropna()
+        if len(movements) &gt; 0:
+            COI_IN, COI_OUT = calculateCOI(I_t)
+
+            # update the dataframe
+            D_SKUs.at[index, &#39;COI_IN&#39;] = COI_IN
+            D_SKUs.at[index, &#39;COI_OUT&#39;] = COI_OUT
+
+    return D_SKUs</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateFourieranalysis"><code class="name flex">
+<span>def <span class="ident">updateFourieranalysis</span></span>(<span>D_SKUs: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update the Fourier Analysis</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_SKUs</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe with SKUs.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_SKUs (pd.DataFrame): Output DataFrame with updated fourier analysis.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def updateFourieranalysis(D_SKUs: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update the Fourier Analysis
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+
+    Returns:
+        D_SKUs (pd.DataFrame): Output DataFrame with updated fourier analysis.
+
+    &#34;&#34;&#34;
+
+    # create result columns
+    D_SKUs[&#39;FOURIER_CARRIER&#39;] = np.nan
+    D_SKUs[&#39;FOURIER_PERIOD&#39;] = np.nan
+
+    for index, row in D_SKUs.iterrows():
+        # select inventory curve
+        I_t = D_SKUs.loc[index][&#39;INVENTORY_QTY&#39;]
+        # calculate the popularity
+        movements = movementfunctionfromInventory(I_t)
+        movements = movements.dropna()
+        if len(movements) &gt; 0:
+            carrier, period = fourierAnalysisInventory(I_t)
+
+            # update the dataframe
+            D_SKUs.at[index, &#39;FOURIER_CARRIER&#39;] = carrier
+            D_SKUs.at[index, &#39;FOURIER_PERIOD&#39;] = period
+
+    return D_SKUs</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateOrderCompletion"><code class="name flex">
+<span>def <span class="ident">updateOrderCompletion</span></span>(<span>D_SKUs: pandas.core.frame.DataFrame, D_mov: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update OC index</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_SKUs</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe with SKUs.</dd>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe with movements.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_SKUs (pd.dataFrame): Output DataFrame with updated OC.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def updateOrderCompletion(D_SKUs: pd.DataFrame, D_mov: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update OC index
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+        D_mov (pd.DataFrame): Input dataframe with movements.
+
+    Returns:
+        D_SKUs (pd.dataFrame): Output DataFrame with updated OC.
+
+    &#34;&#34;&#34;
+
+    # create result columns
+    D_SKUs[&#39;OC&#39;] = np.nan
+
+    for index, row in D_SKUs.iterrows():
+
+        part = row[&#39;ITEMCODE&#39;]
+
+        # calculate the popularity
+        OC = calculateOrderCompletion(D_mov, part, itemfield=&#39;ITEMCODE&#39;, ordercodefield=&#39;ORDERCODE&#39;)
+
+        # update the dataframe
+        D_SKUs.at[index, &#39;OC&#39;] = OC
+
+    return D_SKUs</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updatePopularity"><code class="name flex">
+<span>def <span class="ident">updatePopularity</span></span>(<span>D_SKUs: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update the popularity index</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_SKUs</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>Input dataframe with SKUs.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_SKUs (pd.DataFrame): Output DataFrame with updated popularity.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def updatePopularity(D_SKUs: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update the popularity index
+
+    Args:
+        D_SKUs (pd.dataFrame): Input dataframe with SKUs.
+
+    Returns:
+        D_SKUs (pd.DataFrame): Output DataFrame with updated popularity.
+
+    &#34;&#34;&#34;
+
+    # create results columns
+    D_SKUs[&#39;POP_IN&#39;] = np.nan
+    D_SKUs[&#39;POP_OUT&#39;] = np.nan
+    D_SKUs[&#39;POP_IN_TOT&#39;] = np.nan
+    D_SKUs[&#39;POP_OUT_TOT&#39;] = np.nan
+
+    for index, row in D_SKUs.iterrows():
+        # select inventory curve
+        I_t = D_SKUs.loc[index][&#39;INVENTORY_QTY&#39;]
+        # calculate the popularity
+        movements = movementfunctionfromInventory(I_t)
+        movements = movements.dropna()
+        if len(movements) &gt; 0:
+            POP_IN, POP_OUT, POP_IN_TOT, POP_OUT_TOT = calculatePopularity(movements[&#39;QUANTITY&#39;])
+
+            # update the dataframe
+            D_SKUs.at[index, &#39;POP_IN&#39;] = POP_IN
+            D_SKUs.at[index, &#39;POP_OUT&#39;] = POP_OUT
+            D_SKUs.at[index, &#39;POP_IN_TOT&#39;] = POP_IN_TOT
+            D_SKUs.at[index, &#39;POP_OUT_TOT&#39;] = POP_OUT_TOT
+    return D_SKUs</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateTURN"><code class="name flex">
+<span>def <span class="ident">updateTURN</span></span>(<span>D_SKUs: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Update TURN index</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_SKUs</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe with SKUs.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_SKUs (TYPE): Output DataFrame with updated TURN.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def updateTURN(D_SKUs: pd.DataFrame):
+    &#34;&#34;&#34;
+    Update TURN index
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+
+    Returns:
+        D_SKUs (TYPE): Output DataFrame with updated TURN.
+
+    &#34;&#34;&#34;
+
+    # create result columns
+    D_SKUs[&#39;TURN&#39;] = np.nan
+
+    for index, row in D_SKUs.iterrows():
+        # select inventory curve
+        I_t = D_SKUs.loc[index][&#39;INVENTORY_QTY&#39;]
+        # calculate the popularity
+        movements = movementfunctionfromInventory(I_t)
+        movements = movements.dropna()
+        if len(movements) &gt; 0:
+            TURN = calculateTurn(I_t)
+
+            # update the dataframe
+            D_SKUs.at[index, &#39;TURN&#39;] = TURN
+
+    return D_SKUs</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.wh_indexes.whIndexParetoPlot"><code class="name flex">
+<span>def <span class="ident">whIndexParetoPlot</span></span>(<span>D_SKUs: pandas.core.frame.DataFrame, columnIndex: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define the Pareto and histogram plot for a WH index</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_SKUs</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe with SKUs.</dd>
+<dt><strong><code>columnIndex</code></strong> :&ensp;<code>str</code></dt>
+<dd>Name of the index to plot.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>output_figures (dict): Output dictionary with figures.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def whIndexParetoPlot(D_SKUs: pd.DataFrame, columnIndex: str):
+    &#34;&#34;&#34;
+    Define the Pareto and histogram plot for a WH index
+
+    Args:
+        D_SKUs (pd.DataFrame): Input dataframe with SKUs.
+        columnIndex (str): Name of the index to plot.
+
+    Returns:
+        output_figures (dict): Output dictionary with figures.
+
+    &#34;&#34;&#34;
+
+    output_figures = {}
+
+    # define the pareto values
+    D_SKUs_pop = paretoDataframe(D_SKUs, columnIndex)
+
+    # build the pareto figures
+    fig1 = plt.figure()
+    plt.plot(np.arange(0, len(D_SKUs_pop)), D_SKUs_pop[f&#34;{columnIndex}_CUM&#34;], color=&#39;orange&#39;)
+    plt.title(f&#34;{columnIndex} Pareto curve&#34;)
+    plt.xlabel(&#34;N. of SKUs&#34;)
+    plt.ylabel(&#34;Popularity percentage&#34;)
+
+    # save the Pareto figure
+    output_figures[f&#34;{columnIndex}_pareto&#34;] = fig1
+
+    fig2 = plt.figure()
+    plt.hist(D_SKUs_pop[columnIndex], color=&#39;orange&#39;)
+    plt.title(f&#34;{columnIndex} histogram&#34;)
+    plt.xlabel(f&#34;{columnIndex}&#34;)
+    plt.ylabel(&#34;Frequency&#34;)
+
+    # save the Pareto figure
+    output_figures[f&#34;{columnIndex}_hist&#34;] = fig2
+
+    return output_figures</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateCOI" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateCOI">calculateCOI</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateOrderCompletion" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateOrderCompletion">calculateOrderCompletion</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculatePopularity" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculatePopularity">calculatePopularity</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateTurn" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.calculateTurn">calculateTurn</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.fourierAnalysisInventory" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.fourierAnalysisInventory">fourierAnalysisInventory</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateCOI" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateCOI">updateCOI</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateFourieranalysis" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateFourieranalysis">updateFourieranalysis</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateOrderCompletion" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateOrderCompletion">updateOrderCompletion</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updatePopularity" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.updatePopularity">updatePopularity</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateTURN" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.updateTURN">updateTURN</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.wh_indexes.whIndexParetoPlot" href="#analogistics.supply_chain.P8_performance_assessment.wh_indexes.whIndexParetoPlot">whIndexParetoPlot</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

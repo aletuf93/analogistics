@@ -59,7 +59,7 @@ def calculateCOI(inventory: pd.Series):
     return COI_in, COI_out
 
 
-def calculateTurn(inventory: pd.series):
+def calculateTurn(inventory: pd.Series):
     """
     Calculate the TURN index of an SKU, given the inventory function
 
@@ -121,7 +121,7 @@ def calculateOrderCompletion(D_mov: pd.DataFrame, itemcode: str,
     return OC
 
 
-def fourierAnalysisInventory(inventory: pd.series):
+def fourierAnalysisInventory(inventory: pd.Series):
     """
     fourier analysis of the inventory curve
 
@@ -141,7 +141,7 @@ def fourierAnalysisInventory(inventory: pd.series):
     return first_carrier, period
 
 
-def updatePopularity(D_SKUs: pd.dataFrame):
+def updatePopularity(D_SKUs: pd.DataFrame):
     """
     Update the popularity index
 

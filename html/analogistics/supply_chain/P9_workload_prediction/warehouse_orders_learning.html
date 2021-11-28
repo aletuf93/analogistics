@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>analogistics API documentation</title>
-<meta name="description" content="Analogistics …" />
+<title>analogistics.supply_chain.P9_workload_prediction.warehouse_orders_learning API documentation</title>
+<meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,69 +17,142 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Package <code>analogistics</code></h1>
+<h1 class="title">Module <code>analogistics.supply_chain.P9_workload_prediction.warehouse_orders_learning</code></h1>
 </header>
 <section id="section-intro">
-<p>Analogistics.</p>
-<p>Analytical Tools for Logistics System Design and Operations Management.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;
-Analogistics.
+<pre><code class="python">import pandas as pd
+from analogistics.clean import cleanUsingIQR
 
-Analytical Tools for Logistics System Design and Operations Management.
-&#34;&#34;&#34;
 
-__version__ = &#34;0.1.0&#34;
-__author__ = &#39;Alessandro Tufano&#39;</code></pre>
+def cleanDatatableLearningOrders(D_tem: pd.DataFrame, features: list):
+    &#34;&#34;&#34;
+    Prepare warehouse learning table with cleaning data using IQR methods
+
+    Args:
+        D_tem (pd.dataFrame): Input dataframe.
+        features (list): List of column name - features - to be cleaned.
+
+    Returns:
+        D_res_tem_IN (pd.DataFrame): Output inbound dataframe.
+        D_res_tem_OUT (pd.DataFrame): Output outbound dataframe.
+        perc_IN (float): Cleaning percentage cleaning inbound dataframe.
+        perc_OUT (TfloatYPE): percentage cleaning outbound dataframe.
+
+    &#34;&#34;&#34;
+
+    # set default error variable
+    D_res_tem_IN = pd.DataFrame()
+    D_res_tem_OUT = pd.DataFrame()
+    perc_IN = []
+    perc_OUT = []
+
+    D_tem_IN = D_tem[D_tem[&#39;INOUT&#39;] == &#39;+&#39;]
+    D_tem_OUT = D_tem[D_tem[&#39;INOUT&#39;] == &#39;-&#39;]
+
+    # ############### DATA CLEANING #############
+
+    if len(D_tem_IN) &gt; 0:
+
+        # INBOUND
+        for feat in features:  # remove zero values
+            D_tem_IN = D_tem_IN[(D_tem_IN[feat] != 0)]
+
+        # clean using IQR
+        if len(D_tem_IN) &gt; 0:
+            D_res_tem_IN, perc_IN = cleanUsingIQR(D_tem_IN, features)
+
+    if len(D_tem_OUT) &gt; 0:
+        # OUTBOUND
+        for feat in features:
+            D_tem_OUT = D_tem_OUT[(D_tem_OUT[feat] != 0)]
+
+        # clean using IQR
+        if len(D_tem_OUT) &gt; 0:
+            D_res_tem_OUT, perc_OUT = cleanUsingIQR(D_tem_OUT, features)
+    return D_res_tem_IN, D_res_tem_OUT, perc_IN, perc_OUT</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="analogistics.clean" href="clean.html">analogistics.clean</a></code></dt>
+<dt id="analogistics.supply_chain.P9_workload_prediction.warehouse_orders_learning.cleanDatatableLearningOrders"><code class="name flex">
+<span>def <span class="ident">cleanDatatableLearningOrders</span></span>(<span>D_tem: pandas.core.frame.DataFrame, features: list)</span>
+</code></dt>
 <dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.data" href="data/index.html">analogistics.data</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.explore" href="explore.html">analogistics.explore</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.graph" href="graph/index.html">analogistics.graph</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.learning" href="learning/index.html">analogistics.learning</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.reduce" href="reduce.html">analogistics.reduce</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.statistics" href="statistics/index.html">analogistics.statistics</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.supply_chain" href="supply_chain/index.html">analogistics.supply_chain</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.transform" href="transform.html">analogistics.transform</a></code></dt>
-<dd>
-<div class="desc"></div>
+<div class="desc"><p>Prepare warehouse learning table with cleaning data using IQR methods</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_tem</code></strong> :&ensp;<code>pd.dataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>features</code></strong> :&ensp;<code>list</code></dt>
+<dd>List of column name - features - to be cleaned.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_res_tem_IN (pd.DataFrame): Output inbound dataframe.
+D_res_tem_OUT (pd.DataFrame): Output outbound dataframe.
+perc_IN (float): Cleaning percentage cleaning inbound dataframe.
+perc_OUT (TfloatYPE): percentage cleaning outbound dataframe.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cleanDatatableLearningOrders(D_tem: pd.DataFrame, features: list):
+    &#34;&#34;&#34;
+    Prepare warehouse learning table with cleaning data using IQR methods
+
+    Args:
+        D_tem (pd.dataFrame): Input dataframe.
+        features (list): List of column name - features - to be cleaned.
+
+    Returns:
+        D_res_tem_IN (pd.DataFrame): Output inbound dataframe.
+        D_res_tem_OUT (pd.DataFrame): Output outbound dataframe.
+        perc_IN (float): Cleaning percentage cleaning inbound dataframe.
+        perc_OUT (TfloatYPE): percentage cleaning outbound dataframe.
+
+    &#34;&#34;&#34;
+
+    # set default error variable
+    D_res_tem_IN = pd.DataFrame()
+    D_res_tem_OUT = pd.DataFrame()
+    perc_IN = []
+    perc_OUT = []
+
+    D_tem_IN = D_tem[D_tem[&#39;INOUT&#39;] == &#39;+&#39;]
+    D_tem_OUT = D_tem[D_tem[&#39;INOUT&#39;] == &#39;-&#39;]
+
+    # ############### DATA CLEANING #############
+
+    if len(D_tem_IN) &gt; 0:
+
+        # INBOUND
+        for feat in features:  # remove zero values
+            D_tem_IN = D_tem_IN[(D_tem_IN[feat] != 0)]
+
+        # clean using IQR
+        if len(D_tem_IN) &gt; 0:
+            D_res_tem_IN, perc_IN = cleanUsingIQR(D_tem_IN, features)
+
+    if len(D_tem_OUT) &gt; 0:
+        # OUTBOUND
+        for feat in features:
+            D_tem_OUT = D_tem_OUT[(D_tem_OUT[feat] != 0)]
+
+        # clean using IQR
+        if len(D_tem_OUT) &gt; 0:
+            D_res_tem_OUT, perc_OUT = cleanUsingIQR(D_tem_OUT, features)
+    return D_res_tem_IN, D_res_tem_OUT, perc_IN, perc_OUT</code></pre>
+</details>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
@@ -90,17 +163,14 @@ __author__ = &#39;Alessandro Tufano&#39;</code></pre>
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="analogistics.clean" href="clean.html">analogistics.clean</a></code></li>
-<li><code><a title="analogistics.data" href="data/index.html">analogistics.data</a></code></li>
-<li><code><a title="analogistics.explore" href="explore.html">analogistics.explore</a></code></li>
-<li><code><a title="analogistics.graph" href="graph/index.html">analogistics.graph</a></code></li>
-<li><code><a title="analogistics.learning" href="learning/index.html">analogistics.learning</a></code></li>
-<li><code><a title="analogistics.reduce" href="reduce.html">analogistics.reduce</a></code></li>
-<li><code><a title="analogistics.statistics" href="statistics/index.html">analogistics.statistics</a></code></li>
-<li><code><a title="analogistics.supply_chain" href="supply_chain/index.html">analogistics.supply_chain</a></code></li>
-<li><code><a title="analogistics.transform" href="transform.html">analogistics.transform</a></code></li>
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction" href="index.html">analogistics.supply_chain.P9_workload_prediction</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P9_workload_prediction.warehouse_orders_learning.cleanDatatableLearningOrders" href="#analogistics.supply_chain.P9_workload_prediction.warehouse_orders_learning.cleanDatatableLearningOrders">cleanDatatableLearningOrders</a></code></li>
 </ul>
 </li>
 </ul>

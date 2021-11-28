@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>analogistics API documentation</title>
-<meta name="description" content="Analogistics …" />
+<title>analogistics.learning.connectionists_grids API documentation</title>
+<meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
@@ -17,71 +17,89 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Package <code>analogistics</code></h1>
+<h1 class="title">Module <code>analogistics.learning.connectionists_grids</code></h1>
 </header>
 <section id="section-intro">
-<p>Analogistics.</p>
-<p>Analytical Tools for Logistics System Design and Operations Management.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;
-Analogistics.
+<pre><code class="python"># %% CLASSIFICATION MODEL PARAMETERS
+from sklearn.neural_network import MLPClassifier, MLPRegressor
 
-Analytical Tools for Logistics System Design and Operations Management.
-&#34;&#34;&#34;
+from analogistics.learning.grids import GridSearch
 
-__version__ = &#34;0.1.0&#34;
-__author__ = &#39;Alessandro Tufano&#39;</code></pre>
+tuned_param_perc = [{&#39;hidden_layer_sizes&#39;: [1, 2, 10, 50, 100],
+                     &#39;activation&#39;: [&#39;identity&#39;, &#39;logistic&#39;, &#39;tanh&#39;, &#39;relu&#39;],
+                     &#39;learning_rate&#39;:[&#39;constant&#39;, &#39;invscaling&#39;, &#39;adaptive&#39;]
+                     }]
+
+tuned_param_perc_regr = [{&#39;hidden_layer_sizes&#39;: [1, 2, 10, 50, 100],
+                          &#39;activation&#39;: [&#39;identity&#39;, &#39;logistic&#39;, &#39;tanh&#39;, &#39;relu&#39;],
+                          &#39;learning_rate&#39;: [&#39;constant&#39;, &#39;invscaling&#39;, &#39;adaptive&#39;]
+                          }]
+
+
+class GridSearchConnectionist(GridSearch):
+    def __init__(self):
+        self.models_regression = {&#39;perceptron single layer&#39;: {&#39;estimator&#39;: MLPRegressor(),
+                                                              &#39;param&#39;: tuned_param_perc_regr,
+                                                              },
+                                  }
+
+        self.models_classification = {&#39;perceptron single layer&#39;: {&#39;estimator&#39;: MLPClassifier(),
+                                                                  &#39;param&#39;: tuned_param_perc
+                                                                  },
+                                      }</code></pre>
 </details>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt><code class="name"><a title="analogistics.clean" href="clean.html">analogistics.clean</a></code></dt>
+<dt id="analogistics.learning.connectionists_grids.GridSearchConnectionist"><code class="flex name class">
+<span>class <span class="ident">GridSearchConnectionist</span></span>
+</code></dt>
 <dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.data" href="data/index.html">analogistics.data</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.explore" href="explore.html">analogistics.explore</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.graph" href="graph/index.html">analogistics.graph</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.learning" href="learning/index.html">analogistics.learning</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.reduce" href="reduce.html">analogistics.reduce</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.statistics" href="statistics/index.html">analogistics.statistics</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.supply_chain" href="supply_chain/index.html">analogistics.supply_chain</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.transform" href="transform.html">analogistics.transform</a></code></dt>
-<dd>
-<div class="desc"></div>
+<div class="desc"><p>Helper class that provides a standard way to create an ABC using
+inheritance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GridSearchConnectionist(GridSearch):
+    def __init__(self):
+        self.models_regression = {&#39;perceptron single layer&#39;: {&#39;estimator&#39;: MLPRegressor(),
+                                                              &#39;param&#39;: tuned_param_perc_regr,
+                                                              },
+                                  }
+
+        self.models_classification = {&#39;perceptron single layer&#39;: {&#39;estimator&#39;: MLPClassifier(),
+                                                                  &#39;param&#39;: tuned_param_perc
+                                                                  },
+                                      }</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li><a title="analogistics.learning.grids.GridSearch" href="grids.html#analogistics.learning.grids.GridSearch">GridSearch</a></li>
+<li>abc.ABC</li>
+</ul>
+<h3>Inherited members</h3>
+<ul class="hlist">
+<li><code><b><a title="analogistics.learning.grids.GridSearch" href="grids.html#analogistics.learning.grids.GridSearch">GridSearch</a></b></code>:
+<ul class="hlist">
+<li><code><a title="analogistics.learning.grids.GridSearch.train_models_classification" href="grids.html#analogistics.learning.grids.GridSearch.train_models_classification">train_models_classification</a></code></li>
+<li><code><a title="analogistics.learning.grids.GridSearch.train_models_regression" href="grids.html#analogistics.learning.grids.GridSearch.train_models_regression">train_models_regression</a></code></li>
+</ul>
+</li>
+</ul>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -90,17 +108,16 @@ __author__ = &#39;Alessandro Tufano&#39;</code></pre>
 <ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="analogistics.clean" href="clean.html">analogistics.clean</a></code></li>
-<li><code><a title="analogistics.data" href="data/index.html">analogistics.data</a></code></li>
-<li><code><a title="analogistics.explore" href="explore.html">analogistics.explore</a></code></li>
-<li><code><a title="analogistics.graph" href="graph/index.html">analogistics.graph</a></code></li>
-<li><code><a title="analogistics.learning" href="learning/index.html">analogistics.learning</a></code></li>
-<li><code><a title="analogistics.reduce" href="reduce.html">analogistics.reduce</a></code></li>
-<li><code><a title="analogistics.statistics" href="statistics/index.html">analogistics.statistics</a></code></li>
-<li><code><a title="analogistics.supply_chain" href="supply_chain/index.html">analogistics.supply_chain</a></code></li>
-<li><code><a title="analogistics.transform" href="transform.html">analogistics.transform</a></code></li>
+<li><code><a title="analogistics.learning" href="index.html">analogistics.learning</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="analogistics.learning.connectionists_grids.GridSearchConnectionist" href="#analogistics.learning.connectionists_grids.GridSearchConnectionist">GridSearchConnectionist</a></code></h4>
+</li>
 </ul>
 </li>
 </ul>

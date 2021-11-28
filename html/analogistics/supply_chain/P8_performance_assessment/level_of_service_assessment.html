@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from analogistics.statistics import time_series as ts
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P8_performance_assessment.vehicle_assessment import createTabellaMovimenti
+
+
+def checkPlannedActual(D_mov: pd.DataFrame, locfrom: str = &#39;LOADING_NODE&#39;,
+                       locto: str = &#39;DISCHARGING_NODE&#39;,
+                       capacityField: str = &#39;QUANTITY&#39;,
+                       voyagefield: str = &#39;VOYAGE_CODE&#39;,
+                       vehiclefield: str = &#39;VEHICLE_CODE&#39;,
+                       timeColumns: dict = {}):
+    &#34;&#34;&#34;
+    analyse if planned routes have been respected in actual voyages
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas dataframe with movements.
+        locfrom (str, optional): Column name with the origin location code. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): Column name with the destination location code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        capacityField (str, optional): Column name with the transported quantity. Defaults to &#39;QUANTITY&#39;.
+        voyagefield (str, optional): Column name with the voyage code. Defaults to &#39;VOYAGE_CODE&#39;.
+        vehiclefield (str, optional): Column name with the vehicle code. Defaults to &#39;VEHICLE_CODE&#39;.
+        timeColumns (dict, optional): Set of the time columns. Defaults to {}.
+
+    Returns:
+        output_figure (dict): output dictionary containing figures.
+        df_results (dict): output dictionary containing dataframes.
+
+    &#34;&#34;&#34;
+
+    df_results = {}
+    output_figure = {}
+
+    D = createTabellaMovimenti(D_mov,
+                               locfrom=locfrom,
+                               locto=locto,
+                               capacityField=capacityField,
+                               timeColumns=timeColumns
+                               )
+    if any(column not in D.columns for column in [&#39;PTA&#39;, &#39;PTD&#39;, &#39;ATA&#39;, &#39;ATD&#39;]):
+        print(&#34;WARNING: no actual and provisional columns in D_mov&#34;)
+        return output_figure, df_results
+    accuracy, _ = getCoverageStats(D_mov, analysisFieldList=[locfrom, locto, voyagefield,
+                                                             vehiclefield, *list(timeColumns.values())
+                                                             ],
+                                   capacityField=&#39;QUANTITY&#39;)
+
+    D_movimenti = D.groupby([vehiclefield, &#39;Location&#39;, &#39;PTA&#39;,
+                             &#39;PTD&#39;, &#39;ATA&#39;, &#39;ATD&#39;, voyagefield])[&#39;Movementquantity&#39;].sum().reset_index()
+    D_movimenti[&#39;AsPlanned&#39;] = True  # save the movements table if routes have been respected
+    colsCheckRoute = [&#39;VoyageCode&#39;, &#39;PlanPerformed&#39;]
+    results_route = pd.DataFrame(columns=colsCheckRoute)
+
+    colsCheckArcs = [&#39;VoyageCode&#39;, &#39;plannedLocation&#39;, &#39;actualLocation&#39;]
+    results_arcExchange = pd.DataFrame(columns=colsCheckArcs)
+
+    # identify routes
+    routeCode = np.unique(D_movimenti[voyagefield][~D_movimenti[voyagefield].isna()])
+    for i in range(0, len(routeCode)):
+        codiceRoute = routeCode[i]
+        dataRoute = D_movimenti[D_movimenti[voyagefield] == codiceRoute]
+
+        # order by PLANNED
+        sortpl = dataRoute.sort_values(by=&#39;PTA&#39;)
+        ordinePlanned = sortpl.index.values
+
+        # order by ACTUAL
+        sortact = dataRoute.sort_values(by=&#39;ATA&#39;)
+        ordineActual = sortact.index.values
+
+        check = all(ordineActual == ordinePlanned)
+
+        if(check):  # the route has been performed as planned
+            # update voyage table
+            temp = pd.DataFrame([[codiceRoute, True]], columns=colsCheckRoute)
+            results_route = results_route.append(temp)
+        else:  # the route has NOT been performed as planned
+            # update voyage table
+            temp = pd.DataFrame([[codiceRoute, False]], columns=colsCheckRoute)
+            results_route = results_route.append(temp)
+
+            # update arc exchange table
+
+            # identify indexes to update
+            indexFrom = sortpl[~(ordineActual == ordinePlanned)].index.values
+            indexTo = sortact[~(ordineActual == ordinePlanned)].index.values
+
+            locFrom = dataRoute.Location[indexFrom]
+            locTo = dataRoute.Location[indexTo]
+            for j in range(0, len(locFrom)):
+                temp = pd.DataFrame([[codiceRoute, locFrom.iloc[j], locTo.iloc[j]]], columns=colsCheckArcs)
+                results_arcExchange = results_arcExchange.append(temp)
+
+            # Update the table with the flag if the route has been performed as planned
+            D_movimenti.loc[(D_movimenti[voyagefield] == codiceRoute) &amp; (D_movimenti.Location.isin(locFrom)), &#39;AsPlanned&#39;] = False
+
+    # calculate statistics
+    stat_exchange = results_arcExchange.groupby([&#39;plannedLocation&#39;, &#39;actualLocation&#39;]).size().reset_index()
+    stat_exchange.rename(columns={0: &#39;count&#39;}, inplace=True)
+    stat_exchange = stat_exchange.sort_values(by=&#39;count&#39;, ascending=False)
+
+    stat_exchange[&#39;accuracy&#39;] = [accuracy for i in range(0, len(stat_exchange))]
+    results_route[&#39;accuracy&#39;] = [accuracy for i in range(0, len(results_route))]
+
+    df_results[&#39;routeExchange&#39;] = stat_exchange
+    df_results[&#39;routeExecutedAsPlanned&#39;] = results_route
+
+    # create pie chart with the percentage of respected routes
+
+    sizes = results_route.groupby([&#39;PlanPerformed&#39;]).size()
+    labels = sizes.index.values
+    explode = 0.1 * np.ones(len(sizes))
+
+    fig1, ax1 = plt.subplots(figsize=(20, 10))
+    plt.pie(sizes, explode=explode, labels=labels, autopct=&#39;%1.1f%%&#39;,
+            shadow=True, startangle=90)
+    ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle
+    plt.title(&#39;Route as planned&#39;)
+    output_figure[&#39;routeAsPlannedPie&#39;] = fig1
+
+    # calculate the difference planned-actual, depending on the date of generation of the record
+    D_movimenti[&#39;latenessTD&#39;] = lateness_TD = ts.timeStampToDays(D_movimenti.ATD - D_movimenti.PTD)
+    D_movimenti[&#39;tardinessTD&#39;] = tardiness_TD = lateness_TD.clip(0, None)  # delete all values outside the range [0, +inf]
+    lateness_TD_mean = np.mean(lateness_TD)
+    tardiness_TD_mean = np.mean(tardiness_TD)
+
+    lateness_TA = ts.timeStampToDays(D_movimenti.ATA - D_movimenti.PTA)
+    tardiness_TA = lateness_TA.clip(0, None)
+    lateness_TA_mean = np.mean(lateness_TA)
+    tardiness_TA_mean = np.mean(tardiness_TA)
+
+    gap_handling = ts.timeStampToDays((D_movimenti.ATD - D_movimenti.ATA) - (D_movimenti.PTD - D_movimenti.PTA))
+    handling_gap_mean = np.mean(gap_handling)
+
+    cols = [&#39;mean lateness - dep.&#39;, &#39;mean lateness - arr.&#39;,
+            &#39;mean tardiness - dep.&#39;, &#39;mean tardiness - arr.&#39;, &#39;mean handling gap&#39;]
+    schedule_results = pd.DataFrame([[lateness_TD_mean, lateness_TA_mean, tardiness_TD_mean,
+                                      tardiness_TA_mean, handling_gap_mean]], columns=cols)
+    schedule_results[&#39;accuracy&#39;] = [accuracy for i in range(0, len(schedule_results))]
+
+    df_results[&#39;schedule_results&#39;] = schedule_results
+
+    return output_figure, df_results
+
+
+def travelTimedistribution(D_mov: pd.DataFrame,
+                           capacityField: str = &#39;QUANTITY&#39;,
+                           loadingTA: str = &#39;PTA_FROM&#39;,
+                           loadingTD: str = &#39;PTD_FROM&#39;,
+                           dischargingTA: str = &#39;PTA_TO&#39;,
+                           dischargingTD: str = &#39;PTD_TO&#39;
+                           ):
+    &#34;&#34;&#34;
+    calculate the average time spent by products on a vehicle
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas dataframe with movements.
+        capacityField (str, optional): Column name with the transported quantity. Defaults to &#39;QUANTITY&#39;.
+        loadingTA (str, optional): Column name with the planned time of arrival for loading. Defaults to &#39;PTA_FROM&#39;.
+        loadingTD (str, optional): Column name with the planned time of departure for loading. Defaults to &#39;PTD_FROM&#39;.
+        dischargingTA (str, optional): Column name with the planned time of arrival for offloading. Defaults to &#39;PTA_TO&#39;.
+        dischargingTD (str, optional): Column name with the planned time of departure for offloading. Defaults to &#39;PTD_TO&#39;.
+
+    Returns:
+        imageResults (dict): output dictionary containing figures.
+        df_traveltime (pd.DataFrame): output pandas dataFrame.
+
+    &#34;&#34;&#34;
+
+    df_traveltime = pd.DataFrame(columns=[&#39;U_L_BOUND&#39;, &#39;TIME_MEAN&#39;, &#39;TIME_STD&#39;])
+    imageResults = {}
+
+    # Get coverage
+    accuracy_ub, _ = getCoverageStats(D_mov, analysisFieldList=[dischargingTD, loadingTA],
+                                      capacityField=capacityField)
+
+    # Expected travel time per container (UPPER BOUND)
+    ExpectedTravelTime_ub = ts.timeStampToDays(D_mov[dischargingTD] - D_mov[loadingTA])
+    ExpectedTravelTime_ub = ExpectedTravelTime_ub[ExpectedTravelTime_ub &gt; 0]
+    mean_ExpectedTravelTime = np.mean(ExpectedTravelTime_ub)
+    std_ExpectedTravelTime = np.std(ExpectedTravelTime_ub)
+
+    data = {&#39;U_L_BOUND&#39;: &#39;upperBound&#39;,
+            &#39;TIME_MEAN&#39;: mean_ExpectedTravelTime,
+            &#39;TIME_STD&#39;: std_ExpectedTravelTime,
+            &#39;accuracy&#39;: str(accuracy_ub)}
+    temp = pd.DataFrame(data, index=[0])
+    df_traveltime = df_traveltime.append(temp)
+
+    # get coverage
+    accuracy_lb, _ = getCoverageStats(D_mov, analysisFieldList=[dischargingTA, loadingTD],
+                                      capacityField=capacityField)
+    # Expected travel time per container (LOWER BOUND)
+    ExpectedTravelTime_lb = ts.timeStampToDays(D_mov[dischargingTA] - D_mov[loadingTD])
+    ExpectedTravelTime_lb = ExpectedTravelTime_lb[ExpectedTravelTime_lb &gt; 0]
+    mean_ExpectedTravelTime = np.mean(ExpectedTravelTime_lb)
+    std_ExpectedTravelTime = np.std(ExpectedTravelTime_lb)
+
+    data = {&#39;U_L_BOUND&#39;: &#39;lowerBound&#39;,
+            &#39;TIME_MEAN&#39;: mean_ExpectedTravelTime,
+            &#39;TIME_STD&#39;: std_ExpectedTravelTime,
+            &#39;accuracy&#39;: str(accuracy_lb)}
+    temp = pd.DataFrame(data, index=[0])
+    df_traveltime = df_traveltime.append(temp)
+
+    # define unit of measure
+    udm = &#39;days&#39;
+    value_ub = ExpectedTravelTime_ub
+    value_lb = ExpectedTravelTime_lb
+    if mean_ExpectedTravelTime &lt; 1 / 24 / 60:  # use minutes
+        udm = &#39;minutes&#39;
+        value_ub = ExpectedTravelTime_ub * 24 * 60
+        value_lb = ExpectedTravelTime_lb * 24 * 60
+
+    elif mean_ExpectedTravelTime &lt; 1:  # use hours
+        udm = &#39;hours&#39;
+        value_ub = ExpectedTravelTime_ub * 24
+        value_lb = ExpectedTravelTime_lb * 24
+
+    # plot figure
+    fig1 = plt.figure()
+    plt.hist(value_ub, color=&#39;orange&#39;)
+    plt.hist(value_lb, color=&#39;blue&#39;, alpha=0.6)
+    plt.title(f&#34;Travel time ({udm})&#34;)
+    plt.xlabel(f&#34;{udm}&#34;)
+    plt.ylabel(&#39;Quantity&#39;)
+    plt.legend([&#39;Upper bound&#39;, &#39;Lower bound&#39;])
+    imageResults[&#34;travel_time_per_movement&#34;] = fig1
+
+    return imageResults, df_traveltime
+
+
+def calculateLoS(D_mov: pd.DataFrame,
+                 capacityField: str = &#39;QUANTITY&#39;,
+                 timeColumns: dict = {}
+                 ):
+    &#34;&#34;&#34;
+    define the level of Service
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas dataframe with movements.
+        capacityField (str, optional): Column name with the transported quantity. Defaults to &#39;QUANTITY&#39;.
+        timeColumns (dict, optional): Set of the time columns. Defaults to {}.
+
+    Returns:
+        output_figure (TYPE): output dictionary containing figures.
+        coverages (TYPE): output tuple with coverage of the analysis.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    coverages = pd.DataFrame()
+
+    if all(column in timeColumns.keys() for column in [&#39;loadingptd&#39;, &#39;dischargingpta&#39;,
+                                                       &#39;loadingatd&#39;, &#39;dischargingata&#39;]):
+        columnsNeeded = [timeColumns[&#39;loadingptd&#39;], timeColumns[&#39;dischargingpta&#39;],
+                         timeColumns[&#39;loadingatd&#39;], timeColumns[&#39;dischargingata&#39;]]
+
+        accuracy, _ = getCoverageStats(D_mov, analysisFieldList=columnsNeeded,
+                                       capacityField=capacityField)
+
+        D_time = D_mov.dropna(subset=columnsNeeded)
+
+        plannedTime = D_time[timeColumns[&#39;dischargingpta&#39;]] - D_time[timeColumns[&#39;loadingptd&#39;]]
+        actualTime = D_time[timeColumns[&#39;dischargingata&#39;]] - D_time[timeColumns[&#39;loadingatd&#39;]]
+
+        Los = actualTime &lt; plannedTime
+        D_res = Los.value_counts()
+
+        fig1 = plt.figure()
+        plt.pie(D_res, autopct=&#39;%1.1f%%&#39;, shadow=True, startangle=90, labels=D_res.index)
+        plt.title(&#39;Level of Service&#39;)
+
+        output_figure[&#39;level_of_service&#39;] = fig1
+
+        coverages = pd.DataFrame([accuracy])
+
+    return output_figure, coverages</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.calculateLoS"><code class="name flex">
+<span>def <span class="ident">calculateLoS</span></span>(<span>D_mov: pandas.core.frame.DataFrame, capacityField: str = 'QUANTITY', timeColumns: dict = {})</span>
+</code></dt>
+<dd>
+<div class="desc"><p>define the level of Service</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas dataframe with movements.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the transported quantity. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>dict</code>, optional</dt>
+<dd>Set of the time columns. Defaults to {}.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>output_figure (TYPE): output dictionary containing figures.
+coverages (TYPE): output tuple with coverage of the analysis.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateLoS(D_mov: pd.DataFrame,
+                 capacityField: str = &#39;QUANTITY&#39;,
+                 timeColumns: dict = {}
+                 ):
+    &#34;&#34;&#34;
+    define the level of Service
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas dataframe with movements.
+        capacityField (str, optional): Column name with the transported quantity. Defaults to &#39;QUANTITY&#39;.
+        timeColumns (dict, optional): Set of the time columns. Defaults to {}.
+
+    Returns:
+        output_figure (TYPE): output dictionary containing figures.
+        coverages (TYPE): output tuple with coverage of the analysis.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    coverages = pd.DataFrame()
+
+    if all(column in timeColumns.keys() for column in [&#39;loadingptd&#39;, &#39;dischargingpta&#39;,
+                                                       &#39;loadingatd&#39;, &#39;dischargingata&#39;]):
+        columnsNeeded = [timeColumns[&#39;loadingptd&#39;], timeColumns[&#39;dischargingpta&#39;],
+                         timeColumns[&#39;loadingatd&#39;], timeColumns[&#39;dischargingata&#39;]]
+
+        accuracy, _ = getCoverageStats(D_mov, analysisFieldList=columnsNeeded,
+                                       capacityField=capacityField)
+
+        D_time = D_mov.dropna(subset=columnsNeeded)
+
+        plannedTime = D_time[timeColumns[&#39;dischargingpta&#39;]] - D_time[timeColumns[&#39;loadingptd&#39;]]
+        actualTime = D_time[timeColumns[&#39;dischargingata&#39;]] - D_time[timeColumns[&#39;loadingatd&#39;]]
+
+        Los = actualTime &lt; plannedTime
+        D_res = Los.value_counts()
+
+        fig1 = plt.figure()
+        plt.pie(D_res, autopct=&#39;%1.1f%%&#39;, shadow=True, startangle=90, labels=D_res.index)
+        plt.title(&#39;Level of Service&#39;)
+
+        output_figure[&#39;level_of_service&#39;] = fig1
+
+        coverages = pd.DataFrame([accuracy])
+
+    return output_figure, coverages</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.checkPlannedActual"><code class="name flex">
+<span>def <span class="ident">checkPlannedActual</span></span>(<span>D_mov: pandas.core.frame.DataFrame, locfrom: str = 'LOADING_NODE', locto: str = 'DISCHARGING_NODE', capacityField: str = 'QUANTITY', voyagefield: str = 'VOYAGE_CODE', vehiclefield: str = 'VEHICLE_CODE', timeColumns: dict = {})</span>
+</code></dt>
+<dd>
+<div class="desc"><p>analyse if planned routes have been respected in actual voyages</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas dataframe with movements.</dd>
+<dt><strong><code>locfrom</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the origin location code. Defaults to 'LOADING_NODE'.</dd>
+<dt><strong><code>locto</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the destination location code. Defaults to 'DISCHARGING_NODE'.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the transported quantity. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>voyagefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the voyage code. Defaults to 'VOYAGE_CODE'.</dd>
+<dt><strong><code>vehiclefield</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the vehicle code. Defaults to 'VEHICLE_CODE'.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>dict</code>, optional</dt>
+<dd>Set of the time columns. Defaults to {}.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>output_figure (dict): output dictionary containing figures.
+df_results (dict): output dictionary containing dataframes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checkPlannedActual(D_mov: pd.DataFrame, locfrom: str = &#39;LOADING_NODE&#39;,
+                       locto: str = &#39;DISCHARGING_NODE&#39;,
+                       capacityField: str = &#39;QUANTITY&#39;,
+                       voyagefield: str = &#39;VOYAGE_CODE&#39;,
+                       vehiclefield: str = &#39;VEHICLE_CODE&#39;,
+                       timeColumns: dict = {}):
+    &#34;&#34;&#34;
+    analyse if planned routes have been respected in actual voyages
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas dataframe with movements.
+        locfrom (str, optional): Column name with the origin location code. Defaults to &#39;LOADING_NODE&#39;.
+        locto (str, optional): Column name with the destination location code. Defaults to &#39;DISCHARGING_NODE&#39;.
+        capacityField (str, optional): Column name with the transported quantity. Defaults to &#39;QUANTITY&#39;.
+        voyagefield (str, optional): Column name with the voyage code. Defaults to &#39;VOYAGE_CODE&#39;.
+        vehiclefield (str, optional): Column name with the vehicle code. Defaults to &#39;VEHICLE_CODE&#39;.
+        timeColumns (dict, optional): Set of the time columns. Defaults to {}.
+
+    Returns:
+        output_figure (dict): output dictionary containing figures.
+        df_results (dict): output dictionary containing dataframes.
+
+    &#34;&#34;&#34;
+
+    df_results = {}
+    output_figure = {}
+
+    D = createTabellaMovimenti(D_mov,
+                               locfrom=locfrom,
+                               locto=locto,
+                               capacityField=capacityField,
+                               timeColumns=timeColumns
+                               )
+    if any(column not in D.columns for column in [&#39;PTA&#39;, &#39;PTD&#39;, &#39;ATA&#39;, &#39;ATD&#39;]):
+        print(&#34;WARNING: no actual and provisional columns in D_mov&#34;)
+        return output_figure, df_results
+    accuracy, _ = getCoverageStats(D_mov, analysisFieldList=[locfrom, locto, voyagefield,
+                                                             vehiclefield, *list(timeColumns.values())
+                                                             ],
+                                   capacityField=&#39;QUANTITY&#39;)
+
+    D_movimenti = D.groupby([vehiclefield, &#39;Location&#39;, &#39;PTA&#39;,
+                             &#39;PTD&#39;, &#39;ATA&#39;, &#39;ATD&#39;, voyagefield])[&#39;Movementquantity&#39;].sum().reset_index()
+    D_movimenti[&#39;AsPlanned&#39;] = True  # save the movements table if routes have been respected
+    colsCheckRoute = [&#39;VoyageCode&#39;, &#39;PlanPerformed&#39;]
+    results_route = pd.DataFrame(columns=colsCheckRoute)
+
+    colsCheckArcs = [&#39;VoyageCode&#39;, &#39;plannedLocation&#39;, &#39;actualLocation&#39;]
+    results_arcExchange = pd.DataFrame(columns=colsCheckArcs)
+
+    # identify routes
+    routeCode = np.unique(D_movimenti[voyagefield][~D_movimenti[voyagefield].isna()])
+    for i in range(0, len(routeCode)):
+        codiceRoute = routeCode[i]
+        dataRoute = D_movimenti[D_movimenti[voyagefield] == codiceRoute]
+
+        # order by PLANNED
+        sortpl = dataRoute.sort_values(by=&#39;PTA&#39;)
+        ordinePlanned = sortpl.index.values
+
+        # order by ACTUAL
+        sortact = dataRoute.sort_values(by=&#39;ATA&#39;)
+        ordineActual = sortact.index.values
+
+        check = all(ordineActual == ordinePlanned)
+
+        if(check):  # the route has been performed as planned
+            # update voyage table
+            temp = pd.DataFrame([[codiceRoute, True]], columns=colsCheckRoute)
+            results_route = results_route.append(temp)
+        else:  # the route has NOT been performed as planned
+            # update voyage table
+            temp = pd.DataFrame([[codiceRoute, False]], columns=colsCheckRoute)
+            results_route = results_route.append(temp)
+
+            # update arc exchange table
+
+            # identify indexes to update
+            indexFrom = sortpl[~(ordineActual == ordinePlanned)].index.values
+            indexTo = sortact[~(ordineActual == ordinePlanned)].index.values
+
+            locFrom = dataRoute.Location[indexFrom]
+            locTo = dataRoute.Location[indexTo]
+            for j in range(0, len(locFrom)):
+                temp = pd.DataFrame([[codiceRoute, locFrom.iloc[j], locTo.iloc[j]]], columns=colsCheckArcs)
+                results_arcExchange = results_arcExchange.append(temp)
+
+            # Update the table with the flag if the route has been performed as planned
+            D_movimenti.loc[(D_movimenti[voyagefield] == codiceRoute) &amp; (D_movimenti.Location.isin(locFrom)), &#39;AsPlanned&#39;] = False
+
+    # calculate statistics
+    stat_exchange = results_arcExchange.groupby([&#39;plannedLocation&#39;, &#39;actualLocation&#39;]).size().reset_index()
+    stat_exchange.rename(columns={0: &#39;count&#39;}, inplace=True)
+    stat_exchange = stat_exchange.sort_values(by=&#39;count&#39;, ascending=False)
+
+    stat_exchange[&#39;accuracy&#39;] = [accuracy for i in range(0, len(stat_exchange))]
+    results_route[&#39;accuracy&#39;] = [accuracy for i in range(0, len(results_route))]
+
+    df_results[&#39;routeExchange&#39;] = stat_exchange
+    df_results[&#39;routeExecutedAsPlanned&#39;] = results_route
+
+    # create pie chart with the percentage of respected routes
+
+    sizes = results_route.groupby([&#39;PlanPerformed&#39;]).size()
+    labels = sizes.index.values
+    explode = 0.1 * np.ones(len(sizes))
+
+    fig1, ax1 = plt.subplots(figsize=(20, 10))
+    plt.pie(sizes, explode=explode, labels=labels, autopct=&#39;%1.1f%%&#39;,
+            shadow=True, startangle=90)
+    ax1.axis(&#39;equal&#39;)  # Equal aspect ratio ensures that pie is drawn as a circle
+    plt.title(&#39;Route as planned&#39;)
+    output_figure[&#39;routeAsPlannedPie&#39;] = fig1
+
+    # calculate the difference planned-actual, depending on the date of generation of the record
+    D_movimenti[&#39;latenessTD&#39;] = lateness_TD = ts.timeStampToDays(D_movimenti.ATD - D_movimenti.PTD)
+    D_movimenti[&#39;tardinessTD&#39;] = tardiness_TD = lateness_TD.clip(0, None)  # delete all values outside the range [0, +inf]
+    lateness_TD_mean = np.mean(lateness_TD)
+    tardiness_TD_mean = np.mean(tardiness_TD)
+
+    lateness_TA = ts.timeStampToDays(D_movimenti.ATA - D_movimenti.PTA)
+    tardiness_TA = lateness_TA.clip(0, None)
+    lateness_TA_mean = np.mean(lateness_TA)
+    tardiness_TA_mean = np.mean(tardiness_TA)
+
+    gap_handling = ts.timeStampToDays((D_movimenti.ATD - D_movimenti.ATA) - (D_movimenti.PTD - D_movimenti.PTA))
+    handling_gap_mean = np.mean(gap_handling)
+
+    cols = [&#39;mean lateness - dep.&#39;, &#39;mean lateness - arr.&#39;,
+            &#39;mean tardiness - dep.&#39;, &#39;mean tardiness - arr.&#39;, &#39;mean handling gap&#39;]
+    schedule_results = pd.DataFrame([[lateness_TD_mean, lateness_TA_mean, tardiness_TD_mean,
+                                      tardiness_TA_mean, handling_gap_mean]], columns=cols)
+    schedule_results[&#39;accuracy&#39;] = [accuracy for i in range(0, len(schedule_results))]
+
+    df_results[&#39;schedule_results&#39;] = schedule_results
+
+    return output_figure, df_results</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.travelTimedistribution"><code class="name flex">
+<span>def <span class="ident">travelTimedistribution</span></span>(<span>D_mov: pandas.core.frame.DataFrame, capacityField: str = 'QUANTITY', loadingTA: str = 'PTA_FROM', loadingTD: str = 'PTD_FROM', dischargingTA: str = 'PTA_TO', dischargingTD: str = 'PTD_TO')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculate the average time spent by products on a vehicle</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas dataframe with movements.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the transported quantity. Defaults to 'QUANTITY'.</dd>
+<dt><strong><code>loadingTA</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the planned time of arrival for loading. Defaults to 'PTA_FROM'.</dd>
+<dt><strong><code>loadingTD</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the planned time of departure for loading. Defaults to 'PTD_FROM'.</dd>
+<dt><strong><code>dischargingTA</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the planned time of arrival for offloading. Defaults to 'PTA_TO'.</dd>
+<dt><strong><code>dischargingTD</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name with the planned time of departure for offloading. Defaults to 'PTD_TO'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>imageResults (dict): output dictionary containing figures.
+df_traveltime (pd.DataFrame): output pandas dataFrame.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def travelTimedistribution(D_mov: pd.DataFrame,
+                           capacityField: str = &#39;QUANTITY&#39;,
+                           loadingTA: str = &#39;PTA_FROM&#39;,
+                           loadingTD: str = &#39;PTD_FROM&#39;,
+                           dischargingTA: str = &#39;PTA_TO&#39;,
+                           dischargingTD: str = &#39;PTD_TO&#39;
+                           ):
+    &#34;&#34;&#34;
+    calculate the average time spent by products on a vehicle
+
+    Args:
+        D_mov (pd.DataFrame): Input pandas dataframe with movements.
+        capacityField (str, optional): Column name with the transported quantity. Defaults to &#39;QUANTITY&#39;.
+        loadingTA (str, optional): Column name with the planned time of arrival for loading. Defaults to &#39;PTA_FROM&#39;.
+        loadingTD (str, optional): Column name with the planned time of departure for loading. Defaults to &#39;PTD_FROM&#39;.
+        dischargingTA (str, optional): Column name with the planned time of arrival for offloading. Defaults to &#39;PTA_TO&#39;.
+        dischargingTD (str, optional): Column name with the planned time of departure for offloading. Defaults to &#39;PTD_TO&#39;.
+
+    Returns:
+        imageResults (dict): output dictionary containing figures.
+        df_traveltime (pd.DataFrame): output pandas dataFrame.
+
+    &#34;&#34;&#34;
+
+    df_traveltime = pd.DataFrame(columns=[&#39;U_L_BOUND&#39;, &#39;TIME_MEAN&#39;, &#39;TIME_STD&#39;])
+    imageResults = {}
+
+    # Get coverage
+    accuracy_ub, _ = getCoverageStats(D_mov, analysisFieldList=[dischargingTD, loadingTA],
+                                      capacityField=capacityField)
+
+    # Expected travel time per container (UPPER BOUND)
+    ExpectedTravelTime_ub = ts.timeStampToDays(D_mov[dischargingTD] - D_mov[loadingTA])
+    ExpectedTravelTime_ub = ExpectedTravelTime_ub[ExpectedTravelTime_ub &gt; 0]
+    mean_ExpectedTravelTime = np.mean(ExpectedTravelTime_ub)
+    std_ExpectedTravelTime = np.std(ExpectedTravelTime_ub)
+
+    data = {&#39;U_L_BOUND&#39;: &#39;upperBound&#39;,
+            &#39;TIME_MEAN&#39;: mean_ExpectedTravelTime,
+            &#39;TIME_STD&#39;: std_ExpectedTravelTime,
+            &#39;accuracy&#39;: str(accuracy_ub)}
+    temp = pd.DataFrame(data, index=[0])
+    df_traveltime = df_traveltime.append(temp)
+
+    # get coverage
+    accuracy_lb, _ = getCoverageStats(D_mov, analysisFieldList=[dischargingTA, loadingTD],
+                                      capacityField=capacityField)
+    # Expected travel time per container (LOWER BOUND)
+    ExpectedTravelTime_lb = ts.timeStampToDays(D_mov[dischargingTA] - D_mov[loadingTD])
+    ExpectedTravelTime_lb = ExpectedTravelTime_lb[ExpectedTravelTime_lb &gt; 0]
+    mean_ExpectedTravelTime = np.mean(ExpectedTravelTime_lb)
+    std_ExpectedTravelTime = np.std(ExpectedTravelTime_lb)
+
+    data = {&#39;U_L_BOUND&#39;: &#39;lowerBound&#39;,
+            &#39;TIME_MEAN&#39;: mean_ExpectedTravelTime,
+            &#39;TIME_STD&#39;: std_ExpectedTravelTime,
+            &#39;accuracy&#39;: str(accuracy_lb)}
+    temp = pd.DataFrame(data, index=[0])
+    df_traveltime = df_traveltime.append(temp)
+
+    # define unit of measure
+    udm = &#39;days&#39;
+    value_ub = ExpectedTravelTime_ub
+    value_lb = ExpectedTravelTime_lb
+    if mean_ExpectedTravelTime &lt; 1 / 24 / 60:  # use minutes
+        udm = &#39;minutes&#39;
+        value_ub = ExpectedTravelTime_ub * 24 * 60
+        value_lb = ExpectedTravelTime_lb * 24 * 60
+
+    elif mean_ExpectedTravelTime &lt; 1:  # use hours
+        udm = &#39;hours&#39;
+        value_ub = ExpectedTravelTime_ub * 24
+        value_lb = ExpectedTravelTime_lb * 24
+
+    # plot figure
+    fig1 = plt.figure()
+    plt.hist(value_ub, color=&#39;orange&#39;)
+    plt.hist(value_lb, color=&#39;blue&#39;, alpha=0.6)
+    plt.title(f&#34;Travel time ({udm})&#34;)
+    plt.xlabel(f&#34;{udm}&#34;)
+    plt.ylabel(&#39;Quantity&#39;)
+    plt.legend([&#39;Upper bound&#39;, &#39;Lower bound&#39;])
+    imageResults[&#34;travel_time_per_movement&#34;] = fig1
+
+    return imageResults, df_traveltime</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.calculateLoS" href="#analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.calculateLoS">calculateLoS</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.checkPlannedActual" href="#analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.checkPlannedActual">checkPlannedActual</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.travelTimedistribution" href="#analogistics.supply_chain.P8_performance_assessment.level_of_service_assessment.travelTimedistribution">travelTimedistribution</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

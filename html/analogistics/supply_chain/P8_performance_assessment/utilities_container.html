@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>analogistics.learning.linear_models API documentation</title>
+<title>analogistics.supply_chain.P8_performance_assessment.utilities_container API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,7 +17,7 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>analogistics.learning.linear_models</code></h1>
+<h1 class="title">Module <code>analogistics.supply_chain.P8_performance_assessment.utilities_container</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
@@ -25,113 +25,32 @@
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">import pandas as pd
-from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet, Lars, LogisticRegression
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis, QuadraticDiscriminantAnalysis
-from sklearn import metrics
-
-# %%
-&#39;&#39;&#39;
-questo modulo costruisce le griglie con i parametri per i modelli
-lineari di regressione e classificazione
-&#39;&#39;&#39;
-# %% IMPOSTO MODELLI E PARAMETRI DI DEFAULT PER LA REGRESSIONE
-
-tuned_param_linear_regression = [{&#39;fit_intercept&#39;:[True,False],
-                                &#39;normalize&#39;:[True, False]}]
-                                
-
-tuned_param_ridge_regression =[{&#39;fit_intercept&#39;:[True,False],
-                                &#39;normalize&#39;:[True, False],
-                               &#39;alpha&#39;: [1e-5, 1e-4, 1e-3, 1e-2,1e-1, 1, 1e1, 1e2, 1e3]}]
-
-tuned_param_lasso_regression =[{&#39;fit_intercept&#39;:[True,False],
-                               &#39;normalize&#39;:[True, False],
-                               &#39;alpha&#39;: [1e-5, 1e-4, 1e-3, 1e-2,1e-1, 1, 1e1, 1e2, 1e3]}]
-
-tuned_param_elasticnet_regression =[{&#39;fit_intercept&#39;:[True,False],
-                                    &#39;normalize&#39;:[True, False],
-                               &#39;alpha&#39;: [1e-5, 1e-4, 1e-3, 1e-2,1e-1, 1, 1e1, 1e2, 1e3]}]
-
-tuned_param_lars_regression =[{&#39;fit_intercept&#39;:[True,False],
-                              &#39;normalize&#39;:[True, False]}
-                               ]
 
 
-
-models_regression = {
-    &#39;regr_linear&#39;: {
-           &#39;estimator&#39;: LinearRegression(), 
-           &#39;param&#39;: tuned_param_linear_regression,
-          },
-    &#39;regr_ridge&#39;: {
-           &#39;estimator&#39;: Ridge(), 
-           &#39;param&#39;: tuned_param_ridge_regression,
-          },
-    &#39;regr_lasso&#39;: {
-           &#39;estimator&#39;: Lasso(), 
-           &#39;param&#39;: tuned_param_lasso_regression,
-          },
-    &#39;regr_elasticnet&#39;: {
-           &#39;estimator&#39;: ElasticNet(), 
-           &#39;param&#39;: tuned_param_elasticnet_regression,
-          },
-    &#39;regr_lars&#39;: {
-           &#39;estimator&#39;: Lars(), 
-           &#39;param&#39;: tuned_param_lars_regression,
-          },
-   
-          }
-
-
-
-# %% IMPOSTO MODELLI E PARAMETRI DI DEFAULT PER LA CLASSIFICAZIONE
-
-tuned_param_lda = [{&#39;solver&#39;:[&#39;svd&#39;,&#39;lsqr&#39;,&#39;eigen&#39;],
-                     &#39;shrinkage&#39;:[None, &#39;auto&#39;]}]
-
-tuned_param_qda = [{&#39;priors&#39;:[None]}]
-
-tuned_param_logistic = [{&#39;penalty&#39;:[&#39;l1&#39;,&#39;l2&#39;,&#39;elasticnet&#39;,&#39;none&#39;],
-                         &#39;dual&#39;:[True, False],
-                         &#39;fit_intercept&#39;:[True, False]
-                         }]
-
-models_classification = {
-                            &#39;linear_discriminant_analysis&#39;: {
-                                   &#39;estimator&#39;: LinearDiscriminantAnalysis(), 
-                                   &#39;param&#39;: tuned_param_lda,
-                            },
-                            
-                            &#39;quadratic_discriminant_analysis&#39;: {
-                                   &#39;estimator&#39;: QuadraticDiscriminantAnalysis(), 
-                                   &#39;param&#39;: tuned_param_qda,
-                            },
-                            
-                            &#39;logistic_regression&#39;: {
-                                   &#39;estimator&#39;: LogisticRegression(), 
-                                   &#39;param&#39;: tuned_param_logistic,
-                            },
-                        }
-
-
-def fit_linear_reg(X: pd.DataFrame, Y: pd.DataFrame):
+def convertContainerISOcodeToTEUFEU(D_hu: pd.DataFrame, codeField: str = &#39;_id&#39;):
     &#34;&#34;&#34;
-    Fit linear regression model and return RSS and R squared values
+    Consider container ISO codes to define their size (TEU or FEU)
 
     Args:
-        X (pd.DataFrame): input pandas dataframe.
-        Y (pd.DataFrame): input target label.
+        D_hu (pd.DataFrame): Input dataframe.
+        codeField (str, optional): Column name containing ISO code of the container. Defaults to &#39;_id&#39;.
 
     Returns:
-        RSS (float): output Root Squared sum.
-        R_squared (float): output r squared.
+        D_hu (pd.Dataframe): Output dataframe with added size column.
 
     &#34;&#34;&#34;
-    model_k = LinearRegression(fit_intercept=True)
-    model_k.fit(X, Y)
-    RSS = metrics.mean_squared_error(Y, model_k.predict(X)) * len(Y)
-    R_squared = model_k.score(X, Y)
-    return RSS, R_squared</code></pre>
+
+    ctSize = D_hu[codeField].str[:1]
+    TEU = ctSize == &#39;2&#39;
+    FEU = ctSize == &#39;4&#39;
+    L5GO = ctSize == &#39;L&#39;
+    ctSize[TEU] = &#39;TEU&#39;
+    ctSize[FEU] = &#39;FEU&#39;
+    ctSize[L5GO] = &#39;L5GO&#39;
+    ctSize[~ (TEU | FEU | L5GO)] = &#39;OTHER&#39;
+    D_hu[&#39;ContainerSize&#39;] = ctSize
+
+    return D_hu</code></pre>
 </details>
 </section>
 <section>
@@ -141,43 +60,48 @@ def fit_linear_reg(X: pd.DataFrame, Y: pd.DataFrame):
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="analogistics.learning.linear_models.fit_linear_reg"><code class="name flex">
-<span>def <span class="ident">fit_linear_reg</span></span>(<span>X: pandas.core.frame.DataFrame, Y: pandas.core.frame.DataFrame)</span>
+<dt id="analogistics.supply_chain.P8_performance_assessment.utilities_container.convertContainerISOcodeToTEUFEU"><code class="name flex">
+<span>def <span class="ident">convertContainerISOcodeToTEUFEU</span></span>(<span>D_hu: pandas.core.frame.DataFrame, codeField: str = '_id')</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Fit linear regression model and return RSS and R squared values</p>
+<div class="desc"><p>Consider container ISO codes to define their size (TEU or FEU)</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>X</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
-<dd>input pandas dataframe.</dd>
-<dt><strong><code>Y</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
-<dd>input target label.</dd>
+<dt><strong><code>D_hu</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>codeField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Column name containing ISO code of the container. Defaults to '_id'.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
-<p>RSS (float): output Root Squared sum.
-R_squared (float): output r squared.</p></div>
+<p>D_hu (pd.Dataframe): Output dataframe with added size column.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def fit_linear_reg(X: pd.DataFrame, Y: pd.DataFrame):
+<pre><code class="python">def convertContainerISOcodeToTEUFEU(D_hu: pd.DataFrame, codeField: str = &#39;_id&#39;):
     &#34;&#34;&#34;
-    Fit linear regression model and return RSS and R squared values
+    Consider container ISO codes to define their size (TEU or FEU)
 
     Args:
-        X (pd.DataFrame): input pandas dataframe.
-        Y (pd.DataFrame): input target label.
+        D_hu (pd.DataFrame): Input dataframe.
+        codeField (str, optional): Column name containing ISO code of the container. Defaults to &#39;_id&#39;.
 
     Returns:
-        RSS (float): output Root Squared sum.
-        R_squared (float): output r squared.
+        D_hu (pd.Dataframe): Output dataframe with added size column.
 
     &#34;&#34;&#34;
-    model_k = LinearRegression(fit_intercept=True)
-    model_k.fit(X, Y)
-    RSS = metrics.mean_squared_error(Y, model_k.predict(X)) * len(Y)
-    R_squared = model_k.score(X, Y)
-    return RSS, R_squared</code></pre>
+
+    ctSize = D_hu[codeField].str[:1]
+    TEU = ctSize == &#39;2&#39;
+    FEU = ctSize == &#39;4&#39;
+    L5GO = ctSize == &#39;L&#39;
+    ctSize[TEU] = &#39;TEU&#39;
+    ctSize[FEU] = &#39;FEU&#39;
+    ctSize[L5GO] = &#39;L5GO&#39;
+    ctSize[~ (TEU | FEU | L5GO)] = &#39;OTHER&#39;
+    D_hu[&#39;ContainerSize&#39;] = ctSize
+
+    return D_hu</code></pre>
 </details>
 </dd>
 </dl>
@@ -193,12 +117,12 @@ R_squared (float): output r squared.</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="analogistics.learning" href="index.html">analogistics.learning</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="analogistics.learning.linear_models.fit_linear_reg" href="#analogistics.learning.linear_models.fit_linear_reg">fit_linear_reg</a></code></li>
+<li><code><a title="analogistics.supply_chain.P8_performance_assessment.utilities_container.convertContainerISOcodeToTEUFEU" href="#analogistics.supply_chain.P8_performance_assessment.utilities_container.convertContainerISOcodeToTEUFEU">convertContainerISOcodeToTEUFEU</a></code></li>
 </ul>
 </li>
 </ul>
