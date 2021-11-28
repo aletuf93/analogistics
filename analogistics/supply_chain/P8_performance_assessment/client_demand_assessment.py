@@ -149,7 +149,7 @@ def paretoNodeClient(D_mov: pd.DataFrame,
     return outputfigure, output_df
 
 
-def violinPlantTerminal(D_mov: pd.dataFrame, plantField: str = 'LOADING_NODE',
+def violinPlantTerminal(D_mov: pd.DataFrame, plantField: str = 'LOADING_NODE',
                         clientField: str = 'DISCHARGING_NODE',
                         capacityField: str = 'QUANTITY'):
     """
