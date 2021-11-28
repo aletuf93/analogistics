@@ -3,7 +3,7 @@ import pandas as pd
 
 from sklearn import metrics
 
-from analytics.transform import dummyColumns
+from analogistics.transform import dummyColumns
 
 
 def BootstrapValues(X: pd.DataFrame, nboot: int) -> list:
