@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import logproj.stat_time_series as ts
+from analogistics.statistics import time_series as ts
 from statsmodels.tsa.seasonal import seasonal_decompose
 from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
 
