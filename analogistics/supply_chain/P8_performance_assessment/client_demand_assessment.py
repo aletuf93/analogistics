@@ -8,7 +8,7 @@ from analogistics.explore import paretoChart
 from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
 
 
-def clientStatistics(D_mov: pd.dataFrame,
+def clientStatistics(D_mov: pd.DataFrame,
                      clientfield: str = 'KLANT',
                      itemfamily: str = 'ContainerSize',
                      capacityfield: str = 'QUANTITY'):
