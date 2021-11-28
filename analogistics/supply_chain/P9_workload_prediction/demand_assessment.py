@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from analogistics.statistics import time_series as ts
 from statsmodels.tsa.seasonal import seasonal_decompose
-from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
 
 
 def getAdvanceInPlanning(D_mov: pd.DataFrame, loadingptafield: str = 'LOADING_TIME_WINDOWS_PROVISIONAL_START'):
@@ -205,7 +205,7 @@ def plotquantitytrend(D_temp: pd.DataFrame, date_field: str = 'TIMESTAMP_IN',
     return fig
 
 
-def plotQuantityTrendWeeklyDaily(D_temp: pd.dataFrame, date_field: str = 'TIMESTAMP_IN',
+def plotQuantityTrendWeeklyDaily(D_temp: pd.DataFrame, date_field: str = 'TIMESTAMP_IN',
                                  filterVariable: str = [], filterValue: str = [],
                                  quantityVariable: str = 'sum_QUANTITY',
                                  countVariable: str = 'count_TIMESTAMP_IN',
@@ -321,7 +321,7 @@ def decomposeTimeSeries(D_time: pd.DataFrame, seriesVariable: str,
     return fig
 
 
-def seasonalityWithfourier(D_time: pd.dataFrame, seriesVariable: str,
+def seasonalityWithfourier(D_time: pd.DataFrame, seriesVariable: str,
                            samplingInterval: str = 'week',
                            date_field: str = 'TIMESTAMP_IN', titolo: str = ''):
     """

@@ -10,7 +10,7 @@ import ast
 
 from analogistics.statistics import time_series as ts
 from analogistics.clean import cleanUsingIQR
-from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
 
 
 def networkRaysPlot(D_mov: pd.DataFrame, timecol: str, lonCol_to: str, latCol_to: str,

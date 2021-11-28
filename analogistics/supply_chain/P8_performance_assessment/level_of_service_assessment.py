@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from analogistics.statistics import time_series as ts
-from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
-from analogistics.supply_chain.P8_performanceAssessment.vehicle_assessment import createTabellaMovimenti
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P8_performance_assessment.vehicle_assessment import createTabellaMovimenti
 
 
 def checkPlannedActual(D_mov: pd.DataFrame, locfrom: str = 'LOADING_NODE',

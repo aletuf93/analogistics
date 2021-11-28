@@ -4,12 +4,12 @@ import pandas as pd
 import datetime
 import matplotlib.pyplot as plt
 
-from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
-from analogistics.supply_chain.P9_workloadPrediction.demand_assessment import getAdvanceInPlanning
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P9_workload_prediction.demand_assessment import getAdvanceInPlanning
 from analogistics.graph.graph import plotGraph
 
 
-def createTabellaMovimenti(D_mov: pd.dataFrame,
+def createTabellaMovimenti(D_mov: pd.DataFrame,
                            locfrom: str = 'LOADING_NODE',
                            locto: str = 'DISCHARGING_NODE',
                            capacityField: str = 'QUANTITY',
@@ -292,7 +292,7 @@ def voyageStatistics(D_mov: pd.DataFrame,
     return D_route, D_arcs_route, D_coverages
 
 
-def returnFigureVoyage(D_route: pd.dataFrame, D_arcs_route: pd.DataFrame, lastPlanningDay: list = [],
+def returnFigureVoyage(D_route: pd.DataFrame, D_arcs_route: pd.DataFrame, lastPlanningDay: list = [],
                        lowerBoundDataCensored: list = [], filteringfield: str = 'VOYAGE_CODE', sortTimefield: str = 'PTD'):
     """
     Create a dictionary of figures with  a chart plot of the routes

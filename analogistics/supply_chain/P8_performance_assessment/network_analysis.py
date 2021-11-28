@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from analogistics.statistics.time_series import timeStampToDays
-from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
 from analogistics.graph.graph import plotGraph
 import pandas as pd
 
 
-def networkStatistics(D_mov: pd.dataFrame,
+def networkStatistics(D_mov: pd.DataFrame,
                       terminalfieldFrom: str = 'LOADING_NODE',
                       terminalfieldto: str = 'DISCHARGING_NODE',
                       capacityField: str = 'QUANTITY',
