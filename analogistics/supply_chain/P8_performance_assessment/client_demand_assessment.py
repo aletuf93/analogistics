@@ -5,7 +5,7 @@ import numpy as np
 import seaborn as sns
 
 from analogistics.explore import paretoChart
-from analogistics.supply_chain.P8_performanceAssessment.utilities_movements import getCoverageStats
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
 
 
 def clientStatistics(D_mov: pd.dataFrame,
