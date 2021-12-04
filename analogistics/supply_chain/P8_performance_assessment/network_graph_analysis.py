@@ -171,7 +171,7 @@ def networkRoadsRoutePlot(D_arcs: pd.DataFrame, lonCol_from: str, latCol_from: s
         routes.append(route)
     fig, ax = ox.plot_graph_routes(G, routes, route_color='orange', route_linewidth=3,
                                    node_size=0,
-                                   orig_dest_node_size=0)
+                                   orig_dest_size=0)
 
     output_figures['Network arcs'] = fig
     return output_figures
