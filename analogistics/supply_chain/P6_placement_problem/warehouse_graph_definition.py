@@ -316,7 +316,7 @@ def addtraversaledges(D_nodes: pd.DataFrame, list_aisles: list, edgeTable: pd.Da
     return edgeTable
 
 
-def defineEdgeTable(D_nodes: pd.DataFrame, D_IO: pd.DataFrame) -> pd.dataFrame:
+def defineEdgeTable(D_nodes: pd.DataFrame, D_IO: pd.DataFrame) -> pd.DataFrame:
     """
     Define a dataframe containing the arcs of the warehouse graph
 
@@ -451,7 +451,7 @@ def defineEdgeTable(D_nodes: pd.DataFrame, D_IO: pd.DataFrame) -> pd.dataFrame:
 
 
 def analyseWhTraffic(D_mov_input: pd.DataFrame, D_res: pd.DataFrame, G, numPicks: int = -1,
-                     edgePredecessors: bool = True, D_layout: pd.dataFrame = []):
+                     edgePredecessors: bool = True, D_layout: pd.DataFrame = []):
     """
     analyse the traffic of a warehouse with a simulation on a sample of picking lists
 
