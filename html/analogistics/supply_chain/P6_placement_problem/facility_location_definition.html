@@ -1,0 +1,1871 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P6_placement_problem.facility_location_definition API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P6_placement_problem.facility_location_definition</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.interpolate import griddata
+import osmnx as ox
+
+import networkx as nx
+
+from analogistics.chart.chart_3D_surface import createFigureWith3Dsurface
+
+
+from analogistics.supply_chain.P8_performance_assessment.utilities_movements import getCoverageStats
+from analogistics.clean import cleanUsingIQR
+
+from sklearn.metrics import mean_squared_error
+
+
+from sklearn import cluster
+from sklearn.mixture import GaussianMixture
+
+
+def mercatorProjection(latitude: float, longitude: float):
+    &#34;&#34;&#34;
+    Return the Mercator projection coordinates of given latitude and longitude
+
+    Args:
+        latitude (float): Latitude of a point.
+        longitude (float): Longitude of a point.
+
+    Returns:
+        x (TYPE): Mercator X coordinate.
+        y (TYPE): Mercator Y coordinate.
+
+    &#34;&#34;&#34;
+
+    R = 6378.14  # earth&#39;s ray
+    e = 0.0167  # earth&#39;s eccentricity
+
+    lon_rad = (np.pi / 180) * longitude
+    lat_rad = (np.pi / 180) * latitude
+
+    x = R * lon_rad
+    y = R * np.log(((1 - e * np.sin(lat_rad)) / (1 + e * np.sin(lat_rad))) ** (e / 2) * np.tan(np.pi / 4 + lat_rad / 2))
+    return x, y
+
+
+def optimalLocationRectangularDistance(D_filtered: pd.DataFrame, latCol: str, lonCol: str, weightCol: str):
+    &#34;&#34;&#34;
+    this function returns the optimal location based on rectangular distances
+
+    Args:
+        D_filtered (pd.DataFrame): Input dataframe.
+        latCol (str): Column name containing latitude.
+        lonCol (str): Column name containing longitude.
+        weightCol (str): Column name containing weight (e.g. production quantity or flows).
+
+    Returns:
+        lat_optimal (TYPE): Optimal latitude.
+        lon_optimal (TYPE): Optimal longitude.
+
+    &#34;&#34;&#34;
+
+    # optimal location
+    op_w = sum(D_filtered[weightCol]) / 2  # identify the median of the sum of weights
+
+    # identify optimal latitude
+    if len(D_filtered) &gt; 1:  # when there are more than a single point
+        D_filtered = D_filtered.sort_values(by=latCol, ascending=True)  # sort by latitude
+        D_filtered[&#39;X_cumsum&#39;] = D_filtered[weightCol].cumsum()  # calculate the cumulated sum
+
+        # identify the LATITUDE closer to the optimal location
+        D_opt_x_max = D_filtered[D_filtered[&#39;X_cumsum&#39;] &gt;= op_w].iloc[0]
+        D_opt_x_min = D_filtered[D_filtered[&#39;X_cumsum&#39;] &lt; op_w].iloc[-1]
+
+        x_array = [D_opt_x_min[&#39;X_cumsum&#39;], D_opt_x_max[&#39;X_cumsum&#39;]]
+        y_array = [D_opt_x_min[latCol], D_opt_x_max[latCol]]
+        lat_optimal = np.interp(op_w, x_array, y_array)
+
+        # identify the LONGITUDE closer to the optimal location
+        D_filtered = D_filtered.sort_values(by=lonCol, ascending=True)  # sort by latitude
+        D_filtered[&#39;Y_cumsum&#39;] = D_filtered[weightCol].cumsum()  # calculate the cumulated sum
+
+        D_opt_x_max = D_filtered[D_filtered[&#39;Y_cumsum&#39;] &gt;= op_w].iloc[0]
+        D_opt_x_min = D_filtered[D_filtered[&#39;Y_cumsum&#39;] &lt; op_w].iloc[-1]
+
+        x_array = [D_opt_x_min[&#39;Y_cumsum&#39;], D_opt_x_max[&#39;Y_cumsum&#39;]]
+        y_array = [D_opt_x_min[lonCol], D_opt_x_max[lonCol]]
+        lon_optimal = np.interp(op_w, x_array, y_array)
+
+    else:  # with a single point take the coordinates of the point
+        lat_optimal = float(D_filtered.iloc[0][latCol])
+        lon_optimal = float(D_filtered.iloc[0][lonCol])
+
+    return lat_optimal, lon_optimal
+
+
+def optimalLocationGravityProblem(D_filtered: pd.DataFrame, latCol: str, lonCol: str, weightCol: str):
+    &#34;&#34;&#34;
+    this dunction calculate the optimal location with squared euclidean distances
+
+    Args:
+        D_filtered (pd.DataFrame): Input dataframe.
+        latCol (str): Column name containing latitude.
+        lonCol (str): Column name containing longitude.
+        weightCol (str): Column name containing weight (e.g. production quantity or flows).
+
+    Returns:
+        lat_optimal (TYPE): Optimal latitude.
+        lon_optimal (TYPE): Optimal longitude.
+
+    &#34;&#34;&#34;
+
+    D_filtered_notnan = D_filtered.dropna(subset=[latCol, lonCol, weightCol])
+    D_filtered_notnan = D_filtered_notnan[D_filtered_notnan[weightCol] &gt; 0]
+    if len(D_filtered_notnan) &gt; 0:
+        lat_optimal = sum(D_filtered_notnan[latCol] * D_filtered_notnan[weightCol]) / sum(D_filtered_notnan[weightCol])
+        lon_optimal = sum(D_filtered_notnan[lonCol] * D_filtered_notnan[weightCol]) / sum(D_filtered_notnan[weightCol])
+    else:
+        lat_optimal = lon_optimal = 0
+    return lat_optimal, lon_optimal
+
+
+def optimalLocationEuclideanDistance(D_filtered: pd.DataFrame, latCol: str, lonCol: str, weightCol: str):
+    &#34;&#34;&#34;
+    this function calculates the optimal location with euclidean distances using the kuhn procedure
+
+    Args:
+        D_filtered (pd.DataFrame): Input dataframe.
+        latCol (str): Column name containing latitude.
+        lonCol (str): Column name containing longitude.
+        weightCol (str): Column name containing weight (e.g. production quantity or flows).
+
+    Returns:
+        lat_optimal (TYPE): Optimal latitude.
+        lon_optimal (TYPE): Optimal longitude.
+
+    &#34;&#34;&#34;
+
+    def _funcGKuhn(wi, xj_1, yj_1, ai, bi):
+        # implements the function g in the kuhn procedure for euclidean distances
+        return wi / ((xj_1 - ai) ** 2 + (yj_1 - bi) ** 2)
+
+    # remove null values
+    D_filtered_notnan = D_filtered.dropna(subset=[latCol, lonCol, weightCol])
+
+    # identify the first solution of the gravity problem
+    lat_optimal_0, lon_optimal_0 = optimalLocationGravityProblem(D_filtered_notnan, latCol, lonCol, weightCol)
+
+    xj_1 = lon_optimal_0
+    yj_1 = lat_optimal_0
+    wi = D_filtered_notnan[weightCol]
+    ai = D_filtered_notnan[lonCol]
+    bi = D_filtered_notnan[latCol]
+
+    # iterates Kuhn procedure to approximate the solution
+    diff_x = 1  # a latitude degree is about 111 km
+    while diff_x &gt; 0.01:
+        lon_optimal_j = sum(_funcGKuhn(wi, xj_1, yj_1, ai, bi) * ai) / sum(_funcGKuhn(wi, xj_1, yj_1, ai, bi))
+        diff_x = np.abs(xj_1 - lon_optimal_j)
+        # print(diff_x)
+        xj_1 = lon_optimal_j
+
+    # iterates Kuhn procedure to approximate the solution
+    diff_x = 1
+    while diff_x &gt; 0.01:
+        lat_optimal_j = sum(_funcGKuhn(wi, xj_1, yj_1, ai, bi) * bi) / sum(_funcGKuhn(wi, xj_1, yj_1, ai, bi))
+        diff_x = np.abs(yj_1 - lat_optimal_j)
+        # print(diff_x)
+        yj_1 = lat_optimal_j
+
+    return lat_optimal_j, lon_optimal_j
+
+
+def func_rectangularDistanceCost(x: float, y: float, x_opt: float, y_opt: float, wi: float) -&gt; float:
+    &#34;&#34;&#34;
+    return cost values with rectangular distances
+
+    Args:
+        x (float): X coordinate.
+        y (float): Y coordinate.
+        x_opt (float): X coordinate of the optimal location.
+        y_opt (float): Y coordinate of the optimal location.
+        wi (float): weight (e.g. flow).
+
+    Returns:
+        float: Cost value.
+
+    &#34;&#34;&#34;
+
+    return (np.abs(x - x_opt) + np.abs(y - y_opt)) * wi
+
+
+def func_gravityDistanceCost(x: float, y: float, x_opt: float, y_opt: float, wi: float) -&gt; float:
+    &#34;&#34;&#34;
+    return cost values with squared euclidean distances
+
+    Args:
+        x (float): X coordinate.
+        y (float): Y coordinate.
+        x_opt (float): X coordinate of the optimal location.
+        y_opt (float): Y coordinate of the optimal location.
+        wi (float): weight (e.g. flow).
+
+    Returns:
+        float: Cost value.
+
+    &#34;&#34;&#34;
+
+    return ((x - x_opt) ** 2 + (y - y_opt) ** 2) * wi
+
+
+def func_euclideanDistanceCost(x: float, y: float, x_opt: float, y_opt: float, wi: float) -&gt; float:
+    &#34;&#34;&#34;
+    return cost values with euclidean distance
+
+    Args:
+        x (float): X coordinate.
+        y (float): Y coordinate.
+        x_opt (float): X coordinate of the optimal location.
+        y_opt (float): Y coordinate of the optimal location.
+        wi (float): weight (e.g. flow).
+
+    Returns:
+        float: Cost value.
+
+    &#34;&#34;&#34;
+
+    return np.sqrt((x - x_opt) ** 2 + (y - y_opt) ** 2) * wi
+
+
+def defineDistanceTableEstimator(D_mov: pd.DataFrame, lonCol_From_mov: str, latCol_From_mov: str,
+                                 lonCol_To_mov: str, latCol_To_mov: str, G: nx.graph,
+                                 cleanOutliersCoordinates: bool = False, capacityField: str = &#39;QUANTITY&#39;):
+    &#34;&#34;&#34;
+
+    Args:
+        D_mov (pd.DataFrame): Inpud dataframe.
+        lonCol_From_mov (str): name of the D_mov dataframe with longitude of the loading node.
+        latCol_From_mov (str): name of the D_mov dataframe with latitude of the loading node.
+        lonCol_To_mov (str): name of the D_mov dataframe with longitude of the discharging node.
+        latCol_To_mov (str): name of the D_mov dataframe with latitude of the loading node.
+        G (nx.graph): road graph obtained with osmnx.
+        cleanOutliersCoordinates (bool, optional): is true to remove outliers in latitude and longitude. Defaults to False.
+        capacityField (str, optional): field of quantity to measure the coverage statistics on it. Defaults to &#39;QUANTITY&#39;.
+
+    Returns:
+        D_dist (TYPE): DESCRIPTION.
+        df_coverages (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # clean data and get coverages
+    analysisFieldList = [lonCol_From_mov, latCol_From_mov, lonCol_To_mov, latCol_To_mov]
+    coverages, _ = getCoverageStats(D_mov, analysisFieldList, capacityField=capacityField)
+    D_dist = D_mov[[lonCol_From_mov, latCol_From_mov, lonCol_To_mov, latCol_To_mov]].drop_duplicates().dropna().reset_index()
+    if cleanOutliersCoordinates:
+        D_dist, coverages_outl = cleanUsingIQR(D_dist, [lonCol_From_mov, latCol_From_mov, lonCol_To_mov, latCol_To_mov])
+        coverages = (coverages[0] * coverages_outl[0], coverages[1] * coverages_outl[1])
+
+    df_coverages = pd.DataFrame(coverages)
+
+    D_dist[&#39;REAL_DISTANCE&#39;] = np.nan
+    D_dist[&#39;MERCATOR_X_FROM&#39;] = np.nan
+    D_dist[&#39;MERCATOR_Y_FROM&#39;] = np.nan
+    D_dist[&#39;MERCATOR_X_TO&#39;] = np.nan
+    D_dist[&#39;MERCATOR_Y_TO&#39;] = np.nan
+
+    for index, row in D_dist.iterrows():
+
+        # get the coordinates
+        lonFrom = row[lonCol_From_mov]
+        latFrom = row[latCol_From_mov]
+        lonTo = row[lonCol_To_mov]
+        latTo = row[latCol_To_mov]
+
+        # get the closest node on the graph
+        node_from = ox.get_nearest_node(G, (latFrom, lonFrom), method=&#39;euclidean&#39;)
+        node_to = ox.get_nearest_node(G, (latTo, lonTo), method=&#39;euclidean&#39;)
+        length = nx.shortest_path_length(G=G, source=node_from, target=node_to, weight=&#39;length&#39;)
+        D_dist[&#39;REAL_DISTANCE&#39;].loc[index] = length
+
+        # convert into mercator coordinates
+        x_merc_from, y_merc_from = mercatorProjection(latFrom, lonFrom)
+        x_merc_to, y_merc_to = mercatorProjection(latTo, lonTo)
+
+        D_dist[&#39;MERCATOR_X_FROM&#39;].loc[index] = x_merc_from
+        D_dist[&#39;MERCATOR_Y_FROM&#39;].loc[index] = y_merc_from
+        D_dist[&#39;MERCATOR_X_TO&#39;].loc[index] = x_merc_to
+        D_dist[&#39;MERCATOR_Y_TO&#39;].loc[index] = y_merc_to
+
+    D_dist[&#39;EUCLIDEAN_DISTANCE&#39;] = 1000 * func_euclideanDistanceCost(D_dist[&#39;MERCATOR_X_FROM&#39;],
+                                                                     D_dist[&#39;MERCATOR_Y_FROM&#39;],
+                                                                     D_dist[&#39;MERCATOR_X_TO&#39;],
+                                                                     D_dist[&#39;MERCATOR_Y_TO&#39;],
+                                                                     1)
+    D_dist[&#39;RECTANGULAR_DISTANCE&#39;] = 1000 * func_rectangularDistanceCost(D_dist[&#39;MERCATOR_X_FROM&#39;],
+                                                                         D_dist[&#39;MERCATOR_Y_FROM&#39;],
+                                                                         D_dist[&#39;MERCATOR_X_TO&#39;],
+                                                                         D_dist[&#39;MERCATOR_Y_TO&#39;],
+                                                                         1)
+    D_dist[&#39;GRAVITY_DISTANCE&#39;] = 1000 * func_gravityDistanceCost(D_dist[&#39;MERCATOR_X_FROM&#39;],
+                                                                 D_dist[&#39;MERCATOR_Y_FROM&#39;],
+                                                                 D_dist[&#39;MERCATOR_X_TO&#39;],
+                                                                 D_dist[&#39;MERCATOR_Y_TO&#39;],
+                                                                 1)
+
+    error_euclidean = mean_squared_error(D_dist[&#39;REAL_DISTANCE&#39;], D_dist[&#39;EUCLIDEAN_DISTANCE&#39;])
+    error_rectangular = mean_squared_error(D_dist[&#39;REAL_DISTANCE&#39;], D_dist[&#39;RECTANGULAR_DISTANCE&#39;])
+    error_gravity = mean_squared_error(D_dist[&#39;REAL_DISTANCE&#39;], D_dist[&#39;GRAVITY_DISTANCE&#39;])
+
+    print(f&#34;MSE EUCLIDEAN: {np.round(error_euclidean,2)}&#34;)
+    print(f&#34;MSE RECTANGULAR: {np.round(error_rectangular,2)}&#34;)
+    print(f&#34;MSE GRAVITY: {np.round(error_gravity,2)}&#34;)
+    return D_dist, df_coverages
+
+
+def calculateOptimalLocation(D_table: pd.DataFrame,
+                             timeColumns: list,
+                             distanceType: str,
+                             latCol: str,
+                             lonCol: str,
+                             codeCol_node: str,
+                             descrCol_node: str,
+                             cleanOutliers: bool = False):
+    &#34;&#34;&#34;
+    this function import a table D_table where each row is a node of the network
+
+    Args:
+        D_table (pd.DataFrame): DESCRIPTION.
+        timeColumns (list): list of the column name with the time horizon containing quantity data.
+        distanceType (str): type of distance to consider for optimization.
+        latCol (str): column name of the latitude of the node.
+        lonCol (str): column name of the longitude of the node.
+        codeCol_node (str): column with description of the node (the same appearing in plantListName).
+        descrCol_node (str): column with description of the node.
+        cleanOutliers (bool, optional): if True use IQR to remove latitude and longitude outliers. Defaults to False.
+
+    Returns:
+        D_res (pd.DataFrame): it returns a dataframe D_res with the ID, LATITUDE, LONGITUDE AND YEAR for
+        each flow adding the column COST AND FLOW representing the distance  travelled (COST) and the flow intensity (FLOW).
+        The column COST_NORM is a the flows scaled between 0 and 100.
+        D_res_optimal (pd.DataFram): it returns a dataframe D_res_optimal with the loptimal latitude and longitude for each
+        time frame, and a column COST and FLOW with the total cost (distance) and flows.
+        output_coverages (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # clean data and calculate coverages
+    output_coverages = {}
+
+    analysisFieldList = [latCol, lonCol]
+    outputCoverages, _ = getCoverageStats(D_table, analysisFieldList, capacityField=timeColumns[0])
+    D_table = D_table.dropna(subset=[latCol, lonCol])
+    if cleanOutliers:
+        D_table, coverages, = cleanUsingIQR(D_table, [latCol, lonCol])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+
+    # fill nan values
+    D_table = D_table.fillna(0)
+
+    # identify years in the column
+    yearsColumns = timeColumns
+
+    # identify useful columns
+    D_res = pd.DataFrame(columns=[codeCol_node, descrCol_node, latCol, lonCol, &#39;YEAR&#39;, &#39;COST&#39;])
+    D_res_optimal = pd.DataFrame(columns=[&#39;PERIOD&#39;, latCol, lonCol, &#39;YEAR&#39;, &#39;COST&#39;, &#39;FLOW&#39;])
+
+    for year in yearsColumns:
+        # year = yearsColumns[0]
+        D_filter_columns = [codeCol_node, descrCol_node, latCol, lonCol, year]
+        D_filtered = D_table[D_filter_columns]
+        D_filtered = D_filtered.rename(columns={year: &#39;FLOW&#39;})
+        D_filtered[&#39;YEAR&#39;] = year
+
+        # define optimal location
+        if distanceType.lower() == &#39;rectangular&#39;:
+            lat_optimal, lon_optimal = optimalLocationRectangularDistance(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+            D_filtered[&#39;COST&#39;] = func_rectangularDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+        elif distanceType.lower() == &#39;gravity&#39;:
+            lat_optimal, lon_optimal = optimalLocationGravityProblem(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+            D_filtered[&#39;COST&#39;] = func_gravityDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+        elif distanceType.lower() == &#39;euclidean&#39;:
+            lat_optimal, lon_optimal = optimalLocationEuclideanDistance(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+            D_filtered[&#39;COST&#39;] = func_euclideanDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+        D_res = D_res.append(D_filtered)
+
+        D_res_optimal = D_res_optimal.append(pd.DataFrame([[f&#34;OPTIMAL LOCATION YEAR: {year}&#34;,
+                                                            lat_optimal,
+                                                            lon_optimal,
+                                                            year,
+                                                            sum(D_res[&#39;COST&#39;]),
+                                                            sum(D_res[&#39;FLOW&#39;]),
+                                                            ]], columns=D_res_optimal.columns))
+
+    # D_res[&#39;COST_norm&#39;]=(D_res[&#39;COST&#39;]-min(D_res[&#39;COST&#39;]))/(max(D_res[&#39;COST&#39;])-min(D_res[&#39;COST&#39;]))*10
+    D_res[&#39;FLOW_norm&#39;] = (D_res[&#39;FLOW&#39;] - min(D_res[&#39;FLOW&#39;])) / (max(D_res[&#39;FLOW&#39;]) - min(D_res[&#39;FLOW&#39;])) * 100
+
+    D_res = D_res.rename(columns={&#39;COST&#39;: &#39;COST_TOBE&#39;})
+
+    return D_res, D_res_optimal, output_coverages
+
+
+def calculateMultipleOptimalLocation(D_table: pd.DataFrame,
+                                     timeColumns: list,
+                                     distanceType: str,
+                                     latCol: str,
+                                     lonCol: str,
+                                     codeCol_node: str,
+                                     descrCol_node: str,
+                                     cleanOutliers: bool = False,
+                                     k: int = 1,
+                                     method: str = &#39;kmeans&#39;):
+    &#34;&#34;&#34;
+    this function defines k facility location using an aggregation method
+
+    Args:
+        D_table (pd.DataFrame): DESCRIPTION.
+        timeColumns (list): list of the column name with the time horizon containing quantity data.
+        distanceType (str): type of distance to consider for optimization.
+        latCol (str): column name of the latitude of the node.
+        lonCol (str): column name of the longitude of the node.
+        codeCol_node (str): column with description of the node (the same appearing in plantListName).
+        descrCol_node (str): column with description of the node.
+        cleanOutliers (bool, optional): if True use IQR to remove latitude and longitude outliers. Defaults to False.
+        k (int, optional): Number of clusters to define. Defaults to 1.
+        method (str, optional): Clustering method to use (e.g. kmeans). Defaults to &#39;kmeans&#39;.
+
+    Returns:
+        D_res (pd.DataFrame): it returns a dataframe D_res with the ID, LATITUDE, LONGITUDE AND YEAR for
+        each flow adding the column COST AND FLOW representing the distance  travelled (COST) and the flow intensity (FLOW).
+        The column COST_NORM is a the flows scaled between 0 and 100.
+        D_res_optimal (pd.DataFram): it returns a dataframe D_res_optimal with the loptimal latitude and longitude for each
+        time frame, and a column COST and FLOW with the total cost (distance) and flows.
+        output_coverages (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # clean data and calculate coverages
+    output_coverages = {}
+
+    analysisFieldList = [latCol, lonCol]
+    outputCoverages, _ = getCoverageStats(D_table, analysisFieldList, capacityField=timeColumns[0])
+    D_table = D_table.dropna(subset=[latCol, lonCol])
+    if cleanOutliers:
+        D_table, coverages, = cleanUsingIQR(D_table, [latCol, lonCol])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+
+    # fill nan values
+    D_table = D_table.fillna(0)
+
+    # identify years in the columns
+    yearsColumns = timeColumns
+
+    # cluster points
+    if method == &#39;kmeans&#39;:
+        km = cluster.KMeans(n_clusters=k).fit(D_table[[latCol, lonCol]])
+        D_table[&#39;CLUSTER&#39;] = pd.DataFrame(km.labels_)
+
+    elif method == &#39;gmm&#39;:
+        gmm = GaussianMixture(n_components=k, covariance_type=&#39;full&#39;).fit(D_table[[latCol, lonCol]])
+        D_table[&#39;CLUSTER&#39;] = pd.DataFrame(gmm.predict(D_table[[latCol, lonCol]]))
+    else:
+        print(&#34;No valid clustering method&#34;)
+        return [], [], []
+
+    # identify useful columns
+    D_res = pd.DataFrame(columns=[codeCol_node, descrCol_node, latCol, lonCol, &#39;YEAR&#39;, &#39;COST&#39;, &#39;CLUSTER&#39;])
+    D_res_optimal = pd.DataFrame(columns=[&#39;PERIOD&#39;, latCol, lonCol, &#39;YEAR&#39;, &#39;COST&#39;, &#39;FLOW&#39;, &#39;CLUSTER&#39;])
+
+    # analyse each cluster separately
+    for cluster_id in set(D_table[&#39;CLUSTER&#39;]):
+        # cluster_id=0
+        D_table_filtered = D_table[D_table[&#39;CLUSTER&#39;] == cluster_id]
+        for year in yearsColumns:
+            # year = yearsColumns[0]
+            D_filter_columns = [codeCol_node, descrCol_node, latCol, lonCol, year, &#39;CLUSTER&#39;]
+            D_filtered = D_table_filtered[D_filter_columns]
+            D_filtered = D_filtered.rename(columns={year: &#39;FLOW&#39;})
+            D_filtered[&#39;YEAR&#39;] = year
+
+            # define optimal location
+            if distanceType.lower() == &#39;rectangular&#39;:
+                lat_optimal, lon_optimal = optimalLocationRectangularDistance(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+                D_filtered[&#39;COST&#39;] = func_rectangularDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+            elif distanceType.lower() == &#39;gravity&#39;:
+                lat_optimal, lon_optimal = optimalLocationGravityProblem(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+                D_filtered[&#39;COST&#39;] = func_gravityDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+            elif distanceType.lower() == &#39;euclidean&#39;:
+                lat_optimal, lon_optimal = optimalLocationEuclideanDistance(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+                D_filtered[&#39;COST&#39;] = func_euclideanDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+            D_res = D_res.append(D_filtered)
+
+            D_res_optimal = D_res_optimal.append(pd.DataFrame([[f&#34;OPTIMAL LOCATION YEAR: {year}&#34;,
+                                                                lat_optimal,
+                                                                lon_optimal,
+                                                                year,
+                                                                sum(D_res[&#39;COST&#39;]),
+                                                                sum(D_res[&#39;FLOW&#39;]),
+                                                                cluster_id
+                                                                ]], columns=D_res_optimal.columns))
+
+    D_res[&#39;FLOW_norm&#39;] = (D_res[&#39;FLOW&#39;] - min(D_res[&#39;FLOW&#39;])) / (max(D_res[&#39;FLOW&#39;]) - min(D_res[&#39;FLOW&#39;])) * 100
+
+    D_res = D_res.rename(columns={&#39;COST&#39;: &#39;COST_TOBE&#39;})
+
+    return D_res, D_res_optimal, output_coverages
+
+
+def calculateCostASIS(D_plant: pd.DataFrame,
+                      latCol_plant: str,
+                      lonCol_plant: str,
+                      plantListName: list,
+                      D_node: pd.DataFrame,
+                      nodeCol_node: str,
+                      latCol_node: str,
+                      lonCol_node: str,
+                      distanceType: str):
+    &#34;&#34;&#34;
+    define the cost as-is of a network, given a cost estimator of the distance function distanceType
+    a dataframe D_plant with one row for each plant of the network to evaluate.
+
+    Args:
+        D_plant (pd.DataFrame): DESCRIPTION.
+        latCol_plant (str): string with the column of D_plant with latitudes.
+        lonCol_plant (str): string with the column of D_plant with longitudes.
+        plantListName (list): string of the column of D_plant containing a list of all the ids of the nodes served by the plant.
+        D_node (pd.DataFrame): input table with one row for each node of the network. Can be a D_res output of the function calculateOptimalLocation.
+        nodeCol_node (str): DESCRIPTION.
+        latCol_node (str): string with the column of D_node with latitudes.
+        lonCol_node (str): string with the column of D_node with longitudes.
+        distanceType (str): chosen distance function distanceType=&#39;euclidean&#39;,&#39;gravity&#39;,&#39;rectangular&#39;.
+
+    Returns:
+        D_node (pd.DataFrame): returns node dataframe with additional column for the as-is cost.
+
+    &#34;&#34;&#34;
+
+    D_node[&#39;COST_ASIS&#39;] = np.nan
+    D_node = D_node.reset_index(drop=True)
+
+    # assign each pod to the serving facility
+    for plant in D_plant[&#39;_id&#39;]:
+        # plant = 652
+
+        plant_client_list = D_plant[D_plant[&#39;_id&#39;] == plant][plantListName].iloc[0]
+        plant_client_list = [str(i) for i in plant_client_list]
+
+        # consider latitude and longitude of the plant
+        lat_plant = D_plant[D_plant[&#39;_id&#39;] == plant][latCol_plant].iloc[0]
+        lon_plant = D_plant[D_plant[&#39;_id&#39;] == plant][lonCol_plant].iloc[0]
+
+        # define a column of the dataframe for the serving plant
+        D_node[plant] = [str(id_nodo) in plant_client_list for id_nodo in D_node[nodeCol_node]]
+
+        # D_res[&#39;all&#39;]=D_res[652].astype(int) + D_res[2615].astype(int) +D_res[603].astype(int) + D_res[610].astype(int)
+        D_filtered = D_node[D_node[plant].isin([True])]
+        idx_to_upload = D_filtered.index.values
+
+        # identify a distance function
+        if distanceType.lower() == &#39;rectangular&#39;:
+            func = func_rectangularDistanceCost
+        elif distanceType.lower() == &#39;gravity&#39;:
+            func = func_gravityDistanceCost
+        elif distanceType.lower() == &#39;euclidean&#39;:
+            func = func_euclideanDistanceCost
+
+        distancecost = list(func(D_filtered[lonCol_node],
+                                 D_filtered[latCol_node],
+                                 lon_plant,
+                                 lat_plant,
+                                 D_filtered[&#39;FLOW&#39;])
+                            )
+        for i in range(0, len(distancecost)):
+            D_node[&#39;COST_ASIS&#39;].loc[idx_to_upload[i]] = distancecost[i]
+    return D_node
+
+
+def tracciaCurveIsocosto(D_res: pd.DataFrame, D_res_optimal: pd.DataFrame, latCol: str, lonCol: str, distanceType: str,
+                         D_plant: pd.DataFrame = [], plantLongitude: str = [], plantLatitude: str = [],
+                         roadGraph: nx.Graph = []):
+    &#34;&#34;&#34;
+    Produce plots with iso-cost curves
+
+    Args:
+        D_res (pd.DataFrame): Input dataframe.
+        D_res_optimal (pd.DataFrame): Input dataframe with optimal points.
+        latCol (str): column name with latitude.
+        lonCol (str): column name with longitude.
+        distanceType (str): type of distance cost function.
+        D_plant (pd.DataFrame, optional): dataframe containing plant coordinates. Defaults to [].
+        plantLongitude (str, optional): column name with latitude. Defaults to [].
+        plantLatitude (str, optional): column name with longitude. Defaults to [].
+        roadGraph (nx.Graph, optional): Road graph. Defaults to [].
+
+    Returns:
+        outputFigure (dict): dictionary of output figures.
+        fig_curve_cost3D (plotly.figure): Interactive 3d plot with .
+
+    &#34;&#34;&#34;
+
+    outputFigure = {}
+    X_list = []
+    Y_list = []
+    grid_list = []
+    time_list = []
+
+    year_list = list(set(D_res[&#39;YEAR&#39;]))
+    year_list.sort()
+    for year in year_list:
+        # year = list(set(D_res[&#39;YEAR&#39;]))[0]
+        D_res_test = D_res[(D_res[&#39;FLOW&#39;] &gt; 0) &amp; (D_res[&#39;YEAR&#39;] == year)]
+        if len(D_res_test) &gt; 2:
+            D_res_optimal_filtered = D_res_optimal[D_res_optimal[&#39;YEAR&#39;] == year]
+
+            # identify the rectangular to represent
+            min_lon = min(D_res_test[lonCol])
+            max_lon = max(D_res_test[lonCol])
+
+            min_lat = min(D_res_test[latCol])
+            max_lat = max(D_res_test[latCol])
+
+            # define the grid
+            lon = np.linspace(min_lon, max_lon, 100)
+            lat = np.linspace(min_lat, max_lat, 100)
+            X, Y = np.meshgrid(lon, lat)
+            xy_coord = list(zip(D_res_test[lonCol], D_res_test[latCol]))
+
+            # interpolate missing points
+            grid = griddata(xy_coord, np.array(D_res_test[&#39;COST_TOBE&#39;]), (X, Y), method=&#39;linear&#39;)
+
+            # save values for the representation
+            X_list.append(X)
+            Y_list.append(Y)
+            grid_list.append(grid)
+            time_list.append(year)
+
+            # if a road graph is given, plot it
+            if roadGraph == []:
+                fig1 = plt.figure()
+                ax = fig1.gca()
+            else:
+                fig1, ax = ox.plot_graph(roadGraph, bgcolor=&#39;k&#39;,
+                                         node_size=1, node_color=&#39;#999999&#39;, node_edgecolor=&#39;none&#39;, node_zorder=2,
+                                         edge_color=&#39;#555555&#39;, edge_linewidth=0.5, edge_alpha=1)
+                plt.legend([&#39;Node&#39;, &#39;Edges&#39;])
+
+            im = ax.contour(X, Y, grid, cmap=&#39;Reds&#39;)
+
+            ax.set_xlabel(&#39;LONGITUDE&#39;)
+            ax.set_ylabel(&#39;LATITUDE&#39;)
+            fig1.colorbar(im, ax=ax)
+
+            ax.set_title(f&#34;Isocost line {distanceType}, period: {year}&#34;)
+
+            # represent optimal points
+            ax.scatter(D_res_optimal_filtered[lonCol], D_res_optimal_filtered[latCol], 100, marker=&#39;^&#39;, color=&#39;green&#39;)
+            plt.legend([&#39;Optimal points&#39;])
+
+            # represent as-is points
+            if len(D_plant) &gt; 0:
+                ax.scatter(D_plant[plantLongitude], D_plant[plantLatitude], 100, marker=&#39;s&#39;, color=&#39;black&#39;)
+                plt.legend([&#39;Optimal points&#39;, &#39;Actual points&#39;])
+
+            fig1 = ax.figure
+            outputFigure[f&#34;isocost_{distanceType}_{year}&#34;] = fig1
+
+            plt.close(&#39;all&#39;)
+    # costruisco il grafico 3d
+    fig_curve_cost3D = createFigureWith3Dsurface(X_list, Y_list, grid_list, time_list)
+    return outputFigure, fig_curve_cost3D
+
+
+def calculateSaving(D_res_asis: pd.DataFrame,
+                    D_res_tobe: pd.DataFrame,
+                    periodCol_asis: str = &#39;YEAR&#39;,
+                    periodCol_tobe: str = &#39;YEAR&#39;,
+                    costCol_asis: str = &#39;COST_ASIS&#39;,
+                    costCol_tobe: str = &#39;COST_TOBE&#39;,
+                    title: str = &#39;&#39;
+                    ):
+    &#34;&#34;&#34;
+    Calculate the saving of a given new configuration
+
+    Args:
+        D_res_asis (pd.DataFrame): Input dataframe AS IS.
+        D_res_tobe (pd.DataFrame): Input dataframe TO BE.
+        periodCol_asis (str, optional): column name with time (AS IS). Defaults to &#39;YEAR&#39;.
+        periodCol_tobe (str, optional): column name with time (TO BE). Defaults to &#39;YEAR&#39;.
+        costCol_asis (str, optional): column name with cost (AS IS). Defaults to &#39;COST_ASIS&#39;.
+        costCol_tobe (str, optional): column name with cost (TO BE). Defaults to &#39;COST_TOBE&#39;.
+        title (str, optional): Figure title. Defaults to &#39;&#39;.
+
+    Returns:
+        output_figure (dict): Output dictionary containing figures.
+        df_saving (pd.DataFrame): Output dataFrame with saving.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    df_saving = pd.DataFrame()
+
+    D_saving_asis = D_res_asis.groupby(periodCol_asis)[costCol_asis].sum().to_frame()
+    D_saving_tobe = D_res_asis.groupby(periodCol_tobe)[costCol_tobe].sum().to_frame()
+    D_saving = D_saving_asis.merge(D_saving_tobe, how=&#39;left&#39;, left_on=periodCol_asis, right_on=periodCol_tobe)
+
+    D_saving[&#39;SAVING&#39;] = D_saving[costCol_tobe] / D_saving[costCol_asis]
+    fig1 = plt.figure()
+    plt.plot(D_saving.index, D_saving[&#39;SAVING&#39;])
+    plt.title(title)
+    plt.xticks(rotation=45)
+
+    output_figure[&#39;savingPercentage&#39;] = fig1
+    df_saving = pd.DataFrame([np.mean(D_saving[&#39;SAVING&#39;])])
+
+    return output_figure, df_saving</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateCostASIS"><code class="name flex">
+<span>def <span class="ident">calculateCostASIS</span></span>(<span>D_plant: pandas.core.frame.DataFrame, latCol_plant: str, lonCol_plant: str, plantListName: list, D_node: pandas.core.frame.DataFrame, nodeCol_node: str, latCol_node: str, lonCol_node: str, distanceType: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>define the cost as-is of a network, given a cost estimator of the distance function distanceType
+a dataframe D_plant with one row for each plant of the network to evaluate.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_plant</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>latCol_plant</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the column of D_plant with latitudes.</dd>
+<dt><strong><code>lonCol_plant</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the column of D_plant with longitudes.</dd>
+<dt><strong><code>plantListName</code></strong> :&ensp;<code>list</code></dt>
+<dd>string of the column of D_plant containing a list of all the ids of the nodes served by the plant.</dd>
+<dt><strong><code>D_node</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>input table with one row for each node of the network. Can be a D_res output of the function calculateOptimalLocation.</dd>
+<dt><strong><code>nodeCol_node</code></strong> :&ensp;<code>str</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>latCol_node</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the column of D_node with latitudes.</dd>
+<dt><strong><code>lonCol_node</code></strong> :&ensp;<code>str</code></dt>
+<dd>string with the column of D_node with longitudes.</dd>
+<dt><strong><code>distanceType</code></strong> :&ensp;<code>str</code></dt>
+<dd>chosen distance function distanceType='euclidean','gravity','rectangular'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_node (pd.DataFrame): returns node dataframe with additional column for the as-is cost.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateCostASIS(D_plant: pd.DataFrame,
+                      latCol_plant: str,
+                      lonCol_plant: str,
+                      plantListName: list,
+                      D_node: pd.DataFrame,
+                      nodeCol_node: str,
+                      latCol_node: str,
+                      lonCol_node: str,
+                      distanceType: str):
+    &#34;&#34;&#34;
+    define the cost as-is of a network, given a cost estimator of the distance function distanceType
+    a dataframe D_plant with one row for each plant of the network to evaluate.
+
+    Args:
+        D_plant (pd.DataFrame): DESCRIPTION.
+        latCol_plant (str): string with the column of D_plant with latitudes.
+        lonCol_plant (str): string with the column of D_plant with longitudes.
+        plantListName (list): string of the column of D_plant containing a list of all the ids of the nodes served by the plant.
+        D_node (pd.DataFrame): input table with one row for each node of the network. Can be a D_res output of the function calculateOptimalLocation.
+        nodeCol_node (str): DESCRIPTION.
+        latCol_node (str): string with the column of D_node with latitudes.
+        lonCol_node (str): string with the column of D_node with longitudes.
+        distanceType (str): chosen distance function distanceType=&#39;euclidean&#39;,&#39;gravity&#39;,&#39;rectangular&#39;.
+
+    Returns:
+        D_node (pd.DataFrame): returns node dataframe with additional column for the as-is cost.
+
+    &#34;&#34;&#34;
+
+    D_node[&#39;COST_ASIS&#39;] = np.nan
+    D_node = D_node.reset_index(drop=True)
+
+    # assign each pod to the serving facility
+    for plant in D_plant[&#39;_id&#39;]:
+        # plant = 652
+
+        plant_client_list = D_plant[D_plant[&#39;_id&#39;] == plant][plantListName].iloc[0]
+        plant_client_list = [str(i) for i in plant_client_list]
+
+        # consider latitude and longitude of the plant
+        lat_plant = D_plant[D_plant[&#39;_id&#39;] == plant][latCol_plant].iloc[0]
+        lon_plant = D_plant[D_plant[&#39;_id&#39;] == plant][lonCol_plant].iloc[0]
+
+        # define a column of the dataframe for the serving plant
+        D_node[plant] = [str(id_nodo) in plant_client_list for id_nodo in D_node[nodeCol_node]]
+
+        # D_res[&#39;all&#39;]=D_res[652].astype(int) + D_res[2615].astype(int) +D_res[603].astype(int) + D_res[610].astype(int)
+        D_filtered = D_node[D_node[plant].isin([True])]
+        idx_to_upload = D_filtered.index.values
+
+        # identify a distance function
+        if distanceType.lower() == &#39;rectangular&#39;:
+            func = func_rectangularDistanceCost
+        elif distanceType.lower() == &#39;gravity&#39;:
+            func = func_gravityDistanceCost
+        elif distanceType.lower() == &#39;euclidean&#39;:
+            func = func_euclideanDistanceCost
+
+        distancecost = list(func(D_filtered[lonCol_node],
+                                 D_filtered[latCol_node],
+                                 lon_plant,
+                                 lat_plant,
+                                 D_filtered[&#39;FLOW&#39;])
+                            )
+        for i in range(0, len(distancecost)):
+            D_node[&#39;COST_ASIS&#39;].loc[idx_to_upload[i]] = distancecost[i]
+    return D_node</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateMultipleOptimalLocation"><code class="name flex">
+<span>def <span class="ident">calculateMultipleOptimalLocation</span></span>(<span>D_table: pandas.core.frame.DataFrame, timeColumns: list, distanceType: str, latCol: str, lonCol: str, codeCol_node: str, descrCol_node: str, cleanOutliers: bool = False, k: int = 1, method: str = 'kmeans')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>this function defines k facility location using an aggregation method</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_table</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>list</code></dt>
+<dd>list of the column name with the time horizon containing quantity data.</dd>
+<dt><strong><code>distanceType</code></strong> :&ensp;<code>str</code></dt>
+<dd>type of distance to consider for optimization.</dd>
+<dt><strong><code>latCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name of the latitude of the node.</dd>
+<dt><strong><code>lonCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name of the longitude of the node.</dd>
+<dt><strong><code>codeCol_node</code></strong> :&ensp;<code>str</code></dt>
+<dd>column with description of the node (the same appearing in plantListName).</dd>
+<dt><strong><code>descrCol_node</code></strong> :&ensp;<code>str</code></dt>
+<dd>column with description of the node.</dd>
+<dt><strong><code>cleanOutliers</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>if True use IQR to remove latitude and longitude outliers. Defaults to False.</dd>
+<dt><strong><code>k</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of clusters to define. Defaults to 1.</dd>
+<dt><strong><code>method</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Clustering method to use (e.g. kmeans). Defaults to 'kmeans'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>D_res (pd.DataFrame): it returns a dataframe D_res with the ID, LATITUDE, LONGITUDE AND YEAR for</code></dt>
+<dd>&nbsp;</dd>
+<dt>each flow adding the column COST AND FLOW representing the distance
+travelled (COST) and the flow intensity (FLOW).</dt>
+<dt>The column COST_NORM is a the flows scaled between 0 and 100.</dt>
+<dt><code>D_res_optimal (pd.DataFram): it returns a dataframe D_res_optimal with the loptimal latitude and longitude for each</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<p>time frame, and a column COST and FLOW with the total cost (distance) and flows.
+output_coverages (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateMultipleOptimalLocation(D_table: pd.DataFrame,
+                                     timeColumns: list,
+                                     distanceType: str,
+                                     latCol: str,
+                                     lonCol: str,
+                                     codeCol_node: str,
+                                     descrCol_node: str,
+                                     cleanOutliers: bool = False,
+                                     k: int = 1,
+                                     method: str = &#39;kmeans&#39;):
+    &#34;&#34;&#34;
+    this function defines k facility location using an aggregation method
+
+    Args:
+        D_table (pd.DataFrame): DESCRIPTION.
+        timeColumns (list): list of the column name with the time horizon containing quantity data.
+        distanceType (str): type of distance to consider for optimization.
+        latCol (str): column name of the latitude of the node.
+        lonCol (str): column name of the longitude of the node.
+        codeCol_node (str): column with description of the node (the same appearing in plantListName).
+        descrCol_node (str): column with description of the node.
+        cleanOutliers (bool, optional): if True use IQR to remove latitude and longitude outliers. Defaults to False.
+        k (int, optional): Number of clusters to define. Defaults to 1.
+        method (str, optional): Clustering method to use (e.g. kmeans). Defaults to &#39;kmeans&#39;.
+
+    Returns:
+        D_res (pd.DataFrame): it returns a dataframe D_res with the ID, LATITUDE, LONGITUDE AND YEAR for
+        each flow adding the column COST AND FLOW representing the distance  travelled (COST) and the flow intensity (FLOW).
+        The column COST_NORM is a the flows scaled between 0 and 100.
+        D_res_optimal (pd.DataFram): it returns a dataframe D_res_optimal with the loptimal latitude and longitude for each
+        time frame, and a column COST and FLOW with the total cost (distance) and flows.
+        output_coverages (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # clean data and calculate coverages
+    output_coverages = {}
+
+    analysisFieldList = [latCol, lonCol]
+    outputCoverages, _ = getCoverageStats(D_table, analysisFieldList, capacityField=timeColumns[0])
+    D_table = D_table.dropna(subset=[latCol, lonCol])
+    if cleanOutliers:
+        D_table, coverages, = cleanUsingIQR(D_table, [latCol, lonCol])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+
+    # fill nan values
+    D_table = D_table.fillna(0)
+
+    # identify years in the columns
+    yearsColumns = timeColumns
+
+    # cluster points
+    if method == &#39;kmeans&#39;:
+        km = cluster.KMeans(n_clusters=k).fit(D_table[[latCol, lonCol]])
+        D_table[&#39;CLUSTER&#39;] = pd.DataFrame(km.labels_)
+
+    elif method == &#39;gmm&#39;:
+        gmm = GaussianMixture(n_components=k, covariance_type=&#39;full&#39;).fit(D_table[[latCol, lonCol]])
+        D_table[&#39;CLUSTER&#39;] = pd.DataFrame(gmm.predict(D_table[[latCol, lonCol]]))
+    else:
+        print(&#34;No valid clustering method&#34;)
+        return [], [], []
+
+    # identify useful columns
+    D_res = pd.DataFrame(columns=[codeCol_node, descrCol_node, latCol, lonCol, &#39;YEAR&#39;, &#39;COST&#39;, &#39;CLUSTER&#39;])
+    D_res_optimal = pd.DataFrame(columns=[&#39;PERIOD&#39;, latCol, lonCol, &#39;YEAR&#39;, &#39;COST&#39;, &#39;FLOW&#39;, &#39;CLUSTER&#39;])
+
+    # analyse each cluster separately
+    for cluster_id in set(D_table[&#39;CLUSTER&#39;]):
+        # cluster_id=0
+        D_table_filtered = D_table[D_table[&#39;CLUSTER&#39;] == cluster_id]
+        for year in yearsColumns:
+            # year = yearsColumns[0]
+            D_filter_columns = [codeCol_node, descrCol_node, latCol, lonCol, year, &#39;CLUSTER&#39;]
+            D_filtered = D_table_filtered[D_filter_columns]
+            D_filtered = D_filtered.rename(columns={year: &#39;FLOW&#39;})
+            D_filtered[&#39;YEAR&#39;] = year
+
+            # define optimal location
+            if distanceType.lower() == &#39;rectangular&#39;:
+                lat_optimal, lon_optimal = optimalLocationRectangularDistance(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+                D_filtered[&#39;COST&#39;] = func_rectangularDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+            elif distanceType.lower() == &#39;gravity&#39;:
+                lat_optimal, lon_optimal = optimalLocationGravityProblem(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+                D_filtered[&#39;COST&#39;] = func_gravityDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+            elif distanceType.lower() == &#39;euclidean&#39;:
+                lat_optimal, lon_optimal = optimalLocationEuclideanDistance(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+                D_filtered[&#39;COST&#39;] = func_euclideanDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+            D_res = D_res.append(D_filtered)
+
+            D_res_optimal = D_res_optimal.append(pd.DataFrame([[f&#34;OPTIMAL LOCATION YEAR: {year}&#34;,
+                                                                lat_optimal,
+                                                                lon_optimal,
+                                                                year,
+                                                                sum(D_res[&#39;COST&#39;]),
+                                                                sum(D_res[&#39;FLOW&#39;]),
+                                                                cluster_id
+                                                                ]], columns=D_res_optimal.columns))
+
+    D_res[&#39;FLOW_norm&#39;] = (D_res[&#39;FLOW&#39;] - min(D_res[&#39;FLOW&#39;])) / (max(D_res[&#39;FLOW&#39;]) - min(D_res[&#39;FLOW&#39;])) * 100
+
+    D_res = D_res.rename(columns={&#39;COST&#39;: &#39;COST_TOBE&#39;})
+
+    return D_res, D_res_optimal, output_coverages</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateOptimalLocation"><code class="name flex">
+<span>def <span class="ident">calculateOptimalLocation</span></span>(<span>D_table: pandas.core.frame.DataFrame, timeColumns: list, distanceType: str, latCol: str, lonCol: str, codeCol_node: str, descrCol_node: str, cleanOutliers: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>this function import a table D_table where each row is a node of the network</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_table</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>timeColumns</code></strong> :&ensp;<code>list</code></dt>
+<dd>list of the column name with the time horizon containing quantity data.</dd>
+<dt><strong><code>distanceType</code></strong> :&ensp;<code>str</code></dt>
+<dd>type of distance to consider for optimization.</dd>
+<dt><strong><code>latCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name of the latitude of the node.</dd>
+<dt><strong><code>lonCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name of the longitude of the node.</dd>
+<dt><strong><code>codeCol_node</code></strong> :&ensp;<code>str</code></dt>
+<dd>column with description of the node (the same appearing in plantListName).</dd>
+<dt><strong><code>descrCol_node</code></strong> :&ensp;<code>str</code></dt>
+<dd>column with description of the node.</dd>
+<dt><strong><code>cleanOutliers</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>if True use IQR to remove latitude and longitude outliers. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>D_res (pd.DataFrame): it returns a dataframe D_res with the ID, LATITUDE, LONGITUDE AND YEAR for</code></dt>
+<dd>&nbsp;</dd>
+<dt>each flow adding the column COST AND FLOW representing the distance
+travelled (COST) and the flow intensity (FLOW).</dt>
+<dt>The column COST_NORM is a the flows scaled between 0 and 100.</dt>
+<dt><code>D_res_optimal (pd.DataFram): it returns a dataframe D_res_optimal with the loptimal latitude and longitude for each</code></dt>
+<dd>&nbsp;</dd>
+</dl>
+<p>time frame, and a column COST and FLOW with the total cost (distance) and flows.
+output_coverages (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateOptimalLocation(D_table: pd.DataFrame,
+                             timeColumns: list,
+                             distanceType: str,
+                             latCol: str,
+                             lonCol: str,
+                             codeCol_node: str,
+                             descrCol_node: str,
+                             cleanOutliers: bool = False):
+    &#34;&#34;&#34;
+    this function import a table D_table where each row is a node of the network
+
+    Args:
+        D_table (pd.DataFrame): DESCRIPTION.
+        timeColumns (list): list of the column name with the time horizon containing quantity data.
+        distanceType (str): type of distance to consider for optimization.
+        latCol (str): column name of the latitude of the node.
+        lonCol (str): column name of the longitude of the node.
+        codeCol_node (str): column with description of the node (the same appearing in plantListName).
+        descrCol_node (str): column with description of the node.
+        cleanOutliers (bool, optional): if True use IQR to remove latitude and longitude outliers. Defaults to False.
+
+    Returns:
+        D_res (pd.DataFrame): it returns a dataframe D_res with the ID, LATITUDE, LONGITUDE AND YEAR for
+        each flow adding the column COST AND FLOW representing the distance  travelled (COST) and the flow intensity (FLOW).
+        The column COST_NORM is a the flows scaled between 0 and 100.
+        D_res_optimal (pd.DataFram): it returns a dataframe D_res_optimal with the loptimal latitude and longitude for each
+        time frame, and a column COST and FLOW with the total cost (distance) and flows.
+        output_coverages (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # clean data and calculate coverages
+    output_coverages = {}
+
+    analysisFieldList = [latCol, lonCol]
+    outputCoverages, _ = getCoverageStats(D_table, analysisFieldList, capacityField=timeColumns[0])
+    D_table = D_table.dropna(subset=[latCol, lonCol])
+    if cleanOutliers:
+        D_table, coverages, = cleanUsingIQR(D_table, [latCol, lonCol])
+        outputCoverages = (coverages[0] * outputCoverages[0], coverages[1] * outputCoverages[1])
+    output_coverages[&#39;coverages&#39;] = pd.DataFrame(outputCoverages)
+
+    # fill nan values
+    D_table = D_table.fillna(0)
+
+    # identify years in the column
+    yearsColumns = timeColumns
+
+    # identify useful columns
+    D_res = pd.DataFrame(columns=[codeCol_node, descrCol_node, latCol, lonCol, &#39;YEAR&#39;, &#39;COST&#39;])
+    D_res_optimal = pd.DataFrame(columns=[&#39;PERIOD&#39;, latCol, lonCol, &#39;YEAR&#39;, &#39;COST&#39;, &#39;FLOW&#39;])
+
+    for year in yearsColumns:
+        # year = yearsColumns[0]
+        D_filter_columns = [codeCol_node, descrCol_node, latCol, lonCol, year]
+        D_filtered = D_table[D_filter_columns]
+        D_filtered = D_filtered.rename(columns={year: &#39;FLOW&#39;})
+        D_filtered[&#39;YEAR&#39;] = year
+
+        # define optimal location
+        if distanceType.lower() == &#39;rectangular&#39;:
+            lat_optimal, lon_optimal = optimalLocationRectangularDistance(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+            D_filtered[&#39;COST&#39;] = func_rectangularDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+        elif distanceType.lower() == &#39;gravity&#39;:
+            lat_optimal, lon_optimal = optimalLocationGravityProblem(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+            D_filtered[&#39;COST&#39;] = func_gravityDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+        elif distanceType.lower() == &#39;euclidean&#39;:
+            lat_optimal, lon_optimal = optimalLocationEuclideanDistance(D_filtered, latCol, lonCol, &#39;FLOW&#39;)
+            D_filtered[&#39;COST&#39;] = func_euclideanDistanceCost(D_filtered[lonCol], D_filtered[latCol], lon_optimal, lat_optimal, D_filtered[&#39;FLOW&#39;])
+        D_res = D_res.append(D_filtered)
+
+        D_res_optimal = D_res_optimal.append(pd.DataFrame([[f&#34;OPTIMAL LOCATION YEAR: {year}&#34;,
+                                                            lat_optimal,
+                                                            lon_optimal,
+                                                            year,
+                                                            sum(D_res[&#39;COST&#39;]),
+                                                            sum(D_res[&#39;FLOW&#39;]),
+                                                            ]], columns=D_res_optimal.columns))
+
+    # D_res[&#39;COST_norm&#39;]=(D_res[&#39;COST&#39;]-min(D_res[&#39;COST&#39;]))/(max(D_res[&#39;COST&#39;])-min(D_res[&#39;COST&#39;]))*10
+    D_res[&#39;FLOW_norm&#39;] = (D_res[&#39;FLOW&#39;] - min(D_res[&#39;FLOW&#39;])) / (max(D_res[&#39;FLOW&#39;]) - min(D_res[&#39;FLOW&#39;])) * 100
+
+    D_res = D_res.rename(columns={&#39;COST&#39;: &#39;COST_TOBE&#39;})
+
+    return D_res, D_res_optimal, output_coverages</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateSaving"><code class="name flex">
+<span>def <span class="ident">calculateSaving</span></span>(<span>D_res_asis: pandas.core.frame.DataFrame, D_res_tobe: pandas.core.frame.DataFrame, periodCol_asis: str = 'YEAR', periodCol_tobe: str = 'YEAR', costCol_asis: str = 'COST_ASIS', costCol_tobe: str = 'COST_TOBE', title: str = '')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate the saving of a given new configuration</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_res_asis</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe AS IS.</dd>
+<dt><strong><code>D_res_tobe</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe TO BE.</dd>
+<dt><strong><code>periodCol_asis</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with time (AS IS). Defaults to 'YEAR'.</dd>
+<dt><strong><code>periodCol_tobe</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with time (TO BE). Defaults to 'YEAR'.</dd>
+<dt><strong><code>costCol_asis</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with cost (AS IS). Defaults to 'COST_ASIS'.</dd>
+<dt><strong><code>costCol_tobe</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with cost (TO BE). Defaults to 'COST_TOBE'.</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Figure title. Defaults to ''.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>output_figure (dict): Output dictionary containing figures.
+df_saving (pd.DataFrame): Output dataFrame with saving.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateSaving(D_res_asis: pd.DataFrame,
+                    D_res_tobe: pd.DataFrame,
+                    periodCol_asis: str = &#39;YEAR&#39;,
+                    periodCol_tobe: str = &#39;YEAR&#39;,
+                    costCol_asis: str = &#39;COST_ASIS&#39;,
+                    costCol_tobe: str = &#39;COST_TOBE&#39;,
+                    title: str = &#39;&#39;
+                    ):
+    &#34;&#34;&#34;
+    Calculate the saving of a given new configuration
+
+    Args:
+        D_res_asis (pd.DataFrame): Input dataframe AS IS.
+        D_res_tobe (pd.DataFrame): Input dataframe TO BE.
+        periodCol_asis (str, optional): column name with time (AS IS). Defaults to &#39;YEAR&#39;.
+        periodCol_tobe (str, optional): column name with time (TO BE). Defaults to &#39;YEAR&#39;.
+        costCol_asis (str, optional): column name with cost (AS IS). Defaults to &#39;COST_ASIS&#39;.
+        costCol_tobe (str, optional): column name with cost (TO BE). Defaults to &#39;COST_TOBE&#39;.
+        title (str, optional): Figure title. Defaults to &#39;&#39;.
+
+    Returns:
+        output_figure (dict): Output dictionary containing figures.
+        df_saving (pd.DataFrame): Output dataFrame with saving.
+
+    &#34;&#34;&#34;
+
+    output_figure = {}
+    df_saving = pd.DataFrame()
+
+    D_saving_asis = D_res_asis.groupby(periodCol_asis)[costCol_asis].sum().to_frame()
+    D_saving_tobe = D_res_asis.groupby(periodCol_tobe)[costCol_tobe].sum().to_frame()
+    D_saving = D_saving_asis.merge(D_saving_tobe, how=&#39;left&#39;, left_on=periodCol_asis, right_on=periodCol_tobe)
+
+    D_saving[&#39;SAVING&#39;] = D_saving[costCol_tobe] / D_saving[costCol_asis]
+    fig1 = plt.figure()
+    plt.plot(D_saving.index, D_saving[&#39;SAVING&#39;])
+    plt.title(title)
+    plt.xticks(rotation=45)
+
+    output_figure[&#39;savingPercentage&#39;] = fig1
+    df_saving = pd.DataFrame([np.mean(D_saving[&#39;SAVING&#39;])])
+
+    return output_figure, df_saving</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.defineDistanceTableEstimator"><code class="name flex">
+<span>def <span class="ident">defineDistanceTableEstimator</span></span>(<span>D_mov: pandas.core.frame.DataFrame, lonCol_From_mov: str, latCol_From_mov: str, lonCol_To_mov: str, latCol_To_mov: str, G: <module 'networkx.classes.graph' from 'C:\\Users\\aletu\\.conda\\envs\\analogistics3\\lib\\site-packages\\networkx\\classes\\graph.py'>, cleanOutliersCoordinates: bool = False, capacityField: str = 'QUANTITY')</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Inpud dataframe.</dd>
+<dt><strong><code>lonCol_From_mov</code></strong> :&ensp;<code>str</code></dt>
+<dd>name of the D_mov dataframe with longitude of the loading node.</dd>
+<dt><strong><code>latCol_From_mov</code></strong> :&ensp;<code>str</code></dt>
+<dd>name of the D_mov dataframe with latitude of the loading node.</dd>
+<dt><strong><code>lonCol_To_mov</code></strong> :&ensp;<code>str</code></dt>
+<dd>name of the D_mov dataframe with longitude of the discharging node.</dd>
+<dt><strong><code>latCol_To_mov</code></strong> :&ensp;<code>str</code></dt>
+<dd>name of the D_mov dataframe with latitude of the loading node.</dd>
+<dt><strong><code>G</code></strong> :&ensp;<code>nx.graph</code></dt>
+<dd>road graph obtained with osmnx.</dd>
+<dt><strong><code>cleanOutliersCoordinates</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>is true to remove outliers in latitude and longitude. Defaults to False.</dd>
+<dt><strong><code>capacityField</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>field of quantity to measure the coverage statistics on it. Defaults to 'QUANTITY'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_dist (TYPE): DESCRIPTION.
+df_coverages (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def defineDistanceTableEstimator(D_mov: pd.DataFrame, lonCol_From_mov: str, latCol_From_mov: str,
+                                 lonCol_To_mov: str, latCol_To_mov: str, G: nx.graph,
+                                 cleanOutliersCoordinates: bool = False, capacityField: str = &#39;QUANTITY&#39;):
+    &#34;&#34;&#34;
+
+    Args:
+        D_mov (pd.DataFrame): Inpud dataframe.
+        lonCol_From_mov (str): name of the D_mov dataframe with longitude of the loading node.
+        latCol_From_mov (str): name of the D_mov dataframe with latitude of the loading node.
+        lonCol_To_mov (str): name of the D_mov dataframe with longitude of the discharging node.
+        latCol_To_mov (str): name of the D_mov dataframe with latitude of the loading node.
+        G (nx.graph): road graph obtained with osmnx.
+        cleanOutliersCoordinates (bool, optional): is true to remove outliers in latitude and longitude. Defaults to False.
+        capacityField (str, optional): field of quantity to measure the coverage statistics on it. Defaults to &#39;QUANTITY&#39;.
+
+    Returns:
+        D_dist (TYPE): DESCRIPTION.
+        df_coverages (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    # clean data and get coverages
+    analysisFieldList = [lonCol_From_mov, latCol_From_mov, lonCol_To_mov, latCol_To_mov]
+    coverages, _ = getCoverageStats(D_mov, analysisFieldList, capacityField=capacityField)
+    D_dist = D_mov[[lonCol_From_mov, latCol_From_mov, lonCol_To_mov, latCol_To_mov]].drop_duplicates().dropna().reset_index()
+    if cleanOutliersCoordinates:
+        D_dist, coverages_outl = cleanUsingIQR(D_dist, [lonCol_From_mov, latCol_From_mov, lonCol_To_mov, latCol_To_mov])
+        coverages = (coverages[0] * coverages_outl[0], coverages[1] * coverages_outl[1])
+
+    df_coverages = pd.DataFrame(coverages)
+
+    D_dist[&#39;REAL_DISTANCE&#39;] = np.nan
+    D_dist[&#39;MERCATOR_X_FROM&#39;] = np.nan
+    D_dist[&#39;MERCATOR_Y_FROM&#39;] = np.nan
+    D_dist[&#39;MERCATOR_X_TO&#39;] = np.nan
+    D_dist[&#39;MERCATOR_Y_TO&#39;] = np.nan
+
+    for index, row in D_dist.iterrows():
+
+        # get the coordinates
+        lonFrom = row[lonCol_From_mov]
+        latFrom = row[latCol_From_mov]
+        lonTo = row[lonCol_To_mov]
+        latTo = row[latCol_To_mov]
+
+        # get the closest node on the graph
+        node_from = ox.get_nearest_node(G, (latFrom, lonFrom), method=&#39;euclidean&#39;)
+        node_to = ox.get_nearest_node(G, (latTo, lonTo), method=&#39;euclidean&#39;)
+        length = nx.shortest_path_length(G=G, source=node_from, target=node_to, weight=&#39;length&#39;)
+        D_dist[&#39;REAL_DISTANCE&#39;].loc[index] = length
+
+        # convert into mercator coordinates
+        x_merc_from, y_merc_from = mercatorProjection(latFrom, lonFrom)
+        x_merc_to, y_merc_to = mercatorProjection(latTo, lonTo)
+
+        D_dist[&#39;MERCATOR_X_FROM&#39;].loc[index] = x_merc_from
+        D_dist[&#39;MERCATOR_Y_FROM&#39;].loc[index] = y_merc_from
+        D_dist[&#39;MERCATOR_X_TO&#39;].loc[index] = x_merc_to
+        D_dist[&#39;MERCATOR_Y_TO&#39;].loc[index] = y_merc_to
+
+    D_dist[&#39;EUCLIDEAN_DISTANCE&#39;] = 1000 * func_euclideanDistanceCost(D_dist[&#39;MERCATOR_X_FROM&#39;],
+                                                                     D_dist[&#39;MERCATOR_Y_FROM&#39;],
+                                                                     D_dist[&#39;MERCATOR_X_TO&#39;],
+                                                                     D_dist[&#39;MERCATOR_Y_TO&#39;],
+                                                                     1)
+    D_dist[&#39;RECTANGULAR_DISTANCE&#39;] = 1000 * func_rectangularDistanceCost(D_dist[&#39;MERCATOR_X_FROM&#39;],
+                                                                         D_dist[&#39;MERCATOR_Y_FROM&#39;],
+                                                                         D_dist[&#39;MERCATOR_X_TO&#39;],
+                                                                         D_dist[&#39;MERCATOR_Y_TO&#39;],
+                                                                         1)
+    D_dist[&#39;GRAVITY_DISTANCE&#39;] = 1000 * func_gravityDistanceCost(D_dist[&#39;MERCATOR_X_FROM&#39;],
+                                                                 D_dist[&#39;MERCATOR_Y_FROM&#39;],
+                                                                 D_dist[&#39;MERCATOR_X_TO&#39;],
+                                                                 D_dist[&#39;MERCATOR_Y_TO&#39;],
+                                                                 1)
+
+    error_euclidean = mean_squared_error(D_dist[&#39;REAL_DISTANCE&#39;], D_dist[&#39;EUCLIDEAN_DISTANCE&#39;])
+    error_rectangular = mean_squared_error(D_dist[&#39;REAL_DISTANCE&#39;], D_dist[&#39;RECTANGULAR_DISTANCE&#39;])
+    error_gravity = mean_squared_error(D_dist[&#39;REAL_DISTANCE&#39;], D_dist[&#39;GRAVITY_DISTANCE&#39;])
+
+    print(f&#34;MSE EUCLIDEAN: {np.round(error_euclidean,2)}&#34;)
+    print(f&#34;MSE RECTANGULAR: {np.round(error_rectangular,2)}&#34;)
+    print(f&#34;MSE GRAVITY: {np.round(error_gravity,2)}&#34;)
+    return D_dist, df_coverages</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_euclideanDistanceCost"><code class="name flex">
+<span>def <span class="ident">func_euclideanDistanceCost</span></span>(<span>x: float, y: float, x_opt: float, y_opt: float, wi: float) -> float</span>
+</code></dt>
+<dd>
+<div class="desc"><p>return cost values with euclidean distance</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>float</code></dt>
+<dd>X coordinate.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>float</code></dt>
+<dd>Y coordinate.</dd>
+<dt><strong><code>x_opt</code></strong> :&ensp;<code>float</code></dt>
+<dd>X coordinate of the optimal location.</dd>
+<dt><strong><code>y_opt</code></strong> :&ensp;<code>float</code></dt>
+<dd>Y coordinate of the optimal location.</dd>
+<dt><strong><code>wi</code></strong> :&ensp;<code>float</code></dt>
+<dd>weight (e.g. flow).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>Cost value.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def func_euclideanDistanceCost(x: float, y: float, x_opt: float, y_opt: float, wi: float) -&gt; float:
+    &#34;&#34;&#34;
+    return cost values with euclidean distance
+
+    Args:
+        x (float): X coordinate.
+        y (float): Y coordinate.
+        x_opt (float): X coordinate of the optimal location.
+        y_opt (float): Y coordinate of the optimal location.
+        wi (float): weight (e.g. flow).
+
+    Returns:
+        float: Cost value.
+
+    &#34;&#34;&#34;
+
+    return np.sqrt((x - x_opt) ** 2 + (y - y_opt) ** 2) * wi</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_gravityDistanceCost"><code class="name flex">
+<span>def <span class="ident">func_gravityDistanceCost</span></span>(<span>x: float, y: float, x_opt: float, y_opt: float, wi: float) -> float</span>
+</code></dt>
+<dd>
+<div class="desc"><p>return cost values with squared euclidean distances</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>float</code></dt>
+<dd>X coordinate.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>float</code></dt>
+<dd>Y coordinate.</dd>
+<dt><strong><code>x_opt</code></strong> :&ensp;<code>float</code></dt>
+<dd>X coordinate of the optimal location.</dd>
+<dt><strong><code>y_opt</code></strong> :&ensp;<code>float</code></dt>
+<dd>Y coordinate of the optimal location.</dd>
+<dt><strong><code>wi</code></strong> :&ensp;<code>float</code></dt>
+<dd>weight (e.g. flow).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>Cost value.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def func_gravityDistanceCost(x: float, y: float, x_opt: float, y_opt: float, wi: float) -&gt; float:
+    &#34;&#34;&#34;
+    return cost values with squared euclidean distances
+
+    Args:
+        x (float): X coordinate.
+        y (float): Y coordinate.
+        x_opt (float): X coordinate of the optimal location.
+        y_opt (float): Y coordinate of the optimal location.
+        wi (float): weight (e.g. flow).
+
+    Returns:
+        float: Cost value.
+
+    &#34;&#34;&#34;
+
+    return ((x - x_opt) ** 2 + (y - y_opt) ** 2) * wi</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_rectangularDistanceCost"><code class="name flex">
+<span>def <span class="ident">func_rectangularDistanceCost</span></span>(<span>x: float, y: float, x_opt: float, y_opt: float, wi: float) -> float</span>
+</code></dt>
+<dd>
+<div class="desc"><p>return cost values with rectangular distances</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>float</code></dt>
+<dd>X coordinate.</dd>
+<dt><strong><code>y</code></strong> :&ensp;<code>float</code></dt>
+<dd>Y coordinate.</dd>
+<dt><strong><code>x_opt</code></strong> :&ensp;<code>float</code></dt>
+<dd>X coordinate of the optimal location.</dd>
+<dt><strong><code>y_opt</code></strong> :&ensp;<code>float</code></dt>
+<dd>Y coordinate of the optimal location.</dd>
+<dt><strong><code>wi</code></strong> :&ensp;<code>float</code></dt>
+<dd>weight (e.g. flow).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>Cost value.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def func_rectangularDistanceCost(x: float, y: float, x_opt: float, y_opt: float, wi: float) -&gt; float:
+    &#34;&#34;&#34;
+    return cost values with rectangular distances
+
+    Args:
+        x (float): X coordinate.
+        y (float): Y coordinate.
+        x_opt (float): X coordinate of the optimal location.
+        y_opt (float): Y coordinate of the optimal location.
+        wi (float): weight (e.g. flow).
+
+    Returns:
+        float: Cost value.
+
+    &#34;&#34;&#34;
+
+    return (np.abs(x - x_opt) + np.abs(y - y_opt)) * wi</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.mercatorProjection"><code class="name flex">
+<span>def <span class="ident">mercatorProjection</span></span>(<span>latitude: float, longitude: float)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the Mercator projection coordinates of given latitude and longitude</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>latitude</code></strong> :&ensp;<code>float</code></dt>
+<dd>Latitude of a point.</dd>
+<dt><strong><code>longitude</code></strong> :&ensp;<code>float</code></dt>
+<dd>Longitude of a point.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>x (TYPE): Mercator X coordinate.
+y (TYPE): Mercator Y coordinate.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mercatorProjection(latitude: float, longitude: float):
+    &#34;&#34;&#34;
+    Return the Mercator projection coordinates of given latitude and longitude
+
+    Args:
+        latitude (float): Latitude of a point.
+        longitude (float): Longitude of a point.
+
+    Returns:
+        x (TYPE): Mercator X coordinate.
+        y (TYPE): Mercator Y coordinate.
+
+    &#34;&#34;&#34;
+
+    R = 6378.14  # earth&#39;s ray
+    e = 0.0167  # earth&#39;s eccentricity
+
+    lon_rad = (np.pi / 180) * longitude
+    lat_rad = (np.pi / 180) * latitude
+
+    x = R * lon_rad
+    y = R * np.log(((1 - e * np.sin(lat_rad)) / (1 + e * np.sin(lat_rad))) ** (e / 2) * np.tan(np.pi / 4 + lat_rad / 2))
+    return x, y</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationEuclideanDistance"><code class="name flex">
+<span>def <span class="ident">optimalLocationEuclideanDistance</span></span>(<span>D_filtered: pandas.core.frame.DataFrame, latCol: str, lonCol: str, weightCol: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>this function calculates the optimal location with euclidean distances using the kuhn procedure</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_filtered</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>latCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing latitude.</dd>
+<dt><strong><code>lonCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing longitude.</dd>
+<dt><strong><code>weightCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing weight (e.g. production quantity or flows).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>lat_optimal (TYPE): Optimal latitude.
+lon_optimal (TYPE): Optimal longitude.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def optimalLocationEuclideanDistance(D_filtered: pd.DataFrame, latCol: str, lonCol: str, weightCol: str):
+    &#34;&#34;&#34;
+    this function calculates the optimal location with euclidean distances using the kuhn procedure
+
+    Args:
+        D_filtered (pd.DataFrame): Input dataframe.
+        latCol (str): Column name containing latitude.
+        lonCol (str): Column name containing longitude.
+        weightCol (str): Column name containing weight (e.g. production quantity or flows).
+
+    Returns:
+        lat_optimal (TYPE): Optimal latitude.
+        lon_optimal (TYPE): Optimal longitude.
+
+    &#34;&#34;&#34;
+
+    def _funcGKuhn(wi, xj_1, yj_1, ai, bi):
+        # implements the function g in the kuhn procedure for euclidean distances
+        return wi / ((xj_1 - ai) ** 2 + (yj_1 - bi) ** 2)
+
+    # remove null values
+    D_filtered_notnan = D_filtered.dropna(subset=[latCol, lonCol, weightCol])
+
+    # identify the first solution of the gravity problem
+    lat_optimal_0, lon_optimal_0 = optimalLocationGravityProblem(D_filtered_notnan, latCol, lonCol, weightCol)
+
+    xj_1 = lon_optimal_0
+    yj_1 = lat_optimal_0
+    wi = D_filtered_notnan[weightCol]
+    ai = D_filtered_notnan[lonCol]
+    bi = D_filtered_notnan[latCol]
+
+    # iterates Kuhn procedure to approximate the solution
+    diff_x = 1  # a latitude degree is about 111 km
+    while diff_x &gt; 0.01:
+        lon_optimal_j = sum(_funcGKuhn(wi, xj_1, yj_1, ai, bi) * ai) / sum(_funcGKuhn(wi, xj_1, yj_1, ai, bi))
+        diff_x = np.abs(xj_1 - lon_optimal_j)
+        # print(diff_x)
+        xj_1 = lon_optimal_j
+
+    # iterates Kuhn procedure to approximate the solution
+    diff_x = 1
+    while diff_x &gt; 0.01:
+        lat_optimal_j = sum(_funcGKuhn(wi, xj_1, yj_1, ai, bi) * bi) / sum(_funcGKuhn(wi, xj_1, yj_1, ai, bi))
+        diff_x = np.abs(yj_1 - lat_optimal_j)
+        # print(diff_x)
+        yj_1 = lat_optimal_j
+
+    return lat_optimal_j, lon_optimal_j</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationGravityProblem"><code class="name flex">
+<span>def <span class="ident">optimalLocationGravityProblem</span></span>(<span>D_filtered: pandas.core.frame.DataFrame, latCol: str, lonCol: str, weightCol: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>this dunction calculate the optimal location with squared euclidean distances</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_filtered</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>latCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing latitude.</dd>
+<dt><strong><code>lonCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing longitude.</dd>
+<dt><strong><code>weightCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing weight (e.g. production quantity or flows).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>lat_optimal (TYPE): Optimal latitude.
+lon_optimal (TYPE): Optimal longitude.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def optimalLocationGravityProblem(D_filtered: pd.DataFrame, latCol: str, lonCol: str, weightCol: str):
+    &#34;&#34;&#34;
+    this dunction calculate the optimal location with squared euclidean distances
+
+    Args:
+        D_filtered (pd.DataFrame): Input dataframe.
+        latCol (str): Column name containing latitude.
+        lonCol (str): Column name containing longitude.
+        weightCol (str): Column name containing weight (e.g. production quantity or flows).
+
+    Returns:
+        lat_optimal (TYPE): Optimal latitude.
+        lon_optimal (TYPE): Optimal longitude.
+
+    &#34;&#34;&#34;
+
+    D_filtered_notnan = D_filtered.dropna(subset=[latCol, lonCol, weightCol])
+    D_filtered_notnan = D_filtered_notnan[D_filtered_notnan[weightCol] &gt; 0]
+    if len(D_filtered_notnan) &gt; 0:
+        lat_optimal = sum(D_filtered_notnan[latCol] * D_filtered_notnan[weightCol]) / sum(D_filtered_notnan[weightCol])
+        lon_optimal = sum(D_filtered_notnan[lonCol] * D_filtered_notnan[weightCol]) / sum(D_filtered_notnan[weightCol])
+    else:
+        lat_optimal = lon_optimal = 0
+    return lat_optimal, lon_optimal</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationRectangularDistance"><code class="name flex">
+<span>def <span class="ident">optimalLocationRectangularDistance</span></span>(<span>D_filtered: pandas.core.frame.DataFrame, latCol: str, lonCol: str, weightCol: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>this function returns the optimal location based on rectangular distances</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_filtered</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>latCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing latitude.</dd>
+<dt><strong><code>lonCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing longitude.</dd>
+<dt><strong><code>weightCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>Column name containing weight (e.g. production quantity or flows).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>lat_optimal (TYPE): Optimal latitude.
+lon_optimal (TYPE): Optimal longitude.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def optimalLocationRectangularDistance(D_filtered: pd.DataFrame, latCol: str, lonCol: str, weightCol: str):
+    &#34;&#34;&#34;
+    this function returns the optimal location based on rectangular distances
+
+    Args:
+        D_filtered (pd.DataFrame): Input dataframe.
+        latCol (str): Column name containing latitude.
+        lonCol (str): Column name containing longitude.
+        weightCol (str): Column name containing weight (e.g. production quantity or flows).
+
+    Returns:
+        lat_optimal (TYPE): Optimal latitude.
+        lon_optimal (TYPE): Optimal longitude.
+
+    &#34;&#34;&#34;
+
+    # optimal location
+    op_w = sum(D_filtered[weightCol]) / 2  # identify the median of the sum of weights
+
+    # identify optimal latitude
+    if len(D_filtered) &gt; 1:  # when there are more than a single point
+        D_filtered = D_filtered.sort_values(by=latCol, ascending=True)  # sort by latitude
+        D_filtered[&#39;X_cumsum&#39;] = D_filtered[weightCol].cumsum()  # calculate the cumulated sum
+
+        # identify the LATITUDE closer to the optimal location
+        D_opt_x_max = D_filtered[D_filtered[&#39;X_cumsum&#39;] &gt;= op_w].iloc[0]
+        D_opt_x_min = D_filtered[D_filtered[&#39;X_cumsum&#39;] &lt; op_w].iloc[-1]
+
+        x_array = [D_opt_x_min[&#39;X_cumsum&#39;], D_opt_x_max[&#39;X_cumsum&#39;]]
+        y_array = [D_opt_x_min[latCol], D_opt_x_max[latCol]]
+        lat_optimal = np.interp(op_w, x_array, y_array)
+
+        # identify the LONGITUDE closer to the optimal location
+        D_filtered = D_filtered.sort_values(by=lonCol, ascending=True)  # sort by latitude
+        D_filtered[&#39;Y_cumsum&#39;] = D_filtered[weightCol].cumsum()  # calculate the cumulated sum
+
+        D_opt_x_max = D_filtered[D_filtered[&#39;Y_cumsum&#39;] &gt;= op_w].iloc[0]
+        D_opt_x_min = D_filtered[D_filtered[&#39;Y_cumsum&#39;] &lt; op_w].iloc[-1]
+
+        x_array = [D_opt_x_min[&#39;Y_cumsum&#39;], D_opt_x_max[&#39;Y_cumsum&#39;]]
+        y_array = [D_opt_x_min[lonCol], D_opt_x_max[lonCol]]
+        lon_optimal = np.interp(op_w, x_array, y_array)
+
+    else:  # with a single point take the coordinates of the point
+        lat_optimal = float(D_filtered.iloc[0][latCol])
+        lon_optimal = float(D_filtered.iloc[0][lonCol])
+
+    return lat_optimal, lon_optimal</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.facility_location_definition.tracciaCurveIsocosto"><code class="name flex">
+<span>def <span class="ident">tracciaCurveIsocosto</span></span>(<span>D_res: pandas.core.frame.DataFrame, D_res_optimal: pandas.core.frame.DataFrame, latCol: str, lonCol: str, distanceType: str, D_plant: pandas.core.frame.DataFrame = [], plantLongitude: str = [], plantLatitude: str = [], roadGraph: networkx.classes.graph.Graph = [])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Produce plots with iso-cost curves</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_res</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe.</dd>
+<dt><strong><code>D_res_optimal</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe with optimal points.</dd>
+<dt><strong><code>latCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name with latitude.</dd>
+<dt><strong><code>lonCol</code></strong> :&ensp;<code>str</code></dt>
+<dd>column name with longitude.</dd>
+<dt><strong><code>distanceType</code></strong> :&ensp;<code>str</code></dt>
+<dd>type of distance cost function.</dd>
+<dt><strong><code>D_plant</code></strong> :&ensp;<code>pd.DataFrame</code>, optional</dt>
+<dd>dataframe containing plant coordinates. Defaults to [].</dd>
+<dt><strong><code>plantLongitude</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with latitude. Defaults to [].</dd>
+<dt><strong><code>plantLatitude</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>column name with longitude. Defaults to [].</dd>
+<dt><strong><code>roadGraph</code></strong> :&ensp;<code>nx.Graph</code>, optional</dt>
+<dd>Road graph. Defaults to [].</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>outputFigure (dict): dictionary of output figures.
+fig_curve_cost3D (plotly.figure): Interactive 3d plot with .</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tracciaCurveIsocosto(D_res: pd.DataFrame, D_res_optimal: pd.DataFrame, latCol: str, lonCol: str, distanceType: str,
+                         D_plant: pd.DataFrame = [], plantLongitude: str = [], plantLatitude: str = [],
+                         roadGraph: nx.Graph = []):
+    &#34;&#34;&#34;
+    Produce plots with iso-cost curves
+
+    Args:
+        D_res (pd.DataFrame): Input dataframe.
+        D_res_optimal (pd.DataFrame): Input dataframe with optimal points.
+        latCol (str): column name with latitude.
+        lonCol (str): column name with longitude.
+        distanceType (str): type of distance cost function.
+        D_plant (pd.DataFrame, optional): dataframe containing plant coordinates. Defaults to [].
+        plantLongitude (str, optional): column name with latitude. Defaults to [].
+        plantLatitude (str, optional): column name with longitude. Defaults to [].
+        roadGraph (nx.Graph, optional): Road graph. Defaults to [].
+
+    Returns:
+        outputFigure (dict): dictionary of output figures.
+        fig_curve_cost3D (plotly.figure): Interactive 3d plot with .
+
+    &#34;&#34;&#34;
+
+    outputFigure = {}
+    X_list = []
+    Y_list = []
+    grid_list = []
+    time_list = []
+
+    year_list = list(set(D_res[&#39;YEAR&#39;]))
+    year_list.sort()
+    for year in year_list:
+        # year = list(set(D_res[&#39;YEAR&#39;]))[0]
+        D_res_test = D_res[(D_res[&#39;FLOW&#39;] &gt; 0) &amp; (D_res[&#39;YEAR&#39;] == year)]
+        if len(D_res_test) &gt; 2:
+            D_res_optimal_filtered = D_res_optimal[D_res_optimal[&#39;YEAR&#39;] == year]
+
+            # identify the rectangular to represent
+            min_lon = min(D_res_test[lonCol])
+            max_lon = max(D_res_test[lonCol])
+
+            min_lat = min(D_res_test[latCol])
+            max_lat = max(D_res_test[latCol])
+
+            # define the grid
+            lon = np.linspace(min_lon, max_lon, 100)
+            lat = np.linspace(min_lat, max_lat, 100)
+            X, Y = np.meshgrid(lon, lat)
+            xy_coord = list(zip(D_res_test[lonCol], D_res_test[latCol]))
+
+            # interpolate missing points
+            grid = griddata(xy_coord, np.array(D_res_test[&#39;COST_TOBE&#39;]), (X, Y), method=&#39;linear&#39;)
+
+            # save values for the representation
+            X_list.append(X)
+            Y_list.append(Y)
+            grid_list.append(grid)
+            time_list.append(year)
+
+            # if a road graph is given, plot it
+            if roadGraph == []:
+                fig1 = plt.figure()
+                ax = fig1.gca()
+            else:
+                fig1, ax = ox.plot_graph(roadGraph, bgcolor=&#39;k&#39;,
+                                         node_size=1, node_color=&#39;#999999&#39;, node_edgecolor=&#39;none&#39;, node_zorder=2,
+                                         edge_color=&#39;#555555&#39;, edge_linewidth=0.5, edge_alpha=1)
+                plt.legend([&#39;Node&#39;, &#39;Edges&#39;])
+
+            im = ax.contour(X, Y, grid, cmap=&#39;Reds&#39;)
+
+            ax.set_xlabel(&#39;LONGITUDE&#39;)
+            ax.set_ylabel(&#39;LATITUDE&#39;)
+            fig1.colorbar(im, ax=ax)
+
+            ax.set_title(f&#34;Isocost line {distanceType}, period: {year}&#34;)
+
+            # represent optimal points
+            ax.scatter(D_res_optimal_filtered[lonCol], D_res_optimal_filtered[latCol], 100, marker=&#39;^&#39;, color=&#39;green&#39;)
+            plt.legend([&#39;Optimal points&#39;])
+
+            # represent as-is points
+            if len(D_plant) &gt; 0:
+                ax.scatter(D_plant[plantLongitude], D_plant[plantLatitude], 100, marker=&#39;s&#39;, color=&#39;black&#39;)
+                plt.legend([&#39;Optimal points&#39;, &#39;Actual points&#39;])
+
+            fig1 = ax.figure
+            outputFigure[f&#34;isocost_{distanceType}_{year}&#34;] = fig1
+
+            plt.close(&#39;all&#39;)
+    # costruisco il grafico 3d
+    fig_curve_cost3D = createFigureWith3Dsurface(X_list, Y_list, grid_list, time_list)
+    return outputFigure, fig_curve_cost3D</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem" href="index.html">analogistics.supply_chain.P6_placement_problem</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateCostASIS" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateCostASIS">calculateCostASIS</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateMultipleOptimalLocation" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateMultipleOptimalLocation">calculateMultipleOptimalLocation</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateOptimalLocation" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateOptimalLocation">calculateOptimalLocation</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateSaving" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.calculateSaving">calculateSaving</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.defineDistanceTableEstimator" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.defineDistanceTableEstimator">defineDistanceTableEstimator</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_euclideanDistanceCost" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_euclideanDistanceCost">func_euclideanDistanceCost</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_gravityDistanceCost" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_gravityDistanceCost">func_gravityDistanceCost</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_rectangularDistanceCost" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.func_rectangularDistanceCost">func_rectangularDistanceCost</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.mercatorProjection" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.mercatorProjection">mercatorProjection</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationEuclideanDistance" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationEuclideanDistance">optimalLocationEuclideanDistance</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationGravityProblem" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationGravityProblem">optimalLocationGravityProblem</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationRectangularDistance" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.optimalLocationRectangularDistance">optimalLocationRectangularDistance</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.facility_location_definition.tracciaCurveIsocosto" href="#analogistics.supply_chain.P6_placement_problem.facility_location_definition.tracciaCurveIsocosto">tracciaCurveIsocosto</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

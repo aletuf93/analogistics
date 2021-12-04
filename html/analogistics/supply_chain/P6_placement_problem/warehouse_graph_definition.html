@@ -1,0 +1,2649 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import pandas as pd
+import networkx as nx
+import matplotlib.pyplot as plt
+import math
+
+
+import analogistics.graph.graph as dg
+from analogistics.clean import cleanUsingIQR
+
+
+def defineCoordinatesFromRackBayLevel(D_layout: pd.DataFrame, aisleX: float = 5.0, bayY: float = 0.9):
+    &#34;&#34;&#34;
+    Define the cartesian coordinates of a warehouse location, based on the number of bay, rack (aisle), and level.
+
+    Args:
+        D_layout (pd.DataFrame): Input layout dataframe.
+        aisleX (float, optional): Lenght of an aisle (in meters, or coherent uom with D_layout). Defaults to 5.0.
+        bayY (float, optional): Length of a bay (in meters, or coherent uom with D_layout). Defaults to 0.9.
+
+    Returns:
+        D_layout (pd.DataFrame): Output dataFrame with coordinates.
+
+    &#34;&#34;&#34;
+
+    print(f&#34;Assuming aisle width of {aisleX} meters and bay width (pallet) of {bayY} meters&#34;)
+
+    # identify aisles
+    D_layout[&#39;loccodex&#39;] = -1
+    D_layout[&#39;loccodey&#39;] = -1
+    allAisles = list(set(D_layout.rack))
+    allAisles.sort()
+    j = 0
+    # scan all aisles
+    for x in allAisles:
+        # assign x coordinate based on the distance between aisles
+        idx_x = D_layout.rack == x
+        D_layout[&#39;loccodex&#39;].loc[idx_x] = aisleX * j
+        j = j + 1
+
+        # identify all the bays of an aisle
+        allBays = list(set(D_layout[&#39;bay&#39;].loc[idx_x]))
+        i = 0
+        for y in allBays:
+            # assign y coordinate based on the distance between bays
+            # hypothesis: all bays are based on the warehouse front
+            idx_y = (D_layout.rack == x) &amp; (D_layout.bay == y)
+            D_layout[&#39;loccodey&#39;].loc[idx_y] = bayY * i
+            i = i + 1
+    return D_layout
+
+
+def estimateMissingAislecoordX(D_layout: pd.DataFrame) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    estimate the values of the aisle coordinate, when not mapped (&#34;aislecodex&#34; column of the dataframe D_layout)
+
+    Args:
+        D_layout (pd.DataFrame): Input dataFrame.
+
+    Returns:
+        D_layout (pd.DataFrame): Output dataframe with coordinates.
+
+    &#34;&#34;&#34;
+
+    # ####################################################
+    # ### fix nan in loccodex e loccodey #################
+    # ####################################################
+    D_layout = D_layout.reset_index()
+
+    # if rack information are given
+    if &#39;rack&#39; in D_layout.columns:
+        D_layout = D_layout.sort_values([&#39;rack&#39;, &#39;bay&#39;], ascending=[True, True])
+        allRacks = list(set(D_layout.rack.dropna()))
+        for rack in allRacks:
+            D_rack = D_layout[D_layout.rack == rack]
+
+            # try to calculate the average value for the rack
+            avgXCoord = np.mean(D_rack.loccodex)
+            if not(math.isnan(avgXCoord)):  # if a value is found
+                D_rack[&#39;loccodex&#39;].fillna(avgXCoord, inplace=True)
+
+            else:  # otherwise search within the neighborhood, and interpolate
+                D_rack_null = D_layout[[&#39;rack&#39;, &#39;loccodex&#39;]].drop_duplicates()
+                D_rack_null = D_rack_null.sort_values(&#39;rack&#39;)
+                D_rack_null[&#39;loccodex&#39;].fillna(method=&#39;backfill&#39;, inplace=True)
+                fillValue = float(D_rack_null[D_rack_null.rack == rack].loccodex)
+                # Then, substitute values
+                D_rack[&#39;loccodex&#39;].fillna(fillValue, inplace=True)
+
+            # set aisles coordinates based on nearest neighbor
+            D_rack[&#39;loccodey&#39;].interpolate(method=&#39;linear&#39;, limit_direction=&#39;forward&#39;, inplace=True)
+
+            # update D_layout
+            D_layout.loc[D_rack.index] = D_rack
+
+        # delete the remaining nan
+        D_layout = D_layout.sort_values(by=[&#39;rack&#39;, &#39;bay&#39;])
+        print(f&#34;====={len(D_layout[D_layout.loccodex.isnull()])} x coordinates have been randomly interpolated&#34;)
+        D_layout[&#39;loccodex&#39;].fillna(method=&#39;ffill&#39;, inplace=True)  # fill scanning forward
+        D_layout[&#39;loccodex&#39;].fillna(method=&#39;bfill&#39;, inplace=True)  # fill scanning backward
+
+    else:
+        print(&#34;No rack information&#34;)
+
+    # ####################################################
+    # ##### estimate coordinates of the missing racks ####
+    # ####################################################
+
+    # identify mapped aisle coordinates (aislecodex)
+    D_givAisl = D_layout[D_layout[&#39;aislecodex&#39;].notna()]
+    D_givAisl = D_givAisl[[&#39;loccodex&#39;, &#39;aislecodex&#39;]]
+    D_givAisl = D_givAisl.drop_duplicates()
+
+    # identify coordinates to map
+    D_estAisl = D_layout[D_layout[&#39;loccodex&#39;].notna()].loccodex
+    allXcoords = list(set(D_estAisl))
+    allXcoords.sort()
+
+    # join the coordinates, and put the farthest in the same aisle
+    dist = 0
+    for j in range(1, len(allXcoords)):
+        dist = dist + np.abs(allXcoords[j] - allXcoords[j - 1])
+    if len(allXcoords) &gt; 1:
+        avg_dist = dist / (len(allXcoords) - 1)
+    else:
+        avg_dist = 0
+
+    # if the distance is above the average, join in the same aisle
+    D_estAisl = pd.DataFrame(columns=D_givAisl.columns)
+    j = 0
+    while j &lt; len(allXcoords):
+        if j &lt; len(allXcoords) - 1:  # for each aisle, except the last
+            dist = np.abs(allXcoords[j + 1] - allXcoords[j])
+            if dist &gt;= avg_dist:  # if they are greater or equal than the average, theiy are on the same aisle
+                aisle = min(allXcoords[j + 1], allXcoords[j]) + dist / 2
+                D_estAisl = D_estAisl.append(pd.DataFrame([[allXcoords[j], aisle]], columns=D_estAisl.columns))
+                D_estAisl = D_estAisl.append(pd.DataFrame([[allXcoords[j + 1], aisle]], columns=D_estAisl.columns))
+                j = j + 2  # joined two, jumo two
+            else:  # otherwise, it is a single aisle
+                D_estAisl = D_estAisl.append(pd.DataFrame([[allXcoords[j], allXcoords[j]]], columns=D_estAisl.columns))
+                j = j + 1  # joined one, jumo one
+        elif j == len(allXcoords) - 1:  # if it is the last aisle
+            D_estAisl = D_estAisl.append(pd.DataFrame([[allXcoords[j], allXcoords[j]]], columns=D_estAisl.columns))
+            j = j + 1  # joined one, jump one
+
+    #  data cleaning
+    # replace None with nan
+    D_layout.replace(to_replace=[None], value=np.nan, inplace=True)
+    # check null aisle values
+    index = D_layout[&#39;aislecodex&#39;].index[D_layout[&#39;aislecodex&#39;].apply(np.isnan)]
+
+    for rows in index:
+        loccodex = D_layout.loc[rows].loccodex
+
+        # if the value is known
+        if loccodex in D_givAisl.loccodex:
+            D_layout[&#39;aislecodex&#39;].loc[rows] = float(D_givAisl[D_givAisl[&#39;loccodex&#39;] == loccodex].aislecodex)
+        else:
+            D_layout[&#39;aislecodex&#39;].loc[rows] = float(D_estAisl[D_estAisl[&#39;loccodex&#39;] == loccodex].aislecodex)
+
+    # check if coordinates exist otherwise replace with rack/bay/level
+
+    # remove rack/bay/level
+    if &#39;rack&#39; in D_layout.columns:
+        D_layout = D_layout.sort_values(by=[&#39;rack&#39;, &#39;bay&#39;])
+    else:
+        D_layout = D_layout.sort_values(by=[&#39;aislecodex&#39;])
+    D_layout = D_layout[[&#39;idlocation&#39;, &#39;aislecodex&#39;, &#39;loccodex&#39;, &#39;loccodey&#39;]]
+
+    # interpolate missing y-coordinate
+
+    print(f&#34;====={len(D_layout[D_layout.loccodey.isnull()])} y coordinates have been randomly interpolated&#34;)
+    D_layout[&#39;loccodey&#39;].interpolate(method=&#39;linear&#39;, limit_direction=&#39;forward&#39;, inplace=True)
+    D_layout[&#39;loccodey&#39;].fillna(method=&#39;ffill&#39;, inplace=True)  # fill scanning forward
+    D_layout[&#39;loccodey&#39;].fillna(method=&#39;bfill&#39;, inplace=True)  # fill scanning backward
+
+    # round everithing avoiding decimal values
+    D_layout[&#39;aislecodex&#39;] = np.round(D_layout[&#39;aislecodex&#39;], 0)
+    D_layout[&#39;loccodey&#39;] = np.round(D_layout[&#39;loccodey&#39;], 0)
+
+    return D_layout
+
+
+def defineGraphNodes(D_layout: pd.DataFrame, D_IO: pd.DataFrame):
+    &#34;&#34;&#34;
+    Define correspondence between idlocation and node id (graph)
+
+    Args:
+        D_layout (pd.DataFrame): Input layout dataframe.
+        D_IO (pd.DataFrame): Input I/O locations dataframe.
+
+    Returns:
+        D_nodes (pd.DataFrame): Output nodes dataframe.
+        D_res_dict (dict): dictionaty with correspondence between idlocation and nodeid.
+        D_IO (pd.DataFrame): Output I/O dataframe.
+
+    &#34;&#34;&#34;
+
+    #  define all the nodes of the graph
+    D_nodes = D_layout[[&#39;aislecodex&#39;, &#39;loccodey&#39;]].drop_duplicates().reset_index(drop=True)
+
+    # add correspondence between D_layout and D_nodes
+    D_layout[&#39;idNode&#39;] = None
+    for index, node in D_nodes.iterrows():
+        idx_node = (D_layout.aislecodex == node.aislecodex) &amp; (D_layout.loccodey == node.loccodey)
+        D_layout.idNode.loc[idx_node] = index
+
+    # add Input-Output nodes
+    # redefine index of D_IO to avoid overlaps with D_nodes
+    D_IO.index = np.arange(max(D_nodes.index.values) + 1, max(D_nodes.index.values) + 1 + len(D_IO))
+
+    for index, node in D_IO.iterrows():
+        idx_node = node.idlocation  # use id location of the fake locations
+        temp = pd.DataFrame([[idx_node, node.loccodex, node.loccodex, node.loccodey, index]],
+                            columns=D_layout.columns)
+        D_layout = D_layout.append(temp)
+
+    D_res = D_layout[[&#39;idlocation&#39;, &#39;idNode&#39;]]
+    D_res = D_res.drop_duplicates()
+
+    D_res_dict = dict(zip(D_res.idlocation, D_res.idNode))
+
+    return D_nodes, D_res_dict, D_IO
+
+
+def addtraversaledges(D_nodes: pd.DataFrame, list_aisles: list, edgeTable: pd.DataFrame,
+                      columns_edgeTable: list, index_source: list, index_target: list) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Add the traversal edges to connect aisles horizontally
+
+    Args:
+        D_nodes (pd.DataFrame): Input nodes DataGrame.
+        list_aisles (list): list of aisles.
+        edgeTable (pd.DataFrame): Input dataframe with edgetable.
+        columns_edgeTable (list): DESCRIPTION.
+        index_source (list): DESCRIPTION.
+        index_target (list): DESCRIPTION.
+
+    Returns:
+        edgeTable (pd.DataFrame): Output Dataframe wth edgetable containing horizontal arcs.
+
+    &#34;&#34;&#34;
+    D_Aisle1 = D_nodes[D_nodes.aislecodex == list_aisles[index_source]]  # identify coordinates of the first aisle
+    D_Aisle2 = D_nodes[D_nodes.aislecodex == list_aisles[index_target]]  # identify coordinates of the first aisle
+
+    # if connecting two aisles with more than a single bay
+    if (len(D_Aisle1) &gt; 1) &amp; (len(D_Aisle2) &gt; 1):
+        # identify the two bays on the back
+        node1_front_index = D_Aisle1[&#39;loccodey&#39;].idxmax()
+        node2_front_index = D_Aisle2[&#39;loccodey&#39;].idxmax()
+
+        # add the arc
+        length = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_front_index]), 1)
+        temp = pd.DataFrame([[node1_front_index, node2_front_index, length]],
+                            columns=columns_edgeTable)
+        edgeTable = edgeTable.append(temp)
+
+        # identify the two bays on the front
+        node1_front_index = D_Aisle1[&#39;loccodey&#39;].idxmin()
+        node2_front_index = D_Aisle2[&#39;loccodey&#39;].idxmin()
+
+        # add the arc
+        length = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_front_index]), 1)
+        temp = pd.DataFrame([[node1_front_index, node2_front_index, length]],
+                            columns=columns_edgeTable)
+        edgeTable = edgeTable.append(temp)
+
+    else:  # otherwise connect single bays
+
+        if len(D_Aisle1) &gt; 1:  # if the first aisle has more than a single bay
+
+            # identify the coordinates of the first aisle
+            node1_back_index = D_Aisle1[&#39;loccodey&#39;].idxmax()
+            node1_front_index = D_Aisle1[&#39;loccodey&#39;].idxmin()
+
+            node2_front_index = D_Aisle2[&#39;loccodey&#39;].idxmax()  # return the index of the sigle bay
+
+            # make a single connection to the closer
+            length_back = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_back_index] - D_Aisle2.aislecodex.loc[node2_front_index]) + np.abs(D_Aisle1.loccodey.loc[node1_back_index] - D_Aisle2.loccodey.loc[node2_front_index]), 1)
+            length_front = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_front_index]) + np.abs(D_Aisle1.loccodey.loc[node1_front_index] - D_Aisle2.loccodey.loc[node2_front_index]), 1)
+
+            # if it is shorter on the front, add a single arc
+            if length_front &lt;= length_back:
+                temp = pd.DataFrame([[node1_front_index, node2_front_index, length_front]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+            else:  # otherwise connect backwards
+                temp = pd.DataFrame([[node1_back_index, node2_front_index, length_back]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+
+        else:  # all the other cases (bay-&gt;bay or bay-&gt;aisle)
+
+            # identify the coordinates of the first aisle
+            node1_front_index = D_Aisle1[&#39;loccodey&#39;].idxmax()
+
+            # identify the coordinates of the second
+            node2_back_index = D_Aisle2[&#39;loccodey&#39;].idxmax()
+            node2_front_index = D_Aisle2[&#39;loccodey&#39;].idxmin()
+
+            # make a single connection to the closer
+            length_back = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_back_index]) + np.abs(D_Aisle1.loccodey.loc[node1_front_index] - D_Aisle2.loccodey.loc[node2_back_index]), 1)
+            length_front = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_front_index]) + np.abs(D_Aisle1.loccodey.loc[node1_front_index] - D_Aisle2.loccodey.loc[node2_front_index]), 1)
+
+            # if it is shorter on the front, add a single arc
+            if length_front &lt;= length_back:
+                temp = pd.DataFrame([[node1_front_index, node2_front_index, length_front]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+            else:  # otherwise connect backwards
+                temp = pd.DataFrame([[node1_front_index, node2_back_index, length_back]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+
+    return edgeTable
+
+
+def defineEdgeTable(D_nodes: pd.DataFrame, D_IO: pd.DataFrame) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Define a dataframe containing the arcs of the warehouse graph
+
+    Args:
+        D_nodes (pd.DataFrame): Input DataFrame with nodes.
+        D_IO (pd.DataFrame): Input DataFrame with i/o points.
+
+    Returns:
+        edgeTable (pd.DataFrame): Output dataframe with arcs.
+
+    &#34;&#34;&#34;
+
+    # avoid considering - temporarily - i/O and fake locations
+    D_fakes = pd.DataFrame(columns=D_nodes.columns)
+    for index, row in D_IO.iterrows():
+        loccodex = row.loccodex
+        loccodey = row.loccodey
+        D_fakes = D_fakes.append(D_nodes[((D_nodes.aislecodex == loccodex) &amp; (D_nodes.loccodey == loccodey))])
+        D_nodes = D_nodes[~((D_nodes.aislecodex == loccodex) &amp; (D_nodes.loccodey == loccodey))]
+
+    columns_edgeTable = [&#39;nodeFrom&#39;, &#39;nodeTo&#39;, &#39;length&#39;]
+    edgeTable = pd.DataFrame(columns=columns_edgeTable)
+
+    # #####################################################
+    # ##### add vertical arcs(aisles) #####################
+    # #####################################################
+    set_aisles = set(D_nodes.aislecodex)  # identify all aisles
+    for aisle in set_aisles:
+        # aisle=list(set_aisles)[0]
+        D_currentAisle = D_nodes[D_nodes.aislecodex == aisle]  # filter by aisle
+        D_currentAisle = D_currentAisle.sort_values(by=&#39;loccodey&#39;)  # sort by bay
+
+        # simplify the graph identifying all the bays with the y coordinate on the aisle
+        for i in range(1, len(D_currentAisle)):  # identify the arcs
+
+            # identify the parameters of the arcs, and their attributes
+            nodeFrom = D_currentAisle.index[i - 1]
+            nodeTo = D_currentAisle.index[i]
+            length = np.round(np.abs(D_currentAisle.loccodey.iloc[i - 1] - D_currentAisle.loccodey.iloc[i]), 1)
+
+            temp = pd.DataFrame([[nodeFrom, nodeTo, length]],
+                                columns=columns_edgeTable)
+            edgeTable = edgeTable.append(temp)
+
+    # #####################################################
+    # ##### add traversal arcs ############################
+    # #####################################################
+
+    list_aisles = list(set_aisles)  # identify the coordinates of each aisle
+    list_aisles.sort()  # sort by coordinate
+    for i in range(1, len(list_aisles)):
+        #  consiser the current index to create an arc with the near aisle
+        if i == 1:
+            edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i)
+            if len(list_aisles) &gt; 2:
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i + 1)
+
+        elif i == len(list_aisles) - 1:
+            if len(list_aisles) &gt; 2:
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i)
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i - 2)
+        else:
+            edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i)
+            if len(list_aisles) &gt; 3:
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i - 2)
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i + 1)
+
+    # #####################################################
+    # ##### add arcs to the I/O and fake locations ########
+    # #####################################################
+
+    # find input
+    D_in = D_IO[D_IO.inputloc == 1]
+    for idx in D_in.index:
+        # identify the coordinates
+        loccodex = D_in.loccodex[idx]
+        loccodey = D_in.loccodey[idx]
+
+        # identify the closest node
+        distanceArray = np.abs(D_nodes.aislecodex - loccodex) + np.abs(D_nodes.loccodey - loccodey)
+        idx_min = distanceArray.idxmin()
+        length = min(distanceArray)
+
+        # create the arc
+        nodeFrom = idx
+        nodeTo = idx_min
+        temp = pd.DataFrame([[nodeFrom, nodeTo, length]],
+                            columns=columns_edgeTable)
+        edgeTable = edgeTable.append(temp)
+
+        # identify fake locations mapped on the same coordinates
+        for idx_fake, row_fake in D_fakes.iterrows():
+            #  if a fake is in the same location of an I/O coordinate
+            if ((row_fake.aislecodex == loccodex) &amp; (row_fake.loccodey == loccodey)):
+                # add the arc
+                nodeFrom = idx_fake
+                temp = pd.DataFrame([[nodeFrom, nodeTo, 0]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+
+    # find output
+    D_out = D_IO[D_IO.outputloc == 1]
+    for idx in D_out.index:
+        # identify the coordinates
+        loccodex = D_out.loccodex[idx]
+        loccodey = D_out.loccodey[idx]
+
+        # identify the closest node
+        distanceArray = np.abs(D_nodes.aislecodex - loccodex) + np.abs(D_nodes.loccodey - loccodey)
+        idx_min = distanceArray.idxmin()
+        length = min(distanceArray)
+
+        # create the arc
+        nodeFrom = idx
+        nodeTo = idx_min
+        temp = pd.DataFrame([[nodeFrom, nodeTo, length]],
+                            columns=columns_edgeTable)
+        edgeTable = edgeTable.append(temp)
+
+        # identify fake locations mapped on the same coordinates
+        for idx_fake, row_fake in D_fakes.iterrows():
+            # if a fake is mapped on a I/O location
+            if ((row_fake.aislecodex == loccodex) &amp; (row_fake.loccodey == loccodey)):
+
+                # add the arc
+                nodeFrom = idx_fake
+                temp = pd.DataFrame([[nodeFrom, nodeTo, 0]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+    edgeTable = edgeTable.drop_duplicates()
+    return edgeTable
+
+
+def analyseWhTraffic(D_mov_input: pd.DataFrame, D_res: pd.DataFrame, G, numPicks: int = -1,
+                     edgePredecessors: bool = True, D_layout: pd.DataFrame = []):
+    &#34;&#34;&#34;
+    analyse the traffic of a warehouse with a simulation on a sample of picking lists
+
+    Args:
+        D_mov_input (pd.DataFrame): dataframe containing the columns IDLOCATION and PICKINGLIST.
+        D_res (pd.DataFrame): dictionary matching idlocation with node of the graph.
+        G (TYPE): graph of the storage system.
+        numPicks (int, optional): number of picks to simulate. Defaults to -1.
+        edgePredecessors (bool, optional): if true save the path of arcs for each picking lists (to define traffic chart). Defaults to True.
+        D_layout (pd.dataFrame, optional): considered when edgepredecessor is true to define the traffic chart. Defaults to [].
+
+    Returns:
+        D_stat_arcs (pd.DataFrame): Output DataFrame with traffic.
+        D_stat_picks (pd.DataFrame): Output DataFrame with statistics .
+
+    &#34;&#34;&#34;
+
+    # rename column with capital letters
+    D_mov = D_mov_input
+    D_mov = D_mov.rename(columns={&#39;IDLOCATION&#39;: &#39;idlocation&#39;,
+                                  &#39;PICKINGLIST&#39;: &#39;pickinglist&#39;})
+    # get IO nodes
+    inputloc = nx.get_node_attributes(G, &#39;input&#39;)
+    outputloc = nx.get_node_attributes(G, &#39;output&#39;)
+
+    inputloc = list(inputloc.keys())[0]
+    outputloc = list(outputloc.keys())[0]
+
+    # check all locations in D_res
+    print(f&#34;There are {len(D_mov.loc[~(D_mov.idlocation.isin(D_res.keys()))])} unmapped locations&#34;)
+
+    # chek if pickinglist are available
+    picklists = list(set(D_mov.pickinglist))
+    if len(picklists) &lt; 2:  # set pickinglist on ordercode
+        D_mov[&#39;pickinglist&#39;] = D_mov.ordercode
+        picklists = list(set(D_mov.pickinglist))
+        print(&#34;====WARNING===== No pickinglists recorded. Using ordercode =========&#34;)
+
+    if numPicks == -1:
+        numPicks = len(picklists)
+
+    cols_res = [&#39;pickinglist&#39;, &#39;distance&#39;]
+    D_stat_order = pd.DataFrame(columns=cols_res)  # dataframe to save statistics on the distances
+    D_arcs = pd.DataFrame(columns=[&#39;nodeFrom&#39;, &#39;nodeTo&#39;])  # dataframe to save statistics on the traffic
+
+    # bootstrap pickinglist
+    np.random.seed(42)
+    pickups = np.random.randint(0, len(picklists), size=numPicks)
+    count = 0
+    for k in range(0, len(pickups)):
+        pick = picklists[pickups[k]]
+
+        count = count + 1
+        print(f&#34;{count/len(pickups)}&#34;)
+        D_list = D_mov[D_mov.pickinglist == pick]
+
+        #  check all idlocations in the pickinglist have been mapped
+        if all(D_list.idlocation.isin(list(D_res.keys()))) &amp; len(D_list) &gt; 0:
+            # scan all the orderlist and define the shortest path
+            for i in range(0, len(D_list) + 1):
+
+                # if it is the first row of a picking list
+                if i == 0:
+                    nodeFrom = inputloc
+                    nodeTo = D_res[D_list.idlocation.iloc[i]]
+                    if edgePredecessors:
+                        path = nx.shortest_path(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+                    dist = nx.shortest_path_length(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+
+                # if it is the last row of a picking list
+                elif i == len(D_list):
+                    nodeFrom = D_res[D_list.idlocation.iloc[i - 1]]
+                    nodeTo = outputloc
+                    if edgePredecessors:
+                        path = nx.shortest_path(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+                    dist = nx.shortest_path_length(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+                else:
+                    nodeFrom = D_res[D_list.idlocation.iloc[i - 1]]
+                    nodeTo = D_res[D_list.idlocation.iloc[i]]
+                    if edgePredecessors:
+                        path = nx.shortest_path(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+                    dist = nx.shortest_path_length(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+
+                # save dataframe with results
+                temp = pd.DataFrame([[pick, dist]], columns=cols_res)
+                D_stat_order = D_stat_order.append(temp)
+
+                if edgePredecessors:
+                    for j in range(1, len(path)):
+                        temp = pd.DataFrame([[path[j - 1], path[j]]], columns=D_arcs.columns)
+                        D_arcs = D_arcs.append(temp)
+
+        else:
+            print(&#34;Idlocations not found:&#34;)
+            print(pick)
+            print(D_list.idlocation.loc[~D_list.idlocation.isin(list(D_res.values()))])
+
+    # group results
+    D_stat_picks = D_stat_order.groupby([&#39;pickinglist&#39;]).sum()
+
+    # draw histogram
+    plt.figure()
+    plt.hist(D_stat_picks.distance)
+    plt.ylabel(&#39;N. of picking lists&#39;)
+    plt.xlabel(&#39;Distance&#39;)
+    plt.title(f&#34;Distance per picking list. {np.round(len(pickups)/len(picklists)*100,1)}% of the dataset &#34;)
+
+    # draw traffic chart
+    D_stat_arcs = D_arcs.groupby([&#39;nodeFrom&#39;, &#39;nodeTo&#39;]).size().reset_index()
+    D_stat_arcs = D_stat_arcs.rename(columns={0: &#39;traffic&#39;})
+
+    # set edge attributes
+    edge_attributes_all = {(nodeFrom, nodeTo): {&#39;traffic&#39;: 0.0001} for (nodeFrom, nodeTo) in G.edges}
+    nx.set_edge_attributes(G, edge_attributes_all)
+
+    edge_attributes_traffic = {(nodeFrom, nodeTo): {&#39;traffic&#39;: traff} for (nodeFrom, nodeTo, traff) in zip(D_stat_arcs.nodeFrom, D_stat_arcs.nodeTo, D_stat_arcs.traffic)}
+    nx.set_edge_attributes(G, edge_attributes_traffic)
+
+    distance = &#39;&#39;
+    weight = &#39;traffic&#39;
+    title = &#39;Traffic chart&#39;
+    arcLabel = False
+    nodeLabel = False
+    trafficGraph = True
+    printNodecoords = True
+
+    if edgePredecessors:
+        dg.printGraph(G, distance, weight, title, arcLabel, nodeLabel, trafficGraph, printNodecoords, D_layout)
+
+    return D_stat_arcs, D_stat_picks
+
+
+def defineWHgraph(D_layout: pd.DataFrame, D_IO: pd.DataFrame, D_fake: pd.DataFrame, allLocs: int,
+                  draw: bool = False, arcLabel: bool = False, nodeLabel: bool = False, trafficGraph: bool = False):
+    &#34;&#34;&#34;
+    the function returns a graph G, and a table with the mapping from idlocations to graph nodes
+
+    Args:
+        D_layout (pd.DataFrame): pandas dataframe containing the coordinates for each locations.
+        D_IO (pd.DataFrame): dataframe containing the coordinates of the Input and output locations.
+        D_fake (pd.DataFrame): dataframe containing the coordinates of the fake locations.
+        allLocs (int): number of the initial locations (returned by the function preprocessing the coordinates).
+        draw (bool, optional): when true plot the graph. Defaults to False.
+        arcLabel (bool, optional): when true plot the arc labels. Defaults to False.
+        nodeLabel (bool, optional): when true plot the node labels. Defaults to False.
+        trafficGraph (bool, optional): when true compute and plot the traffic graph. Defaults to False.
+
+    Returns:
+        nx.Graph: Output networkx graph.
+        pd.DataFrame: Output DataFrame.
+        pd.DataFrame: DESOutput DataFrameCRIPTION.
+
+    &#34;&#34;&#34;
+
+    D_layout.columns = [i.lower() for i in D_layout.columns]
+
+    fakecoordx = D_IO.loccodex.iloc[0]
+    fakecoordy = D_IO.loccodey.iloc[0]
+
+    # map the coordinates of all the fake locations with the I/O
+    D_layout.loccodex.loc[D_layout.idlocation.isin(D_fake.idlocation)] = fakecoordx
+    D_layout.loccodey.loc[D_layout.idlocation.isin(D_fake.idlocation)] = fakecoordy
+
+    # estimathe coordinates of the missing aisles
+    D_layout = estimateMissingAislecoordX(D_layout)
+
+    #  plot coordinates after removing nan
+
+    if len(D_layout) == allLocs:
+        # find coordinates between graph nodes and id locations
+        D_nodes, D_res, D_IO = defineGraphNodes(D_layout, D_IO)
+
+        # define arcs
+        edgeTable = defineEdgeTable(D_nodes, D_IO)
+
+        # define the graph
+        G = dg.defineGraph(edgeTable)
+
+        # set graph attribute coordinates x and y
+        pos = {idlocation: (coordx, coordy) for (idlocation, coordx, coordy) in zip(D_nodes.index.values, D_nodes.aislecodex, D_nodes.loccodey)}
+        pos_io = {idlocation: (coordx, coordy) for (idlocation, coordx, coordy) in zip(D_IO.index.values, D_IO.loccodex, D_IO.loccodey)}
+        pos.update(pos_io)
+        nx.set_node_attributes(G, pos, &#39;coordinates&#39;)
+
+        # set boolean input
+        attr_io = {idlocation: inputloc for (idlocation, inputloc) in zip(D_IO.index.values, D_IO.inputloc)}
+        nx.set_node_attributes(G, attr_io, &#39;input&#39;)
+
+        # set boolean input
+        attr_io = {idlocation: outputloc for (idlocation, outputloc) in zip(D_IO.index.values, D_IO.outputloc)}
+        nx.set_node_attributes(G, attr_io, &#39;output&#39;)
+
+        # set distance between the nodes and the IO point
+        # consider a single input point
+        idlocation_IN = D_IO[D_IO.inputloc == 1].index.values[0]
+        idlocation_OUT = D_IO[D_IO.outputloc == 1].index.values[0]
+
+        # prepare dataframe with results
+        D_allNodes = list(G.nodes)
+        D_distanceIO = pd.DataFrame(index=D_allNodes)
+        D_distanceIO[&#39;IN_dist&#39;] = None
+        D_distanceIO[&#39;OUT_dist&#39;] = None
+
+        # calculate IO distance for each node of the graph
+        for index, row in D_distanceIO.iterrows():
+            # distance IN
+            dist_IN = nx.shortest_path_length(G, source=idlocation_IN, target=index, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+            dist_OUT = nx.shortest_path_length(G, source=idlocation_OUT, target=index, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+            D_distanceIO[&#39;IN_dist&#39;].loc[index] = dist_IN
+            D_distanceIO[&#39;OUT_dist&#39;].loc[index] = dist_OUT
+
+        # set input distance
+        attr_dist_in = {idlocation: in_dist for (idlocation, in_dist) in zip(D_distanceIO.index.values, D_distanceIO.IN_dist)}
+        nx.set_node_attributes(G, attr_dist_in, &#39;input_distance&#39;)
+
+        # set output distance
+        attr_dist_out = {idlocation: out_dist for (idlocation, out_dist) in zip(D_distanceIO.index.values, D_distanceIO.OUT_dist)}
+        nx.set_node_attributes(G, attr_dist_out, &#39;output_distance&#39;)
+
+        # draw graph
+        if draw:
+            # print the graph
+            distance = weight = &#39;length&#39;
+            title = &#39;Warehouse graph&#39;
+            printNodecoords = False
+            dg.printGraph(G, distance, weight, title, arcLabel, nodeLabel, trafficGraph, printNodecoords, D_layout)
+
+        return G, D_res, D_layout
+    else:
+        print(&#34;=======EXIT=======Internal error. Some locations were not mapped&#34;)
+        return [], [], []
+
+
+def calculateExchangeSaving(D_mov_input: pd.DataFrame, D_res: pd.DataFrame,
+                            G: nx.Graph, useSameLevel: bool = False) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    calculates the distance saving while exchanging two physical locations (popularity-distance graph)
+
+    Args:
+        D_mov_input (pd.DataFrame): dataframe with the set of the movements.
+        D_res (pd.DataFrame): dictionary with correnspondence between IDLOCATION and NODE ID.
+        G (nx.Graph): graph of the warehouse.
+        useSameLevel (bool, optional): if True no exchanges are allowed between locations on different wh levels. Defaults to False.
+
+    Returns:
+        D_results (pd.DataFrame): Output dataFrame with saving and exchange.
+
+    &#34;&#34;&#34;
+
+    D_mov = D_mov_input
+    D_mov.columns = D_mov_input.columns.str.lower()
+
+    if useSameLevel:
+        # Calculate the popularity for each location and level
+        D_bubbles = D_mov.groupby([&#39;idlocation&#39;, &#39;level&#39;]).size().reset_index()
+
+    else:
+        D_bubbles = D_mov.groupby([&#39;idlocation&#39;]).size().reset_index()
+        D_bubbles = pd.DataFrame(D_bubbles)
+
+    D_bubbles = D_bubbles.set_index(&#39;idlocation&#39;)
+    D_bubbles = D_bubbles.rename(columns={0: &#39;popularity&#39;})
+    D_bubbles[&#39;idNode&#39;] = None
+    D_bubbles[&#39;distance&#39;] = None
+
+    # calculate distance for each location
+    inputDistance = nx.get_node_attributes(G, &#39;input_distance&#39;)
+    outputDistance = nx.get_node_attributes(G, &#39;output_distance&#39;)
+
+    for index, row in D_bubbles.iterrows():
+        if index not in D_res.keys():
+            pass
+        else:
+            idNode = D_res[index]
+            D_bubbles[&#39;idNode&#39;].loc[index] = idNode
+            D_bubbles[&#39;distance&#39;].loc[index] = inputDistance[idNode] + outputDistance[idNode]
+
+    # plot the distance of each point to the I/O
+    nodecoords = nx.get_node_attributes(G, &#39;coordinates&#39;)
+
+    # remove nan
+    D_bubbles = D_bubbles.dropna()
+
+    # save coordinates
+    D_bubbles[&#39;loccodex&#39;] = [nodecoords[idNode][0] for idNode in D_bubbles[&#39;idNode&#39;]]
+    D_bubbles[&#39;loccodey&#39;] = [nodecoords[idNode][1] for idNode in D_bubbles[&#39;idNode&#39;]]
+
+    plt.figure()
+    plt.scatter(D_bubbles.loccodex, D_bubbles.loccodey, c=D_bubbles.distance)
+    plt.colorbar()
+    plt.title(&#34;Distance of each node from the I/O&#34;)
+
+    if useSameLevel:
+        # make optimising exchanges on the dame level (iaisles has the same number of levels)
+
+        res_cols = [&#39;level&#39;, &#39;popularity&#39;, &#39;idNode&#39;, &#39;distance&#39;, &#39;new_idNode&#39;, &#39;new_distance&#39;, &#39;costASIS&#39;,
+                    &#39;costTOBE&#39;, &#39;idlocationASIS&#39;, &#39;idlocationTOBE&#39;]
+        D_results = pd.DataFrame(columns=res_cols)
+
+        for level in set(D_bubbles.level):
+            D_bubbles_level = D_bubbles[D_bubbles.level == level]
+
+            # sort the dataframe by popularity
+            D_bubbles_pop = D_bubbles_level.sort_values(by=&#39;popularity&#39;, ascending=False)
+
+            # sort the dataframe by distance
+            D_bubbles_dist = D_bubbles_level.sort_values(by=&#39;distance&#39;, ascending=True)
+
+            # work on the popularity dataframe and identify which location to pick from that popularityy
+            D_bubbles_pop[&#39;new_idNode&#39;] = D_bubbles_dist[&#39;idNode&#39;].reset_index(drop=True).values
+            D_bubbles_pop[&#39;new_distance&#39;] = D_bubbles_dist[&#39;distance&#39;].reset_index(drop=True).values
+
+            # drop zeros from popularity and distance
+            D_bubbles_pop[&#39;new_distance&#39;] = D_bubbles_pop[&#39;new_distance&#39;].replace(0, 0.0001)
+            D_bubbles_pop[&#39;distance&#39;] = D_bubbles_pop[&#39;distance&#39;].replace(0, 0.0001)
+
+            # estimate travelling and saving
+            D_bubbles_pop[&#39;costASIS&#39;] = D_bubbles_pop[&#39;popularity&#39;] * D_bubbles_pop[&#39;distance&#39;]
+            D_bubbles_pop[&#39;costTOBE&#39;] = D_bubbles_pop[&#39;popularity&#39;] * D_bubbles_pop[&#39;new_distance&#39;]
+
+            # save exchange locations
+            D_bubbles_pop[&#39;idlocationASIS&#39;] = D_bubbles_pop.index.values
+            D_bubbles_pop[&#39;idlocationTOBE&#39;] = D_bubbles_dist.index.values
+
+            D_results = D_results.append(D_bubbles_pop.reset_index(drop=True))
+
+    else:
+        res_cols = [&#39;popularity&#39;, &#39;idNode&#39;, &#39;distance&#39;, &#39;new_idNode&#39;,
+                    &#39;new_distance&#39;, &#39;costASIS&#39;, &#39;costTOBE&#39;]
+        D_results = pd.DataFrame(columns=res_cols)
+
+        # sort the dataframe by popularity
+        D_bubbles_pop = D_bubbles.sort_values(by=&#39;popularity&#39;, ascending=False)
+
+        # sort the dataframe by distance
+        D_bubbles_dist = D_bubbles.sort_values(by=&#39;distance&#39;, ascending=True)
+
+        # identify the location to wiche it is better to pick that popularity
+        D_bubbles_pop[&#39;new_idNode&#39;] = D_bubbles_dist[&#39;idNode&#39;].reset_index(drop=True).values
+        D_bubbles_pop[&#39;new_distance&#39;] = D_bubbles_dist[&#39;distance&#39;].reset_index(drop=True).values
+
+        # drop zeros from popularity and distances
+        D_bubbles_pop[&#39;new_distance&#39;] = D_bubbles_pop[&#39;new_distance&#39;].replace(0, 0.0001)
+        D_bubbles_pop[&#39;distance&#39;] = D_bubbles_pop[&#39;distance&#39;].replace(0, 0.0001)
+
+        # estimate travelling and saving
+        D_bubbles_pop[&#39;costASIS&#39;] = D_bubbles_pop[&#39;popularity&#39;] * D_bubbles_pop[&#39;distance&#39;]
+        D_bubbles_pop[&#39;costTOBE&#39;] = D_bubbles_pop[&#39;popularity&#39;] * D_bubbles_pop[&#39;new_distance&#39;]
+
+        # save locations exchange
+        D_bubbles_pop[&#39;idlocationASIS&#39;] = D_bubbles_pop.index.values
+        D_bubbles_pop[&#39;idlocationTOBE&#39;] = D_bubbles_dist.index.values
+
+        D_results = D_results.append(D_bubbles_pop.reset_index(drop=True))
+
+    D_results = D_results.reset_index(drop=True)
+
+    D_results[&#39;saving_rank&#39;] = 1 - D_results[&#39;costTOBE&#39;] / D_results[&#39;costASIS&#39;]
+
+    savingTotale = 1 - sum(D_results[&#39;costTOBE&#39;]) / sum(D_results[&#39;costASIS&#39;])
+
+    D_results[&#39;saving_exchange&#39;] = D_results[&#39;saving_rank&#39;] / (sum(D_results[&#39;saving_rank&#39;])) * savingTotale
+
+    print(&#34;=======================================================&#34;)
+    print(f&#34;The expected saving is: {np.round(savingTotale,3)*100}%&#34;)
+
+    D_results[&#39;loccodexTOBE&#39;] = [nodecoords[idNode][0] for idNode in D_results[&#39;new_idNode&#39;]]
+    D_results[&#39;loccodeyTOBE&#39;] = [nodecoords[idNode][1] for idNode in D_results[&#39;new_idNode&#39;]]
+
+    D_results.popularity = D_results.popularity.astype(float)  # cast popularity
+
+    return D_results
+
+
+def returnPopularitydistanceGraphLocations(D_results: pd.DataFrame) -&gt; dict:
+    &#34;&#34;&#34;
+    Produce the graph popularity-distance
+
+    Args:
+        D_results (pd.DataFrame): Input Pandas DataFrame.
+
+    Returns:
+        dict: Output dictionary containing figures.
+
+    &#34;&#34;&#34;
+
+    figure_out = {}
+    D_results[&#39;distance&#39;] = D_results[&#39;distance&#39;].astype(float)
+
+    D_graph = D_results.groupby([&#39;idNode&#39;]).agg({&#39;popularity&#39;: [&#39;sum&#39;], &#39;distance&#39;: [&#39;mean&#39;]}).reset_index()
+    D_graph.columns = [&#39;idNode&#39;, &#39;popularity&#39;, &#39;distance&#39;]
+
+    # clean popularity using IQR
+    D_graph, _ = cleanUsingIQR(D_graph, features=[&#39;popularity&#39;])
+
+    # plot asis graph
+    fig1 = plt.figure()
+    plt.scatter(D_graph[&#39;popularity&#39;], D_graph[&#39;distance&#39;])
+    plt.xlabel(&#39;Popularity&#39;)
+    plt.ylabel(&#39;Distance&#39;)
+    plt.title(&#34;AS-IS Scenario&#34;)
+    figure_out[&#39;asis&#39;] = fig1
+
+    # graph pop-dist optimal
+    D_results[&#39;new_distance&#39;] = D_results[&#39;new_distance&#39;].astype(float)
+    D_graph = D_results.groupby([&#39;new_idNode&#39;]).agg({&#39;popularity&#39;: [&#39;sum&#39;], &#39;new_distance&#39;: [&#39;mean&#39;]}).reset_index()
+    D_graph.columns = [&#39;idNode&#39;, &#39;popularity&#39;, &#39;distance&#39;]
+
+    # clean popularity using IQR
+    D_graph, _ = cleanUsingIQR(D_graph, features=[&#39;popularity&#39;])
+
+    # plot tobe graph
+    fig2 = plt.figure()
+    plt.scatter(D_graph[&#39;popularity&#39;], D_graph[&#39;distance&#39;])
+    plt.xlabel(&#39;Popularity&#39;)
+    plt.ylabel(&#39;Distance&#39;)
+    plt.title(&#34;TO-BE Scenario&#34;)
+    figure_out[&#39;tobe&#39;] = fig2
+
+    return figure_out
+
+
+def returnbubbleGraphAsIsToBe(D_results: pd.DataFrame, cleanData: bool = False) -&gt; dict:
+    &#34;&#34;&#34;
+    Return the graph with storage plant layout and picking bubbles
+
+    Args:
+        D_results (pd.DataFrame): Inputn pndas DataFrame.
+        cleanData (bool, optional): If true, data are cleaned using IQR. Defaults to False.
+
+    Returns:
+        dict: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    def _normaliseVector(x):
+        return(x - min(x)) / (max(x) - min(x))
+
+    figure_out = {}
+
+    if cleanData:
+        D_results, _ = cleanUsingIQR(D_results, [&#39;popularity&#39;])
+
+    # graph as/is
+    D_graph = D_results.groupby([&#39;loccodex&#39;, &#39;loccodey&#39;])[&#39;popularity&#39;].agg([&#39;sum&#39;]).reset_index()
+    D_graph[&#39;size&#39;] = _normaliseVector(D_graph[&#39;sum&#39;]) * 100
+
+    fig1 = plt.figure()
+    plt.scatter(D_graph.loccodex, D_graph.loccodey, D_graph[&#39;size&#39;])
+    plt.title(&#34;Warehouse as-is&#34;)
+    figure_out[&#39;pick_layout_asis&#39;] = fig1
+
+    # graph to/be
+    D_graph = D_results.groupby([&#39;loccodexTOBE&#39;, &#39;loccodeyTOBE&#39;])[&#39;popularity&#39;].agg([&#39;sum&#39;]).reset_index()
+    D_graph[&#39;size&#39;] = _normaliseVector(D_graph[&#39;sum&#39;]) * 100
+
+    fig2 = plt.figure()
+    plt.scatter(D_graph.loccodexTOBE, D_graph.loccodeyTOBE, D_graph[&#39;size&#39;])
+    plt.title(&#34;Warehouse to-be&#34;)
+    figure_out[&#39;pick_layout_tobe&#39;] = fig2
+
+    return figure_out
+
+
+def plotLocations(D_locations: pd.DataFrame) -&gt; dict:
+    &#34;&#34;&#34;
+    Produce a plot with the poistion of the storage locations
+    Args:
+        D_locations (pd.DataFrame): pandas dataframe with the coordinates of the locations.
+
+    Returns:
+        dict: dictionary of figures.
+
+    &#34;&#34;&#34;
+
+    output_figures = {}
+
+    # organise locations by type
+    D_input_locations = D_locations[D_locations[&#39;INPUTLOC&#39;].isin([True])]
+    D_output_locations = D_locations[D_locations[&#39;OUTPUTLOC&#39;].isin([True])]
+    D_physical_locations = D_locations[D_locations[&#39;FAKELOC&#39;].isin([False])]
+
+    # plot locations
+    fig1 = plt.figure()
+    plt.scatter(D_physical_locations[&#39;LOCCODEX&#39;], D_physical_locations[&#39;LOCCODEY&#39;])
+    plt.scatter(D_input_locations[&#39;LOCCODEX&#39;], D_input_locations[&#39;LOCCODEY&#39;])
+    plt.scatter(D_output_locations[&#39;LOCCODEX&#39;], D_output_locations[&#39;LOCCODEY&#39;])
+    plt.legend([&#34;Locations&#34;, &#34;Input&#34;, &#34;Output&#34;])
+
+    output_figures[&#39;layout&#39;] = fig1
+    return output_figures
+
+
+def extractIoPoints(D_loc: pd.DataFrame):
+    &#34;&#34;&#34;
+    Find the input and output coordinates from the locations dataframe
+
+    Args:
+        D_loc (pd.DataFrame): Input dataFrame.
+
+    Returns:
+        input_loccodex (float): Input X coordinate.
+        input_loccodey (float): Input Y coordinate.
+        output_loccodex (float): Output X coordinate.
+        output_loccodey (float): Output Y coordinate.
+
+    &#34;&#34;&#34;
+
+    D_loc_IN = D_loc[D_loc[&#39;INPUTLOC&#39;].isin([True])]
+    D_loc_OUT = D_loc[D_loc[&#39;OUTPUTLOC&#39;].isin([True])]
+    D_loc = D_loc[(D_loc[&#39;INPUTLOC&#39;].isin([False])) &amp; (D_loc[&#39;OUTPUTLOC&#39;].isin([False]))]
+
+    # set Input point
+    if len(D_loc_IN) == 0:
+        input_loccodey = np.nanmin(D_loc[&#39;LOCCODEY&#39;]) - 1
+        input_loccodex = np.nanmean(list(set(D_loc[&#39;LOCCODEX&#39;])))
+    else:
+        input_loccodey = D_loc_IN.iloc[0][&#39;LOCCODEY&#39;]
+        input_loccodex = D_loc_IN.iloc[0][&#39;LOCCODEX&#39;]
+
+    # set output point
+    if len(D_loc_OUT) == 0:
+        output_loccodey = np.nanmin(D_loc[&#39;LOCCODEY&#39;]) - 1
+        output_loccodex = np.nanmean(list(set(D_loc[&#39;LOCCODEX&#39;])))
+    else:
+        output_loccodey = D_loc_OUT.iloc[0][&#39;LOCCODEY&#39;]
+        output_loccodex = D_loc_OUT.iloc[0][&#39;LOCCODEX&#39;]
+    return input_loccodex, input_loccodey, output_loccodex, output_loccodey
+
+
+def calculateStorageLocationsDistance(D_loc: pd.DataFrame, input_loccodex: float,
+                                      input_loccodey: float, output_loccodex: float,
+                                      output_loccodey: float) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    calculate the sum of the rectangular distances from
+    Input point -&gt; physical location -&gt; Output point
+
+    Args:
+        D_loc (pd.DataFrame): Input location DataFrame.
+        input_loccodex (float): Input X coordinate.
+        input_loccodey (float): Input Y coordinate.
+        output_loccodex (float): Output X coordinate.
+        output_loccodey (float): Output Y coordinate.
+
+    Returns:
+        D_loc (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    D_loc = D_loc.dropna(subset=[&#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;])
+    D_loc[&#39;INPUT_DISTANCE&#39;] = np.abs(input_loccodex - D_loc[&#39;LOCCODEX&#39;]) + np.abs(input_loccodey - D_loc[&#39;LOCCODEY&#39;])
+    D_loc[&#39;OUTPUT_DISTANCE&#39;] = np.abs(output_loccodex - D_loc[&#39;LOCCODEX&#39;]) + np.abs(output_loccodey - D_loc[&#39;LOCCODEY&#39;])
+    return D_loc
+
+
+def prepareCoordinates(D_layout: pd.DataFrame, D_IO: pd.DataFrame = [], D_fake: pd.DataFrame = []):
+    &#34;&#34;&#34;
+
+    Args:
+        D_layout (pd.DataFrame): Input layout dataframe.
+        D_IO (pd.DataFrame, optional): Input I/O DataFrame. Defaults to [].
+        D_fake (pd.DataFrame, optional): Input fake locations DataFrame. Defaults to [].
+
+    Returns:
+        pd.DataFrame: D_layout with update coordinates.
+        pd.DataFrame: D_IO with update coordinates.
+        pd.DataFrame: D_fake with update coordinates.
+        TYPE: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    D_layout.columns = D_layout.columns.str.lower()
+    D_check = D_layout[[&#39;loccodex&#39;, &#39;loccodey&#39;]]
+
+    allLocs = len(D_layout)
+
+    # if at least one coordinate is given
+    if len(D_check.drop_duplicates()) &gt; 2:
+
+        # import I/O points
+        if len(D_IO) == 0:
+            D_IO = pd.DataFrame(columns=[&#39;idlocation&#39;, &#39;inputloc&#39;, &#39;outputloc&#39;,
+                                         &#39;loccodex&#39;, &#39;loccodey&#39;, &#39;loccodez&#39;])
+        D_IO.columns = D_IO.columns.str.lower()
+        D_IO = D_IO.dropna()
+
+        # if a input point is not mapped it is placed in the middle of the front
+        if len(D_IO[D_IO.inputloc == 1]) == 0:
+            idlocation = -1
+            loccodey = np.nanmin(D_layout.loccodey) - 1
+            loccodex = np.nanmean(list(set(D_layout.loccodex)))
+            loccodez = 0
+            inputloc = 1
+            outputloc = 0
+            D_IO = D_IO.append(pd.DataFrame([[idlocation, inputloc, outputloc, loccodex,
+                                              loccodey, loccodez]], columns=D_IO.columns))
+            print(f&#34;=======Input point unmapped. I is set to x:{loccodex},y:{loccodey}&#34;)
+
+        # if the Output point is not mapped, it is placed in the middle of the front
+        if len(D_IO[D_IO.outputloc == 1]) == 0:
+            idlocation = -2
+            loccodey = np.nanmin(D_layout.loccodey) - 1
+            loccodex = np.nanmean(list(set(D_layout.loccodex)))
+            loccodez = 0
+            inputloc = 0
+            outputloc = 1
+            D_IO = D_IO.append(pd.DataFrame([[idlocation, inputloc, outputloc, loccodex,
+                                              loccodey, loccodez]], columns=D_IO.columns))
+            print(f&#34;=======Output point unmapped. O is set to x:{loccodex},y:{loccodey}&#34;)
+
+        # identify fake locations
+        if len(D_fake) == 0:
+            D_fake = pd.DataFrame(columns=[&#39;idlocation&#39;, &#39;inputloc&#39;, &#39;outputloc&#39;,
+                                           &#39;loccodex&#39;, &#39;loccodey&#39;, &#39;loccodez&#39;])
+        D_fake.columns = D_fake.columns.str.lower()
+
+        return D_layout, D_IO, D_fake, allLocs
+
+    else:
+        print(&#34;======EXIT===== No coordinates mapped to define a graph&#34;)
+        return [], [], [], []
+
+
+def asisTobeBubblePopDist(D_results: pd.DataFrame, cleanData: bool = False) -&gt; dict:
+    &#34;&#34;&#34;
+    Plot ASIS - TOBE graph
+
+    Args:
+        D_results (pd.DataFrame): Input pandas DataFrame.
+        cleanData (bool, optional): If true use IQR to clean data. Defaults to False.
+
+    Returns:
+        dict: Output dictionary with figures.
+
+    &#34;&#34;&#34;
+
+    output_figures = {}
+    if cleanData:
+        D_results, _ = cleanUsingIQR(D_results, [&#39;popularity&#39;])
+
+    D_results[&#39;distance&#39;] = D_results[&#39;distance&#39;].astype(float)
+
+    # ASIS GRAPH
+    D_graph = D_results.groupby([&#39;idNode&#39;]).agg({&#39;popularity&#39;: [&#39;sum&#39;],
+                                                 &#39;distance&#39;: [&#39;mean&#39;]}).reset_index()
+    D_graph.columns = [&#39;idNode&#39;, &#39;popularity&#39;, &#39;distance&#39;]
+
+    fig1 = plt.figure()
+    plt.scatter(D_graph[&#39;distance&#39;], D_graph[&#39;popularity&#39;])
+    plt.xlabel(&#39;Distance (m)&#39;)
+    plt.ylabel(&#39;Popularity&#39;)
+    plt.title(&#34;AS-IS configuration&#34;)
+    output_figures[&#39;pop_dist_asis&#39;] = fig1
+
+    # TOBE GRAPH
+    D_results[&#39;new_distance&#39;] = D_results[&#39;new_distance&#39;].astype(float)
+    D_graph = D_results.groupby([&#39;new_idNode&#39;]).agg({&#39;popularity&#39;: [&#39;sum&#39;],
+                                                     &#39;new_distance&#39;: [&#39;mean&#39;]}).reset_index()
+    D_graph.columns = [&#39;idNode&#39;, &#39;popularity&#39;, &#39;distance&#39;]
+
+    fig2 = plt.figure()
+    plt.scatter(D_graph[&#39;distance&#39;], D_graph[&#39;popularity&#39;])
+    plt.xlabel(&#39;Distance (m)&#39;)
+    plt.ylabel(&#39;Popularity&#39;)
+    plt.title(&#34;TO-BE configuration&#34;)
+    output_figures[&#39;pop_dist_tobe&#39;] = fig2
+    return output_figures</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.addtraversaledges"><code class="name flex">
+<span>def <span class="ident">addtraversaledges</span></span>(<span>D_nodes: pandas.core.frame.DataFrame, list_aisles: list, edgeTable: pandas.core.frame.DataFrame, columns_edgeTable: list, index_source: list, index_target: list) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Add the traversal edges to connect aisles horizontally</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_nodes</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input nodes DataGrame.</dd>
+<dt><strong><code>list_aisles</code></strong> :&ensp;<code>list</code></dt>
+<dd>list of aisles.</dd>
+<dt><strong><code>edgeTable</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataframe with edgetable.</dd>
+<dt><strong><code>columns_edgeTable</code></strong> :&ensp;<code>list</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>index_source</code></strong> :&ensp;<code>list</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>index_target</code></strong> :&ensp;<code>list</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>edgeTable (pd.DataFrame): Output Dataframe wth edgetable containing horizontal arcs.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def addtraversaledges(D_nodes: pd.DataFrame, list_aisles: list, edgeTable: pd.DataFrame,
+                      columns_edgeTable: list, index_source: list, index_target: list) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Add the traversal edges to connect aisles horizontally
+
+    Args:
+        D_nodes (pd.DataFrame): Input nodes DataGrame.
+        list_aisles (list): list of aisles.
+        edgeTable (pd.DataFrame): Input dataframe with edgetable.
+        columns_edgeTable (list): DESCRIPTION.
+        index_source (list): DESCRIPTION.
+        index_target (list): DESCRIPTION.
+
+    Returns:
+        edgeTable (pd.DataFrame): Output Dataframe wth edgetable containing horizontal arcs.
+
+    &#34;&#34;&#34;
+    D_Aisle1 = D_nodes[D_nodes.aislecodex == list_aisles[index_source]]  # identify coordinates of the first aisle
+    D_Aisle2 = D_nodes[D_nodes.aislecodex == list_aisles[index_target]]  # identify coordinates of the first aisle
+
+    # if connecting two aisles with more than a single bay
+    if (len(D_Aisle1) &gt; 1) &amp; (len(D_Aisle2) &gt; 1):
+        # identify the two bays on the back
+        node1_front_index = D_Aisle1[&#39;loccodey&#39;].idxmax()
+        node2_front_index = D_Aisle2[&#39;loccodey&#39;].idxmax()
+
+        # add the arc
+        length = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_front_index]), 1)
+        temp = pd.DataFrame([[node1_front_index, node2_front_index, length]],
+                            columns=columns_edgeTable)
+        edgeTable = edgeTable.append(temp)
+
+        # identify the two bays on the front
+        node1_front_index = D_Aisle1[&#39;loccodey&#39;].idxmin()
+        node2_front_index = D_Aisle2[&#39;loccodey&#39;].idxmin()
+
+        # add the arc
+        length = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_front_index]), 1)
+        temp = pd.DataFrame([[node1_front_index, node2_front_index, length]],
+                            columns=columns_edgeTable)
+        edgeTable = edgeTable.append(temp)
+
+    else:  # otherwise connect single bays
+
+        if len(D_Aisle1) &gt; 1:  # if the first aisle has more than a single bay
+
+            # identify the coordinates of the first aisle
+            node1_back_index = D_Aisle1[&#39;loccodey&#39;].idxmax()
+            node1_front_index = D_Aisle1[&#39;loccodey&#39;].idxmin()
+
+            node2_front_index = D_Aisle2[&#39;loccodey&#39;].idxmax()  # return the index of the sigle bay
+
+            # make a single connection to the closer
+            length_back = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_back_index] - D_Aisle2.aislecodex.loc[node2_front_index]) + np.abs(D_Aisle1.loccodey.loc[node1_back_index] - D_Aisle2.loccodey.loc[node2_front_index]), 1)
+            length_front = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_front_index]) + np.abs(D_Aisle1.loccodey.loc[node1_front_index] - D_Aisle2.loccodey.loc[node2_front_index]), 1)
+
+            # if it is shorter on the front, add a single arc
+            if length_front &lt;= length_back:
+                temp = pd.DataFrame([[node1_front_index, node2_front_index, length_front]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+            else:  # otherwise connect backwards
+                temp = pd.DataFrame([[node1_back_index, node2_front_index, length_back]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+
+        else:  # all the other cases (bay-&gt;bay or bay-&gt;aisle)
+
+            # identify the coordinates of the first aisle
+            node1_front_index = D_Aisle1[&#39;loccodey&#39;].idxmax()
+
+            # identify the coordinates of the second
+            node2_back_index = D_Aisle2[&#39;loccodey&#39;].idxmax()
+            node2_front_index = D_Aisle2[&#39;loccodey&#39;].idxmin()
+
+            # make a single connection to the closer
+            length_back = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_back_index]) + np.abs(D_Aisle1.loccodey.loc[node1_front_index] - D_Aisle2.loccodey.loc[node2_back_index]), 1)
+            length_front = np.round(np.abs(D_Aisle1.aislecodex.loc[node1_front_index] - D_Aisle2.aislecodex.loc[node2_front_index]) + np.abs(D_Aisle1.loccodey.loc[node1_front_index] - D_Aisle2.loccodey.loc[node2_front_index]), 1)
+
+            # if it is shorter on the front, add a single arc
+            if length_front &lt;= length_back:
+                temp = pd.DataFrame([[node1_front_index, node2_front_index, length_front]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+            else:  # otherwise connect backwards
+                temp = pd.DataFrame([[node1_front_index, node2_back_index, length_back]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+
+    return edgeTable</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.analyseWhTraffic"><code class="name flex">
+<span>def <span class="ident">analyseWhTraffic</span></span>(<span>D_mov_input: pandas.core.frame.DataFrame, D_res: pandas.core.frame.DataFrame, G, numPicks: int = -1, edgePredecessors: bool = True, D_layout: pandas.core.frame.DataFrame = [])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>analyse the traffic of a warehouse with a simulation on a sample of picking lists</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov_input</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe containing the columns IDLOCATION and PICKINGLIST.</dd>
+<dt><strong><code>D_res</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dictionary matching idlocation with node of the graph.</dd>
+<dt><strong><code>G</code></strong> :&ensp;<code>TYPE</code></dt>
+<dd>graph of the storage system.</dd>
+<dt><strong><code>numPicks</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>number of picks to simulate. Defaults to -1.</dd>
+<dt><strong><code>edgePredecessors</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>if true save the path of arcs for each picking lists (to define traffic chart). Defaults to True.</dd>
+<dt><strong><code>D_layout</code></strong> :&ensp;<code>pd.dataFrame</code>, optional</dt>
+<dd>considered when edgepredecessor is true to define the traffic chart. Defaults to [].</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_stat_arcs (pd.DataFrame): Output DataFrame with traffic.
+D_stat_picks (pd.DataFrame): Output DataFrame with statistics .</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def analyseWhTraffic(D_mov_input: pd.DataFrame, D_res: pd.DataFrame, G, numPicks: int = -1,
+                     edgePredecessors: bool = True, D_layout: pd.DataFrame = []):
+    &#34;&#34;&#34;
+    analyse the traffic of a warehouse with a simulation on a sample of picking lists
+
+    Args:
+        D_mov_input (pd.DataFrame): dataframe containing the columns IDLOCATION and PICKINGLIST.
+        D_res (pd.DataFrame): dictionary matching idlocation with node of the graph.
+        G (TYPE): graph of the storage system.
+        numPicks (int, optional): number of picks to simulate. Defaults to -1.
+        edgePredecessors (bool, optional): if true save the path of arcs for each picking lists (to define traffic chart). Defaults to True.
+        D_layout (pd.dataFrame, optional): considered when edgepredecessor is true to define the traffic chart. Defaults to [].
+
+    Returns:
+        D_stat_arcs (pd.DataFrame): Output DataFrame with traffic.
+        D_stat_picks (pd.DataFrame): Output DataFrame with statistics .
+
+    &#34;&#34;&#34;
+
+    # rename column with capital letters
+    D_mov = D_mov_input
+    D_mov = D_mov.rename(columns={&#39;IDLOCATION&#39;: &#39;idlocation&#39;,
+                                  &#39;PICKINGLIST&#39;: &#39;pickinglist&#39;})
+    # get IO nodes
+    inputloc = nx.get_node_attributes(G, &#39;input&#39;)
+    outputloc = nx.get_node_attributes(G, &#39;output&#39;)
+
+    inputloc = list(inputloc.keys())[0]
+    outputloc = list(outputloc.keys())[0]
+
+    # check all locations in D_res
+    print(f&#34;There are {len(D_mov.loc[~(D_mov.idlocation.isin(D_res.keys()))])} unmapped locations&#34;)
+
+    # chek if pickinglist are available
+    picklists = list(set(D_mov.pickinglist))
+    if len(picklists) &lt; 2:  # set pickinglist on ordercode
+        D_mov[&#39;pickinglist&#39;] = D_mov.ordercode
+        picklists = list(set(D_mov.pickinglist))
+        print(&#34;====WARNING===== No pickinglists recorded. Using ordercode =========&#34;)
+
+    if numPicks == -1:
+        numPicks = len(picklists)
+
+    cols_res = [&#39;pickinglist&#39;, &#39;distance&#39;]
+    D_stat_order = pd.DataFrame(columns=cols_res)  # dataframe to save statistics on the distances
+    D_arcs = pd.DataFrame(columns=[&#39;nodeFrom&#39;, &#39;nodeTo&#39;])  # dataframe to save statistics on the traffic
+
+    # bootstrap pickinglist
+    np.random.seed(42)
+    pickups = np.random.randint(0, len(picklists), size=numPicks)
+    count = 0
+    for k in range(0, len(pickups)):
+        pick = picklists[pickups[k]]
+
+        count = count + 1
+        print(f&#34;{count/len(pickups)}&#34;)
+        D_list = D_mov[D_mov.pickinglist == pick]
+
+        #  check all idlocations in the pickinglist have been mapped
+        if all(D_list.idlocation.isin(list(D_res.keys()))) &amp; len(D_list) &gt; 0:
+            # scan all the orderlist and define the shortest path
+            for i in range(0, len(D_list) + 1):
+
+                # if it is the first row of a picking list
+                if i == 0:
+                    nodeFrom = inputloc
+                    nodeTo = D_res[D_list.idlocation.iloc[i]]
+                    if edgePredecessors:
+                        path = nx.shortest_path(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+                    dist = nx.shortest_path_length(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+
+                # if it is the last row of a picking list
+                elif i == len(D_list):
+                    nodeFrom = D_res[D_list.idlocation.iloc[i - 1]]
+                    nodeTo = outputloc
+                    if edgePredecessors:
+                        path = nx.shortest_path(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+                    dist = nx.shortest_path_length(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+                else:
+                    nodeFrom = D_res[D_list.idlocation.iloc[i - 1]]
+                    nodeTo = D_res[D_list.idlocation.iloc[i]]
+                    if edgePredecessors:
+                        path = nx.shortest_path(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+                    dist = nx.shortest_path_length(G, source=nodeFrom, target=nodeTo, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+
+                # save dataframe with results
+                temp = pd.DataFrame([[pick, dist]], columns=cols_res)
+                D_stat_order = D_stat_order.append(temp)
+
+                if edgePredecessors:
+                    for j in range(1, len(path)):
+                        temp = pd.DataFrame([[path[j - 1], path[j]]], columns=D_arcs.columns)
+                        D_arcs = D_arcs.append(temp)
+
+        else:
+            print(&#34;Idlocations not found:&#34;)
+            print(pick)
+            print(D_list.idlocation.loc[~D_list.idlocation.isin(list(D_res.values()))])
+
+    # group results
+    D_stat_picks = D_stat_order.groupby([&#39;pickinglist&#39;]).sum()
+
+    # draw histogram
+    plt.figure()
+    plt.hist(D_stat_picks.distance)
+    plt.ylabel(&#39;N. of picking lists&#39;)
+    plt.xlabel(&#39;Distance&#39;)
+    plt.title(f&#34;Distance per picking list. {np.round(len(pickups)/len(picklists)*100,1)}% of the dataset &#34;)
+
+    # draw traffic chart
+    D_stat_arcs = D_arcs.groupby([&#39;nodeFrom&#39;, &#39;nodeTo&#39;]).size().reset_index()
+    D_stat_arcs = D_stat_arcs.rename(columns={0: &#39;traffic&#39;})
+
+    # set edge attributes
+    edge_attributes_all = {(nodeFrom, nodeTo): {&#39;traffic&#39;: 0.0001} for (nodeFrom, nodeTo) in G.edges}
+    nx.set_edge_attributes(G, edge_attributes_all)
+
+    edge_attributes_traffic = {(nodeFrom, nodeTo): {&#39;traffic&#39;: traff} for (nodeFrom, nodeTo, traff) in zip(D_stat_arcs.nodeFrom, D_stat_arcs.nodeTo, D_stat_arcs.traffic)}
+    nx.set_edge_attributes(G, edge_attributes_traffic)
+
+    distance = &#39;&#39;
+    weight = &#39;traffic&#39;
+    title = &#39;Traffic chart&#39;
+    arcLabel = False
+    nodeLabel = False
+    trafficGraph = True
+    printNodecoords = True
+
+    if edgePredecessors:
+        dg.printGraph(G, distance, weight, title, arcLabel, nodeLabel, trafficGraph, printNodecoords, D_layout)
+
+    return D_stat_arcs, D_stat_picks</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.asisTobeBubblePopDist"><code class="name flex">
+<span>def <span class="ident">asisTobeBubblePopDist</span></span>(<span>D_results: pandas.core.frame.DataFrame, cleanData: bool = False) -> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot ASIS - TOBE graph</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_results</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input pandas DataFrame.</dd>
+<dt><strong><code>cleanData</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If true use IQR to clean data. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Output dictionary with figures.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def asisTobeBubblePopDist(D_results: pd.DataFrame, cleanData: bool = False) -&gt; dict:
+    &#34;&#34;&#34;
+    Plot ASIS - TOBE graph
+
+    Args:
+        D_results (pd.DataFrame): Input pandas DataFrame.
+        cleanData (bool, optional): If true use IQR to clean data. Defaults to False.
+
+    Returns:
+        dict: Output dictionary with figures.
+
+    &#34;&#34;&#34;
+
+    output_figures = {}
+    if cleanData:
+        D_results, _ = cleanUsingIQR(D_results, [&#39;popularity&#39;])
+
+    D_results[&#39;distance&#39;] = D_results[&#39;distance&#39;].astype(float)
+
+    # ASIS GRAPH
+    D_graph = D_results.groupby([&#39;idNode&#39;]).agg({&#39;popularity&#39;: [&#39;sum&#39;],
+                                                 &#39;distance&#39;: [&#39;mean&#39;]}).reset_index()
+    D_graph.columns = [&#39;idNode&#39;, &#39;popularity&#39;, &#39;distance&#39;]
+
+    fig1 = plt.figure()
+    plt.scatter(D_graph[&#39;distance&#39;], D_graph[&#39;popularity&#39;])
+    plt.xlabel(&#39;Distance (m)&#39;)
+    plt.ylabel(&#39;Popularity&#39;)
+    plt.title(&#34;AS-IS configuration&#34;)
+    output_figures[&#39;pop_dist_asis&#39;] = fig1
+
+    # TOBE GRAPH
+    D_results[&#39;new_distance&#39;] = D_results[&#39;new_distance&#39;].astype(float)
+    D_graph = D_results.groupby([&#39;new_idNode&#39;]).agg({&#39;popularity&#39;: [&#39;sum&#39;],
+                                                     &#39;new_distance&#39;: [&#39;mean&#39;]}).reset_index()
+    D_graph.columns = [&#39;idNode&#39;, &#39;popularity&#39;, &#39;distance&#39;]
+
+    fig2 = plt.figure()
+    plt.scatter(D_graph[&#39;distance&#39;], D_graph[&#39;popularity&#39;])
+    plt.xlabel(&#39;Distance (m)&#39;)
+    plt.ylabel(&#39;Popularity&#39;)
+    plt.title(&#34;TO-BE configuration&#34;)
+    output_figures[&#39;pop_dist_tobe&#39;] = fig2
+    return output_figures</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.calculateExchangeSaving"><code class="name flex">
+<span>def <span class="ident">calculateExchangeSaving</span></span>(<span>D_mov_input: pandas.core.frame.DataFrame, D_res: pandas.core.frame.DataFrame, G: networkx.classes.graph.Graph, useSameLevel: bool = False) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculates the distance saving while exchanging two physical locations (popularity-distance graph)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_mov_input</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe with the set of the movements.</dd>
+<dt><strong><code>D_res</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dictionary with correnspondence between IDLOCATION and NODE ID.</dd>
+<dt><strong><code>G</code></strong> :&ensp;<code>nx.Graph</code></dt>
+<dd>graph of the warehouse.</dd>
+<dt><strong><code>useSameLevel</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>if True no exchanges are allowed between locations on different wh levels. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_results (pd.DataFrame): Output dataFrame with saving and exchange.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateExchangeSaving(D_mov_input: pd.DataFrame, D_res: pd.DataFrame,
+                            G: nx.Graph, useSameLevel: bool = False) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    calculates the distance saving while exchanging two physical locations (popularity-distance graph)
+
+    Args:
+        D_mov_input (pd.DataFrame): dataframe with the set of the movements.
+        D_res (pd.DataFrame): dictionary with correnspondence between IDLOCATION and NODE ID.
+        G (nx.Graph): graph of the warehouse.
+        useSameLevel (bool, optional): if True no exchanges are allowed between locations on different wh levels. Defaults to False.
+
+    Returns:
+        D_results (pd.DataFrame): Output dataFrame with saving and exchange.
+
+    &#34;&#34;&#34;
+
+    D_mov = D_mov_input
+    D_mov.columns = D_mov_input.columns.str.lower()
+
+    if useSameLevel:
+        # Calculate the popularity for each location and level
+        D_bubbles = D_mov.groupby([&#39;idlocation&#39;, &#39;level&#39;]).size().reset_index()
+
+    else:
+        D_bubbles = D_mov.groupby([&#39;idlocation&#39;]).size().reset_index()
+        D_bubbles = pd.DataFrame(D_bubbles)
+
+    D_bubbles = D_bubbles.set_index(&#39;idlocation&#39;)
+    D_bubbles = D_bubbles.rename(columns={0: &#39;popularity&#39;})
+    D_bubbles[&#39;idNode&#39;] = None
+    D_bubbles[&#39;distance&#39;] = None
+
+    # calculate distance for each location
+    inputDistance = nx.get_node_attributes(G, &#39;input_distance&#39;)
+    outputDistance = nx.get_node_attributes(G, &#39;output_distance&#39;)
+
+    for index, row in D_bubbles.iterrows():
+        if index not in D_res.keys():
+            pass
+        else:
+            idNode = D_res[index]
+            D_bubbles[&#39;idNode&#39;].loc[index] = idNode
+            D_bubbles[&#39;distance&#39;].loc[index] = inputDistance[idNode] + outputDistance[idNode]
+
+    # plot the distance of each point to the I/O
+    nodecoords = nx.get_node_attributes(G, &#39;coordinates&#39;)
+
+    # remove nan
+    D_bubbles = D_bubbles.dropna()
+
+    # save coordinates
+    D_bubbles[&#39;loccodex&#39;] = [nodecoords[idNode][0] for idNode in D_bubbles[&#39;idNode&#39;]]
+    D_bubbles[&#39;loccodey&#39;] = [nodecoords[idNode][1] for idNode in D_bubbles[&#39;idNode&#39;]]
+
+    plt.figure()
+    plt.scatter(D_bubbles.loccodex, D_bubbles.loccodey, c=D_bubbles.distance)
+    plt.colorbar()
+    plt.title(&#34;Distance of each node from the I/O&#34;)
+
+    if useSameLevel:
+        # make optimising exchanges on the dame level (iaisles has the same number of levels)
+
+        res_cols = [&#39;level&#39;, &#39;popularity&#39;, &#39;idNode&#39;, &#39;distance&#39;, &#39;new_idNode&#39;, &#39;new_distance&#39;, &#39;costASIS&#39;,
+                    &#39;costTOBE&#39;, &#39;idlocationASIS&#39;, &#39;idlocationTOBE&#39;]
+        D_results = pd.DataFrame(columns=res_cols)
+
+        for level in set(D_bubbles.level):
+            D_bubbles_level = D_bubbles[D_bubbles.level == level]
+
+            # sort the dataframe by popularity
+            D_bubbles_pop = D_bubbles_level.sort_values(by=&#39;popularity&#39;, ascending=False)
+
+            # sort the dataframe by distance
+            D_bubbles_dist = D_bubbles_level.sort_values(by=&#39;distance&#39;, ascending=True)
+
+            # work on the popularity dataframe and identify which location to pick from that popularityy
+            D_bubbles_pop[&#39;new_idNode&#39;] = D_bubbles_dist[&#39;idNode&#39;].reset_index(drop=True).values
+            D_bubbles_pop[&#39;new_distance&#39;] = D_bubbles_dist[&#39;distance&#39;].reset_index(drop=True).values
+
+            # drop zeros from popularity and distance
+            D_bubbles_pop[&#39;new_distance&#39;] = D_bubbles_pop[&#39;new_distance&#39;].replace(0, 0.0001)
+            D_bubbles_pop[&#39;distance&#39;] = D_bubbles_pop[&#39;distance&#39;].replace(0, 0.0001)
+
+            # estimate travelling and saving
+            D_bubbles_pop[&#39;costASIS&#39;] = D_bubbles_pop[&#39;popularity&#39;] * D_bubbles_pop[&#39;distance&#39;]
+            D_bubbles_pop[&#39;costTOBE&#39;] = D_bubbles_pop[&#39;popularity&#39;] * D_bubbles_pop[&#39;new_distance&#39;]
+
+            # save exchange locations
+            D_bubbles_pop[&#39;idlocationASIS&#39;] = D_bubbles_pop.index.values
+            D_bubbles_pop[&#39;idlocationTOBE&#39;] = D_bubbles_dist.index.values
+
+            D_results = D_results.append(D_bubbles_pop.reset_index(drop=True))
+
+    else:
+        res_cols = [&#39;popularity&#39;, &#39;idNode&#39;, &#39;distance&#39;, &#39;new_idNode&#39;,
+                    &#39;new_distance&#39;, &#39;costASIS&#39;, &#39;costTOBE&#39;]
+        D_results = pd.DataFrame(columns=res_cols)
+
+        # sort the dataframe by popularity
+        D_bubbles_pop = D_bubbles.sort_values(by=&#39;popularity&#39;, ascending=False)
+
+        # sort the dataframe by distance
+        D_bubbles_dist = D_bubbles.sort_values(by=&#39;distance&#39;, ascending=True)
+
+        # identify the location to wiche it is better to pick that popularity
+        D_bubbles_pop[&#39;new_idNode&#39;] = D_bubbles_dist[&#39;idNode&#39;].reset_index(drop=True).values
+        D_bubbles_pop[&#39;new_distance&#39;] = D_bubbles_dist[&#39;distance&#39;].reset_index(drop=True).values
+
+        # drop zeros from popularity and distances
+        D_bubbles_pop[&#39;new_distance&#39;] = D_bubbles_pop[&#39;new_distance&#39;].replace(0, 0.0001)
+        D_bubbles_pop[&#39;distance&#39;] = D_bubbles_pop[&#39;distance&#39;].replace(0, 0.0001)
+
+        # estimate travelling and saving
+        D_bubbles_pop[&#39;costASIS&#39;] = D_bubbles_pop[&#39;popularity&#39;] * D_bubbles_pop[&#39;distance&#39;]
+        D_bubbles_pop[&#39;costTOBE&#39;] = D_bubbles_pop[&#39;popularity&#39;] * D_bubbles_pop[&#39;new_distance&#39;]
+
+        # save locations exchange
+        D_bubbles_pop[&#39;idlocationASIS&#39;] = D_bubbles_pop.index.values
+        D_bubbles_pop[&#39;idlocationTOBE&#39;] = D_bubbles_dist.index.values
+
+        D_results = D_results.append(D_bubbles_pop.reset_index(drop=True))
+
+    D_results = D_results.reset_index(drop=True)
+
+    D_results[&#39;saving_rank&#39;] = 1 - D_results[&#39;costTOBE&#39;] / D_results[&#39;costASIS&#39;]
+
+    savingTotale = 1 - sum(D_results[&#39;costTOBE&#39;]) / sum(D_results[&#39;costASIS&#39;])
+
+    D_results[&#39;saving_exchange&#39;] = D_results[&#39;saving_rank&#39;] / (sum(D_results[&#39;saving_rank&#39;])) * savingTotale
+
+    print(&#34;=======================================================&#34;)
+    print(f&#34;The expected saving is: {np.round(savingTotale,3)*100}%&#34;)
+
+    D_results[&#39;loccodexTOBE&#39;] = [nodecoords[idNode][0] for idNode in D_results[&#39;new_idNode&#39;]]
+    D_results[&#39;loccodeyTOBE&#39;] = [nodecoords[idNode][1] for idNode in D_results[&#39;new_idNode&#39;]]
+
+    D_results.popularity = D_results.popularity.astype(float)  # cast popularity
+
+    return D_results</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.calculateStorageLocationsDistance"><code class="name flex">
+<span>def <span class="ident">calculateStorageLocationsDistance</span></span>(<span>D_loc: pandas.core.frame.DataFrame, input_loccodex: float, input_loccodey: float, output_loccodex: float, output_loccodey: float) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>calculate the sum of the rectangular distances from
+Input point -&gt; physical location -&gt; Output point</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_loc</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input location DataFrame.</dd>
+<dt><strong><code>input_loccodex</code></strong> :&ensp;<code>float</code></dt>
+<dd>Input X coordinate.</dd>
+<dt><strong><code>input_loccodey</code></strong> :&ensp;<code>float</code></dt>
+<dd>Input Y coordinate.</dd>
+<dt><strong><code>output_loccodex</code></strong> :&ensp;<code>float</code></dt>
+<dd>Output X coordinate.</dd>
+<dt><strong><code>output_loccodey</code></strong> :&ensp;<code>float</code></dt>
+<dd>Output Y coordinate.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_loc (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateStorageLocationsDistance(D_loc: pd.DataFrame, input_loccodex: float,
+                                      input_loccodey: float, output_loccodex: float,
+                                      output_loccodey: float) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    calculate the sum of the rectangular distances from
+    Input point -&gt; physical location -&gt; Output point
+
+    Args:
+        D_loc (pd.DataFrame): Input location DataFrame.
+        input_loccodex (float): Input X coordinate.
+        input_loccodey (float): Input Y coordinate.
+        output_loccodex (float): Output X coordinate.
+        output_loccodey (float): Output Y coordinate.
+
+    Returns:
+        D_loc (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    D_loc = D_loc.dropna(subset=[&#39;LOCCODEX&#39;, &#39;LOCCODEY&#39;])
+    D_loc[&#39;INPUT_DISTANCE&#39;] = np.abs(input_loccodex - D_loc[&#39;LOCCODEX&#39;]) + np.abs(input_loccodey - D_loc[&#39;LOCCODEY&#39;])
+    D_loc[&#39;OUTPUT_DISTANCE&#39;] = np.abs(output_loccodex - D_loc[&#39;LOCCODEX&#39;]) + np.abs(output_loccodey - D_loc[&#39;LOCCODEY&#39;])
+    return D_loc</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineCoordinatesFromRackBayLevel"><code class="name flex">
+<span>def <span class="ident">defineCoordinatesFromRackBayLevel</span></span>(<span>D_layout: pandas.core.frame.DataFrame, aisleX: float = 5.0, bayY: float = 0.9)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define the cartesian coordinates of a warehouse location, based on the number of bay, rack (aisle), and level.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_layout</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input layout dataframe.</dd>
+<dt><strong><code>aisleX</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Lenght of an aisle (in meters, or coherent uom with D_layout). Defaults to 5.0.</dd>
+<dt><strong><code>bayY</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Length of a bay (in meters, or coherent uom with D_layout). Defaults to 0.9.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_layout (pd.DataFrame): Output dataFrame with coordinates.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def defineCoordinatesFromRackBayLevel(D_layout: pd.DataFrame, aisleX: float = 5.0, bayY: float = 0.9):
+    &#34;&#34;&#34;
+    Define the cartesian coordinates of a warehouse location, based on the number of bay, rack (aisle), and level.
+
+    Args:
+        D_layout (pd.DataFrame): Input layout dataframe.
+        aisleX (float, optional): Lenght of an aisle (in meters, or coherent uom with D_layout). Defaults to 5.0.
+        bayY (float, optional): Length of a bay (in meters, or coherent uom with D_layout). Defaults to 0.9.
+
+    Returns:
+        D_layout (pd.DataFrame): Output dataFrame with coordinates.
+
+    &#34;&#34;&#34;
+
+    print(f&#34;Assuming aisle width of {aisleX} meters and bay width (pallet) of {bayY} meters&#34;)
+
+    # identify aisles
+    D_layout[&#39;loccodex&#39;] = -1
+    D_layout[&#39;loccodey&#39;] = -1
+    allAisles = list(set(D_layout.rack))
+    allAisles.sort()
+    j = 0
+    # scan all aisles
+    for x in allAisles:
+        # assign x coordinate based on the distance between aisles
+        idx_x = D_layout.rack == x
+        D_layout[&#39;loccodex&#39;].loc[idx_x] = aisleX * j
+        j = j + 1
+
+        # identify all the bays of an aisle
+        allBays = list(set(D_layout[&#39;bay&#39;].loc[idx_x]))
+        i = 0
+        for y in allBays:
+            # assign y coordinate based on the distance between bays
+            # hypothesis: all bays are based on the warehouse front
+            idx_y = (D_layout.rack == x) &amp; (D_layout.bay == y)
+            D_layout[&#39;loccodey&#39;].loc[idx_y] = bayY * i
+            i = i + 1
+    return D_layout</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineEdgeTable"><code class="name flex">
+<span>def <span class="ident">defineEdgeTable</span></span>(<span>D_nodes: pandas.core.frame.DataFrame, D_IO: pandas.core.frame.DataFrame) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define a dataframe containing the arcs of the warehouse graph</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_nodes</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input DataFrame with nodes.</dd>
+<dt><strong><code>D_IO</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input DataFrame with i/o points.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>edgeTable (pd.DataFrame): Output dataframe with arcs.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def defineEdgeTable(D_nodes: pd.DataFrame, D_IO: pd.DataFrame) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Define a dataframe containing the arcs of the warehouse graph
+
+    Args:
+        D_nodes (pd.DataFrame): Input DataFrame with nodes.
+        D_IO (pd.DataFrame): Input DataFrame with i/o points.
+
+    Returns:
+        edgeTable (pd.DataFrame): Output dataframe with arcs.
+
+    &#34;&#34;&#34;
+
+    # avoid considering - temporarily - i/O and fake locations
+    D_fakes = pd.DataFrame(columns=D_nodes.columns)
+    for index, row in D_IO.iterrows():
+        loccodex = row.loccodex
+        loccodey = row.loccodey
+        D_fakes = D_fakes.append(D_nodes[((D_nodes.aislecodex == loccodex) &amp; (D_nodes.loccodey == loccodey))])
+        D_nodes = D_nodes[~((D_nodes.aislecodex == loccodex) &amp; (D_nodes.loccodey == loccodey))]
+
+    columns_edgeTable = [&#39;nodeFrom&#39;, &#39;nodeTo&#39;, &#39;length&#39;]
+    edgeTable = pd.DataFrame(columns=columns_edgeTable)
+
+    # #####################################################
+    # ##### add vertical arcs(aisles) #####################
+    # #####################################################
+    set_aisles = set(D_nodes.aislecodex)  # identify all aisles
+    for aisle in set_aisles:
+        # aisle=list(set_aisles)[0]
+        D_currentAisle = D_nodes[D_nodes.aislecodex == aisle]  # filter by aisle
+        D_currentAisle = D_currentAisle.sort_values(by=&#39;loccodey&#39;)  # sort by bay
+
+        # simplify the graph identifying all the bays with the y coordinate on the aisle
+        for i in range(1, len(D_currentAisle)):  # identify the arcs
+
+            # identify the parameters of the arcs, and their attributes
+            nodeFrom = D_currentAisle.index[i - 1]
+            nodeTo = D_currentAisle.index[i]
+            length = np.round(np.abs(D_currentAisle.loccodey.iloc[i - 1] - D_currentAisle.loccodey.iloc[i]), 1)
+
+            temp = pd.DataFrame([[nodeFrom, nodeTo, length]],
+                                columns=columns_edgeTable)
+            edgeTable = edgeTable.append(temp)
+
+    # #####################################################
+    # ##### add traversal arcs ############################
+    # #####################################################
+
+    list_aisles = list(set_aisles)  # identify the coordinates of each aisle
+    list_aisles.sort()  # sort by coordinate
+    for i in range(1, len(list_aisles)):
+        #  consiser the current index to create an arc with the near aisle
+        if i == 1:
+            edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i)
+            if len(list_aisles) &gt; 2:
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i + 1)
+
+        elif i == len(list_aisles) - 1:
+            if len(list_aisles) &gt; 2:
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i)
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i - 2)
+        else:
+            edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i)
+            if len(list_aisles) &gt; 3:
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i - 2)
+                edgeTable = addtraversaledges(D_nodes, list_aisles, edgeTable, columns_edgeTable, i - 1, i + 1)
+
+    # #####################################################
+    # ##### add arcs to the I/O and fake locations ########
+    # #####################################################
+
+    # find input
+    D_in = D_IO[D_IO.inputloc == 1]
+    for idx in D_in.index:
+        # identify the coordinates
+        loccodex = D_in.loccodex[idx]
+        loccodey = D_in.loccodey[idx]
+
+        # identify the closest node
+        distanceArray = np.abs(D_nodes.aislecodex - loccodex) + np.abs(D_nodes.loccodey - loccodey)
+        idx_min = distanceArray.idxmin()
+        length = min(distanceArray)
+
+        # create the arc
+        nodeFrom = idx
+        nodeTo = idx_min
+        temp = pd.DataFrame([[nodeFrom, nodeTo, length]],
+                            columns=columns_edgeTable)
+        edgeTable = edgeTable.append(temp)
+
+        # identify fake locations mapped on the same coordinates
+        for idx_fake, row_fake in D_fakes.iterrows():
+            #  if a fake is in the same location of an I/O coordinate
+            if ((row_fake.aislecodex == loccodex) &amp; (row_fake.loccodey == loccodey)):
+                # add the arc
+                nodeFrom = idx_fake
+                temp = pd.DataFrame([[nodeFrom, nodeTo, 0]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+
+    # find output
+    D_out = D_IO[D_IO.outputloc == 1]
+    for idx in D_out.index:
+        # identify the coordinates
+        loccodex = D_out.loccodex[idx]
+        loccodey = D_out.loccodey[idx]
+
+        # identify the closest node
+        distanceArray = np.abs(D_nodes.aislecodex - loccodex) + np.abs(D_nodes.loccodey - loccodey)
+        idx_min = distanceArray.idxmin()
+        length = min(distanceArray)
+
+        # create the arc
+        nodeFrom = idx
+        nodeTo = idx_min
+        temp = pd.DataFrame([[nodeFrom, nodeTo, length]],
+                            columns=columns_edgeTable)
+        edgeTable = edgeTable.append(temp)
+
+        # identify fake locations mapped on the same coordinates
+        for idx_fake, row_fake in D_fakes.iterrows():
+            # if a fake is mapped on a I/O location
+            if ((row_fake.aislecodex == loccodex) &amp; (row_fake.loccodey == loccodey)):
+
+                # add the arc
+                nodeFrom = idx_fake
+                temp = pd.DataFrame([[nodeFrom, nodeTo, 0]],
+                                    columns=columns_edgeTable)
+                edgeTable = edgeTable.append(temp)
+    edgeTable = edgeTable.drop_duplicates()
+    return edgeTable</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineGraphNodes"><code class="name flex">
+<span>def <span class="ident">defineGraphNodes</span></span>(<span>D_layout: pandas.core.frame.DataFrame, D_IO: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define correspondence between idlocation and node id (graph)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_layout</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input layout dataframe.</dd>
+<dt><strong><code>D_IO</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input I/O locations dataframe.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_nodes (pd.DataFrame): Output nodes dataframe.
+D_res_dict (dict): dictionaty with correspondence between idlocation and nodeid.
+D_IO (pd.DataFrame): Output I/O dataframe.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def defineGraphNodes(D_layout: pd.DataFrame, D_IO: pd.DataFrame):
+    &#34;&#34;&#34;
+    Define correspondence between idlocation and node id (graph)
+
+    Args:
+        D_layout (pd.DataFrame): Input layout dataframe.
+        D_IO (pd.DataFrame): Input I/O locations dataframe.
+
+    Returns:
+        D_nodes (pd.DataFrame): Output nodes dataframe.
+        D_res_dict (dict): dictionaty with correspondence between idlocation and nodeid.
+        D_IO (pd.DataFrame): Output I/O dataframe.
+
+    &#34;&#34;&#34;
+
+    #  define all the nodes of the graph
+    D_nodes = D_layout[[&#39;aislecodex&#39;, &#39;loccodey&#39;]].drop_duplicates().reset_index(drop=True)
+
+    # add correspondence between D_layout and D_nodes
+    D_layout[&#39;idNode&#39;] = None
+    for index, node in D_nodes.iterrows():
+        idx_node = (D_layout.aislecodex == node.aislecodex) &amp; (D_layout.loccodey == node.loccodey)
+        D_layout.idNode.loc[idx_node] = index
+
+    # add Input-Output nodes
+    # redefine index of D_IO to avoid overlaps with D_nodes
+    D_IO.index = np.arange(max(D_nodes.index.values) + 1, max(D_nodes.index.values) + 1 + len(D_IO))
+
+    for index, node in D_IO.iterrows():
+        idx_node = node.idlocation  # use id location of the fake locations
+        temp = pd.DataFrame([[idx_node, node.loccodex, node.loccodex, node.loccodey, index]],
+                            columns=D_layout.columns)
+        D_layout = D_layout.append(temp)
+
+    D_res = D_layout[[&#39;idlocation&#39;, &#39;idNode&#39;]]
+    D_res = D_res.drop_duplicates()
+
+    D_res_dict = dict(zip(D_res.idlocation, D_res.idNode))
+
+    return D_nodes, D_res_dict, D_IO</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineWHgraph"><code class="name flex">
+<span>def <span class="ident">defineWHgraph</span></span>(<span>D_layout: pandas.core.frame.DataFrame, D_IO: pandas.core.frame.DataFrame, D_fake: pandas.core.frame.DataFrame, allLocs: int, draw: bool = False, arcLabel: bool = False, nodeLabel: bool = False, trafficGraph: bool = False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>the function returns a graph G, and a table with the mapping from idlocations to graph nodes</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_layout</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>pandas dataframe containing the coordinates for each locations.</dd>
+<dt><strong><code>D_IO</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe containing the coordinates of the Input and output locations.</dd>
+<dt><strong><code>D_fake</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe containing the coordinates of the fake locations.</dd>
+<dt><strong><code>allLocs</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of the initial locations (returned by the function preprocessing the coordinates).</dd>
+<dt><strong><code>draw</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>when true plot the graph. Defaults to False.</dd>
+<dt><strong><code>arcLabel</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>when true plot the arc labels. Defaults to False.</dd>
+<dt><strong><code>nodeLabel</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>when true plot the node labels. Defaults to False.</dd>
+<dt><strong><code>trafficGraph</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>when true compute and plot the traffic graph. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>nx.Graph</code></dt>
+<dd>Output networkx graph.</dd>
+<dt><code>pd.DataFrame</code></dt>
+<dd>Output DataFrame.</dd>
+<dt><code>pd.DataFrame</code></dt>
+<dd>DESOutput DataFrameCRIPTION.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def defineWHgraph(D_layout: pd.DataFrame, D_IO: pd.DataFrame, D_fake: pd.DataFrame, allLocs: int,
+                  draw: bool = False, arcLabel: bool = False, nodeLabel: bool = False, trafficGraph: bool = False):
+    &#34;&#34;&#34;
+    the function returns a graph G, and a table with the mapping from idlocations to graph nodes
+
+    Args:
+        D_layout (pd.DataFrame): pandas dataframe containing the coordinates for each locations.
+        D_IO (pd.DataFrame): dataframe containing the coordinates of the Input and output locations.
+        D_fake (pd.DataFrame): dataframe containing the coordinates of the fake locations.
+        allLocs (int): number of the initial locations (returned by the function preprocessing the coordinates).
+        draw (bool, optional): when true plot the graph. Defaults to False.
+        arcLabel (bool, optional): when true plot the arc labels. Defaults to False.
+        nodeLabel (bool, optional): when true plot the node labels. Defaults to False.
+        trafficGraph (bool, optional): when true compute and plot the traffic graph. Defaults to False.
+
+    Returns:
+        nx.Graph: Output networkx graph.
+        pd.DataFrame: Output DataFrame.
+        pd.DataFrame: DESOutput DataFrameCRIPTION.
+
+    &#34;&#34;&#34;
+
+    D_layout.columns = [i.lower() for i in D_layout.columns]
+
+    fakecoordx = D_IO.loccodex.iloc[0]
+    fakecoordy = D_IO.loccodey.iloc[0]
+
+    # map the coordinates of all the fake locations with the I/O
+    D_layout.loccodex.loc[D_layout.idlocation.isin(D_fake.idlocation)] = fakecoordx
+    D_layout.loccodey.loc[D_layout.idlocation.isin(D_fake.idlocation)] = fakecoordy
+
+    # estimathe coordinates of the missing aisles
+    D_layout = estimateMissingAislecoordX(D_layout)
+
+    #  plot coordinates after removing nan
+
+    if len(D_layout) == allLocs:
+        # find coordinates between graph nodes and id locations
+        D_nodes, D_res, D_IO = defineGraphNodes(D_layout, D_IO)
+
+        # define arcs
+        edgeTable = defineEdgeTable(D_nodes, D_IO)
+
+        # define the graph
+        G = dg.defineGraph(edgeTable)
+
+        # set graph attribute coordinates x and y
+        pos = {idlocation: (coordx, coordy) for (idlocation, coordx, coordy) in zip(D_nodes.index.values, D_nodes.aislecodex, D_nodes.loccodey)}
+        pos_io = {idlocation: (coordx, coordy) for (idlocation, coordx, coordy) in zip(D_IO.index.values, D_IO.loccodex, D_IO.loccodey)}
+        pos.update(pos_io)
+        nx.set_node_attributes(G, pos, &#39;coordinates&#39;)
+
+        # set boolean input
+        attr_io = {idlocation: inputloc for (idlocation, inputloc) in zip(D_IO.index.values, D_IO.inputloc)}
+        nx.set_node_attributes(G, attr_io, &#39;input&#39;)
+
+        # set boolean input
+        attr_io = {idlocation: outputloc for (idlocation, outputloc) in zip(D_IO.index.values, D_IO.outputloc)}
+        nx.set_node_attributes(G, attr_io, &#39;output&#39;)
+
+        # set distance between the nodes and the IO point
+        # consider a single input point
+        idlocation_IN = D_IO[D_IO.inputloc == 1].index.values[0]
+        idlocation_OUT = D_IO[D_IO.outputloc == 1].index.values[0]
+
+        # prepare dataframe with results
+        D_allNodes = list(G.nodes)
+        D_distanceIO = pd.DataFrame(index=D_allNodes)
+        D_distanceIO[&#39;IN_dist&#39;] = None
+        D_distanceIO[&#39;OUT_dist&#39;] = None
+
+        # calculate IO distance for each node of the graph
+        for index, row in D_distanceIO.iterrows():
+            # distance IN
+            dist_IN = nx.shortest_path_length(G, source=idlocation_IN, target=index, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+            dist_OUT = nx.shortest_path_length(G, source=idlocation_OUT, target=index, weight=&#39;length&#39;, method=&#39;dijkstra&#39;)
+            D_distanceIO[&#39;IN_dist&#39;].loc[index] = dist_IN
+            D_distanceIO[&#39;OUT_dist&#39;].loc[index] = dist_OUT
+
+        # set input distance
+        attr_dist_in = {idlocation: in_dist for (idlocation, in_dist) in zip(D_distanceIO.index.values, D_distanceIO.IN_dist)}
+        nx.set_node_attributes(G, attr_dist_in, &#39;input_distance&#39;)
+
+        # set output distance
+        attr_dist_out = {idlocation: out_dist for (idlocation, out_dist) in zip(D_distanceIO.index.values, D_distanceIO.OUT_dist)}
+        nx.set_node_attributes(G, attr_dist_out, &#39;output_distance&#39;)
+
+        # draw graph
+        if draw:
+            # print the graph
+            distance = weight = &#39;length&#39;
+            title = &#39;Warehouse graph&#39;
+            printNodecoords = False
+            dg.printGraph(G, distance, weight, title, arcLabel, nodeLabel, trafficGraph, printNodecoords, D_layout)
+
+        return G, D_res, D_layout
+    else:
+        print(&#34;=======EXIT=======Internal error. Some locations were not mapped&#34;)
+        return [], [], []</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.estimateMissingAislecoordX"><code class="name flex">
+<span>def <span class="ident">estimateMissingAislecoordX</span></span>(<span>D_layout: pandas.core.frame.DataFrame) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>estimate the values of the aisle coordinate, when not mapped ("aislecodex" column of the dataframe D_layout)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_layout</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataFrame.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_layout (pd.DataFrame): Output dataframe with coordinates.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def estimateMissingAislecoordX(D_layout: pd.DataFrame) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    estimate the values of the aisle coordinate, when not mapped (&#34;aislecodex&#34; column of the dataframe D_layout)
+
+    Args:
+        D_layout (pd.DataFrame): Input dataFrame.
+
+    Returns:
+        D_layout (pd.DataFrame): Output dataframe with coordinates.
+
+    &#34;&#34;&#34;
+
+    # ####################################################
+    # ### fix nan in loccodex e loccodey #################
+    # ####################################################
+    D_layout = D_layout.reset_index()
+
+    # if rack information are given
+    if &#39;rack&#39; in D_layout.columns:
+        D_layout = D_layout.sort_values([&#39;rack&#39;, &#39;bay&#39;], ascending=[True, True])
+        allRacks = list(set(D_layout.rack.dropna()))
+        for rack in allRacks:
+            D_rack = D_layout[D_layout.rack == rack]
+
+            # try to calculate the average value for the rack
+            avgXCoord = np.mean(D_rack.loccodex)
+            if not(math.isnan(avgXCoord)):  # if a value is found
+                D_rack[&#39;loccodex&#39;].fillna(avgXCoord, inplace=True)
+
+            else:  # otherwise search within the neighborhood, and interpolate
+                D_rack_null = D_layout[[&#39;rack&#39;, &#39;loccodex&#39;]].drop_duplicates()
+                D_rack_null = D_rack_null.sort_values(&#39;rack&#39;)
+                D_rack_null[&#39;loccodex&#39;].fillna(method=&#39;backfill&#39;, inplace=True)
+                fillValue = float(D_rack_null[D_rack_null.rack == rack].loccodex)
+                # Then, substitute values
+                D_rack[&#39;loccodex&#39;].fillna(fillValue, inplace=True)
+
+            # set aisles coordinates based on nearest neighbor
+            D_rack[&#39;loccodey&#39;].interpolate(method=&#39;linear&#39;, limit_direction=&#39;forward&#39;, inplace=True)
+
+            # update D_layout
+            D_layout.loc[D_rack.index] = D_rack
+
+        # delete the remaining nan
+        D_layout = D_layout.sort_values(by=[&#39;rack&#39;, &#39;bay&#39;])
+        print(f&#34;====={len(D_layout[D_layout.loccodex.isnull()])} x coordinates have been randomly interpolated&#34;)
+        D_layout[&#39;loccodex&#39;].fillna(method=&#39;ffill&#39;, inplace=True)  # fill scanning forward
+        D_layout[&#39;loccodex&#39;].fillna(method=&#39;bfill&#39;, inplace=True)  # fill scanning backward
+
+    else:
+        print(&#34;No rack information&#34;)
+
+    # ####################################################
+    # ##### estimate coordinates of the missing racks ####
+    # ####################################################
+
+    # identify mapped aisle coordinates (aislecodex)
+    D_givAisl = D_layout[D_layout[&#39;aislecodex&#39;].notna()]
+    D_givAisl = D_givAisl[[&#39;loccodex&#39;, &#39;aislecodex&#39;]]
+    D_givAisl = D_givAisl.drop_duplicates()
+
+    # identify coordinates to map
+    D_estAisl = D_layout[D_layout[&#39;loccodex&#39;].notna()].loccodex
+    allXcoords = list(set(D_estAisl))
+    allXcoords.sort()
+
+    # join the coordinates, and put the farthest in the same aisle
+    dist = 0
+    for j in range(1, len(allXcoords)):
+        dist = dist + np.abs(allXcoords[j] - allXcoords[j - 1])
+    if len(allXcoords) &gt; 1:
+        avg_dist = dist / (len(allXcoords) - 1)
+    else:
+        avg_dist = 0
+
+    # if the distance is above the average, join in the same aisle
+    D_estAisl = pd.DataFrame(columns=D_givAisl.columns)
+    j = 0
+    while j &lt; len(allXcoords):
+        if j &lt; len(allXcoords) - 1:  # for each aisle, except the last
+            dist = np.abs(allXcoords[j + 1] - allXcoords[j])
+            if dist &gt;= avg_dist:  # if they are greater or equal than the average, theiy are on the same aisle
+                aisle = min(allXcoords[j + 1], allXcoords[j]) + dist / 2
+                D_estAisl = D_estAisl.append(pd.DataFrame([[allXcoords[j], aisle]], columns=D_estAisl.columns))
+                D_estAisl = D_estAisl.append(pd.DataFrame([[allXcoords[j + 1], aisle]], columns=D_estAisl.columns))
+                j = j + 2  # joined two, jumo two
+            else:  # otherwise, it is a single aisle
+                D_estAisl = D_estAisl.append(pd.DataFrame([[allXcoords[j], allXcoords[j]]], columns=D_estAisl.columns))
+                j = j + 1  # joined one, jumo one
+        elif j == len(allXcoords) - 1:  # if it is the last aisle
+            D_estAisl = D_estAisl.append(pd.DataFrame([[allXcoords[j], allXcoords[j]]], columns=D_estAisl.columns))
+            j = j + 1  # joined one, jump one
+
+    #  data cleaning
+    # replace None with nan
+    D_layout.replace(to_replace=[None], value=np.nan, inplace=True)
+    # check null aisle values
+    index = D_layout[&#39;aislecodex&#39;].index[D_layout[&#39;aislecodex&#39;].apply(np.isnan)]
+
+    for rows in index:
+        loccodex = D_layout.loc[rows].loccodex
+
+        # if the value is known
+        if loccodex in D_givAisl.loccodex:
+            D_layout[&#39;aislecodex&#39;].loc[rows] = float(D_givAisl[D_givAisl[&#39;loccodex&#39;] == loccodex].aislecodex)
+        else:
+            D_layout[&#39;aislecodex&#39;].loc[rows] = float(D_estAisl[D_estAisl[&#39;loccodex&#39;] == loccodex].aislecodex)
+
+    # check if coordinates exist otherwise replace with rack/bay/level
+
+    # remove rack/bay/level
+    if &#39;rack&#39; in D_layout.columns:
+        D_layout = D_layout.sort_values(by=[&#39;rack&#39;, &#39;bay&#39;])
+    else:
+        D_layout = D_layout.sort_values(by=[&#39;aislecodex&#39;])
+    D_layout = D_layout[[&#39;idlocation&#39;, &#39;aislecodex&#39;, &#39;loccodex&#39;, &#39;loccodey&#39;]]
+
+    # interpolate missing y-coordinate
+
+    print(f&#34;====={len(D_layout[D_layout.loccodey.isnull()])} y coordinates have been randomly interpolated&#34;)
+    D_layout[&#39;loccodey&#39;].interpolate(method=&#39;linear&#39;, limit_direction=&#39;forward&#39;, inplace=True)
+    D_layout[&#39;loccodey&#39;].fillna(method=&#39;ffill&#39;, inplace=True)  # fill scanning forward
+    D_layout[&#39;loccodey&#39;].fillna(method=&#39;bfill&#39;, inplace=True)  # fill scanning backward
+
+    # round everithing avoiding decimal values
+    D_layout[&#39;aislecodex&#39;] = np.round(D_layout[&#39;aislecodex&#39;], 0)
+    D_layout[&#39;loccodey&#39;] = np.round(D_layout[&#39;loccodey&#39;], 0)
+
+    return D_layout</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.extractIoPoints"><code class="name flex">
+<span>def <span class="ident">extractIoPoints</span></span>(<span>D_loc: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find the input and output coordinates from the locations dataframe</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_loc</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input dataFrame.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>input_loccodex (float): Input X coordinate.
+input_loccodey (float): Input Y coordinate.
+output_loccodex (float): Output X coordinate.
+output_loccodey (float): Output Y coordinate.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def extractIoPoints(D_loc: pd.DataFrame):
+    &#34;&#34;&#34;
+    Find the input and output coordinates from the locations dataframe
+
+    Args:
+        D_loc (pd.DataFrame): Input dataFrame.
+
+    Returns:
+        input_loccodex (float): Input X coordinate.
+        input_loccodey (float): Input Y coordinate.
+        output_loccodex (float): Output X coordinate.
+        output_loccodey (float): Output Y coordinate.
+
+    &#34;&#34;&#34;
+
+    D_loc_IN = D_loc[D_loc[&#39;INPUTLOC&#39;].isin([True])]
+    D_loc_OUT = D_loc[D_loc[&#39;OUTPUTLOC&#39;].isin([True])]
+    D_loc = D_loc[(D_loc[&#39;INPUTLOC&#39;].isin([False])) &amp; (D_loc[&#39;OUTPUTLOC&#39;].isin([False]))]
+
+    # set Input point
+    if len(D_loc_IN) == 0:
+        input_loccodey = np.nanmin(D_loc[&#39;LOCCODEY&#39;]) - 1
+        input_loccodex = np.nanmean(list(set(D_loc[&#39;LOCCODEX&#39;])))
+    else:
+        input_loccodey = D_loc_IN.iloc[0][&#39;LOCCODEY&#39;]
+        input_loccodex = D_loc_IN.iloc[0][&#39;LOCCODEX&#39;]
+
+    # set output point
+    if len(D_loc_OUT) == 0:
+        output_loccodey = np.nanmin(D_loc[&#39;LOCCODEY&#39;]) - 1
+        output_loccodex = np.nanmean(list(set(D_loc[&#39;LOCCODEX&#39;])))
+    else:
+        output_loccodey = D_loc_OUT.iloc[0][&#39;LOCCODEY&#39;]
+        output_loccodex = D_loc_OUT.iloc[0][&#39;LOCCODEX&#39;]
+    return input_loccodex, input_loccodey, output_loccodex, output_loccodey</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.plotLocations"><code class="name flex">
+<span>def <span class="ident">plotLocations</span></span>(<span>D_locations: pandas.core.frame.DataFrame) -> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Produce a plot with the poistion of the storage locations</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_locations</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>pandas dataframe with the coordinates of the locations.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>dictionary of figures.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plotLocations(D_locations: pd.DataFrame) -&gt; dict:
+    &#34;&#34;&#34;
+    Produce a plot with the poistion of the storage locations
+    Args:
+        D_locations (pd.DataFrame): pandas dataframe with the coordinates of the locations.
+
+    Returns:
+        dict: dictionary of figures.
+
+    &#34;&#34;&#34;
+
+    output_figures = {}
+
+    # organise locations by type
+    D_input_locations = D_locations[D_locations[&#39;INPUTLOC&#39;].isin([True])]
+    D_output_locations = D_locations[D_locations[&#39;OUTPUTLOC&#39;].isin([True])]
+    D_physical_locations = D_locations[D_locations[&#39;FAKELOC&#39;].isin([False])]
+
+    # plot locations
+    fig1 = plt.figure()
+    plt.scatter(D_physical_locations[&#39;LOCCODEX&#39;], D_physical_locations[&#39;LOCCODEY&#39;])
+    plt.scatter(D_input_locations[&#39;LOCCODEX&#39;], D_input_locations[&#39;LOCCODEY&#39;])
+    plt.scatter(D_output_locations[&#39;LOCCODEX&#39;], D_output_locations[&#39;LOCCODEY&#39;])
+    plt.legend([&#34;Locations&#34;, &#34;Input&#34;, &#34;Output&#34;])
+
+    output_figures[&#39;layout&#39;] = fig1
+    return output_figures</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.prepareCoordinates"><code class="name flex">
+<span>def <span class="ident">prepareCoordinates</span></span>(<span>D_layout: pandas.core.frame.DataFrame, D_IO: pandas.core.frame.DataFrame = [], D_fake: pandas.core.frame.DataFrame = [])</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_layout</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input layout dataframe.</dd>
+<dt><strong><code>D_IO</code></strong> :&ensp;<code>pd.DataFrame</code>, optional</dt>
+<dd>Input I/O DataFrame. Defaults to [].</dd>
+<dt><strong><code>D_fake</code></strong> :&ensp;<code>pd.DataFrame</code>, optional</dt>
+<dd>Input fake locations DataFrame. Defaults to [].</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>D_layout with update coordinates.</dd>
+<dt><code>pd.DataFrame</code></dt>
+<dd>D_IO with update coordinates.</dd>
+<dt><code>pd.DataFrame</code></dt>
+<dd>D_fake with update coordinates.</dd>
+<dt><code>TYPE</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def prepareCoordinates(D_layout: pd.DataFrame, D_IO: pd.DataFrame = [], D_fake: pd.DataFrame = []):
+    &#34;&#34;&#34;
+
+    Args:
+        D_layout (pd.DataFrame): Input layout dataframe.
+        D_IO (pd.DataFrame, optional): Input I/O DataFrame. Defaults to [].
+        D_fake (pd.DataFrame, optional): Input fake locations DataFrame. Defaults to [].
+
+    Returns:
+        pd.DataFrame: D_layout with update coordinates.
+        pd.DataFrame: D_IO with update coordinates.
+        pd.DataFrame: D_fake with update coordinates.
+        TYPE: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    D_layout.columns = D_layout.columns.str.lower()
+    D_check = D_layout[[&#39;loccodex&#39;, &#39;loccodey&#39;]]
+
+    allLocs = len(D_layout)
+
+    # if at least one coordinate is given
+    if len(D_check.drop_duplicates()) &gt; 2:
+
+        # import I/O points
+        if len(D_IO) == 0:
+            D_IO = pd.DataFrame(columns=[&#39;idlocation&#39;, &#39;inputloc&#39;, &#39;outputloc&#39;,
+                                         &#39;loccodex&#39;, &#39;loccodey&#39;, &#39;loccodez&#39;])
+        D_IO.columns = D_IO.columns.str.lower()
+        D_IO = D_IO.dropna()
+
+        # if a input point is not mapped it is placed in the middle of the front
+        if len(D_IO[D_IO.inputloc == 1]) == 0:
+            idlocation = -1
+            loccodey = np.nanmin(D_layout.loccodey) - 1
+            loccodex = np.nanmean(list(set(D_layout.loccodex)))
+            loccodez = 0
+            inputloc = 1
+            outputloc = 0
+            D_IO = D_IO.append(pd.DataFrame([[idlocation, inputloc, outputloc, loccodex,
+                                              loccodey, loccodez]], columns=D_IO.columns))
+            print(f&#34;=======Input point unmapped. I is set to x:{loccodex},y:{loccodey}&#34;)
+
+        # if the Output point is not mapped, it is placed in the middle of the front
+        if len(D_IO[D_IO.outputloc == 1]) == 0:
+            idlocation = -2
+            loccodey = np.nanmin(D_layout.loccodey) - 1
+            loccodex = np.nanmean(list(set(D_layout.loccodex)))
+            loccodez = 0
+            inputloc = 0
+            outputloc = 1
+            D_IO = D_IO.append(pd.DataFrame([[idlocation, inputloc, outputloc, loccodex,
+                                              loccodey, loccodez]], columns=D_IO.columns))
+            print(f&#34;=======Output point unmapped. O is set to x:{loccodex},y:{loccodey}&#34;)
+
+        # identify fake locations
+        if len(D_fake) == 0:
+            D_fake = pd.DataFrame(columns=[&#39;idlocation&#39;, &#39;inputloc&#39;, &#39;outputloc&#39;,
+                                           &#39;loccodex&#39;, &#39;loccodey&#39;, &#39;loccodez&#39;])
+        D_fake.columns = D_fake.columns.str.lower()
+
+        return D_layout, D_IO, D_fake, allLocs
+
+    else:
+        print(&#34;======EXIT===== No coordinates mapped to define a graph&#34;)
+        return [], [], [], []</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.returnPopularitydistanceGraphLocations"><code class="name flex">
+<span>def <span class="ident">returnPopularitydistanceGraphLocations</span></span>(<span>D_results: pandas.core.frame.DataFrame) -> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Produce the graph popularity-distance</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_results</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Input Pandas DataFrame.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>Output dictionary containing figures.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def returnPopularitydistanceGraphLocations(D_results: pd.DataFrame) -&gt; dict:
+    &#34;&#34;&#34;
+    Produce the graph popularity-distance
+
+    Args:
+        D_results (pd.DataFrame): Input Pandas DataFrame.
+
+    Returns:
+        dict: Output dictionary containing figures.
+
+    &#34;&#34;&#34;
+
+    figure_out = {}
+    D_results[&#39;distance&#39;] = D_results[&#39;distance&#39;].astype(float)
+
+    D_graph = D_results.groupby([&#39;idNode&#39;]).agg({&#39;popularity&#39;: [&#39;sum&#39;], &#39;distance&#39;: [&#39;mean&#39;]}).reset_index()
+    D_graph.columns = [&#39;idNode&#39;, &#39;popularity&#39;, &#39;distance&#39;]
+
+    # clean popularity using IQR
+    D_graph, _ = cleanUsingIQR(D_graph, features=[&#39;popularity&#39;])
+
+    # plot asis graph
+    fig1 = plt.figure()
+    plt.scatter(D_graph[&#39;popularity&#39;], D_graph[&#39;distance&#39;])
+    plt.xlabel(&#39;Popularity&#39;)
+    plt.ylabel(&#39;Distance&#39;)
+    plt.title(&#34;AS-IS Scenario&#34;)
+    figure_out[&#39;asis&#39;] = fig1
+
+    # graph pop-dist optimal
+    D_results[&#39;new_distance&#39;] = D_results[&#39;new_distance&#39;].astype(float)
+    D_graph = D_results.groupby([&#39;new_idNode&#39;]).agg({&#39;popularity&#39;: [&#39;sum&#39;], &#39;new_distance&#39;: [&#39;mean&#39;]}).reset_index()
+    D_graph.columns = [&#39;idNode&#39;, &#39;popularity&#39;, &#39;distance&#39;]
+
+    # clean popularity using IQR
+    D_graph, _ = cleanUsingIQR(D_graph, features=[&#39;popularity&#39;])
+
+    # plot tobe graph
+    fig2 = plt.figure()
+    plt.scatter(D_graph[&#39;popularity&#39;], D_graph[&#39;distance&#39;])
+    plt.xlabel(&#39;Popularity&#39;)
+    plt.ylabel(&#39;Distance&#39;)
+    plt.title(&#34;TO-BE Scenario&#34;)
+    figure_out[&#39;tobe&#39;] = fig2
+
+    return figure_out</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.returnbubbleGraphAsIsToBe"><code class="name flex">
+<span>def <span class="ident">returnbubbleGraphAsIsToBe</span></span>(<span>D_results: pandas.core.frame.DataFrame, cleanData: bool = False) -> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Return the graph with storage plant layout and picking bubbles</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_results</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>Inputn pndas DataFrame.</dd>
+<dt><strong><code>cleanData</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>If true, data are cleaned using IQR. Defaults to False.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>DESCRIPTION.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def returnbubbleGraphAsIsToBe(D_results: pd.DataFrame, cleanData: bool = False) -&gt; dict:
+    &#34;&#34;&#34;
+    Return the graph with storage plant layout and picking bubbles
+
+    Args:
+        D_results (pd.DataFrame): Inputn pndas DataFrame.
+        cleanData (bool, optional): If true, data are cleaned using IQR. Defaults to False.
+
+    Returns:
+        dict: DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    def _normaliseVector(x):
+        return(x - min(x)) / (max(x) - min(x))
+
+    figure_out = {}
+
+    if cleanData:
+        D_results, _ = cleanUsingIQR(D_results, [&#39;popularity&#39;])
+
+    # graph as/is
+    D_graph = D_results.groupby([&#39;loccodex&#39;, &#39;loccodey&#39;])[&#39;popularity&#39;].agg([&#39;sum&#39;]).reset_index()
+    D_graph[&#39;size&#39;] = _normaliseVector(D_graph[&#39;sum&#39;]) * 100
+
+    fig1 = plt.figure()
+    plt.scatter(D_graph.loccodex, D_graph.loccodey, D_graph[&#39;size&#39;])
+    plt.title(&#34;Warehouse as-is&#34;)
+    figure_out[&#39;pick_layout_asis&#39;] = fig1
+
+    # graph to/be
+    D_graph = D_results.groupby([&#39;loccodexTOBE&#39;, &#39;loccodeyTOBE&#39;])[&#39;popularity&#39;].agg([&#39;sum&#39;]).reset_index()
+    D_graph[&#39;size&#39;] = _normaliseVector(D_graph[&#39;sum&#39;]) * 100
+
+    fig2 = plt.figure()
+    plt.scatter(D_graph.loccodexTOBE, D_graph.loccodeyTOBE, D_graph[&#39;size&#39;])
+    plt.title(&#34;Warehouse to-be&#34;)
+    figure_out[&#39;pick_layout_tobe&#39;] = fig2
+
+    return figure_out</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem" href="index.html">analogistics.supply_chain.P6_placement_problem</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.addtraversaledges" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.addtraversaledges">addtraversaledges</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.analyseWhTraffic" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.analyseWhTraffic">analyseWhTraffic</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.asisTobeBubblePopDist" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.asisTobeBubblePopDist">asisTobeBubblePopDist</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.calculateExchangeSaving" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.calculateExchangeSaving">calculateExchangeSaving</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.calculateStorageLocationsDistance" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.calculateStorageLocationsDistance">calculateStorageLocationsDistance</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineCoordinatesFromRackBayLevel" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineCoordinatesFromRackBayLevel">defineCoordinatesFromRackBayLevel</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineEdgeTable" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineEdgeTable">defineEdgeTable</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineGraphNodes" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineGraphNodes">defineGraphNodes</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineWHgraph" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.defineWHgraph">defineWHgraph</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.estimateMissingAislecoordX" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.estimateMissingAislecoordX">estimateMissingAislecoordX</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.extractIoPoints" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.extractIoPoints">extractIoPoints</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.plotLocations" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.plotLocations">plotLocations</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.prepareCoordinates" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.prepareCoordinates">prepareCoordinates</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.returnPopularitydistanceGraphLocations" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.returnPopularitydistanceGraphLocations">returnPopularitydistanceGraphLocations</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.returnbubbleGraphAsIsToBe" href="#analogistics.supply_chain.P6_placement_problem.warehouse_graph_definition.returnbubbleGraphAsIsToBe">returnbubbleGraphAsIsToBe</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

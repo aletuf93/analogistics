@@ -1,0 +1,1231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P6_placement_problem.locationAllocationProblem API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P6_placement_problem.locationAllocationProblem</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def totalCostASIS(year: int,
+                  productivity: float,
+                  logistic_cost_asis_dist: tuple,
+                  operational_cost_asis_dist: tuple,
+                  direct_labor_cost_asis_dist: tuple,
+                  depreciation_cost_as_is_dist: tuple,
+                  fixed_cost_asis_dist: tuple):
+    &#34;&#34;&#34;
+    Performs a numerical simulation given a cost model to evaluate the cash flow at the following years
+
+    Args:
+        year (int): year to simulate.
+        productivity (TYPE): number of parts produced.
+        logistic_cost_asis_dist (tuple): tuple with mean and variace of the logistic cost per part.
+        operational_cost_asis_dist (tuple): tuple with mean and variance of the operational cost per part.
+        direct_labor_cost_asis_dist (tuple): tuple with mean and variance of the direct labor cost per part.
+        depreciation_cost_as_is_dist (tuple): tuple with mean and variance of the depreciation cost per part.
+        fixed_cost_asis_dist (tuple): tuple with mean and variance of the fixed costs.
+
+    Returns:
+        results (dict): dictionary with results.
+
+    &#34;&#34;&#34;
+
+    results = {}
+
+    # logistic costs
+    if isinstance(logistic_cost_asis_dist, list):
+        total_cost = 0
+        for plant in range(0, len(logistic_cost_asis_dist)):
+            cost_tuple = logistic_cost_asis_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;logistic_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;logistic_cost_asis&#39;] = productivity[year] * np.random.normal(logistic_cost_asis_dist[0], logistic_cost_asis_dist[1])
+
+    # operational costs
+    if isinstance(operational_cost_asis_dist, list):
+        total_cost = 0
+        for plant in range(0, len(operational_cost_asis_dist)):
+            cost_tuple = operational_cost_asis_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;operational_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;operational_cost_asis&#39;] = productivity[year] * np.random.normal(operational_cost_asis_dist[0], operational_cost_asis_dist[1])
+
+    # direct labour costs
+    if isinstance(direct_labor_cost_asis_dist, list):
+        total_cost = 0
+        for plant in range(0, len(direct_labor_cost_asis_dist)):
+            cost_tuple = direct_labor_cost_asis_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;direct_labor_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;direct_labor_cost_asis&#39;] = productivity[year] * np.random.normal(direct_labor_cost_asis_dist[0], direct_labor_cost_asis_dist[1])
+
+    # fixed costs
+    if isinstance(fixed_cost_asis_dist, list):
+        total_cost = 0
+        for plant in range(0, len(fixed_cost_asis_dist)):
+            cost_tuple = fixed_cost_asis_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;fixed_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;fixed_cost_asis&#39;] = np.random.normal(fixed_cost_asis_dist[0], fixed_cost_asis_dist[1])
+
+    # depreciation costs
+    if isinstance(depreciation_cost_as_is_dist, list):
+        total_cost = 0
+        for plant in range(0, len(depreciation_cost_as_is_dist)):
+            cost_tuple = depreciation_cost_as_is_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;depreciation_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;depreciation_cost_asis&#39;] = np.random.normal(depreciation_cost_as_is_dist[0], depreciation_cost_as_is_dist[1])
+
+    # total cost (cash flow) withoud depreciation
+    results[&#39;total_cost_asis&#39;] = results[&#39;logistic_cost_asis&#39;] + results[&#39;operational_cost_asis&#39;] + results[&#39;direct_labor_cost_asis&#39;] + results[&#39;fixed_cost_asis&#39;]
+    return results
+
+
+def totalCostTOBE(year: int,
+                  productivity: float,
+                  logistic_cost_tobe_dist: tuple,
+                  operational_cost_tobe_dist: tuple,
+                  direct_labor_cost_tobe_dist: tuple,
+                  depreciation_cost_tobe_dist: tuple,
+                  investment_cost_tobe_dist: tuple,
+                  fixed_cost_tobe_dist: tuple):
+    &#34;&#34;&#34;
+
+    Args:
+        year (int): DESCRIPTION.
+        productivity (float): number of parts produced.
+        logistic_cost_asis_dist (tuple): tuple with mean and variace of the logistic cost per part.
+        operational_cost_asis_dist (tuple): tuple with mean and variance of the operational cost per part.
+        direct_labor_cost_asis_dist (tuple): tuple with mean and variance of the direct labor cost per part.
+        depreciation_cost_as_is_dist (tuple): tuple with mean and variance of the depreciation cost per part.
+        investment_cost_tobe_dist (tuple): tuple with mean and variance of the investment cost.
+        fixed_cost_asis_dist (tuple): tuple with mean and variance of the fixed costs.
+
+    Returns:
+        results (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    results = {}
+
+    # logistic costs
+    if isinstance(logistic_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(logistic_cost_tobe_dist)):
+            cost_tuple = logistic_cost_tobe_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;logistic_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;logistic_cost_tobe&#39;] = productivity[year] * np.random.normal(logistic_cost_tobe_dist[0], logistic_cost_tobe_dist[1])
+
+    # operational costs
+    if isinstance(operational_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(operational_cost_tobe_dist)):
+            cost_tuple = operational_cost_tobe_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;operational_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;operational_cost_tobe&#39;] = productivity[year] * np.random.normal(operational_cost_tobe_dist[0], operational_cost_tobe_dist[1])
+
+    # direct labour costs
+    if isinstance(direct_labor_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(direct_labor_cost_tobe_dist)):
+            cost_tuple = direct_labor_cost_tobe_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;direct_labor_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;direct_labor_cost_tobe&#39;] = productivity[year] * np.random.normal(direct_labor_cost_tobe_dist[0], direct_labor_cost_tobe_dist[1])
+
+    # fixed costs
+    if isinstance(fixed_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(fixed_cost_tobe_dist)):
+            cost_tuple = fixed_cost_tobe_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;fixed_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;fixed_cost_tobe&#39;] = np.random.normal(fixed_cost_tobe_dist[0], fixed_cost_tobe_dist[1])
+
+    # depreciation costs
+    if isinstance(depreciation_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(depreciation_cost_tobe_dist)):
+            cost_tuple = depreciation_cost_tobe_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;depreciation_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;depreciation_cost_tobe&#39;] = np.random.normal(depreciation_cost_tobe_dist[0], depreciation_cost_tobe_dist[1])
+
+    # investment costs
+    if isinstance(investment_cost_tobe_dist, list):
+        investment_cost = 0
+        for plant in range(0, len(investment_cost_tobe_dist)):
+            cost_tuple = investment_cost_tobe_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            investment_cost = investment_cost + plant_cost
+
+    else:
+        investment_cost = np.random.normal(investment_cost_tobe_dist[0], investment_cost_tobe_dist[1])
+
+    # return total cost per year plus investment cost at year zero (cash flow with no depreciation)
+    if year == 0:  # if year=0 consider the investment cost
+        results[&#39;total_cost_tobe&#39;] = investment_cost + results[&#39;logistic_cost_tobe&#39;] + results[&#39;operational_cost_tobe&#39;] + results[&#39;direct_labor_cost_tobe&#39;] + results[&#39;fixed_cost_tobe&#39;]
+    else:
+        results[&#39;total_cost_tobe&#39;] = results[&#39;logistic_cost_tobe&#39;] + results[&#39;operational_cost_tobe&#39;] + results[&#39;direct_labor_cost_tobe&#39;] + results[&#39;fixed_cost_tobe&#39;]
+
+    return results
+
+
+def runSimulation(num_iter: int,
+                  years: int,
+                  productivity_asis: int,
+                  logistic_cost_asis_dist: tuple,
+                  operational_cost_asis_dist: tuple,
+                  direct_labor_cost_asis_dist: tuple,
+                  depreciation_cost_as_is_dist: tuple,
+                  fixed_cost_asis_dist: tuple,
+                  productivity_tobe: int,
+                  logistic_cost_tobe_dist: tuple,
+                  operational_cost_tobe_dist: tuple,
+                  direct_labor_cost_tobe_dist: tuple,
+                  depreciation_cost_tobe_dist: tuple,
+                  investment_cost_tobe_dist: tuple,
+                  fixed_cost_tobe_dist: tuple) -&gt; plt.figure:
+    &#34;&#34;&#34;
+    Run montecarlo simulation for LAP.
+    Args:
+        num_iter (int): Number of iterations of the simulation.
+        years (int): Number of years to simulate.
+        productivity_asis (int): Number of parts to produce as-is.
+        logistic_cost_asis_dist (tuple): tuple with mean and variance of the logistic cost as-is.
+        operational_cost_asis_dist (tuple): tuple with mean and variance of the operational cost as-is.
+        direct_labor_cost_asis_dist (tuple): tuple with mean and variance of the direct labor cost as-is.
+        depreciation_cost_as_is_dist (tuple): tuple with mean and variance of the depreciation cost as-is.
+        fixed_cost_asis_dist (tuple): tuple with mean and variance of the fixed cost as-is.
+        productivity_tobe (int): Number of parts to produce to-be.
+        logistic_cost_tobe_dist (tuple): tuple with mean and variance of the logistic cost to-be.
+        operational_cost_tobe_dist (tuple): tuple with mean and variance of the operational cost to-be.
+        direct_labor_cost_tobe_dist (tuple): tuple with mean and variance of the direct laor cost to-be.
+        depreciation_cost_tobe_dist (tuple): tuple with mean and variance of the depreciation cost to-be.
+        investment_cost_tobe_dist (tuple): tuple with mean and variance of the investment cost to-be.
+        fixed_cost_tobe_dist (tuple): tuple with mean and variance of the fixed cost to-be.
+
+    Returns:
+        fig1 (plt.figure): Output figure of the simulation.
+
+    &#34;&#34;&#34;
+    fig1 = plt.figure(figsize=[10, 8])  # define resulting figure
+
+    for i in range(0, num_iter):
+        cost_asis = []
+        cost_tobe = []
+        for j in range(0, years):
+
+            # calculate and append costs
+            results_asis = totalCostASIS(year=j,
+                                         productivity=productivity_asis,
+                                         logistic_cost_asis_dist=logistic_cost_asis_dist,
+                                         operational_cost_asis_dist=operational_cost_asis_dist,
+                                         direct_labor_cost_asis_dist=direct_labor_cost_asis_dist,
+                                         depreciation_cost_as_is_dist=depreciation_cost_as_is_dist,
+                                         fixed_cost_asis_dist=fixed_cost_asis_dist)
+            cost_asis.append(results_asis[&#39;total_cost_asis&#39;])
+
+            results_tobe = totalCostTOBE(year=j,
+                                         productivity=productivity_tobe,
+                                         logistic_cost_tobe_dist=logistic_cost_tobe_dist,
+                                         operational_cost_tobe_dist=operational_cost_tobe_dist,
+                                         direct_labor_cost_tobe_dist=direct_labor_cost_tobe_dist,
+                                         depreciation_cost_tobe_dist=depreciation_cost_tobe_dist,
+                                         investment_cost_tobe_dist=investment_cost_tobe_dist,
+                                         fixed_cost_tobe_dist=fixed_cost_tobe_dist
+                                         )
+
+            cost_tobe.append(results_tobe[&#39;total_cost_tobe&#39;])
+
+        # generates cumulative functions
+        cost_asis = np.array(cost_asis)
+        cost_tobe = np.array(cost_tobe)
+        cost_asis_cum = np.cumsum(cost_asis)
+        cost_tobe_cum = np.cumsum(cost_tobe)
+
+        cashflow = cost_asis_cum - cost_tobe_cum
+        plt.plot(range(0, years), cashflow)
+
+    plt.hlines(0, 0, years)
+    plt.title(&#39;Montecarlo LAP&#39;)
+    plt.xlabel(&#39;years&#39;)
+    plt.ylabel(&#39;return - €&#39;)
+    return fig1
+
+
+def runSimulationNoVariance(num_iter: int,
+                            years: int,
+                            productivity_asis: int,
+                            logistic_cost_asis_dist: tuple,
+                            operational_cost_asis_dist: tuple,
+                            direct_labor_cost_asis_dist: tuple,
+                            depreciation_cost_as_is_dist: tuple,
+                            fixed_cost_asis_dist: tuple,
+                            productivity_tobe: int,
+                            logistic_cost_tobe_dist: tuple,
+                            operational_cost_tobe_dist: tuple,
+                            direct_labor_cost_tobe_dist: tuple,
+                            depreciation_cost_tobe_dist: tuple,
+                            investment_cost_tobe_dist: tuple,
+                            fixed_cost_tobe_dist: tuple):
+    &#34;&#34;&#34;
+
+    Args:
+        num_iter (int): Number of iterations of the simulation.
+        years (int): Number of years to simulate.
+        productivity_asis (int): Number of parts to produce as-is.
+        logistic_cost_asis_dist (tuple): tuple with mean and variance of the logistic cost as-is.
+        operational_cost_asis_dist (tuple): tuple with mean and variance of the operational cost as-is.
+        direct_labor_cost_asis_dist (tuple): tuple with mean and variance of the direct labor cost as-is.
+        depreciation_cost_as_is_dist (tuple): tuple with mean and variance of the depreciation cost as-is.
+        fixed_cost_asis_dist (tuple): tuple with mean and variance of the fixed cost as-is.
+        productivity_tobe (int): Number of parts to produce to-be.
+        logistic_cost_tobe_dist (tuple): tuple with mean and variance of the logistic cost to-be.
+        operational_cost_tobe_dist (tuple): tuple with mean and variance of the operational cost to-be.
+        direct_labor_cost_tobe_dist (tuple): tuple with mean and variance of the direct laor cost to-be.
+        depreciation_cost_tobe_dist (tuple): tuple with mean and variance of the depreciation cost to-be.
+        investment_cost_tobe_dist (tuple): tuple with mean and variance of the investment cost to-be.
+        fixed_cost_tobe_dist (tuple): tuple with mean and variance of the fixed cost to-be.
+
+    Returns:
+        fig1 (plt.figure): Output figure of the simulation.
+        df_results (pd.DataFrame): Output dataframe of the simulation.
+
+    &#34;&#34;&#34;
+
+    fig1 = plt.figure(figsize=[10, 8])  # define resulting figure
+
+    df_results = {}
+    df_columns = [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                  &#39;depreciation cost&#39;, &#39;fixed cost&#39;]
+
+    df_conto_economico_asis = pd.DataFrame(columns=df_columns)
+    df_conto_economico_tobe = pd.DataFrame(columns=df_columns)
+
+    # cancel parameters variances
+
+    # define AS-IS parameters
+    logistic_cost_asis_dist_medione = (logistic_cost_asis_dist[0], 0)
+    operational_cost_asis_dist_medione = (operational_cost_asis_dist[0], 0)
+    direct_labor_cost_asis_dist_medione = (direct_labor_cost_asis_dist[0], 0)
+    depreciation_cost_as_is_dist_medione = (depreciation_cost_as_is_dist[0], 0)
+    fixed_cost_asis_dist_medione = (fixed_cost_asis_dist[0], 0)
+
+    # logistic costs
+    if isinstance(logistic_cost_tobe_dist, list):
+        logistic_cost_tobe_dist_medione = []
+        for tupla in logistic_cost_tobe_dist:
+            logistic_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        logistic_cost_tobe_dist_medione = (logistic_cost_tobe_dist[0], 0)
+
+    # operational costs
+    if isinstance(operational_cost_tobe_dist, list):
+        operational_cost_tobe_dist_medione = []
+        for tupla in operational_cost_tobe_dist:
+            operational_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        operational_cost_tobe_dist_medione = (operational_cost_tobe_dist[0], 0)
+
+    # direct labour costs
+    if isinstance(direct_labor_cost_tobe_dist, list):
+        direct_labor_cost_tobe_dist_medione = []
+        for tupla in direct_labor_cost_tobe_dist:
+            direct_labor_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        direct_labor_cost_tobe_dist_medione = (direct_labor_cost_tobe_dist[0], 0)
+
+    # depreciation costs
+    if isinstance(depreciation_cost_tobe_dist, list):
+        depreciation_cost_tobe_dist_medione = []
+        for tupla in depreciation_cost_tobe_dist:
+            depreciation_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        depreciation_cost_tobe_dist_medione = (depreciation_cost_tobe_dist[0], 0)
+
+    # fixed costs
+    if isinstance(fixed_cost_tobe_dist, list):
+        fixed_cost_tobe_dist_medione = []
+        for tupla in fixed_cost_tobe_dist:
+            fixed_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        fixed_cost_tobe_dist_medione = (fixed_cost_tobe_dist[0], 0)
+
+    # investment costs
+    if isinstance(investment_cost_tobe_dist, list):
+        investment_cost_tobe_dist_medione = []
+        for tupla in investment_cost_tobe_dist:
+            investment_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        investment_cost_tobe_dist_medione = (investment_cost_tobe_dist[0], 0)
+
+    for i in range(0, num_iter):
+        cost_asis = []
+        cost_tobe = []
+        for j in range(0, years):
+
+            # generate as is costs
+            results_asis = totalCostASIS(year=j,
+                                         productivity=productivity_asis,
+                                         logistic_cost_asis_dist=logistic_cost_asis_dist_medione,
+                                         operational_cost_asis_dist=operational_cost_asis_dist_medione,
+                                         direct_labor_cost_asis_dist=direct_labor_cost_asis_dist_medione,
+                                         depreciation_cost_as_is_dist=depreciation_cost_as_is_dist_medione,
+                                         fixed_cost_asis_dist=fixed_cost_asis_dist_medione)
+            cost_asis.append(results_asis[&#39;total_cost_asis&#39;])
+
+            # update the income statement
+            df_conto_economico_asis = df_conto_economico_asis.append(pd.DataFrame([[j,
+                                                                     results_asis[&#39;direct_labor_cost_asis&#39;],
+                                                                     results_asis[&#39;logistic_cost_asis&#39;],
+                                                                     results_asis[&#39;operational_cost_asis&#39;],
+                                                                     results_asis[&#39;depreciation_cost_asis&#39;],
+                                                                     results_asis[&#39;fixed_cost_asis&#39;],
+                                                                     ]], columns=df_columns))
+
+            # generate to-be costs
+            results_tobe = totalCostTOBE(year=j,
+                                         productivity=productivity_tobe,
+                                         logistic_cost_tobe_dist=logistic_cost_tobe_dist_medione,
+                                         operational_cost_tobe_dist=operational_cost_tobe_dist_medione,
+                                         direct_labor_cost_tobe_dist=direct_labor_cost_tobe_dist_medione,
+                                         depreciation_cost_tobe_dist=depreciation_cost_tobe_dist_medione,
+                                         investment_cost_tobe_dist=investment_cost_tobe_dist_medione,
+                                         fixed_cost_tobe_dist=fixed_cost_tobe_dist_medione
+                                         )
+            cost_tobe.append(results_tobe[&#39;total_cost_tobe&#39;])
+
+            # update the income statement
+            df_conto_economico_tobe = df_conto_economico_tobe.append(pd.DataFrame([[j,
+                                                                                    results_tobe[&#39;direct_labor_cost_tobe&#39;],
+                                                                                    results_tobe[&#39;logistic_cost_tobe&#39;],
+                                                                                    results_tobe[&#39;operational_cost_tobe&#39;],
+                                                                                    results_tobe[&#39;depreciation_cost_tobe&#39;],
+                                                                                    results_tobe[&#39;fixed_cost_tobe&#39;],
+                                                                                    ]], columns=df_columns))
+        # calculate cumulative cash flows
+        cost_asis = np.array(cost_asis)
+        cost_tobe = np.array(cost_tobe)
+        cost_asis_cum = np.cumsum(cost_asis)
+        cost_tobe_cum = np.cumsum(cost_tobe)
+
+        cashflow = cost_asis_cum - cost_tobe_cum
+        plt.plot(range(0, years), cashflow)
+
+    plt.hlines(0, 0, years)
+    plt.title(&#39;Montecarlo LAP&#39;)
+    plt.xlabel(&#39;years&#39;)
+    plt.ylabel(&#39;return - €&#39;)
+
+    # generate income statement to be
+    df_conto_economico_tobe = df_conto_economico_tobe.groupby([&#39;anno&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;logistics cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;operational cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;depreciation cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;fixed cost&#39;: [&#39;mean&#39;]
+                                                                             }).reset_index()
+    df_conto_economico_tobe.columns = [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                                       &#39;depreciation cost&#39;, &#39;fixed cost&#39;]
+    df_results[&#39;df_conto_economico_tobe&#39;] = df_conto_economico_tobe
+
+    # generate income statement tobe per part
+    df_conto_economico_tobe_pasto = df_conto_economico_tobe.copy()
+    for column in [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                   &#39;depreciation cost&#39;, &#39;fixed cost&#39;]:
+
+        df_conto_economico_tobe_pasto[column] = df_conto_economico_tobe_pasto[column] / productivity_asis[0]
+    df_results[&#39;df_conto_economico_tobe_part&#39;] = df_conto_economico_tobe_pasto
+
+    # generate income statement asis
+    df_conto_economico_asis = df_conto_economico_asis.groupby([&#39;anno&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;logistics cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;operational cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;depreciation cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;fixed cost&#39;: [&#39;mean&#39;]
+                                                                             }).reset_index()
+    df_conto_economico_asis.columns = [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                                       &#39;depreciation cost&#39;, &#39;fixed cost&#39;]
+
+    df_results[&#39;df_conto_economico_asis&#39;] = df_conto_economico_asis
+
+    # generate income statement asis per part
+    df_conto_economico_asis_pasto = df_conto_economico_asis.copy()
+    for column in [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                   &#39;depreciation cost&#39;, &#39;fixed cost&#39;]:
+
+        df_conto_economico_asis_pasto[column] = df_conto_economico_asis_pasto[column] / productivity_asis[0]
+    df_results[&#39;df_conto_economico_asis_part&#39;] = df_conto_economico_asis_pasto
+
+    return fig1, df_results</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.runSimulation"><code class="name flex">
+<span>def <span class="ident">runSimulation</span></span>(<span>num_iter: int, years: int, productivity_asis: int, logistic_cost_asis_dist: tuple, operational_cost_asis_dist: tuple, direct_labor_cost_asis_dist: tuple, depreciation_cost_as_is_dist: tuple, fixed_cost_asis_dist: tuple, productivity_tobe: int, logistic_cost_tobe_dist: tuple, operational_cost_tobe_dist: tuple, direct_labor_cost_tobe_dist: tuple, depreciation_cost_tobe_dist: tuple, investment_cost_tobe_dist: tuple, fixed_cost_tobe_dist: tuple) -> <function figure at 0x0000014C78C43268></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Run montecarlo simulation for LAP.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>num_iter</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of iterations of the simulation.</dd>
+<dt><strong><code>years</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of years to simulate.</dd>
+<dt><strong><code>productivity_asis</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of parts to produce as-is.</dd>
+<dt><strong><code>logistic_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the logistic cost as-is.</dd>
+<dt><strong><code>operational_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the operational cost as-is.</dd>
+<dt><strong><code>direct_labor_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the direct labor cost as-is.</dd>
+<dt><strong><code>depreciation_cost_as_is_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the depreciation cost as-is.</dd>
+<dt><strong><code>fixed_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the fixed cost as-is.</dd>
+<dt><strong><code>productivity_tobe</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of parts to produce to-be.</dd>
+<dt><strong><code>logistic_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the logistic cost to-be.</dd>
+<dt><strong><code>operational_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the operational cost to-be.</dd>
+<dt><strong><code>direct_labor_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the direct laor cost to-be.</dd>
+<dt><strong><code>depreciation_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the depreciation cost to-be.</dd>
+<dt><strong><code>investment_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the investment cost to-be.</dd>
+<dt><strong><code>fixed_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the fixed cost to-be.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig1 (plt.figure): Output figure of the simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def runSimulation(num_iter: int,
+                  years: int,
+                  productivity_asis: int,
+                  logistic_cost_asis_dist: tuple,
+                  operational_cost_asis_dist: tuple,
+                  direct_labor_cost_asis_dist: tuple,
+                  depreciation_cost_as_is_dist: tuple,
+                  fixed_cost_asis_dist: tuple,
+                  productivity_tobe: int,
+                  logistic_cost_tobe_dist: tuple,
+                  operational_cost_tobe_dist: tuple,
+                  direct_labor_cost_tobe_dist: tuple,
+                  depreciation_cost_tobe_dist: tuple,
+                  investment_cost_tobe_dist: tuple,
+                  fixed_cost_tobe_dist: tuple) -&gt; plt.figure:
+    &#34;&#34;&#34;
+    Run montecarlo simulation for LAP.
+    Args:
+        num_iter (int): Number of iterations of the simulation.
+        years (int): Number of years to simulate.
+        productivity_asis (int): Number of parts to produce as-is.
+        logistic_cost_asis_dist (tuple): tuple with mean and variance of the logistic cost as-is.
+        operational_cost_asis_dist (tuple): tuple with mean and variance of the operational cost as-is.
+        direct_labor_cost_asis_dist (tuple): tuple with mean and variance of the direct labor cost as-is.
+        depreciation_cost_as_is_dist (tuple): tuple with mean and variance of the depreciation cost as-is.
+        fixed_cost_asis_dist (tuple): tuple with mean and variance of the fixed cost as-is.
+        productivity_tobe (int): Number of parts to produce to-be.
+        logistic_cost_tobe_dist (tuple): tuple with mean and variance of the logistic cost to-be.
+        operational_cost_tobe_dist (tuple): tuple with mean and variance of the operational cost to-be.
+        direct_labor_cost_tobe_dist (tuple): tuple with mean and variance of the direct laor cost to-be.
+        depreciation_cost_tobe_dist (tuple): tuple with mean and variance of the depreciation cost to-be.
+        investment_cost_tobe_dist (tuple): tuple with mean and variance of the investment cost to-be.
+        fixed_cost_tobe_dist (tuple): tuple with mean and variance of the fixed cost to-be.
+
+    Returns:
+        fig1 (plt.figure): Output figure of the simulation.
+
+    &#34;&#34;&#34;
+    fig1 = plt.figure(figsize=[10, 8])  # define resulting figure
+
+    for i in range(0, num_iter):
+        cost_asis = []
+        cost_tobe = []
+        for j in range(0, years):
+
+            # calculate and append costs
+            results_asis = totalCostASIS(year=j,
+                                         productivity=productivity_asis,
+                                         logistic_cost_asis_dist=logistic_cost_asis_dist,
+                                         operational_cost_asis_dist=operational_cost_asis_dist,
+                                         direct_labor_cost_asis_dist=direct_labor_cost_asis_dist,
+                                         depreciation_cost_as_is_dist=depreciation_cost_as_is_dist,
+                                         fixed_cost_asis_dist=fixed_cost_asis_dist)
+            cost_asis.append(results_asis[&#39;total_cost_asis&#39;])
+
+            results_tobe = totalCostTOBE(year=j,
+                                         productivity=productivity_tobe,
+                                         logistic_cost_tobe_dist=logistic_cost_tobe_dist,
+                                         operational_cost_tobe_dist=operational_cost_tobe_dist,
+                                         direct_labor_cost_tobe_dist=direct_labor_cost_tobe_dist,
+                                         depreciation_cost_tobe_dist=depreciation_cost_tobe_dist,
+                                         investment_cost_tobe_dist=investment_cost_tobe_dist,
+                                         fixed_cost_tobe_dist=fixed_cost_tobe_dist
+                                         )
+
+            cost_tobe.append(results_tobe[&#39;total_cost_tobe&#39;])
+
+        # generates cumulative functions
+        cost_asis = np.array(cost_asis)
+        cost_tobe = np.array(cost_tobe)
+        cost_asis_cum = np.cumsum(cost_asis)
+        cost_tobe_cum = np.cumsum(cost_tobe)
+
+        cashflow = cost_asis_cum - cost_tobe_cum
+        plt.plot(range(0, years), cashflow)
+
+    plt.hlines(0, 0, years)
+    plt.title(&#39;Montecarlo LAP&#39;)
+    plt.xlabel(&#39;years&#39;)
+    plt.ylabel(&#39;return - €&#39;)
+    return fig1</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.runSimulationNoVariance"><code class="name flex">
+<span>def <span class="ident">runSimulationNoVariance</span></span>(<span>num_iter: int, years: int, productivity_asis: int, logistic_cost_asis_dist: tuple, operational_cost_asis_dist: tuple, direct_labor_cost_asis_dist: tuple, depreciation_cost_as_is_dist: tuple, fixed_cost_asis_dist: tuple, productivity_tobe: int, logistic_cost_tobe_dist: tuple, operational_cost_tobe_dist: tuple, direct_labor_cost_tobe_dist: tuple, depreciation_cost_tobe_dist: tuple, investment_cost_tobe_dist: tuple, fixed_cost_tobe_dist: tuple)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>num_iter</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of iterations of the simulation.</dd>
+<dt><strong><code>years</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of years to simulate.</dd>
+<dt><strong><code>productivity_asis</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of parts to produce as-is.</dd>
+<dt><strong><code>logistic_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the logistic cost as-is.</dd>
+<dt><strong><code>operational_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the operational cost as-is.</dd>
+<dt><strong><code>direct_labor_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the direct labor cost as-is.</dd>
+<dt><strong><code>depreciation_cost_as_is_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the depreciation cost as-is.</dd>
+<dt><strong><code>fixed_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the fixed cost as-is.</dd>
+<dt><strong><code>productivity_tobe</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of parts to produce to-be.</dd>
+<dt><strong><code>logistic_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the logistic cost to-be.</dd>
+<dt><strong><code>operational_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the operational cost to-be.</dd>
+<dt><strong><code>direct_labor_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the direct laor cost to-be.</dd>
+<dt><strong><code>depreciation_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the depreciation cost to-be.</dd>
+<dt><strong><code>investment_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the investment cost to-be.</dd>
+<dt><strong><code>fixed_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the fixed cost to-be.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>fig1 (plt.figure): Output figure of the simulation.
+df_results (pd.DataFrame): Output dataframe of the simulation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def runSimulationNoVariance(num_iter: int,
+                            years: int,
+                            productivity_asis: int,
+                            logistic_cost_asis_dist: tuple,
+                            operational_cost_asis_dist: tuple,
+                            direct_labor_cost_asis_dist: tuple,
+                            depreciation_cost_as_is_dist: tuple,
+                            fixed_cost_asis_dist: tuple,
+                            productivity_tobe: int,
+                            logistic_cost_tobe_dist: tuple,
+                            operational_cost_tobe_dist: tuple,
+                            direct_labor_cost_tobe_dist: tuple,
+                            depreciation_cost_tobe_dist: tuple,
+                            investment_cost_tobe_dist: tuple,
+                            fixed_cost_tobe_dist: tuple):
+    &#34;&#34;&#34;
+
+    Args:
+        num_iter (int): Number of iterations of the simulation.
+        years (int): Number of years to simulate.
+        productivity_asis (int): Number of parts to produce as-is.
+        logistic_cost_asis_dist (tuple): tuple with mean and variance of the logistic cost as-is.
+        operational_cost_asis_dist (tuple): tuple with mean and variance of the operational cost as-is.
+        direct_labor_cost_asis_dist (tuple): tuple with mean and variance of the direct labor cost as-is.
+        depreciation_cost_as_is_dist (tuple): tuple with mean and variance of the depreciation cost as-is.
+        fixed_cost_asis_dist (tuple): tuple with mean and variance of the fixed cost as-is.
+        productivity_tobe (int): Number of parts to produce to-be.
+        logistic_cost_tobe_dist (tuple): tuple with mean and variance of the logistic cost to-be.
+        operational_cost_tobe_dist (tuple): tuple with mean and variance of the operational cost to-be.
+        direct_labor_cost_tobe_dist (tuple): tuple with mean and variance of the direct laor cost to-be.
+        depreciation_cost_tobe_dist (tuple): tuple with mean and variance of the depreciation cost to-be.
+        investment_cost_tobe_dist (tuple): tuple with mean and variance of the investment cost to-be.
+        fixed_cost_tobe_dist (tuple): tuple with mean and variance of the fixed cost to-be.
+
+    Returns:
+        fig1 (plt.figure): Output figure of the simulation.
+        df_results (pd.DataFrame): Output dataframe of the simulation.
+
+    &#34;&#34;&#34;
+
+    fig1 = plt.figure(figsize=[10, 8])  # define resulting figure
+
+    df_results = {}
+    df_columns = [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                  &#39;depreciation cost&#39;, &#39;fixed cost&#39;]
+
+    df_conto_economico_asis = pd.DataFrame(columns=df_columns)
+    df_conto_economico_tobe = pd.DataFrame(columns=df_columns)
+
+    # cancel parameters variances
+
+    # define AS-IS parameters
+    logistic_cost_asis_dist_medione = (logistic_cost_asis_dist[0], 0)
+    operational_cost_asis_dist_medione = (operational_cost_asis_dist[0], 0)
+    direct_labor_cost_asis_dist_medione = (direct_labor_cost_asis_dist[0], 0)
+    depreciation_cost_as_is_dist_medione = (depreciation_cost_as_is_dist[0], 0)
+    fixed_cost_asis_dist_medione = (fixed_cost_asis_dist[0], 0)
+
+    # logistic costs
+    if isinstance(logistic_cost_tobe_dist, list):
+        logistic_cost_tobe_dist_medione = []
+        for tupla in logistic_cost_tobe_dist:
+            logistic_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        logistic_cost_tobe_dist_medione = (logistic_cost_tobe_dist[0], 0)
+
+    # operational costs
+    if isinstance(operational_cost_tobe_dist, list):
+        operational_cost_tobe_dist_medione = []
+        for tupla in operational_cost_tobe_dist:
+            operational_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        operational_cost_tobe_dist_medione = (operational_cost_tobe_dist[0], 0)
+
+    # direct labour costs
+    if isinstance(direct_labor_cost_tobe_dist, list):
+        direct_labor_cost_tobe_dist_medione = []
+        for tupla in direct_labor_cost_tobe_dist:
+            direct_labor_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        direct_labor_cost_tobe_dist_medione = (direct_labor_cost_tobe_dist[0], 0)
+
+    # depreciation costs
+    if isinstance(depreciation_cost_tobe_dist, list):
+        depreciation_cost_tobe_dist_medione = []
+        for tupla in depreciation_cost_tobe_dist:
+            depreciation_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        depreciation_cost_tobe_dist_medione = (depreciation_cost_tobe_dist[0], 0)
+
+    # fixed costs
+    if isinstance(fixed_cost_tobe_dist, list):
+        fixed_cost_tobe_dist_medione = []
+        for tupla in fixed_cost_tobe_dist:
+            fixed_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        fixed_cost_tobe_dist_medione = (fixed_cost_tobe_dist[0], 0)
+
+    # investment costs
+    if isinstance(investment_cost_tobe_dist, list):
+        investment_cost_tobe_dist_medione = []
+        for tupla in investment_cost_tobe_dist:
+            investment_cost_tobe_dist_medione.append((tupla[0], 0))
+    else:
+        investment_cost_tobe_dist_medione = (investment_cost_tobe_dist[0], 0)
+
+    for i in range(0, num_iter):
+        cost_asis = []
+        cost_tobe = []
+        for j in range(0, years):
+
+            # generate as is costs
+            results_asis = totalCostASIS(year=j,
+                                         productivity=productivity_asis,
+                                         logistic_cost_asis_dist=logistic_cost_asis_dist_medione,
+                                         operational_cost_asis_dist=operational_cost_asis_dist_medione,
+                                         direct_labor_cost_asis_dist=direct_labor_cost_asis_dist_medione,
+                                         depreciation_cost_as_is_dist=depreciation_cost_as_is_dist_medione,
+                                         fixed_cost_asis_dist=fixed_cost_asis_dist_medione)
+            cost_asis.append(results_asis[&#39;total_cost_asis&#39;])
+
+            # update the income statement
+            df_conto_economico_asis = df_conto_economico_asis.append(pd.DataFrame([[j,
+                                                                     results_asis[&#39;direct_labor_cost_asis&#39;],
+                                                                     results_asis[&#39;logistic_cost_asis&#39;],
+                                                                     results_asis[&#39;operational_cost_asis&#39;],
+                                                                     results_asis[&#39;depreciation_cost_asis&#39;],
+                                                                     results_asis[&#39;fixed_cost_asis&#39;],
+                                                                     ]], columns=df_columns))
+
+            # generate to-be costs
+            results_tobe = totalCostTOBE(year=j,
+                                         productivity=productivity_tobe,
+                                         logistic_cost_tobe_dist=logistic_cost_tobe_dist_medione,
+                                         operational_cost_tobe_dist=operational_cost_tobe_dist_medione,
+                                         direct_labor_cost_tobe_dist=direct_labor_cost_tobe_dist_medione,
+                                         depreciation_cost_tobe_dist=depreciation_cost_tobe_dist_medione,
+                                         investment_cost_tobe_dist=investment_cost_tobe_dist_medione,
+                                         fixed_cost_tobe_dist=fixed_cost_tobe_dist_medione
+                                         )
+            cost_tobe.append(results_tobe[&#39;total_cost_tobe&#39;])
+
+            # update the income statement
+            df_conto_economico_tobe = df_conto_economico_tobe.append(pd.DataFrame([[j,
+                                                                                    results_tobe[&#39;direct_labor_cost_tobe&#39;],
+                                                                                    results_tobe[&#39;logistic_cost_tobe&#39;],
+                                                                                    results_tobe[&#39;operational_cost_tobe&#39;],
+                                                                                    results_tobe[&#39;depreciation_cost_tobe&#39;],
+                                                                                    results_tobe[&#39;fixed_cost_tobe&#39;],
+                                                                                    ]], columns=df_columns))
+        # calculate cumulative cash flows
+        cost_asis = np.array(cost_asis)
+        cost_tobe = np.array(cost_tobe)
+        cost_asis_cum = np.cumsum(cost_asis)
+        cost_tobe_cum = np.cumsum(cost_tobe)
+
+        cashflow = cost_asis_cum - cost_tobe_cum
+        plt.plot(range(0, years), cashflow)
+
+    plt.hlines(0, 0, years)
+    plt.title(&#39;Montecarlo LAP&#39;)
+    plt.xlabel(&#39;years&#39;)
+    plt.ylabel(&#39;return - €&#39;)
+
+    # generate income statement to be
+    df_conto_economico_tobe = df_conto_economico_tobe.groupby([&#39;anno&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;logistics cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;operational cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;depreciation cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;fixed cost&#39;: [&#39;mean&#39;]
+                                                                             }).reset_index()
+    df_conto_economico_tobe.columns = [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                                       &#39;depreciation cost&#39;, &#39;fixed cost&#39;]
+    df_results[&#39;df_conto_economico_tobe&#39;] = df_conto_economico_tobe
+
+    # generate income statement tobe per part
+    df_conto_economico_tobe_pasto = df_conto_economico_tobe.copy()
+    for column in [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                   &#39;depreciation cost&#39;, &#39;fixed cost&#39;]:
+
+        df_conto_economico_tobe_pasto[column] = df_conto_economico_tobe_pasto[column] / productivity_asis[0]
+    df_results[&#39;df_conto_economico_tobe_part&#39;] = df_conto_economico_tobe_pasto
+
+    # generate income statement asis
+    df_conto_economico_asis = df_conto_economico_asis.groupby([&#39;anno&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;logistics cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;operational cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;depreciation cost&#39;: [&#39;mean&#39;],
+                                                                             &#39;fixed cost&#39;: [&#39;mean&#39;]
+                                                                             }).reset_index()
+    df_conto_economico_asis.columns = [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                                       &#39;depreciation cost&#39;, &#39;fixed cost&#39;]
+
+    df_results[&#39;df_conto_economico_asis&#39;] = df_conto_economico_asis
+
+    # generate income statement asis per part
+    df_conto_economico_asis_pasto = df_conto_economico_asis.copy()
+    for column in [&#39;year&#39;, &#39;personnell cost&#39;, &#39;logistics cost&#39;, &#39;operational cost&#39;,
+                   &#39;depreciation cost&#39;, &#39;fixed cost&#39;]:
+
+        df_conto_economico_asis_pasto[column] = df_conto_economico_asis_pasto[column] / productivity_asis[0]
+    df_results[&#39;df_conto_economico_asis_part&#39;] = df_conto_economico_asis_pasto
+
+    return fig1, df_results</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.totalCostASIS"><code class="name flex">
+<span>def <span class="ident">totalCostASIS</span></span>(<span>year: int, productivity: float, logistic_cost_asis_dist: tuple, operational_cost_asis_dist: tuple, direct_labor_cost_asis_dist: tuple, depreciation_cost_as_is_dist: tuple, fixed_cost_asis_dist: tuple)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs a numerical simulation given a cost model to evaluate the cash flow at the following years</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>year</code></strong> :&ensp;<code>int</code></dt>
+<dd>year to simulate.</dd>
+<dt><strong><code>productivity</code></strong> :&ensp;<code>TYPE</code></dt>
+<dd>number of parts produced.</dd>
+<dt><strong><code>logistic_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variace of the logistic cost per part.</dd>
+<dt><strong><code>operational_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the operational cost per part.</dd>
+<dt><strong><code>direct_labor_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the direct labor cost per part.</dd>
+<dt><strong><code>depreciation_cost_as_is_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the depreciation cost per part.</dd>
+<dt><strong><code>fixed_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the fixed costs.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>results (dict): dictionary with results.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def totalCostASIS(year: int,
+                  productivity: float,
+                  logistic_cost_asis_dist: tuple,
+                  operational_cost_asis_dist: tuple,
+                  direct_labor_cost_asis_dist: tuple,
+                  depreciation_cost_as_is_dist: tuple,
+                  fixed_cost_asis_dist: tuple):
+    &#34;&#34;&#34;
+    Performs a numerical simulation given a cost model to evaluate the cash flow at the following years
+
+    Args:
+        year (int): year to simulate.
+        productivity (TYPE): number of parts produced.
+        logistic_cost_asis_dist (tuple): tuple with mean and variace of the logistic cost per part.
+        operational_cost_asis_dist (tuple): tuple with mean and variance of the operational cost per part.
+        direct_labor_cost_asis_dist (tuple): tuple with mean and variance of the direct labor cost per part.
+        depreciation_cost_as_is_dist (tuple): tuple with mean and variance of the depreciation cost per part.
+        fixed_cost_asis_dist (tuple): tuple with mean and variance of the fixed costs.
+
+    Returns:
+        results (dict): dictionary with results.
+
+    &#34;&#34;&#34;
+
+    results = {}
+
+    # logistic costs
+    if isinstance(logistic_cost_asis_dist, list):
+        total_cost = 0
+        for plant in range(0, len(logistic_cost_asis_dist)):
+            cost_tuple = logistic_cost_asis_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;logistic_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;logistic_cost_asis&#39;] = productivity[year] * np.random.normal(logistic_cost_asis_dist[0], logistic_cost_asis_dist[1])
+
+    # operational costs
+    if isinstance(operational_cost_asis_dist, list):
+        total_cost = 0
+        for plant in range(0, len(operational_cost_asis_dist)):
+            cost_tuple = operational_cost_asis_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;operational_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;operational_cost_asis&#39;] = productivity[year] * np.random.normal(operational_cost_asis_dist[0], operational_cost_asis_dist[1])
+
+    # direct labour costs
+    if isinstance(direct_labor_cost_asis_dist, list):
+        total_cost = 0
+        for plant in range(0, len(direct_labor_cost_asis_dist)):
+            cost_tuple = direct_labor_cost_asis_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;direct_labor_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;direct_labor_cost_asis&#39;] = productivity[year] * np.random.normal(direct_labor_cost_asis_dist[0], direct_labor_cost_asis_dist[1])
+
+    # fixed costs
+    if isinstance(fixed_cost_asis_dist, list):
+        total_cost = 0
+        for plant in range(0, len(fixed_cost_asis_dist)):
+            cost_tuple = fixed_cost_asis_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;fixed_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;fixed_cost_asis&#39;] = np.random.normal(fixed_cost_asis_dist[0], fixed_cost_asis_dist[1])
+
+    # depreciation costs
+    if isinstance(depreciation_cost_as_is_dist, list):
+        total_cost = 0
+        for plant in range(0, len(depreciation_cost_as_is_dist)):
+            cost_tuple = depreciation_cost_as_is_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;depreciation_cost_asis&#39;] = total_cost
+
+    else:
+        results[&#39;depreciation_cost_asis&#39;] = np.random.normal(depreciation_cost_as_is_dist[0], depreciation_cost_as_is_dist[1])
+
+    # total cost (cash flow) withoud depreciation
+    results[&#39;total_cost_asis&#39;] = results[&#39;logistic_cost_asis&#39;] + results[&#39;operational_cost_asis&#39;] + results[&#39;direct_labor_cost_asis&#39;] + results[&#39;fixed_cost_asis&#39;]
+    return results</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.totalCostTOBE"><code class="name flex">
+<span>def <span class="ident">totalCostTOBE</span></span>(<span>year: int, productivity: float, logistic_cost_tobe_dist: tuple, operational_cost_tobe_dist: tuple, direct_labor_cost_tobe_dist: tuple, depreciation_cost_tobe_dist: tuple, investment_cost_tobe_dist: tuple, fixed_cost_tobe_dist: tuple)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>year</code></strong> :&ensp;<code>int</code></dt>
+<dd>DESCRIPTION.</dd>
+<dt><strong><code>productivity</code></strong> :&ensp;<code>float</code></dt>
+<dd>number of parts produced.</dd>
+<dt><strong><code>logistic_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variace of the logistic cost per part.</dd>
+<dt><strong><code>operational_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the operational cost per part.</dd>
+<dt><strong><code>direct_labor_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the direct labor cost per part.</dd>
+<dt><strong><code>depreciation_cost_as_is_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the depreciation cost per part.</dd>
+<dt><strong><code>investment_cost_tobe_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the investment cost.</dd>
+<dt><strong><code>fixed_cost_asis_dist</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>tuple with mean and variance of the fixed costs.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>results (TYPE): DESCRIPTION.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def totalCostTOBE(year: int,
+                  productivity: float,
+                  logistic_cost_tobe_dist: tuple,
+                  operational_cost_tobe_dist: tuple,
+                  direct_labor_cost_tobe_dist: tuple,
+                  depreciation_cost_tobe_dist: tuple,
+                  investment_cost_tobe_dist: tuple,
+                  fixed_cost_tobe_dist: tuple):
+    &#34;&#34;&#34;
+
+    Args:
+        year (int): DESCRIPTION.
+        productivity (float): number of parts produced.
+        logistic_cost_asis_dist (tuple): tuple with mean and variace of the logistic cost per part.
+        operational_cost_asis_dist (tuple): tuple with mean and variance of the operational cost per part.
+        direct_labor_cost_asis_dist (tuple): tuple with mean and variance of the direct labor cost per part.
+        depreciation_cost_as_is_dist (tuple): tuple with mean and variance of the depreciation cost per part.
+        investment_cost_tobe_dist (tuple): tuple with mean and variance of the investment cost.
+        fixed_cost_asis_dist (tuple): tuple with mean and variance of the fixed costs.
+
+    Returns:
+        results (TYPE): DESCRIPTION.
+
+    &#34;&#34;&#34;
+
+    results = {}
+
+    # logistic costs
+    if isinstance(logistic_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(logistic_cost_tobe_dist)):
+            cost_tuple = logistic_cost_tobe_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;logistic_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;logistic_cost_tobe&#39;] = productivity[year] * np.random.normal(logistic_cost_tobe_dist[0], logistic_cost_tobe_dist[1])
+
+    # operational costs
+    if isinstance(operational_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(operational_cost_tobe_dist)):
+            cost_tuple = operational_cost_tobe_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;operational_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;operational_cost_tobe&#39;] = productivity[year] * np.random.normal(operational_cost_tobe_dist[0], operational_cost_tobe_dist[1])
+
+    # direct labour costs
+    if isinstance(direct_labor_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(direct_labor_cost_tobe_dist)):
+            cost_tuple = direct_labor_cost_tobe_dist[plant]
+            plant_cost = productivity[plant][year] * np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;direct_labor_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;direct_labor_cost_tobe&#39;] = productivity[year] * np.random.normal(direct_labor_cost_tobe_dist[0], direct_labor_cost_tobe_dist[1])
+
+    # fixed costs
+    if isinstance(fixed_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(fixed_cost_tobe_dist)):
+            cost_tuple = fixed_cost_tobe_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;fixed_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;fixed_cost_tobe&#39;] = np.random.normal(fixed_cost_tobe_dist[0], fixed_cost_tobe_dist[1])
+
+    # depreciation costs
+    if isinstance(depreciation_cost_tobe_dist, list):
+        total_cost = 0
+        for plant in range(0, len(depreciation_cost_tobe_dist)):
+            cost_tuple = depreciation_cost_tobe_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            total_cost = total_cost + plant_cost
+
+        # update the global result
+        results[&#39;depreciation_cost_tobe&#39;] = total_cost
+
+    else:
+        results[&#39;depreciation_cost_tobe&#39;] = np.random.normal(depreciation_cost_tobe_dist[0], depreciation_cost_tobe_dist[1])
+
+    # investment costs
+    if isinstance(investment_cost_tobe_dist, list):
+        investment_cost = 0
+        for plant in range(0, len(investment_cost_tobe_dist)):
+            cost_tuple = investment_cost_tobe_dist[plant]
+            plant_cost = np.random.normal(cost_tuple[0], cost_tuple[1])
+            investment_cost = investment_cost + plant_cost
+
+    else:
+        investment_cost = np.random.normal(investment_cost_tobe_dist[0], investment_cost_tobe_dist[1])
+
+    # return total cost per year plus investment cost at year zero (cash flow with no depreciation)
+    if year == 0:  # if year=0 consider the investment cost
+        results[&#39;total_cost_tobe&#39;] = investment_cost + results[&#39;logistic_cost_tobe&#39;] + results[&#39;operational_cost_tobe&#39;] + results[&#39;direct_labor_cost_tobe&#39;] + results[&#39;fixed_cost_tobe&#39;]
+    else:
+        results[&#39;total_cost_tobe&#39;] = results[&#39;logistic_cost_tobe&#39;] + results[&#39;operational_cost_tobe&#39;] + results[&#39;direct_labor_cost_tobe&#39;] + results[&#39;fixed_cost_tobe&#39;]
+
+    return results</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem" href="index.html">analogistics.supply_chain.P6_placement_problem</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.runSimulation" href="#analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.runSimulation">runSimulation</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.runSimulationNoVariance" href="#analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.runSimulationNoVariance">runSimulationNoVariance</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.totalCostASIS" href="#analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.totalCostASIS">totalCostASIS</a></code></li>
+<li><code><a title="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.totalCostTOBE" href="#analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.totalCostTOBE">totalCostTOBE</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

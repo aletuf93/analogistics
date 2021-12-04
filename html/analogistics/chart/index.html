@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.8.1" />
-<title>analogistics.supply_chain API documentation</title>
+<title>analogistics.chart API documentation</title>
 <meta name="description" content="" />
 <link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
@@ -17,30 +17,45 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Namespace <code>analogistics.supply_chain</code></h1>
+<h1 class="title">Module <code>analogistics.chart</code></h1>
 </header>
 <section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># %% Import figures from mtplotLib
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+
+
+
+def fig_to_uri(in_fig, close_all=True, **save_args):
+    # type: (plt.Figure) -&gt; str
+    &#34;&#34;&#34;
+    Save a figure as a URI
+    :param in_fig:
+    :return:
+    &#34;&#34;&#34;
+    out_img = BytesIO()
+    in_fig.savefig(out_img, format=&#39;png&#39;, **save_args)
+    if close_all:
+        in_fig.clf()
+        plt.close(&#39;all&#39;)
+    out_img.seek(0)  # rewind file
+    encoded = base64.b64encode(out_img.read()).decode(&#34;ascii&#34;).replace(&#34;\n&#34;, &#34;&#34;)
+    return &#34;data:image/png;base64,{}&#34;.format(encoded)</code></pre>
+</details>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt><code class="name"><a title="analogistics.supply_chain.P1_family_problem" href="P1_family_problem/index.html">analogistics.supply_chain.P1_family_problem</a></code></dt>
+<dt><code class="name"><a title="analogistics.chart.chart_3D_surface" href="chart_3D_surface.html">analogistics.chart.chart_3D_surface</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt><code class="name"><a title="analogistics.supply_chain.P6_placement_problem" href="P6_placement_problem/index.html">analogistics.supply_chain.P6_placement_problem</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.supply_chain.P8_performance_assessment" href="P8_performance_assessment/index.html">analogistics.supply_chain.P8_performance_assessment</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.supply_chain.P9_workload_prediction" href="P9_workload_prediction/index.html">analogistics.supply_chain.P9_workload_prediction</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-<dt><code class="name"><a title="analogistics.supply_chain.information_framework" href="information_framework.html">analogistics.supply_chain.information_framework</a></code></dt>
+<dt><code class="name"><a title="analogistics.chart.chart_map" href="chart_map.html">analogistics.chart.chart_map</a></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -49,6 +64,37 @@
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.chart.fig_to_uri"><code class="name flex">
+<span>def <span class="ident">fig_to_uri</span></span>(<span>in_fig, close_all=True, **save_args)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Save a figure as a URI
+:param in_fig:
+:return:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fig_to_uri(in_fig, close_all=True, **save_args):
+    # type: (plt.Figure) -&gt; str
+    &#34;&#34;&#34;
+    Save a figure as a URI
+    :param in_fig:
+    :return:
+    &#34;&#34;&#34;
+    out_img = BytesIO()
+    in_fig.savefig(out_img, format=&#39;png&#39;, **save_args)
+    if close_all:
+        in_fig.clf()
+        plt.close(&#39;all&#39;)
+    out_img.seek(0)  # rewind file
+    encoded = base64.b64encode(out_img.read()).decode(&#34;ascii&#34;).replace(&#34;\n&#34;, &#34;&#34;)
+    return &#34;data:image/png;base64,{}&#34;.format(encoded)</code></pre>
+</details>
+</dd>
+</dl>
 </section>
 <section>
 </section>
@@ -66,11 +112,13 @@
 </li>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
-<li><code><a title="analogistics.supply_chain.P1_family_problem" href="P1_family_problem/index.html">analogistics.supply_chain.P1_family_problem</a></code></li>
-<li><code><a title="analogistics.supply_chain.P6_placement_problem" href="P6_placement_problem/index.html">analogistics.supply_chain.P6_placement_problem</a></code></li>
-<li><code><a title="analogistics.supply_chain.P8_performance_assessment" href="P8_performance_assessment/index.html">analogistics.supply_chain.P8_performance_assessment</a></code></li>
-<li><code><a title="analogistics.supply_chain.P9_workload_prediction" href="P9_workload_prediction/index.html">analogistics.supply_chain.P9_workload_prediction</a></code></li>
-<li><code><a title="analogistics.supply_chain.information_framework" href="information_framework.html">analogistics.supply_chain.information_framework</a></code></li>
+<li><code><a title="analogistics.chart.chart_3D_surface" href="chart_3D_surface.html">analogistics.chart.chart_3D_surface</a></code></li>
+<li><code><a title="analogistics.chart.chart_map" href="chart_map.html">analogistics.chart.chart_map</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.chart.fig_to_uri" href="#analogistics.chart.fig_to_uri">fig_to_uri</a></code></li>
 </ul>
 </li>
 </ul>
