@@ -43,13 +43,13 @@ def predictWithFBPROPHET(D_series: pd.DataFrame, timeVariable: str, seriesVariab
     timeSeries_analysis[timeVariable] = timeSeries_analysis.index.values
 
     if samplingInterval == 'month':
-        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, timeVariable, seriesVariable, 'sum')
+        timeSeries_analysis = ts.groupPerMonth(timeSeries_analysis, timeVariable, seriesVariable, 'sum')
     elif samplingInterval == 'week':
-        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, timeVariable, seriesVariable, 'sum')
+        timeSeries_analysis = ts.groupPerWeek(timeSeries_analysis, timeVariable, seriesVariable, 'sum')
     elif samplingInterval == 'day':
         timeSeries_analysis = timeSeries_analysis[seriesVariable]
 
-    # prepare input dataframe
+    # prepare input datafgroupPerWeekme
     timeSeries_analysis = pd.DataFrame([timeSeries_analysis.index.values, timeSeries_analysis]).transpose()
     timeSeries_analysis.columns = ['ds', 'y']
 
@@ -109,9 +109,9 @@ def predictWithARIMA(D_series: pd.DataFrame, seriesVariable: str, samplingInterv
     timeSeries_analysis[date_field] = timeSeries_analysis.index.values
 
     if samplingInterval == 'month':
-        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, 'sum')
+        timeSeries_analysis = ts.groupPerMonth(timeSeries_analysis, date_field, seriesVariable, 'sum')
     elif samplingInterval == 'week':
-        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, 'sum')
+        timeSeries_analysis = ts.groupPerWeek(timeSeries_analysis, date_field, seriesVariable, 'sum')
     elif samplingInterval == 'day':
         timeSeries_analysis = timeSeries_analysis[seriesVariable]
 
@@ -124,7 +124,7 @@ def predictWithARIMA(D_series: pd.DataFrame, seriesVariable: str, samplingInterv
 
         # detect ACF and PACF
         fig_CF, D_acf_significant, D_pacf_significant = ts.ACF_PACF_plot(stationary_series)
-        params = ts.returnsignificantLags(D_pacf_significant, D_acf_significant, maxValuesSelected)
+        params = ts.returnSignificantLags(D_pacf_significant, D_acf_significant, maxValuesSelected)
 
         # Running ARIMA fit, consider that
         figure_forecast, figure_residuals, resultModel = ts.SARIMAXfit(stationary_series, params)
