@@ -469,7 +469,7 @@ def runSimulationNoVariance(num_iter: int,
     plt.ylabel('return - €')
 
     # generate income statement to be
-    df_conto_economico_tobe = df_conto_economico_tobe.groupby(['anno']).agg({'personnell cost': ['mean'],
+    df_conto_economico_tobe = df_conto_economico_tobe.groupby(['year']).agg({'personnell cost': ['mean'],
                                                                              'logistics cost': ['mean'],
                                                                              'operational cost': ['mean'],
                                                                              'depreciation cost': ['mean'],
@@ -488,7 +488,7 @@ def runSimulationNoVariance(num_iter: int,
     df_results['df_conto_economico_tobe_part'] = df_conto_economico_tobe_pasto
 
     # generate income statement asis
-    df_conto_economico_asis = df_conto_economico_asis.groupby(['anno']).agg({'personnell cost': ['mean'],
+    df_conto_economico_asis = df_conto_economico_asis.groupby(['year']).agg({'personnell cost': ['mean'],
                                                                              'logistics cost': ['mean'],
                                                                              'operational cost': ['mean'],
                                                                              'depreciation cost': ['mean'],
