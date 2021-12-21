@@ -49,7 +49,7 @@ setup(
                       'seaborn',  # 0.11.0
                       'statsmodels',  # 0.12.1
                       'geocoder'],  # 1.38.1
-    download_url='https://github.com/aletuf93/analogistics/archive/refs/tags/v0.1.tar.gz',
+    download_url='https://github.com/aletuf93/analogistics/archive/refs/tags/v0.2.0.tar.gz',
     classifiers=[
         'Development Status :: 1 - Planning',
         'Intended Audience :: Science/Research',
