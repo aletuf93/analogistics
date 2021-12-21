@@ -8,6 +8,7 @@
 
 # then upload to pypi using
 # python setup.py sdist
+# twine upload dist/*
 
 from setuptools import setup
 import os
@@ -22,7 +23,7 @@ if os.path.isfile(requirementPath):
 
 setup(
     name='analogistics',
-    version='0.1.1',
+    version='0.1.2',
     description='Analytical Tools for Logistics System Design and Operations Management',
     url='https://github.com/aletuf93/analogistics',
     author='Alessandro Tufano',
