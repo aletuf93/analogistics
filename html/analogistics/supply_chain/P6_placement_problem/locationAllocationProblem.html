@@ -495,7 +495,7 @@ def runSimulationNoVariance(num_iter: int,
     plt.ylabel(&#39;return - €&#39;)
 
     # generate income statement to be
-    df_conto_economico_tobe = df_conto_economico_tobe.groupby([&#39;anno&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
+    df_conto_economico_tobe = df_conto_economico_tobe.groupby([&#39;year&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
                                                                              &#39;logistics cost&#39;: [&#39;mean&#39;],
                                                                              &#39;operational cost&#39;: [&#39;mean&#39;],
                                                                              &#39;depreciation cost&#39;: [&#39;mean&#39;],
@@ -514,7 +514,7 @@ def runSimulationNoVariance(num_iter: int,
     df_results[&#39;df_conto_economico_tobe_part&#39;] = df_conto_economico_tobe_pasto
 
     # generate income statement asis
-    df_conto_economico_asis = df_conto_economico_asis.groupby([&#39;anno&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
+    df_conto_economico_asis = df_conto_economico_asis.groupby([&#39;year&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
                                                                              &#39;logistics cost&#39;: [&#39;mean&#39;],
                                                                              &#39;operational cost&#39;: [&#39;mean&#39;],
                                                                              &#39;depreciation cost&#39;: [&#39;mean&#39;],
@@ -544,7 +544,7 @@ def runSimulationNoVariance(num_iter: int,
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="analogistics.supply_chain.P6_placement_problem.locationAllocationProblem.runSimulation"><code class="name flex">
-<span>def <span class="ident">runSimulation</span></span>(<span>num_iter: int, years: int, productivity_asis: int, logistic_cost_asis_dist: tuple, operational_cost_asis_dist: tuple, direct_labor_cost_asis_dist: tuple, depreciation_cost_as_is_dist: tuple, fixed_cost_asis_dist: tuple, productivity_tobe: int, logistic_cost_tobe_dist: tuple, operational_cost_tobe_dist: tuple, direct_labor_cost_tobe_dist: tuple, depreciation_cost_tobe_dist: tuple, investment_cost_tobe_dist: tuple, fixed_cost_tobe_dist: tuple) -> <function figure at 0x0000014C78C43268></span>
+<span>def <span class="ident">runSimulation</span></span>(<span>num_iter: int, years: int, productivity_asis: int, logistic_cost_asis_dist: tuple, operational_cost_asis_dist: tuple, direct_labor_cost_asis_dist: tuple, depreciation_cost_as_is_dist: tuple, fixed_cost_asis_dist: tuple, productivity_tobe: int, logistic_cost_tobe_dist: tuple, operational_cost_tobe_dist: tuple, direct_labor_cost_tobe_dist: tuple, depreciation_cost_tobe_dist: tuple, investment_cost_tobe_dist: tuple, fixed_cost_tobe_dist: tuple) -> <function figure at 0x0000028888CE3268></span>
 </code></dt>
 <dd>
 <div class="desc"><p>Run montecarlo simulation for LAP.</p>
@@ -879,7 +879,7 @@ df_results (pd.DataFrame): Output dataframe of the simulation.</p></div>
     plt.ylabel(&#39;return - €&#39;)
 
     # generate income statement to be
-    df_conto_economico_tobe = df_conto_economico_tobe.groupby([&#39;anno&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
+    df_conto_economico_tobe = df_conto_economico_tobe.groupby([&#39;year&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
                                                                              &#39;logistics cost&#39;: [&#39;mean&#39;],
                                                                              &#39;operational cost&#39;: [&#39;mean&#39;],
                                                                              &#39;depreciation cost&#39;: [&#39;mean&#39;],
@@ -898,7 +898,7 @@ df_results (pd.DataFrame): Output dataframe of the simulation.</p></div>
     df_results[&#39;df_conto_economico_tobe_part&#39;] = df_conto_economico_tobe_pasto
 
     # generate income statement asis
-    df_conto_economico_asis = df_conto_economico_asis.groupby([&#39;anno&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
+    df_conto_economico_asis = df_conto_economico_asis.groupby([&#39;year&#39;]).agg({&#39;personnell cost&#39;: [&#39;mean&#39;],
                                                                              &#39;logistics cost&#39;: [&#39;mean&#39;],
                                                                              &#39;operational cost&#39;: [&#39;mean&#39;],
                                                                              &#39;depreciation cost&#39;: [&#39;mean&#39;],

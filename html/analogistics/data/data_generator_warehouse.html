@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.data.data_generator_warehouse API documentation</title>
+<meta name="description" content="Created on Sat May
+9 19:30:38 2020 …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.data.data_generator_warehouse</code></h1>
+</header>
+<section id="section-intro">
+<p>Created on Sat May
+9 19:30:38 2020</p>
+<p>@author: aletu</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python"># -*- coding: utf-8 -*-
+&#34;&#34;&#34;
+Created on Sat May  9 19:30:38 2020
+
+@author: aletu
+&#34;&#34;&#34;
+import numpy as np
+import pandas as pd
+import random
+import datetime
+
+
+def generateWarehouseData(num_SKUs: int = 100,
+                          nodecode: int = 1,
+                          idwh: list = [&#39;LOGICAL_WH1&#39;, &#39;LOGICAL_WH2&#39;, &#39;FAKE&#39;],
+                          whsubarea: list = [&#39;AREA 1&#39;],
+                          num_aisles: int = 5,
+                          num_bays: int = 66,
+                          num_levels: int = 5,
+                          level_height: int = 1200,
+                          bay_width: int = 800,
+                          aisle_width: int = 4000,
+                          num_movements: int = 1000,
+                          num_ordercode: int = 800,
+                          average_time_between_movements: float = 1 / 24,  # days
+                          first_day: datetime.datetime = datetime.datetime(year=2020, month=1, day=2),
+                          ):
+    &#34;&#34;&#34;
+    Generate sample warehouse picking data
+
+    Args:
+        num_SKUs (int, optional): Number of SKUs of the Warehouse. Defaults to 100.
+        nodecode (int, optional): Nodecode of the Warehouse. Defaults to 1.
+        idwh (list, optional): List of logical clusters of the warehouse. Defaults to [&#39;LOGICAL_WH1&#39;, &#39;LOGICAL_WH2&#39;, &#39;FAKE&#39;].
+        whsubarea (list, optional): List of physical areas of the warehouse. Defaults to [&#39;AREA 1&#39;].
+        num_aisles (int, optional): Number of aisles of the warehouse. Defaults to 5.
+        num_bays (int, optional): Number of bays pof the warheouse. Defaults to 66.
+        num_levels (int, optional): Number of levels of the warehouse. Defaults to 5.
+        level_height (int, optional): Height of a level. Defaults to 1200.
+        bay_width (int, optional): Width of a bay. Defaults to 800.
+        aisle_width (int, optional): Width of an Aisle. Defaults to 4000.
+        num_movements (int, optional): Number of movements to generate. Defaults to 1000.
+        num_ordercode (int, optional): Number of picking lists to generate. Defaults to 800.
+        average_time_between_movements (float, optional): Average waiting time between movements. Defaults to 1 / 24.
+        first_day (datetime.datetime, optional): First day of the picking list. Defaults to datetime.datetime(year=2020, month=1, day=2).
+
+    Returns:
+        D_locations (pd.dataFrame): Output DataFrame with storage locations.
+        D_SKUs (pd.dataFrame): Output DataFrame with SKUs.
+        D_movements (pd.dataFrame): Output DataFrame with movements.
+        D_inventory (pd.dataFrame): Output DataFrame with inventory values.
+
+    &#34;&#34;&#34;
+
+    class SKU():
+        def __init__(self, itemcode: str):
+            self.ITEMCODE = itemcode
+            self.DESCRIPTION = f&#34;PRODOTTO_{itemcode}&#34;
+            self.VOLUME = np.random.uniform(0.1, 100)  # volume in dm3
+            self.WEIGHT = np.random.uniform(0.1, 10)  # weigth in Kg
+
+    class STORAGE_LOCATION():
+        def __init__(self, nodecode, idwh, whsubarea, idlocation,
+                     loccodex, loccodey, loccodez, rack, bay, level):
+
+            self.NODECODE = nodecode
+            self.IDWH = idwh
+            self.WHSUBAREA = whsubarea
+            self.IDLOCATION = idlocation
+            self.LOCCODEX = loccodex
+            self.LOCCODEY = loccodey
+            self.LOCCODEZ = loccodez
+            self.RACK = rack
+            self.BAY = bay
+            self.LEVEL = level
+
+    class MOVEMENTS():
+        def __init__(self, itemcode, volume, weight, nodecode, idwh, whsubarea, idlocation,
+                     rack, bay, level, loccodex, loccodey, loccodez,
+                     ordercode, quantity, timestamp, inout, ordertype):
+            self.ITEMCODE = itemcode
+            self.NODECODE = nodecode
+            self.IDWH = idwh
+            self.WHSUBAREA = whsubarea
+            self.IDLOCATION = idlocation
+            self.RACK = rack
+            self.BAY = bay
+            self.LEVEL = level
+            self.LOCCODEX = loccodex
+            self.LOCCODEY = loccodey
+            self.LOCCODEZ = loccodez
+            self.ORDERCODE = ordercode
+            self.PICKINGLIST = ordercode
+            self.QUANTITY = quantity
+            self.VOLUME = volume * quantity
+            self.WEIGHT = weight * quantity
+            self.TIMESTAMP_IN = timestamp
+            self.INOUT = inout
+            self.ORDERTYPE = ordertype
+
+    class INVENTORY():
+        def __init__(self, itemcode, nodecode, idwh, idlocation, quantity, timestamp):
+            self.NODECODE = nodecode
+            self.IDWH = idwh
+            self.ITEMCODE = itemcode
+            self.IDLOCATION = idlocation
+            self.QUANTITY = quantity
+            self.TIMESTAMP = timestamp
+
+    dict_SKUs = {}
+    itemcodes = np.arange(0, num_SKUs)
+    for itemcode in itemcodes:
+        dict_SKUs[itemcode] = SKU(itemcode)
+
+    # % CREATE WH LAYOUT
+    dict_locations = {}
+    idlocation = 0
+
+    for corsia in range(0, num_aisles):
+        for campata in range(0, num_bays):
+            for livello in range(0, num_levels):
+                idlocation = idlocation + 1  # create a new location index
+
+                # save parameters
+                NODECODE = nodecode
+                IDWH = random.choice(idwh)
+                WHSUBAREA = random.choice(whsubarea)
+                IDLOCATION = idlocation
+                LOCCODEX = corsia * aisle_width
+                LOCCODEY = campata * bay_width
+                LOCCODEZ = livello * level_height
+
+                # create storage location
+                dict_locations[idlocation] = STORAGE_LOCATION(NODECODE,
+                                                              IDWH,
+                                                              WHSUBAREA,
+                                                              IDLOCATION,
+                                                              LOCCODEX,
+                                                              LOCCODEY,
+                                                              LOCCODEZ,
+                                                              corsia,
+                                                              campata,
+                                                              livello)
+    # create movements
+    dict_movements = {}
+    num_creati = 0
+    ordercodes = np.arange(0, num_ordercode)
+
+    while num_creati &lt; num_movements:
+        num_creati = num_creati + 1
+
+        # random select sku
+        sku = random.choice(dict_SKUs)
+        itemcode = sku.ITEMCODE
+        volume = sku.VOLUME
+        weight = sku.WEIGHT
+
+        # random select storage location
+        loc_key = random.choice(list(dict_locations.keys()))
+        loc = dict_locations[loc_key]
+        nodecode = loc.NODECODE
+        idwh = loc.IDWH
+        whsubarea = loc.WHSUBAREA
+        idlocation = loc.IDLOCATION
+        loccodex = loc.LOCCODEX
+        loccodey = loc.LOCCODEY
+        loccodez = loc.LOCCODEZ
+        rack = loc.RACK
+        bay = loc.BAY
+        level = loc.LEVEL
+
+        # generates movements data
+        ordercode = random.choice(ordercodes)
+        quantity = np.random.lognormal(mean=2, sigma=1)
+        wait = np.random.exponential(average_time_between_movements)
+        if num_creati == 1:
+            timestamp = first_day + datetime.timedelta(wait)
+        else:
+            timestamp = dict_movements[num_creati - 1].TIMESTAMP_IN + datetime.timedelta(wait)
+
+        inout = random.choice([&#39;+&#39;, &#39;-&#39;, &#39; &#39;])
+        ordertype = random.choice([&#39;PICKING&#39;, &#39;PUTAWAY&#39;, &#39; OTHER &#39;])
+        dict_movements[num_creati] = MOVEMENTS(itemcode, volume, weight, nodecode, idwh, whsubarea, idlocation,
+                                               rack, bay, level, loccodex, loccodey, loccodez,
+                                               ordercode, quantity, timestamp, inout, ordertype)
+
+    # create inventory
+    dict_inventory = {}
+    for itemcode in dict_SKUs:
+        # sku = dict_SKUs[itemcode]
+
+        loc_key = random.choice(list(dict_locations.keys()))
+        loc = dict_locations[loc_key]
+        nodecode = loc.NODECODE
+        idwh = loc.IDWH
+        idlocation = loc.IDLOCATION
+        quantity = np.random.lognormal(mean=2, sigma=1)
+        dict_inventory[itemcode] = INVENTORY(itemcode, nodecode, idwh, idlocation, quantity, first_day)
+
+    # save locations and export
+    D_locations = pd.DataFrame()
+    for loc in dict_locations:
+        D_locations = D_locations.append(pd.DataFrame([vars(dict_locations[loc])]))
+
+    # save skus
+    D_SKUs = pd.DataFrame()
+    for sku in dict_SKUs:
+        D_SKUs = D_SKUs.append(pd.DataFrame([vars(dict_SKUs[sku])]))
+
+    # save movements
+    D_movements = pd.DataFrame()
+    for mov in dict_movements:
+        D_movements = D_movements.append(pd.DataFrame([vars(dict_movements[mov])]))
+
+    # save inventory
+    D_inventory = pd.DataFrame()
+    for inv in dict_inventory:
+        D_inventory = D_inventory.append(pd.DataFrame([vars(dict_inventory[inv])]))
+
+    return D_locations, D_SKUs, D_movements, D_inventory</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.data.data_generator_warehouse.generateWarehouseData"><code class="name flex">
+<span>def <span class="ident">generateWarehouseData</span></span>(<span>num_SKUs: int = 100, nodecode: int = 1, idwh: list = ['LOGICAL_WH1', 'LOGICAL_WH2', 'FAKE'], whsubarea: list = ['AREA 1'], num_aisles: int = 5, num_bays: int = 66, num_levels: int = 5, level_height: int = 1200, bay_width: int = 800, aisle_width: int = 4000, num_movements: int = 1000, num_ordercode: int = 800, average_time_between_movements: float = 0.041666666666666664, first_day: datetime.datetime = datetime.datetime(2020, 1, 2, 0, 0))</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate sample warehouse picking data</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>num_SKUs</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of SKUs of the Warehouse. Defaults to 100.</dd>
+<dt><strong><code>nodecode</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Nodecode of the Warehouse. Defaults to 1.</dd>
+<dt><strong><code>idwh</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>List of logical clusters of the warehouse. Defaults to ['LOGICAL_WH1', 'LOGICAL_WH2', 'FAKE'].</dd>
+<dt><strong><code>whsubarea</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>List of physical areas of the warehouse. Defaults to ['AREA 1'].</dd>
+<dt><strong><code>num_aisles</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of aisles of the warehouse. Defaults to 5.</dd>
+<dt><strong><code>num_bays</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of bays pof the warheouse. Defaults to 66.</dd>
+<dt><strong><code>num_levels</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of levels of the warehouse. Defaults to 5.</dd>
+<dt><strong><code>level_height</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Height of a level. Defaults to 1200.</dd>
+<dt><strong><code>bay_width</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Width of a bay. Defaults to 800.</dd>
+<dt><strong><code>aisle_width</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Width of an Aisle. Defaults to 4000.</dd>
+<dt><strong><code>num_movements</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of movements to generate. Defaults to 1000.</dd>
+<dt><strong><code>num_ordercode</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Number of picking lists to generate. Defaults to 800.</dd>
+<dt><strong><code>average_time_between_movements</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>Average waiting time between movements. Defaults to 1 / 24.</dd>
+<dt><strong><code>first_day</code></strong> :&ensp;<code>datetime.datetime</code>, optional</dt>
+<dd>First day of the picking list. Defaults to datetime.datetime(year=2020, month=1, day=2).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_locations (pd.dataFrame): Output DataFrame with storage locations.
+D_SKUs (pd.dataFrame): Output DataFrame with SKUs.
+D_movements (pd.dataFrame): Output DataFrame with movements.
+D_inventory (pd.dataFrame): Output DataFrame with inventory values.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generateWarehouseData(num_SKUs: int = 100,
+                          nodecode: int = 1,
+                          idwh: list = [&#39;LOGICAL_WH1&#39;, &#39;LOGICAL_WH2&#39;, &#39;FAKE&#39;],
+                          whsubarea: list = [&#39;AREA 1&#39;],
+                          num_aisles: int = 5,
+                          num_bays: int = 66,
+                          num_levels: int = 5,
+                          level_height: int = 1200,
+                          bay_width: int = 800,
+                          aisle_width: int = 4000,
+                          num_movements: int = 1000,
+                          num_ordercode: int = 800,
+                          average_time_between_movements: float = 1 / 24,  # days
+                          first_day: datetime.datetime = datetime.datetime(year=2020, month=1, day=2),
+                          ):
+    &#34;&#34;&#34;
+    Generate sample warehouse picking data
+
+    Args:
+        num_SKUs (int, optional): Number of SKUs of the Warehouse. Defaults to 100.
+        nodecode (int, optional): Nodecode of the Warehouse. Defaults to 1.
+        idwh (list, optional): List of logical clusters of the warehouse. Defaults to [&#39;LOGICAL_WH1&#39;, &#39;LOGICAL_WH2&#39;, &#39;FAKE&#39;].
+        whsubarea (list, optional): List of physical areas of the warehouse. Defaults to [&#39;AREA 1&#39;].
+        num_aisles (int, optional): Number of aisles of the warehouse. Defaults to 5.
+        num_bays (int, optional): Number of bays pof the warheouse. Defaults to 66.
+        num_levels (int, optional): Number of levels of the warehouse. Defaults to 5.
+        level_height (int, optional): Height of a level. Defaults to 1200.
+        bay_width (int, optional): Width of a bay. Defaults to 800.
+        aisle_width (int, optional): Width of an Aisle. Defaults to 4000.
+        num_movements (int, optional): Number of movements to generate. Defaults to 1000.
+        num_ordercode (int, optional): Number of picking lists to generate. Defaults to 800.
+        average_time_between_movements (float, optional): Average waiting time between movements. Defaults to 1 / 24.
+        first_day (datetime.datetime, optional): First day of the picking list. Defaults to datetime.datetime(year=2020, month=1, day=2).
+
+    Returns:
+        D_locations (pd.dataFrame): Output DataFrame with storage locations.
+        D_SKUs (pd.dataFrame): Output DataFrame with SKUs.
+        D_movements (pd.dataFrame): Output DataFrame with movements.
+        D_inventory (pd.dataFrame): Output DataFrame with inventory values.
+
+    &#34;&#34;&#34;
+
+    class SKU():
+        def __init__(self, itemcode: str):
+            self.ITEMCODE = itemcode
+            self.DESCRIPTION = f&#34;PRODOTTO_{itemcode}&#34;
+            self.VOLUME = np.random.uniform(0.1, 100)  # volume in dm3
+            self.WEIGHT = np.random.uniform(0.1, 10)  # weigth in Kg
+
+    class STORAGE_LOCATION():
+        def __init__(self, nodecode, idwh, whsubarea, idlocation,
+                     loccodex, loccodey, loccodez, rack, bay, level):
+
+            self.NODECODE = nodecode
+            self.IDWH = idwh
+            self.WHSUBAREA = whsubarea
+            self.IDLOCATION = idlocation
+            self.LOCCODEX = loccodex
+            self.LOCCODEY = loccodey
+            self.LOCCODEZ = loccodez
+            self.RACK = rack
+            self.BAY = bay
+            self.LEVEL = level
+
+    class MOVEMENTS():
+        def __init__(self, itemcode, volume, weight, nodecode, idwh, whsubarea, idlocation,
+                     rack, bay, level, loccodex, loccodey, loccodez,
+                     ordercode, quantity, timestamp, inout, ordertype):
+            self.ITEMCODE = itemcode
+            self.NODECODE = nodecode
+            self.IDWH = idwh
+            self.WHSUBAREA = whsubarea
+            self.IDLOCATION = idlocation
+            self.RACK = rack
+            self.BAY = bay
+            self.LEVEL = level
+            self.LOCCODEX = loccodex
+            self.LOCCODEY = loccodey
+            self.LOCCODEZ = loccodez
+            self.ORDERCODE = ordercode
+            self.PICKINGLIST = ordercode
+            self.QUANTITY = quantity
+            self.VOLUME = volume * quantity
+            self.WEIGHT = weight * quantity
+            self.TIMESTAMP_IN = timestamp
+            self.INOUT = inout
+            self.ORDERTYPE = ordertype
+
+    class INVENTORY():
+        def __init__(self, itemcode, nodecode, idwh, idlocation, quantity, timestamp):
+            self.NODECODE = nodecode
+            self.IDWH = idwh
+            self.ITEMCODE = itemcode
+            self.IDLOCATION = idlocation
+            self.QUANTITY = quantity
+            self.TIMESTAMP = timestamp
+
+    dict_SKUs = {}
+    itemcodes = np.arange(0, num_SKUs)
+    for itemcode in itemcodes:
+        dict_SKUs[itemcode] = SKU(itemcode)
+
+    # % CREATE WH LAYOUT
+    dict_locations = {}
+    idlocation = 0
+
+    for corsia in range(0, num_aisles):
+        for campata in range(0, num_bays):
+            for livello in range(0, num_levels):
+                idlocation = idlocation + 1  # create a new location index
+
+                # save parameters
+                NODECODE = nodecode
+                IDWH = random.choice(idwh)
+                WHSUBAREA = random.choice(whsubarea)
+                IDLOCATION = idlocation
+                LOCCODEX = corsia * aisle_width
+                LOCCODEY = campata * bay_width
+                LOCCODEZ = livello * level_height
+
+                # create storage location
+                dict_locations[idlocation] = STORAGE_LOCATION(NODECODE,
+                                                              IDWH,
+                                                              WHSUBAREA,
+                                                              IDLOCATION,
+                                                              LOCCODEX,
+                                                              LOCCODEY,
+                                                              LOCCODEZ,
+                                                              corsia,
+                                                              campata,
+                                                              livello)
+    # create movements
+    dict_movements = {}
+    num_creati = 0
+    ordercodes = np.arange(0, num_ordercode)
+
+    while num_creati &lt; num_movements:
+        num_creati = num_creati + 1
+
+        # random select sku
+        sku = random.choice(dict_SKUs)
+        itemcode = sku.ITEMCODE
+        volume = sku.VOLUME
+        weight = sku.WEIGHT
+
+        # random select storage location
+        loc_key = random.choice(list(dict_locations.keys()))
+        loc = dict_locations[loc_key]
+        nodecode = loc.NODECODE
+        idwh = loc.IDWH
+        whsubarea = loc.WHSUBAREA
+        idlocation = loc.IDLOCATION
+        loccodex = loc.LOCCODEX
+        loccodey = loc.LOCCODEY
+        loccodez = loc.LOCCODEZ
+        rack = loc.RACK
+        bay = loc.BAY
+        level = loc.LEVEL
+
+        # generates movements data
+        ordercode = random.choice(ordercodes)
+        quantity = np.random.lognormal(mean=2, sigma=1)
+        wait = np.random.exponential(average_time_between_movements)
+        if num_creati == 1:
+            timestamp = first_day + datetime.timedelta(wait)
+        else:
+            timestamp = dict_movements[num_creati - 1].TIMESTAMP_IN + datetime.timedelta(wait)
+
+        inout = random.choice([&#39;+&#39;, &#39;-&#39;, &#39; &#39;])
+        ordertype = random.choice([&#39;PICKING&#39;, &#39;PUTAWAY&#39;, &#39; OTHER &#39;])
+        dict_movements[num_creati] = MOVEMENTS(itemcode, volume, weight, nodecode, idwh, whsubarea, idlocation,
+                                               rack, bay, level, loccodex, loccodey, loccodez,
+                                               ordercode, quantity, timestamp, inout, ordertype)
+
+    # create inventory
+    dict_inventory = {}
+    for itemcode in dict_SKUs:
+        # sku = dict_SKUs[itemcode]
+
+        loc_key = random.choice(list(dict_locations.keys()))
+        loc = dict_locations[loc_key]
+        nodecode = loc.NODECODE
+        idwh = loc.IDWH
+        idlocation = loc.IDLOCATION
+        quantity = np.random.lognormal(mean=2, sigma=1)
+        dict_inventory[itemcode] = INVENTORY(itemcode, nodecode, idwh, idlocation, quantity, first_day)
+
+    # save locations and export
+    D_locations = pd.DataFrame()
+    for loc in dict_locations:
+        D_locations = D_locations.append(pd.DataFrame([vars(dict_locations[loc])]))
+
+    # save skus
+    D_SKUs = pd.DataFrame()
+    for sku in dict_SKUs:
+        D_SKUs = D_SKUs.append(pd.DataFrame([vars(dict_SKUs[sku])]))
+
+    # save movements
+    D_movements = pd.DataFrame()
+    for mov in dict_movements:
+        D_movements = D_movements.append(pd.DataFrame([vars(dict_movements[mov])]))
+
+    # save inventory
+    D_inventory = pd.DataFrame()
+    for inv in dict_inventory:
+        D_inventory = D_inventory.append(pd.DataFrame([vars(dict_inventory[inv])]))
+
+    return D_locations, D_SKUs, D_movements, D_inventory</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.data" href="index.html">analogistics.data</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.data.data_generator_warehouse.generateWarehouseData" href="#analogistics.data.data_generator_warehouse.generateWarehouseData">generateWarehouseData</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

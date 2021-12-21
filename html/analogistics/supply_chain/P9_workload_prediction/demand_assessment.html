@@ -130,10 +130,10 @@ def bookingStatistics(D_mov: pd.DataFrame, capacityField: str = &#39;QUANTITY&#3
 
     for spInterval in samplingInterval:
         if spInterval == &#39;month&#39;:
-            timeSeries_analysis = ts.raggruppaPerMese(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
+            timeSeries_analysis = ts.groupPerMonth(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
 
         elif spInterval == &#39;week&#39;:
-            timeSeries_analysis = ts.raggruppaPerSettimana(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
+            timeSeries_analysis = ts.groupPerWeek(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
 
         elif spInterval == &#39;day&#39;:
             timeSeries_analysis = D_OrderTrend.set_index(&#39;DatePeriod&#39;)
@@ -172,7 +172,7 @@ def bookingStatistics(D_mov: pd.DataFrame, capacityField: str = &#39;QUANTITY&#3
     dataframeResults[&#39;trend_df&#39;] = D_trend_stat
 
     # distribution per weekday
-    D_grouped = ts.raggruppaPerGiornoDellaSettimana(D_OrderTrend, timeVariable=&#39;DatePeriod&#39;, seriesVariable=&#39;Orders&#39;)
+    D_grouped = ts.groupPerWeekday(D_OrderTrend, timeVariable=&#39;DatePeriod&#39;, groupVariable=&#39;Orders&#39;)
     D_grouped[&#39;accuracy&#39;] = [accuracy for i in range(0, len(D_grouped))]
     dataframeResults[&#39;weekday_df&#39;] = D_grouped
 
@@ -268,10 +268,10 @@ def plotQuantityTrendWeeklyDaily(D_temp: pd.DataFrame, date_field: str = &#39;TI
     timeSeries_day = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
 
     # extract weekly time series
-    timeSeries_week = ts.raggruppaPerSettimana(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
+    timeSeries_week = ts.groupPerWeek(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
 
     # extract monthly time series
-    timeSeries_month = ts.raggruppaPerMese(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
+    timeSeries_month = ts.groupPerMonth(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
 
     # plot weekly-daily
     axs[0].plot(timeSeries_day)
@@ -289,10 +289,10 @@ def plotQuantityTrendWeeklyDaily(D_temp: pd.DataFrame, date_field: str = &#39;TI
     timeSeries_day = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
 
     # extract weekly time series
-    timeSeries_week = ts.raggruppaPerSettimana(timeSeries, date_field, countVariable, &#39;sum&#39;)
+    timeSeries_week = ts.groupPerWeek(timeSeries, date_field, countVariable, &#39;sum&#39;)
 
     # extract monthly time series
-    timeSeries_month = ts.raggruppaPerMese(timeSeries, date_field, countVariable, &#39;sum&#39;)
+    timeSeries_month = ts.groupPerMonth(timeSeries, date_field, countVariable, &#39;sum&#39;)
 
     # plot weekly-daily
     axs[1].plot(timeSeries_day)
@@ -330,10 +330,10 @@ def decomposeTimeSeries(D_time: pd.DataFrame, seriesVariable: str,
     timeSeries_analysis[date_field] = timeSeries_analysis.index.values
 
     if samplingInterval == &#39;month&#39;:
-        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        timeSeries_analysis = ts.groupPerMonth(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
         frequency = min(12, len(timeSeries_analysis) - 1)  # search yearly frequency
     elif samplingInterval == &#39;week&#39;:
-        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        timeSeries_analysis = ts.groupPerWeek(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
         frequency = min(4, len(timeSeries_analysis) - 1)  # search monthly frequency
     elif samplingInterval == &#39;day&#39;:
         timeSeries_analysis = timeSeries_analysis[seriesVariable]
@@ -371,9 +371,9 @@ def seasonalityWithfourier(D_time: pd.DataFrame, seriesVariable: str,
     timeSeries_analysis[date_field] = timeSeries_analysis.index.values
 
     if samplingInterval == &#39;month&#39;:
-        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        timeSeries_analysis = ts.groupPerMonth(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
     elif samplingInterval == &#39;week&#39;:
-        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        timeSeries_analysis = ts.groupPerWeek(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
     elif samplingInterval == &#39;day&#39;:
         timeSeries_analysis = timeSeries_analysis[seriesVariable]
 
@@ -451,10 +451,10 @@ dataframeResults (dict): Dictionary with output dataFrames.</p></div>
 
     for spInterval in samplingInterval:
         if spInterval == &#39;month&#39;:
-            timeSeries_analysis = ts.raggruppaPerMese(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
+            timeSeries_analysis = ts.groupPerMonth(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
 
         elif spInterval == &#39;week&#39;:
-            timeSeries_analysis = ts.raggruppaPerSettimana(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
+            timeSeries_analysis = ts.groupPerWeek(D_OrderTrend, &#39;DatePeriod&#39;, &#39;Orders&#39;, &#39;sum&#39;)
 
         elif spInterval == &#39;day&#39;:
             timeSeries_analysis = D_OrderTrend.set_index(&#39;DatePeriod&#39;)
@@ -493,7 +493,7 @@ dataframeResults (dict): Dictionary with output dataFrames.</p></div>
     dataframeResults[&#39;trend_df&#39;] = D_trend_stat
 
     # distribution per weekday
-    D_grouped = ts.raggruppaPerGiornoDellaSettimana(D_OrderTrend, timeVariable=&#39;DatePeriod&#39;, seriesVariable=&#39;Orders&#39;)
+    D_grouped = ts.groupPerWeekday(D_OrderTrend, timeVariable=&#39;DatePeriod&#39;, groupVariable=&#39;Orders&#39;)
     D_grouped[&#39;accuracy&#39;] = [accuracy for i in range(0, len(D_grouped))]
     dataframeResults[&#39;weekday_df&#39;] = D_grouped
 
@@ -558,10 +558,10 @@ dataframeResults (dict): Dictionary with output dataFrames.</p></div>
     timeSeries_analysis[date_field] = timeSeries_analysis.index.values
 
     if samplingInterval == &#39;month&#39;:
-        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        timeSeries_analysis = ts.groupPerMonth(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
         frequency = min(12, len(timeSeries_analysis) - 1)  # search yearly frequency
     elif samplingInterval == &#39;week&#39;:
-        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        timeSeries_analysis = ts.groupPerWeek(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
         frequency = min(4, len(timeSeries_analysis) - 1)  # search monthly frequency
     elif samplingInterval == &#39;day&#39;:
         timeSeries_analysis = timeSeries_analysis[seriesVariable]
@@ -727,10 +727,10 @@ dataframeResults (dict): Dictionary with output dataFrames.</p></div>
     timeSeries_day = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
 
     # extract weekly time series
-    timeSeries_week = ts.raggruppaPerSettimana(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
+    timeSeries_week = ts.groupPerWeek(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
 
     # extract monthly time series
-    timeSeries_month = ts.raggruppaPerMese(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
+    timeSeries_month = ts.groupPerMonth(timeSeries, date_field, quantityVariable, &#39;sum&#39;)
 
     # plot weekly-daily
     axs[0].plot(timeSeries_day)
@@ -748,10 +748,10 @@ dataframeResults (dict): Dictionary with output dataFrames.</p></div>
     timeSeries_day = timeSeries.set_index(date_field).resample(&#39;D&#39;).sum()
 
     # extract weekly time series
-    timeSeries_week = ts.raggruppaPerSettimana(timeSeries, date_field, countVariable, &#39;sum&#39;)
+    timeSeries_week = ts.groupPerWeek(timeSeries, date_field, countVariable, &#39;sum&#39;)
 
     # extract monthly time series
-    timeSeries_month = ts.raggruppaPerMese(timeSeries, date_field, countVariable, &#39;sum&#39;)
+    timeSeries_month = ts.groupPerMonth(timeSeries, date_field, countVariable, &#39;sum&#39;)
 
     # plot weekly-daily
     axs[1].plot(timeSeries_day)
@@ -886,9 +886,9 @@ dataframeResults (dict): Dictionary with output dataFrames.</p></div>
     timeSeries_analysis[date_field] = timeSeries_analysis.index.values
 
     if samplingInterval == &#39;month&#39;:
-        timeSeries_analysis = ts.raggruppaPerMese(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        timeSeries_analysis = ts.groupPerMonth(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
     elif samplingInterval == &#39;week&#39;:
-        timeSeries_analysis = ts.raggruppaPerSettimana(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
+        timeSeries_analysis = ts.groupPerWeek(timeSeries_analysis, date_field, seriesVariable, &#39;sum&#39;)
     elif samplingInterval == &#39;day&#39;:
         timeSeries_analysis = timeSeries_analysis[seriesVariable]
 

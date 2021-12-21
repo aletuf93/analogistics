@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def calculateABCsaving(p: float, q: float, D_parts: pd.DataFrame):
+    &#34;&#34;&#34;
+    Calculate the saving based on re-assignment with classes ABC, compared with a random assignment scenario
+
+    Args:
+        p (float): warehouse front length in meters.
+        q (float): warehouse depth in meters.
+        D_parts (pd.DataFrame): dataframe containing SKUs with columns POP_IN_TOT and POP_OUT_TOT.
+
+    Returns:
+        list: list of threshold of class A.
+        list: list of threshold of class B.
+        list: optimal saving inbound.
+        list: optimal saving inbound.
+        float: best threshold A class.
+        float: best threshold B class.
+        float: best total saving (IN + OUT).
+
+    &#34;&#34;&#34;
+
+    # Check the input columns of the dataframe
+    checkColumns = [&#39;POP_IN_TOT&#39;, &#39;POP_OUT_TOT&#39;]
+    for col in checkColumns:
+        if col not in D_parts.columns:
+            print(f&#34;Column {col} not in dataframe D_parts&#34;)
+            return [], [], [], [], [], [], []
+
+    # ############################ SCENARIO RANDOM #################################
+    if (~np.isnan(p) or ~np.isnan(q)):
+
+        # count pick in and out
+        pickIN = sum(D_parts[&#39;POP_IN_TOT&#39;])
+        pickOUT = sum(D_parts[&#39;POP_OUT_TOT&#39;])
+
+        D_parts[&#39;POP_TOT&#39;] = D_parts[&#39;POP_IN_TOT&#39;] + D_parts[&#39;POP_OUT_TOT&#39;]
+
+        # Random scenario
+        # I/O distributed on the front
+        r_cicloSemplice = (q / 2 + p / 3) * 2
+
+        KmIn_rand = pickIN * r_cicloSemplice
+        KmOut_rand = pickOUT * r_cicloSemplice
+
+        SAVING_IN = []
+        SAVING_OUT = []
+        soglieA = []
+        soglieB = []
+
+        # ############################ SCENARIO ABC ###################################
+        for i in range(0, 100, 10):
+            for j in range(i + 1, 100, 10):
+                sogliaA = i / 100
+                sogliaB = j / 100
+
+                D_pop_totale = D_parts.groupby(&#39;ITEMCODE&#39;)[&#39;POP_TOT&#39;].sum().reset_index()
+                D_pop_totale = D_pop_totale.sort_values(by=&#39;POP_TOT&#39;, ascending=False)
+
+                sogliaClasseA = int(np.round(sogliaA * len(D_pop_totale)))
+                sogliaClasseB = int(np.round(sogliaB * len(D_pop_totale)))
+
+                ITEM_A = D_pop_totale[&#39;ITEMCODE&#39;].iloc[0: sogliaClasseA].reset_index()
+                ITEM_B = D_pop_totale[&#39;ITEMCODE&#39;].iloc[sogliaClasseA: sogliaClasseB].reset_index()
+                ITEM_C = D_pop_totale[&#39;ITEMCODE&#39;].iloc[sogliaClasseB: len(D_pop_totale)].reset_index()
+
+                # Count pickIn
+                num_pickin_A = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_A[&#39;ITEMCODE&#39;])][&#39;POP_IN_TOT&#39;])
+                num_pickin_B = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_B[&#39;ITEMCODE&#39;])][&#39;POP_IN_TOT&#39;])
+                num_pickin_C = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_C[&#39;ITEMCODE&#39;])][&#39;POP_IN_TOT&#39;])
+
+                # Count le pickOUT
+                num_pickout_A = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_A[&#39;ITEMCODE&#39;])][&#39;POP_OUT_TOT&#39;])
+                num_pickout_B = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_B[&#39;ITEMCODE&#39;])][&#39;POP_OUT_TOT&#39;])
+                num_pickout_C = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_C[&#39;ITEMCODE&#39;])][&#39;POP_OUT_TOT&#39;])
+
+                len_q_A = len(ITEM_A) / (len(ITEM_A) + len(ITEM_B) + len(ITEM_C))
+                len_q_B = len(ITEM_B) / (len(ITEM_A) + len(ITEM_B) + len(ITEM_C))
+                len_q_C = len(ITEM_C) / (len(ITEM_A) + len(ITEM_B) + len(ITEM_C))
+
+                # Calculate the km
+                # check OK number picks
+                if((num_pickin_A + num_pickin_B + num_pickin_C) == pickIN) &amp; ((num_pickout_A + num_pickout_B + num_pickout_C) == pickOUT):
+
+                    # I/O distributed on the front
+                    dist_A = (q * len_q_A / 2 + p / 3) * 2
+                    dist_B = (q * (len_q_A + len_q_B / 2) + p / 3) * 2
+                    dist_C = (q * (len_q_A + len_q_B + len_q_C / 2) + p / 3) * 2
+
+                    KmIn_ABC = (num_pickin_A * dist_A + num_pickin_B * dist_B + num_pickin_C * dist_C)
+                    KmOut_ABC = (num_pickout_A * dist_A + num_pickout_B * dist_B + num_pickout_C * dist_C)
+
+                    if (KmIn_rand == 0):  # avoid division by zero
+                        sav_IN = 0
+                    else:
+                        sav_IN = 1 - float(KmIn_ABC / KmIn_rand)
+
+                    if (KmOut_rand == 0):  # avoid division by zero
+                        sav_OUT = 0
+                    else:
+                        sav_OUT = 1 - float(KmOut_ABC / KmOut_rand)
+
+                    SAVING_IN.append(sav_IN)
+                    SAVING_OUT.append(sav_OUT)
+                    soglieA.append(sogliaA)
+                    soglieB.append(sogliaB)
+
+                    # calculate best saving scenario
+                    SAV_TOT = np.asarray(SAVING_IN) + np.asarray(SAVING_OUT)
+                    idx = np.nanargmax(SAV_TOT)
+                    best_A = np.round(soglieA[idx], 1)
+                    best_B = np.round(soglieB[idx], 1)
+
+                else:
+                    print(&#34;Error: num pick scenario ABC does not match num pick scenario random&#34;)
+
+        return soglieA, soglieB, SAVING_IN, SAVING_OUT, best_A, best_B, SAV_TOT[idx]
+    else:
+        return [], [], [], [], [], [], []
+
+
+def defineABCclassesOfStorageLocations(D_nodes: pd.DataFrame, AclassPerc: float = .2, BclassPerc: float = .5) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Define the classes A, B, C for each storage location (nodes of the warehouse).
+
+    Args:
+        D_nodes (pd.DataFrame): pandas dataframe with storage locations and INPUT_DISTANCE and OUTPUT_DISTANCE .
+        AclassPerc (float, optional): class A threshold. Defaults to .2.
+        BclassPerc (float, optional): class B threshold. Defaults to .5.
+
+    Returns:
+        TYPE: input dataframe with the column CLASS (A,B,C) for each storage location.
+
+    &#34;&#34;&#34;
+
+    # Check the input columns of the dataframe
+    checkColumns = [&#39;INPUT_DISTANCE&#39;, &#39;OUTPUT_DISTANCE&#39;]
+    for col in checkColumns:
+        if col not in D_nodes.columns:
+            print(f&#34;Column {col} not in dataframe D_parts&#34;)
+            return []
+
+    # calculate total distance
+    D_nodes[&#39;WEIGHT&#39;] = D_nodes[&#39;INPUT_DISTANCE&#39;] + D_nodes[&#39;OUTPUT_DISTANCE&#39;]
+    D_nodes = D_nodes.sort_values(by=&#39;WEIGHT&#39;, ascending=False)
+
+    D_nodes[&#39;WEIGHT&#39;] = D_nodes[&#39;WEIGHT&#39;] / sum(D_nodes[&#39;WEIGHT&#39;])
+    D_nodes[&#39;WEIGHT_cum&#39;] = D_nodes[&#39;WEIGHT&#39;].cumsum()
+
+    # assign classes
+    D_nodes[&#39;CLASS&#39;] = np.nan
+
+    for i in range(0, len(D_nodes)):
+        if D_nodes.iloc[i][&#39;WEIGHT_cum&#39;] &lt; AclassPerc:
+            D_nodes.iloc[i, D_nodes.columns.get_loc(&#39;CLASS&#39;)] = &#39;A&#39;
+        elif (D_nodes.iloc[i][&#39;WEIGHT_cum&#39;] &gt;= AclassPerc) &amp; (D_nodes.iloc[i][&#39;WEIGHT_cum&#39;] &lt; BclassPerc):
+            D_nodes.iloc[i, D_nodes.columns.get_loc(&#39;CLASS&#39;)] = &#39;B&#39;
+        else:
+            D_nodes.iloc[i, D_nodes.columns.get_loc(&#39;CLASS&#39;)] = &#39;C&#39;
+
+    return D_nodes
+
+
+def defineABCclassesOfParts(D_parts: pd.DataFrame, columnWeightList: list,
+                            AclassPerc: float = .2, BclassPerc: float = .5) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Assign classes A, B, C to the SKUs of the master files.
+
+    Args:
+        D_parts (pd.DataFrame): dataframe of parts.
+        columnWeightList (list): list of column of D_parts with the weights to consider to define ABC classes.
+        AclassPerc (float, optional): cut percentile of class A. Defaults to .2.
+        BclassPerc (float, optional): cut percentile of class B. Defaults to .5.
+
+    Returns:
+        D_parts (pd.DataFrame): Output DataFrame with classes for each SKU.
+
+    &#34;&#34;&#34;
+
+    D_parts[&#39;WEIGHT&#39;] = 0
+    # calculate total distance
+
+    for col in columnWeightList:
+        if col in D_parts.columns:
+            D_parts[&#39;WEIGHT&#39;] = D_parts[&#39;WEIGHT&#39;] + D_parts[col]
+        else:
+            print(f&#34;Column {col} not in index, column ignored&#34;)
+    D_parts = D_parts.sort_values(by=&#39;WEIGHT&#39;, ascending=False)
+
+    D_parts[&#39;WEIGHT&#39;] = D_parts[&#39;WEIGHT&#39;] / sum(D_parts[&#39;WEIGHT&#39;])
+    D_parts[&#39;WEIGHT_cum&#39;] = D_parts[&#39;WEIGHT&#39;].cumsum()
+
+    # assign classes
+    D_parts[&#39;CLASS&#39;] = np.nan
+
+    for i in range(0, len(D_parts)):
+        if D_parts.iloc[i][&#39;WEIGHT_cum&#39;] &lt; AclassPerc:
+            D_parts.iloc[i, D_parts.columns.get_loc(&#39;CLASS&#39;)] = &#39;A&#39;
+        elif (D_parts.iloc[i][&#39;WEIGHT_cum&#39;] &gt;= AclassPerc) &amp; (D_parts.iloc[i][&#39;WEIGHT_cum&#39;] &lt; BclassPerc):
+            D_parts.iloc[i, D_parts.columns.get_loc(&#39;CLASS&#39;)] = &#39;B&#39;
+        else:
+            D_parts.iloc[i, D_parts.columns.get_loc(&#39;CLASS&#39;)] = &#39;C&#39;
+
+    return D_parts
+
+
+def plotSavingABCclass(p: float, q: float, D_SKUs: pd.DataFrame) -&gt; dict:
+    &#34;&#34;&#34;
+    Plot the 3d graph with saving given different values of a, b, c thresholds
+
+    Args:
+        p (float): warehouse front length in meters.
+        q (float): warehouse depth in meters.
+        D_SKUs (pd.DataFrame): DataFrame of the Sku master file.
+
+    Returns:
+        dict: output dictionary containing figures.
+
+    &#34;&#34;&#34;
+    figure_output = {}
+
+    # calculate saving
+    soglieA, soglieB, SAVING_IN, SAVING_OUT, best_A, best_B, SAV_TOT = calculateABCsaving(p, q, D_SKUs)
+
+    # inbound saving
+    fig1 = plt.figure()
+    ax = fig1.add_subplot(111, projection=&#39;3d&#39;)
+    ax.scatter(soglieA,
+               soglieB,
+               SAVING_IN,
+               color=&#39;orange&#39;
+               )
+
+    plt.xlabel(&#34;A class threshold&#34;)
+    plt.ylabel(&#34;B class threshold&#34;)
+    plt.title(&#34;Inbound saving &#34;)
+    figure_output[&#34;IN_saving_ABC_inbound&#34;] = fig1
+
+    # outbound saving
+    fig1 = plt.figure()
+    ax = fig1.add_subplot(111, projection=&#39;3d&#39;)
+    ax.scatter(soglieA,
+               soglieB,
+               SAVING_OUT,
+               color=&#39;orange&#39;
+               )
+
+    plt.xlabel(&#34;A class threshold&#34;)
+    plt.ylabel(&#34;B class threshold&#34;)
+    plt.title(&#34;Outbound saving &#34;)
+    figure_output[&#34;IN_saving_ABC_outbound&#34;] = fig1
+
+    return figure_output</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.calculateABCsaving"><code class="name flex">
+<span>def <span class="ident">calculateABCsaving</span></span>(<span>p: float, q: float, D_parts: pandas.core.frame.DataFrame)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculate the saving based on re-assignment with classes ABC, compared with a random assignment scenario</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>p</code></strong> :&ensp;<code>float</code></dt>
+<dd>warehouse front length in meters.</dd>
+<dt><strong><code>q</code></strong> :&ensp;<code>float</code></dt>
+<dd>warehouse depth in meters.</dd>
+<dt><strong><code>D_parts</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe containing SKUs with columns POP_IN_TOT and POP_OUT_TOT.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>list of threshold of class A.</dd>
+<dt><code>list</code></dt>
+<dd>list of threshold of class B.</dd>
+<dt><code>list</code></dt>
+<dd>optimal saving inbound.</dd>
+<dt><code>list</code></dt>
+<dd>optimal saving inbound.</dd>
+<dt><code>float</code></dt>
+<dd>best threshold A class.</dd>
+<dt><code>float</code></dt>
+<dd>best threshold B class.</dd>
+<dt><code>float</code></dt>
+<dd>best total saving (IN + OUT).</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def calculateABCsaving(p: float, q: float, D_parts: pd.DataFrame):
+    &#34;&#34;&#34;
+    Calculate the saving based on re-assignment with classes ABC, compared with a random assignment scenario
+
+    Args:
+        p (float): warehouse front length in meters.
+        q (float): warehouse depth in meters.
+        D_parts (pd.DataFrame): dataframe containing SKUs with columns POP_IN_TOT and POP_OUT_TOT.
+
+    Returns:
+        list: list of threshold of class A.
+        list: list of threshold of class B.
+        list: optimal saving inbound.
+        list: optimal saving inbound.
+        float: best threshold A class.
+        float: best threshold B class.
+        float: best total saving (IN + OUT).
+
+    &#34;&#34;&#34;
+
+    # Check the input columns of the dataframe
+    checkColumns = [&#39;POP_IN_TOT&#39;, &#39;POP_OUT_TOT&#39;]
+    for col in checkColumns:
+        if col not in D_parts.columns:
+            print(f&#34;Column {col} not in dataframe D_parts&#34;)
+            return [], [], [], [], [], [], []
+
+    # ############################ SCENARIO RANDOM #################################
+    if (~np.isnan(p) or ~np.isnan(q)):
+
+        # count pick in and out
+        pickIN = sum(D_parts[&#39;POP_IN_TOT&#39;])
+        pickOUT = sum(D_parts[&#39;POP_OUT_TOT&#39;])
+
+        D_parts[&#39;POP_TOT&#39;] = D_parts[&#39;POP_IN_TOT&#39;] + D_parts[&#39;POP_OUT_TOT&#39;]
+
+        # Random scenario
+        # I/O distributed on the front
+        r_cicloSemplice = (q / 2 + p / 3) * 2
+
+        KmIn_rand = pickIN * r_cicloSemplice
+        KmOut_rand = pickOUT * r_cicloSemplice
+
+        SAVING_IN = []
+        SAVING_OUT = []
+        soglieA = []
+        soglieB = []
+
+        # ############################ SCENARIO ABC ###################################
+        for i in range(0, 100, 10):
+            for j in range(i + 1, 100, 10):
+                sogliaA = i / 100
+                sogliaB = j / 100
+
+                D_pop_totale = D_parts.groupby(&#39;ITEMCODE&#39;)[&#39;POP_TOT&#39;].sum().reset_index()
+                D_pop_totale = D_pop_totale.sort_values(by=&#39;POP_TOT&#39;, ascending=False)
+
+                sogliaClasseA = int(np.round(sogliaA * len(D_pop_totale)))
+                sogliaClasseB = int(np.round(sogliaB * len(D_pop_totale)))
+
+                ITEM_A = D_pop_totale[&#39;ITEMCODE&#39;].iloc[0: sogliaClasseA].reset_index()
+                ITEM_B = D_pop_totale[&#39;ITEMCODE&#39;].iloc[sogliaClasseA: sogliaClasseB].reset_index()
+                ITEM_C = D_pop_totale[&#39;ITEMCODE&#39;].iloc[sogliaClasseB: len(D_pop_totale)].reset_index()
+
+                # Count pickIn
+                num_pickin_A = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_A[&#39;ITEMCODE&#39;])][&#39;POP_IN_TOT&#39;])
+                num_pickin_B = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_B[&#39;ITEMCODE&#39;])][&#39;POP_IN_TOT&#39;])
+                num_pickin_C = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_C[&#39;ITEMCODE&#39;])][&#39;POP_IN_TOT&#39;])
+
+                # Count le pickOUT
+                num_pickout_A = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_A[&#39;ITEMCODE&#39;])][&#39;POP_OUT_TOT&#39;])
+                num_pickout_B = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_B[&#39;ITEMCODE&#39;])][&#39;POP_OUT_TOT&#39;])
+                num_pickout_C = sum(D_parts[D_parts[&#39;ITEMCODE&#39;].isin(ITEM_C[&#39;ITEMCODE&#39;])][&#39;POP_OUT_TOT&#39;])
+
+                len_q_A = len(ITEM_A) / (len(ITEM_A) + len(ITEM_B) + len(ITEM_C))
+                len_q_B = len(ITEM_B) / (len(ITEM_A) + len(ITEM_B) + len(ITEM_C))
+                len_q_C = len(ITEM_C) / (len(ITEM_A) + len(ITEM_B) + len(ITEM_C))
+
+                # Calculate the km
+                # check OK number picks
+                if((num_pickin_A + num_pickin_B + num_pickin_C) == pickIN) &amp; ((num_pickout_A + num_pickout_B + num_pickout_C) == pickOUT):
+
+                    # I/O distributed on the front
+                    dist_A = (q * len_q_A / 2 + p / 3) * 2
+                    dist_B = (q * (len_q_A + len_q_B / 2) + p / 3) * 2
+                    dist_C = (q * (len_q_A + len_q_B + len_q_C / 2) + p / 3) * 2
+
+                    KmIn_ABC = (num_pickin_A * dist_A + num_pickin_B * dist_B + num_pickin_C * dist_C)
+                    KmOut_ABC = (num_pickout_A * dist_A + num_pickout_B * dist_B + num_pickout_C * dist_C)
+
+                    if (KmIn_rand == 0):  # avoid division by zero
+                        sav_IN = 0
+                    else:
+                        sav_IN = 1 - float(KmIn_ABC / KmIn_rand)
+
+                    if (KmOut_rand == 0):  # avoid division by zero
+                        sav_OUT = 0
+                    else:
+                        sav_OUT = 1 - float(KmOut_ABC / KmOut_rand)
+
+                    SAVING_IN.append(sav_IN)
+                    SAVING_OUT.append(sav_OUT)
+                    soglieA.append(sogliaA)
+                    soglieB.append(sogliaB)
+
+                    # calculate best saving scenario
+                    SAV_TOT = np.asarray(SAVING_IN) + np.asarray(SAVING_OUT)
+                    idx = np.nanargmax(SAV_TOT)
+                    best_A = np.round(soglieA[idx], 1)
+                    best_B = np.round(soglieB[idx], 1)
+
+                else:
+                    print(&#34;Error: num pick scenario ABC does not match num pick scenario random&#34;)
+
+        return soglieA, soglieB, SAVING_IN, SAVING_OUT, best_A, best_B, SAV_TOT[idx]
+    else:
+        return [], [], [], [], [], [], []</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.defineABCclassesOfParts"><code class="name flex">
+<span>def <span class="ident">defineABCclassesOfParts</span></span>(<span>D_parts: pandas.core.frame.DataFrame, columnWeightList: list, AclassPerc: float = 0.2, BclassPerc: float = 0.5) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Assign classes A, B, C to the SKUs of the master files.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_parts</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>dataframe of parts.</dd>
+<dt><strong><code>columnWeightList</code></strong> :&ensp;<code>list</code></dt>
+<dd>list of column of D_parts with the weights to consider to define ABC classes.</dd>
+<dt><strong><code>AclassPerc</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>cut percentile of class A. Defaults to .2.</dd>
+<dt><strong><code>BclassPerc</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>cut percentile of class B. Defaults to .5.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>D_parts (pd.DataFrame): Output DataFrame with classes for each SKU.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def defineABCclassesOfParts(D_parts: pd.DataFrame, columnWeightList: list,
+                            AclassPerc: float = .2, BclassPerc: float = .5) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Assign classes A, B, C to the SKUs of the master files.
+
+    Args:
+        D_parts (pd.DataFrame): dataframe of parts.
+        columnWeightList (list): list of column of D_parts with the weights to consider to define ABC classes.
+        AclassPerc (float, optional): cut percentile of class A. Defaults to .2.
+        BclassPerc (float, optional): cut percentile of class B. Defaults to .5.
+
+    Returns:
+        D_parts (pd.DataFrame): Output DataFrame with classes for each SKU.
+
+    &#34;&#34;&#34;
+
+    D_parts[&#39;WEIGHT&#39;] = 0
+    # calculate total distance
+
+    for col in columnWeightList:
+        if col in D_parts.columns:
+            D_parts[&#39;WEIGHT&#39;] = D_parts[&#39;WEIGHT&#39;] + D_parts[col]
+        else:
+            print(f&#34;Column {col} not in index, column ignored&#34;)
+    D_parts = D_parts.sort_values(by=&#39;WEIGHT&#39;, ascending=False)
+
+    D_parts[&#39;WEIGHT&#39;] = D_parts[&#39;WEIGHT&#39;] / sum(D_parts[&#39;WEIGHT&#39;])
+    D_parts[&#39;WEIGHT_cum&#39;] = D_parts[&#39;WEIGHT&#39;].cumsum()
+
+    # assign classes
+    D_parts[&#39;CLASS&#39;] = np.nan
+
+    for i in range(0, len(D_parts)):
+        if D_parts.iloc[i][&#39;WEIGHT_cum&#39;] &lt; AclassPerc:
+            D_parts.iloc[i, D_parts.columns.get_loc(&#39;CLASS&#39;)] = &#39;A&#39;
+        elif (D_parts.iloc[i][&#39;WEIGHT_cum&#39;] &gt;= AclassPerc) &amp; (D_parts.iloc[i][&#39;WEIGHT_cum&#39;] &lt; BclassPerc):
+            D_parts.iloc[i, D_parts.columns.get_loc(&#39;CLASS&#39;)] = &#39;B&#39;
+        else:
+            D_parts.iloc[i, D_parts.columns.get_loc(&#39;CLASS&#39;)] = &#39;C&#39;
+
+    return D_parts</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.defineABCclassesOfStorageLocations"><code class="name flex">
+<span>def <span class="ident">defineABCclassesOfStorageLocations</span></span>(<span>D_nodes: pandas.core.frame.DataFrame, AclassPerc: float = 0.2, BclassPerc: float = 0.5) -> pandas.core.frame.DataFrame</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Define the classes A, B, C for each storage location (nodes of the warehouse).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>D_nodes</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>pandas dataframe with storage locations and INPUT_DISTANCE and OUTPUT_DISTANCE .</dd>
+<dt><strong><code>AclassPerc</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>class A threshold. Defaults to .2.</dd>
+<dt><strong><code>BclassPerc</code></strong> :&ensp;<code>float</code>, optional</dt>
+<dd>class B threshold. Defaults to .5.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>TYPE</code></dt>
+<dd>input dataframe with the column CLASS (A,B,C) for each storage location.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def defineABCclassesOfStorageLocations(D_nodes: pd.DataFrame, AclassPerc: float = .2, BclassPerc: float = .5) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
+    Define the classes A, B, C for each storage location (nodes of the warehouse).
+
+    Args:
+        D_nodes (pd.DataFrame): pandas dataframe with storage locations and INPUT_DISTANCE and OUTPUT_DISTANCE .
+        AclassPerc (float, optional): class A threshold. Defaults to .2.
+        BclassPerc (float, optional): class B threshold. Defaults to .5.
+
+    Returns:
+        TYPE: input dataframe with the column CLASS (A,B,C) for each storage location.
+
+    &#34;&#34;&#34;
+
+    # Check the input columns of the dataframe
+    checkColumns = [&#39;INPUT_DISTANCE&#39;, &#39;OUTPUT_DISTANCE&#39;]
+    for col in checkColumns:
+        if col not in D_nodes.columns:
+            print(f&#34;Column {col} not in dataframe D_parts&#34;)
+            return []
+
+    # calculate total distance
+    D_nodes[&#39;WEIGHT&#39;] = D_nodes[&#39;INPUT_DISTANCE&#39;] + D_nodes[&#39;OUTPUT_DISTANCE&#39;]
+    D_nodes = D_nodes.sort_values(by=&#39;WEIGHT&#39;, ascending=False)
+
+    D_nodes[&#39;WEIGHT&#39;] = D_nodes[&#39;WEIGHT&#39;] / sum(D_nodes[&#39;WEIGHT&#39;])
+    D_nodes[&#39;WEIGHT_cum&#39;] = D_nodes[&#39;WEIGHT&#39;].cumsum()
+
+    # assign classes
+    D_nodes[&#39;CLASS&#39;] = np.nan
+
+    for i in range(0, len(D_nodes)):
+        if D_nodes.iloc[i][&#39;WEIGHT_cum&#39;] &lt; AclassPerc:
+            D_nodes.iloc[i, D_nodes.columns.get_loc(&#39;CLASS&#39;)] = &#39;A&#39;
+        elif (D_nodes.iloc[i][&#39;WEIGHT_cum&#39;] &gt;= AclassPerc) &amp; (D_nodes.iloc[i][&#39;WEIGHT_cum&#39;] &lt; BclassPerc):
+            D_nodes.iloc[i, D_nodes.columns.get_loc(&#39;CLASS&#39;)] = &#39;B&#39;
+        else:
+            D_nodes.iloc[i, D_nodes.columns.get_loc(&#39;CLASS&#39;)] = &#39;C&#39;
+
+    return D_nodes</code></pre>
+</details>
+</dd>
+<dt id="analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.plotSavingABCclass"><code class="name flex">
+<span>def <span class="ident">plotSavingABCclass</span></span>(<span>p: float, q: float, D_SKUs: pandas.core.frame.DataFrame) -> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the 3d graph with saving given different values of a, b, c thresholds</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>p</code></strong> :&ensp;<code>float</code></dt>
+<dd>warehouse front length in meters.</dd>
+<dt><strong><code>q</code></strong> :&ensp;<code>float</code></dt>
+<dd>warehouse depth in meters.</dd>
+<dt><strong><code>D_SKUs</code></strong> :&ensp;<code>pd.DataFrame</code></dt>
+<dd>DataFrame of the Sku master file.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>dict</code></dt>
+<dd>output dictionary containing figures.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plotSavingABCclass(p: float, q: float, D_SKUs: pd.DataFrame) -&gt; dict:
+    &#34;&#34;&#34;
+    Plot the 3d graph with saving given different values of a, b, c thresholds
+
+    Args:
+        p (float): warehouse front length in meters.
+        q (float): warehouse depth in meters.
+        D_SKUs (pd.DataFrame): DataFrame of the Sku master file.
+
+    Returns:
+        dict: output dictionary containing figures.
+
+    &#34;&#34;&#34;
+    figure_output = {}
+
+    # calculate saving
+    soglieA, soglieB, SAVING_IN, SAVING_OUT, best_A, best_B, SAV_TOT = calculateABCsaving(p, q, D_SKUs)
+
+    # inbound saving
+    fig1 = plt.figure()
+    ax = fig1.add_subplot(111, projection=&#39;3d&#39;)
+    ax.scatter(soglieA,
+               soglieB,
+               SAVING_IN,
+               color=&#39;orange&#39;
+               )
+
+    plt.xlabel(&#34;A class threshold&#34;)
+    plt.ylabel(&#34;B class threshold&#34;)
+    plt.title(&#34;Inbound saving &#34;)
+    figure_output[&#34;IN_saving_ABC_inbound&#34;] = fig1
+
+    # outbound saving
+    fig1 = plt.figure()
+    ax = fig1.add_subplot(111, projection=&#39;3d&#39;)
+    ax.scatter(soglieA,
+               soglieB,
+               SAVING_OUT,
+               color=&#39;orange&#39;
+               )
+
+    plt.xlabel(&#34;A class threshold&#34;)
+    plt.ylabel(&#34;B class threshold&#34;)
+    plt.title(&#34;Outbound saving &#34;)
+    figure_output[&#34;IN_saving_ABC_outbound&#34;] = fig1
+
+    return figure_output</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="analogistics.supply_chain.P2_assignment_problem" href="index.html">analogistics.supply_chain.P2_assignment_problem</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.calculateABCsaving" href="#analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.calculateABCsaving">calculateABCsaving</a></code></li>
+<li><code><a title="analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.defineABCclassesOfParts" href="#analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.defineABCclassesOfParts">defineABCclassesOfParts</a></code></li>
+<li><code><a title="analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.defineABCclassesOfStorageLocations" href="#analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.defineABCclassesOfStorageLocations">defineABCclassesOfStorageLocations</a></code></li>
+<li><code><a title="analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.plotSavingABCclass" href="#analogistics.supply_chain.P2_assignment_problem.warehousing_ABC_saving.plotSavingABCclass">plotSavingABCclass</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
