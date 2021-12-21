@@ -4,7 +4,10 @@
 
 
 # first export requirements.txt file by using
-# conda list -e > requirements.txt
+# pip list --format=freeze > requirements.txt
+
+# then upload to pypi using
+# python setup.py sdist
 
 from setuptools import setup
 import os
