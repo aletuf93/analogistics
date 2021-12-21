@@ -1,29 +1,36 @@
 # -*- coding: utf-8 -*-
-# TODO: look here for references https://docs.python.org/3/distutils/setupscript.html
+# setuptools references https://docs.python.org/3/distutils/setupscript.html
+# pip references https://medium.com/@joel.barmettler/how-to-upload-your-python-package-to-pypi-65edc5fe9c56
+
+
+# first export requirements.txt file by using
+# conda list -e > requirements.txt
+
 from setuptools import setup
+import os
+
+# read the requirements file
+thelibFolder = os.path.dirname(os.path.realpath(__file__))
+requirementPath = thelibFolder + '/requirements.txt'
+install_requires = []  # Here we'll get: ["gunicorn", "docutils>=0.3", "lxml==0.5a7"]
+if os.path.isfile(requirementPath):
+    with open(requirementPath) as f:
+        install_requires = f.read().splitlines()
 
 setup(
     name='analogistics',
-    version='0.1.0',
+    version='0.1.1',
     description='Analytical Tools for Logistics System Design and Operations Management',
     url='https://github.com/aletuf93/analogistics',
     author='Alessandro Tufano',
     author_email='aletuf@gmail.com',
     license='MIT',
-    packages=['pyexample'],
-    install_requires=['mpi4py>=2.0',
-                      'numpy',
-                      ],
-
+    packages=['analogistics'],
+    install_requires=install_requires,
+    download_url='https://github.com/aletuf93/analogistics/archive/refs/tags/v0.1.tar.gz',
     classifiers=[
         'Development Status :: 1 - Planning',
         'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: BSD License',
-        'Operating System :: POSIX :: Linux',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.7',
     ],
 )
